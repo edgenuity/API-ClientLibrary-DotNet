@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicOneAPI", "RicOneAPI\RicOneAPI.csproj", "{18C26B37-D4AB-49ED-B4A6-6FC235CAF643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsole", "SampleConsole\SampleConsole.csproj", "{93547658-DCD1-4540-85D5-4A8FC52BA682}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicOneAPI.Tests", "RicOneAPI.Tests\RicOneAPI.Tests.csproj", "{07169E5C-454D-4B60-93DA-E63DEDC8F60C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18C26B37-D4AB-49ED-B4A6-6FC235CAF643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C26B37-D4AB-49ED-B4A6-6FC235CAF643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C26B37-D4AB-49ED-B4A6-6FC235CAF643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C26B37-D4AB-49ED-B4A6-6FC235CAF643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93547658-DCD1-4540-85D5-4A8FC52BA682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93547658-DCD1-4540-85D5-4A8FC52BA682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93547658-DCD1-4540-85D5-4A8FC52BA682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93547658-DCD1-4540-85D5-4A8FC52BA682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07169E5C-454D-4B60-93DA-E63DEDC8F60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07169E5C-454D-4B60-93DA-E63DEDC8F60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07169E5C-454D-4B60-93DA-E63DEDC8F60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07169E5C-454D-4B60-93DA-E63DEDC8F60C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
