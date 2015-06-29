@@ -12,8 +12,11 @@ namespace SampleConsole
     class Program
     {
         #region Test Constants
+        //const string username = "YOUR USERNAME";
+        //const string password = "YOUR PASSWORD";
         const string username = "Full_3";
         const string password = "Full_3";
+        //Optional
         const string providerId = "South Central RIC - Test Data Provider 1";
         static string navigationPage = "1";
         static string navigationPageSize = "5";
