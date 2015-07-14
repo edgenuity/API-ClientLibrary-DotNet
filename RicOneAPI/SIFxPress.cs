@@ -29,6 +29,7 @@ namespace RicOneAPI.Api
             this.restClient = restClient;
         }
 
+
         # region xLeas
         /// <summary>
         /// Request all Leas
@@ -36,7 +37,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeas(string navigationPage, string navigationPageSize)
+        public List<XLea> GetXLeas(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -45,7 +46,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPageSize", navigationPageSize);
 
             var response = restClient.Execute<XLeasRoot>(request);
-
+          
             Util.ResponseHandler(response);
 
             return response.Data.xLeas.xLea;
@@ -63,19 +64,18 @@ namespace RicOneAPI.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XLeasRoot>(request);
-
+        
             Util.ResponseHandler(response);
 
             return response.Data.xLeas.xLea;
         }
-
 
         /// <summary>
         /// Request single Leas by refId
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XLea GetXLea(string refId, string navigationPage, string navigationPageSize)
+        public XLea GetXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -115,7 +115,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXSchool(string refId, string navigationPage, string navigationPageSize)
+        public List<XLea> GetXLeasByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -154,7 +154,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXStudent(string refId, string navigationPage, string navigationPageSize)
+        public List<XLea> GetXLeasByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -193,7 +193,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXContact(string refId, string navigationPage, string navigationPageSize)
+        public List<XLea> GetXLeasByXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -235,7 +235,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchools(string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchools(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -271,7 +271,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XSchool GetXSchool(string refId, string navigationPage, string navigationPageSize)
+        public XSchool GetXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -310,7 +310,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXLea(string refId, string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchoolsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -349,7 +349,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXCalendar(string refId, string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchoolsByXCalendar(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCalendars/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -388,7 +388,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXCourse(string refId, string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchoolsByXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -427,7 +427,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXRoster(string refId, string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchoolsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -466,7 +466,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXStaff(string refId, string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchoolsByXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -506,7 +506,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXStudent(string refId, string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchoolsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -545,7 +545,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXContact(string refId, string navigationPage, string navigationPageSize)
+        public List<XSchool> GetXSchoolsByXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -587,7 +587,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCalendar> GetXCalendars(string navigationPage, string navigationPageSize)
+        public List<XCalendar> GetXCalendars(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCalendars", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -623,7 +623,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XCalendar GetXCalendar(string refId, string navigationPage, string navigationPageSize)
+        public XCalendar GetXCalendar(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCalendars/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -662,7 +662,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCalendar> GetXCalendarsByXSchool(string refId, string navigationPage, string navigationPageSize)
+        public List<XCalendar> GetXCalendarsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xCalendars", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -703,7 +703,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCourse> GetXCourses(string navigationPage, string navigationPageSize)
+        public List<XCourse> GetXCourses(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -740,7 +740,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XCourse GetXCourse(string refId, string navigationPage, string navigationPageSize)
+        public XCourse GetXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -779,7 +779,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCourse> GetXCoursesByXLea(string refId, string navigationPage, string navigationPageSize)
+        public List<XCourse> GetXCoursesByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xCourses", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -821,7 +821,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRosters(string navigationPage, string navigationPageSize)
+        public List<XRoster> GetXRosters(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -857,7 +857,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XRoster GetXRoster(string refId, string navigationPage, string navigationPageSize)
+        public XRoster GetXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
         RestRequest request = new RestRequest("xRosters/{refId}", Method.GET);
         request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -896,7 +896,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXLea(string refId, string navigationPage, string navigationPageSize)
+        public List<XRoster> GetXRostersByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -935,7 +935,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXSchool(string refId, string navigationPage, string navigationPageSize)
+        public List<XRoster> GetXRostersByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -974,7 +974,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXCourse(string refId, string navigationPage, string navigationPageSize)
+        public List<XRoster> GetXRostersByXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1013,7 +1013,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXStaff(string refId, string navigationPage, string navigationPageSize)
+        public List<XRoster> GetXRostersByXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1052,7 +1052,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXStudent(string refId, string navigationPage, string navigationPageSize)
+        public List<XRoster> GetXRostersByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1094,7 +1094,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffs(string navigationPage, string navigationPageSize)
+        public List<XStaff> GetXStaffs(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -1130,7 +1130,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XStaff GetXStaff(string refId, string navigationPage, string navigationPageSize)
+        public XStaff GetXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1169,7 +1169,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXLea(string refId, string navigationPage, string navigationPageSize)
+        public List<XStaff> GetXStaffsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1208,7 +1208,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXSchool(string refId, string navigationPage, string navigationPageSize)
+        public List<XStaff> GetXStaffsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1247,7 +1247,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXCourse(string refId, string navigationPage, string navigationPageSize)
+        public List<XStaff> GetXStaffsByXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1286,7 +1286,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXRoster(string refId, string navigationPage, string navigationPageSize)
+        public List<XStaff> GetXStaffsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1328,7 +1328,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudents(string navigationPage, string navigationPageSize)
+        public List<XStudent> GetXStudents(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -1364,7 +1364,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XStudent GetXStudent(string refId, string navigationPage, string navigationPageSize)
+        public XStudent GetXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1403,7 +1403,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXLea(string refId, string navigationPage, string navigationPageSize)
+        public List<XStudent> GetXStudentsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1442,7 +1442,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXSchool(string refId, string navigationPage, string navigationPageSize)
+        public List<XStudent> GetXStudentsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1481,7 +1481,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXRoster(string refId, string navigationPage, string navigationPageSize)
+        public List<XStudent> GetXStudentsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1520,7 +1520,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXStaff(string refId, string navigationPage, string navigationPageSize)
+        public List<XStudent> GetXStudentsByXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1559,7 +1559,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXContact(string refId, string navigationPage, string navigationPageSize)
+        public List<XStudent> GetXStudentsByXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1601,7 +1601,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContacts(string navigationPage, string navigationPageSize)
+        public List<XContact> GetXContacts(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -1637,7 +1637,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XContact GetXContact(string refId, string navigationPage, string navigationPageSize)
+        public XContact GetXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1676,7 +1676,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXLea(string refId, string navigationPage, string navigationPageSize)
+        public List<XContact> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1715,7 +1715,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXSchool(string refId, string navigationPage, string navigationPageSize)
+        public List<XContact> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1754,7 +1754,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXStudent(string refId, string navigationPage, string navigationPageSize)
+        public List<XContact> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1785,6 +1785,394 @@ namespace RicOneAPI.Api
             Util.ResponseHandler(response);
 
             return response.Data.xContacts.xContact;
+        }
+
+        #endregion
+
+        #region navigationLastPage
+
+        public enum ServicePath
+        {
+            GetXLeas = 1,
+            GetXLeasByXSchool = 2,
+            GetXLeasByXStudent = 3,
+            GetXLeasByXContact = 4,
+            GetXSchools = 5,
+            GetXSchoolsByXLea = 6,
+            GetXSchoolsByXCalendar = 7,
+            GetXSchoolsByXCourse = 8,
+            GetXSchoolsByXRoster = 9,
+            GetXSchoolsByXStaff = 10,
+            GetXSchoolsByXStudent = 11,
+            GetXSchoolsByXContact = 12,
+            GetXCalendars = 13,
+            GetXCalendarsByXSchool = 14,
+            GetXCourses = 15,
+            GetXCoursesByXLea = 16,
+            GetXRosters = 17,
+            GetXRostersByXLea = 18,
+            GetXRostersByXSchool = 19,
+            GetXRostersByXCourse = 20,
+            GetXRostersByXStaff = 21,
+            GetXRostersByXStudent = 22,
+            GetXStaffs = 23,
+            GetXStaffsByXLea = 24,
+            GetXStaffsByXSchool = 25,
+            GetXStaffsByXCourse = 26,
+            GetXStaffsByXRoster = 27,
+            GetXStudents = 28,
+            GetXStudentsByXLea = 29,
+            GetXStudentsByXSchool = 30,
+            GetXStudentsByXRoster = 31,
+            GetXStudentsByXStaff = 32,
+            GetXStudentsByXContact = 33,
+            GetXContacts = 34,
+            GetXContactsByXLea = 35,
+            GetXContactsByXSchool = 36,
+            GetXContactsByXStudent = 37
+        }
+
+        public ServicePath myServicePath { get; set; }
+
+        public int GetLastPage(int navigationPageSize, ServicePath p, string refId)
+        {
+            string path = "";
+
+            if (p == ServicePath.GetXLeas)
+            {
+                path = "xLeas";
+            }
+            else if (p == ServicePath.GetXLeasByXSchool)
+            {
+                path = "xSchools/{refId}/xLeas";
+            }
+            else if (p == ServicePath.GetXLeasByXStudent)
+            {
+                path = "xStudents/{refId}/xLeas";
+            }
+            else if (p == ServicePath.GetXLeasByXContact)
+            {
+                path = "xContacts/{refId}/xLeas";
+            }
+            else if (p == ServicePath.GetXSchools)
+            {
+                path = "xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXLea)
+            {
+                path = "xLeas/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXCalendar)
+            {
+                path = "xCalendars/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXCourse)
+            {
+                path = "xCourses/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXRoster)
+            {
+                path = "xRosters/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXStaff)
+            {
+                path = "xStaffs/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXStudent)
+            {
+                path = "xStudents/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXContact)
+            {
+                path = "xContacts/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXCalendars)
+            {
+                path = "xCalendars";
+            }
+            else if (p == ServicePath.GetXCalendarsByXSchool)
+            {
+                path = "xSchools/{refId}/xCalendars";
+            }
+            else if (p == ServicePath.GetXCourses)
+            {
+                path = "xCourses";
+            }
+            else if (p == ServicePath.GetXCoursesByXLea)
+            {
+                path = "xLeas/{refId}/xCourses";
+            }
+            else if (p == ServicePath.GetXRosters)
+            {
+                path = "xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXLea)
+            {
+                path = "xLeas/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXSchool)
+            {
+                path = "xSchools/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXCourse)
+            {
+                path = "xCourses/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXStaff)
+            {
+                path = "xStaffs/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXStudent)
+            {
+                path = "xStudents/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXStaffs)
+            {
+                path = "xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXLea)
+            {
+                path = "xLeas/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXSchool)
+            {
+                path = "xSchools/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXCourse)
+            {
+                path = "xCourses/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXRoster)
+            {
+                path = "xRosters/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStudents)
+            {
+                path = "xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXLea)
+            {
+                path = "xLeas/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXSchool)
+            {
+                path = "xSchools/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXRoster)
+            {
+                path = "xRosters/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXStaff)
+            {
+                path = "xStaffs/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXContact)
+            {
+                path = "xContacts/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXContacts)
+            {
+                path = "xContacts";
+            }
+            else if (p == ServicePath.GetXContactsByXLea)
+            {
+                path = "xLeas/{refId}/xContacts";
+            }
+            else if (p == ServicePath.GetXContactsByXSchool)
+            {
+                path = "xSchools/{refId}/xContacts";
+            }
+            else if (p == ServicePath.GetXContactsByXStudent)
+            {
+                path = "xStudents/{refId}/xContacts";
+            }
+
+            RestRequest request = new RestRequest(path, Method.GET);
+            request.AddHeader("Accept", "application/json");
+
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddParameter("navigationPage", 1);
+            request.AddParameter("navigationPageSize", navigationPageSize);
+            
+            var response = restClient.Execute(request);
+
+            int navigationLastPage = Int32.Parse(response.Headers.ToList()
+            .Find(x => x.Name == "navigationLastPage")
+            .Value.ToString());
+
+            Util.ResponseHandler(response);
+
+            return navigationLastPage;
+        }
+
+        public int GetLastPage(int navigationPageSize, ServicePath p)
+        {
+            string path = "";
+
+            if (p == ServicePath.GetXLeas)
+            {
+                path = "xLeas";
+            }
+            else if (p == ServicePath.GetXLeasByXSchool)
+            {
+                path = "xSchools/{refId}/xLeas";
+            }
+            else if (p == ServicePath.GetXLeasByXStudent)
+            {
+                path = "xStudents/{refId}/xLeas";
+            }
+            else if (p == ServicePath.GetXLeasByXContact)
+            {
+                path = "xContacts/{refId}/xLeas";
+            }
+            else if (p == ServicePath.GetXSchools)
+            {
+                path = "xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXLea)
+            {
+                path = "xLeas/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXCalendar)
+            {
+                path = "xCalendars/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXCourse)
+            {
+                path = "xCourses/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXRoster)
+            {
+                path = "xRosters/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXStaff)
+            {
+                path = "xStaffs/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXStudent)
+            {
+                path = "xStudents/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXSchoolsByXContact)
+            {
+                path = "xContacts/{refId}/xSchools";
+            }
+            else if (p == ServicePath.GetXCalendars)
+            {
+                path = "xCalendars";
+            }
+            else if (p == ServicePath.GetXCalendarsByXSchool)
+            {
+                path = "xSchools/{refId}/xCalendars";
+            }
+            else if (p == ServicePath.GetXCourses)
+            {
+                path = "xCourses";
+            }
+            else if (p == ServicePath.GetXCoursesByXLea)
+            {
+                path = "xLeas/{refId}/xCourses";
+            }
+            else if (p == ServicePath.GetXRosters)
+            {
+                path = "xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXLea)
+            {
+                path = "xLeas/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXSchool)
+            {
+                path = "xSchools/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXCourse)
+            {
+                path = "xCourses/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXStaff)
+            {
+                path = "xStaffs/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXRostersByXStudent)
+            {
+                path = "xStudents/{refId}/xRosters";
+            }
+            else if (p == ServicePath.GetXStaffs)
+            {
+                path = "xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXLea)
+            {
+                path = "xLeas/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXSchool)
+            {
+                path = "xSchools/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXCourse)
+            {
+                path = "xCourses/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStaffsByXRoster)
+            {
+                path = "xRosters/{refId}/xStaffs";
+            }
+            else if (p == ServicePath.GetXStudents)
+            {
+                path = "xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXLea)
+            {
+                path = "xLeas/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXSchool)
+            {
+                path = "xSchools/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXRoster)
+            {
+                path = "xRosters/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXStaff)
+            {
+                path = "xStaffs/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXStudentsByXContact)
+            {
+                path = "xContacts/{refId}/xStudents";
+            }
+            else if (p == ServicePath.GetXContacts)
+            {
+                path = "xContacts";
+            }
+            else if (p == ServicePath.GetXContactsByXLea)
+            {
+                path = "xLeas/{refId}/xContacts";
+            }
+            else if (p == ServicePath.GetXContactsByXSchool)
+            {
+                path = "xSchools/{refId}/xContacts";
+            }
+            else if (p == ServicePath.GetXContactsByXStudent)
+            {
+                path = "xStudents/{refId}/xContacts";
+            }
+
+            RestRequest request = new RestRequest(path, Method.GET);
+            request.AddHeader("Accept", "application/json");
+
+            request.AddParameter("navigationPage", 1);
+            request.AddParameter("navigationPageSize", navigationPageSize);
+            
+            var response = restClient.Execute(request);
+
+            int navigationLastPage = Int32.Parse(response.Headers.ToList()
+            .Find(x => x.Name == "navigationLastPage")
+            .Value.ToString());
+
+            Util.ResponseHandler(response);
+
+            return navigationLastPage;
         }
 
         #endregion

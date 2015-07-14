@@ -7,6 +7,8 @@ namespace RicOneAPI.Models.SIFxPress
 {
     /// <summary>
     /// XOtherPersonIdListType
+    /// xOtherOrganizationIdListType
+    /// xOtherCourseIdListType
     /// </summary>
     public class OtherIds
     {
