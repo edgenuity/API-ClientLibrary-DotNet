@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and limitations 
 
 
 The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/).The 
-client library supports OAuth2 authentication and the JSON return type.
+client library supports OAuth2 authentication and the JSON return type..
 
 ## v1.0
 
@@ -34,8 +34,8 @@ foreach (Endpoint e in auth.GetEndpoints())
 ```
 
 ### Project Contents
-* RicOneAPI - Client Library
-* RicOneAPI.Tests - Test Console Outputs
+* RicOneApi - Client Library
+* RicOneApi.Tests - Test Console Outputs
 * SampleConsole - Simple console app showing use
 
 ### Getting Started

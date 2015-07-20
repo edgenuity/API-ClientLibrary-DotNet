@@ -7,33 +7,33 @@ using System.Net;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
-using RicOneAPI.Models.Authentication;
-using RicOneAPI.Models.SIFxPress;
-using RicOneAPI;
+using RicOneApi.Models.Authentication;
+using RicOneApi.Models.SifXpress;
+using RicOneApi;
 
-namespace RicOneAPI.Api
+namespace RicOneApi.Api
 {
     /// <summary>
     /// Contains the calls to consume the RicOne API.
     /// </summary>
-    public class RicOneAPIClient
+    public class RicOneApiClient
     {
         private string token;
         private RestClient restClient;
         private string baseApiUrl;
-        public SIFxPress sifXpress;
+        public SifXpress sifXpress;
 
         /// <summary>
         /// Use endpoint values to authenticate to data API
         /// </summary>
         /// <param name="endpoint"></param>
-        public RicOneAPIClient(Endpoint endpoint)
+        public RicOneApiClient(Endpoint endpoint)
         {
             this.token = endpoint.token;
             this.baseApiUrl = endpoint.href;
             this.restClient = new RestClient(baseApiUrl);
             restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
-            sifXpress = new SIFxPress(token, baseApiUrl, restClient);
+            sifXpress = new SifXpress(token, baseApiUrl, restClient);
 
         }
         /// <summary>
@@ -41,13 +41,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="token"></param>
         /// <param name="baseApiUrl"></param>
-        public RicOneAPIClient(string token, string baseApiUrl)
+        public RicOneApiClient(string token, string baseApiUrl)
         {
             this.token = token;
             this.baseApiUrl = baseApiUrl;
             this.restClient = new RestClient(baseApiUrl);
             restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
-            sifXpress = new SIFxPress(token, baseApiUrl, restClient);
+            sifXpress = new SifXpress(token, baseApiUrl, restClient);
            
         }
     }

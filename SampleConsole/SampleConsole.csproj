@@ -74,9 +74,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RicOneAPI\RicOneAPI.csproj">
+    <ProjectReference Include="..\RicOneAPI\RicOneApi.csproj">
       <Project>{18c26b37-d4ab-49ed-b4a6-6fc235caf643}</Project>
-      <Name>RicOneAPI</Name>
+      <Name>RicOneApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

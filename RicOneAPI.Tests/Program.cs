@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RicOneAPI.Api;
-using RicOneAPI.Models.Authentication;
-using RicOneAPI.Models.SIFxPress;
+using System.Numerics;
+using RicOneApi.Api;
+using RicOneApi.Models.Authentication;
+using RicOneApi.Models.SifXpress;
 
-namespace RicOneAPI.Tests
+namespace RicOneApi.Tests
 {
     class Program
     { 
         #region Test Constants
         const string username = "Full_3";
         const string password = "Full_3";
-        //const string provider = "North East Regional Information Center - productio";
+        //const string providerId = "North East Regional Information Center - productio";
         const string providerId = "SCRIC - Test Data Provider 1";
         //static int navigationPage = 1;
         static int navigationPageSize = 2;
+        //static int navigationPageSize = 100;
 
         //Null:
         static string refId = null;
@@ -35,20 +37,19 @@ namespace RicOneAPI.Tests
         //static string refId = "61126B90-2AF9-4176-9377-005686D1B855";
         //Student:
         //static string refId = "0AC93DFD-DC1C-48A4-9D37-000210E4C952";
-        //Contact 1:
+        //static string refId = "D47B7B88-CE17-44FB-B94F-0000E5BA0532";
+        //Contact:
         //static string refId = "9a7345c7-72bd-4672-aee2-001876903ad8";
-        //Contact 2:
         //static string refId = "128592BC-691D-4ED0-9493-0007D6966142";
         #endregion
 
         static void Main(string[] args)
         {
             Authenticator auth = new Authenticator(username, password);
-
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                RicOneAPIClient ricOne = new RicOneAPIClient(e);
+                RicOneApiClient ricOne = new RicOneApiClient(e);
                 
                 #region xLeas
                 //XLeas_GetXLeas(ricOne);
@@ -198,9 +199,9 @@ namespace RicOneAPI.Tests
         #region xLeas
 
         //RETURN ALL LEAS
-        public static void XLeas_GetXLeas(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLeas(RicOneApiClient ricOne)
         {
-            foreach (XLea lea in ricOne.sifXpress.GetXLeas())
+            foreach (XLeaType lea in ricOne.sifXpress.GetXLeas())
             {
                 Console.WriteLine("refId: " + lea.refId);
                 Console.WriteLine("leaName: " + lea.leaName);
@@ -224,7 +225,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -235,9 +236,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SINGLE LEA
-        public static void XLeas_GetXLea(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLea(RicOneApiClient ricOne)
         {
-            XLea lea = ricOne.sifXpress.GetXLea(refId);
+            XLeaType lea = ricOne.sifXpress.GetXLea(refId);
 
             Console.WriteLine("refId: " + lea.refId);
             Console.WriteLine("leaName: " + lea.leaName);
@@ -261,7 +262,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
             Console.WriteLine("##### END PHONENUMBER #####");
             Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-            foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+            foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
             {
                 Console.WriteLine("number: " + p.number);
                 Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -271,9 +272,9 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN LEAS BY SCHOOL
-        public static void XLeas_GetXLeasByXSchool(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLeasByXSchool(RicOneApiClient ricOne)
         {
-            foreach (XLea lea in ricOne.sifXpress.GetXLeasByXSchool(refId))
+            foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXSchool(refId))
             {
                 Console.WriteLine("refId: " + lea.refId);
                 Console.WriteLine("leaName: " + lea.leaName);
@@ -297,7 +298,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -308,9 +309,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN LEAS BY STUDENT
-        public static void XLeas_GetXLeasByXStudent(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLeasByXStudent(RicOneApiClient ricOne)
         {
-            foreach (XLea lea in ricOne.sifXpress.GetXLeasByXStudent(refId))
+            foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXStudent(refId))
             {
                 Console.WriteLine("refId: " + lea.refId);
                 Console.WriteLine("leaName: " + lea.leaName);
@@ -334,7 +335,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -345,9 +346,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN LEAS BY CONTACT
-        public static void XLeas_GetXLeasByXContact(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLeasByXContact(RicOneApiClient ricOne)
         {
-            foreach (XLea lea in ricOne.sifXpress.GetXLeasByXContact(refId))
+            foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXContact(refId))
             {
                 Console.WriteLine("refId: " + lea.refId);
                 Console.WriteLine("leaName: " + lea.leaName);
@@ -371,7 +372,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -386,16 +387,16 @@ namespace RicOneAPI.Tests
 
         #region xSchools
         //RETURN ALL SCHOOLS
-        public static void XSchools_GetXSchools(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchools(RicOneApiClient ricOne)
         {
-            foreach (XSchool school in ricOne.sifXpress.GetXSchools())
+            foreach (XSchoolType school in ricOne.sifXpress.GetXSchools())
             {
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
                 Console.WriteLine("localId: " + school.localId);
                 Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in school.otherIds.otherId)
+                foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -423,7 +424,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -434,16 +435,16 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SINGLE SCHOOL
-        public static void XSchools_GetXSchool(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchool(RicOneApiClient ricOne)
         {
-            XSchool school = ricOne.sifXpress.GetXSchool(refId);
+            XSchoolType school = ricOne.sifXpress.GetXSchool(refId);
 
             Console.WriteLine("refId: " + school.refId);
             Console.WriteLine("leaRefId: " + school.leaRefId);
             Console.WriteLine("localId: " + school.localId);
             Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
             Console.WriteLine("##### BEGIN OTHERIDS #####");
-            foreach (OtherId id in school.otherIds.otherId)
+            foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
             {
                 Console.WriteLine("otherId id" + id.id);
                 Console.WriteLine("type: " + id.type);
@@ -471,7 +472,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
             Console.WriteLine("##### END PHONENUMBER #####");
             Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-            foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+            foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
             {
                 Console.WriteLine("otherPhoneNumbers number: " + p.number);
                 Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -481,16 +482,16 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN SCHOOLS BY LEA
-        public static void XSchools_GetXSchoolsByXLea(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXLea(RicOneApiClient ricOne)
         {
-            foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXLea(refId))
+            foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXLea(refId))
             {
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
                 Console.WriteLine("localId: " + school.localId);
                 Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in school.otherIds.otherId)
+                foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -518,7 +519,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -529,16 +530,16 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY CALENDAR
-        public static void XSchools_GetXSchoolsByXCalendar(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXCalendar(RicOneApiClient ricOne)
         {
-            foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXCalendar(refId))
+            foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXCalendar(refId))
             {
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
                 Console.WriteLine("localId: " + school.localId);
                 Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in school.otherIds.otherId)
+                foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -566,7 +567,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -577,16 +578,16 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY COURSE
-        public static void XSchools_GetXSchoolsByXCourse(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXCourse(RicOneApiClient ricOne)
         {
-            foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXCourse(refId))
+            foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXCourse(refId))
             {
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
                 Console.WriteLine("localId: " + school.localId);
                 Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in school.otherIds.otherId)
+                foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -614,7 +615,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -625,16 +626,16 @@ namespace RicOneAPI.Tests
             }
          }
         //RETURN SCHOOLS BY ROSTER
-        public static void XSchools_GetXSchoolsByXRoster(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXRoster(RicOneApiClient ricOne)
          {
-             foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXRoster(refId))
+             foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXRoster(refId))
              {
                  Console.WriteLine("refId: " + school.refId);
                  Console.WriteLine("leaRefId: " + school.leaRefId);
                  Console.WriteLine("localId: " + school.localId);
                  Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                  Console.WriteLine("##### BEGIN OTHERIDS #####");
-                 foreach (OtherId id in school.otherIds.otherId)
+                 foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                  {
                      Console.WriteLine("otherId id" + id.id);
                      Console.WriteLine("type: " + id.type);
@@ -662,7 +663,7 @@ namespace RicOneAPI.Tests
                  Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                  Console.WriteLine("##### END PHONENUMBER #####");
                  Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                 foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                 foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                  {
                      Console.WriteLine("otherPhoneNumbers number: " + p.number);
                      Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -673,16 +674,16 @@ namespace RicOneAPI.Tests
              }
          }
         //RETURN SCHOOLS BY STAFF
-        public static void XSchools_GetXSchoolsByXStaff(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXStaff(RicOneApiClient ricOne)
         {
-            foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXStaff(refId))
+            foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXStaff(refId))
             {
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
                 Console.WriteLine("localId: " + school.localId);
                 Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in school.otherIds.otherId)
+                foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -710,7 +711,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -721,16 +722,16 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY STUDENT
-        public static void XSchools_GetXSchoolsByXStudent(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXStudent(RicOneApiClient ricOne)
         {
-            foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXStudent(refId))
+            foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXStudent(refId))
             {
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
                 Console.WriteLine("localId: " + school.localId);
                 Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in school.otherIds.otherId)
+                foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -758,7 +759,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -769,16 +770,16 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY CONTACT
-        public static void XSchools_GetXSchoolsByXContact(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXContact(RicOneApiClient ricOne)
         {
-            foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXContact(refId))
+            foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXContact(refId))
             {
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
                 Console.WriteLine("localId: " + school.localId);
                 Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in school.otherIds.otherId)
+                foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -806,7 +807,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBER #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -820,15 +821,15 @@ namespace RicOneAPI.Tests
 
         #region xCalendars
         //RETURN ALL CALENDARS
-        public static void XCalendars_GetXCalendars(RicOneAPIClient ricOne)
+        public static void XCalendars_GetXCalendars(RicOneApiClient ricOne)
         {
-            foreach (XCalendar calendar in ricOne.sifXpress.GetXCalendars())
+            foreach (XCalendarType calendar in ricOne.sifXpress.GetXCalendars())
             {
                 Console.WriteLine("refId: " + calendar.refId);
                 Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
                 Console.WriteLine("schoolYear: " + calendar.schoolYear);
                 Console.WriteLine("##### BEGIN SESSIONLIST #####");
-                foreach(SessionList sl in calendar.sessions.sessionList)
+                foreach (XSessionType sl in calendar.sessions.sessionList)
                 {
                     Console.WriteLine("sessionType: " + sl.sessionType);
                     Console.WriteLine("sessionCode: " + sl.sessionCode);
@@ -844,15 +845,15 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SINGLE CALENDAR
-        public static void XCalendars_GetXCalendar(RicOneAPIClient ricOne)
+        public static void XCalendars_GetXCalendar(RicOneApiClient ricOne)
         {
-            XCalendar calendar = ricOne.sifXpress.GetXCalendar(refId);
+            XCalendarType calendar = ricOne.sifXpress.GetXCalendar(refId);
 
             Console.WriteLine("refId: " + calendar.refId);
             Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
             Console.WriteLine("schoolYear: " + calendar.schoolYear);
             Console.WriteLine("##### BEGIN SESSIONLIST #####");
-            foreach (SessionList sl in calendar.sessions.sessionList)
+            foreach (XSessionType sl in calendar.sessions.sessionList)
             {
                 Console.WriteLine("sessionType: " + sl.sessionType);
                 Console.WriteLine("sessionCode: " + sl.sessionCode);
@@ -867,15 +868,15 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN CALENDARS BY SCHOOL
-        public static void XCalendars_GetXCalendarsByXSchool(RicOneAPIClient ricOne)
+        public static void XCalendars_GetXCalendarsByXSchool(RicOneApiClient ricOne)
         {
-            foreach (XCalendar calendar in ricOne.sifXpress.GetXCalendarsByXSchool(refId))
+            foreach (XCalendarType calendar in ricOne.sifXpress.GetXCalendarsByXSchool(refId))
             {
                 Console.WriteLine("refId: " + calendar.refId);
                 Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
                 Console.WriteLine("schoolYear: " + calendar.schoolYear);
                 Console.WriteLine("##### BEGIN SESSIONLIST #####");
-                foreach (SessionList sl in calendar.sessions.sessionList)
+                foreach (XSessionType sl in calendar.sessions.sessionList)
                 {
                     Console.WriteLine("sessionType: " + sl.sessionType);
                     Console.WriteLine("sessionCode: " + sl.sessionCode);
@@ -894,16 +895,16 @@ namespace RicOneAPI.Tests
 
         #region xCourses
         //RETURN ALL COURSES
-        public static void XCourses_GetXCourses(RicOneAPIClient ricOne)
+        public static void XCourses_GetXCourses(RicOneApiClient ricOne)
         {
-            foreach(XCourse course in ricOne.sifXpress.GetXCourses())
+            foreach(XCourseType course in ricOne.sifXpress.GetXCourses())
             {
                 Console.WriteLine("refId: " + course.refId);
                 Console.WriteLine("schoolRefId: " + course.schoolRefId);
                 Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
                 Console.WriteLine("leaCourseId: " + course.leaCourseId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in course.otherIds.otherId)
+                foreach (XOtherCourseIdType id in course.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -926,16 +927,16 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SINGLE COURSE
-        public static void XCourses_GetXCourse(RicOneAPIClient ricOne)
+        public static void XCourses_GetXCourse(RicOneApiClient ricOne)
         {
-            XCourse course = ricOne.sifXpress.GetXCourse(refId);
+            XCourseType course = ricOne.sifXpress.GetXCourse(refId);
             
             Console.WriteLine("refId: " + course.refId);
             Console.WriteLine("schoolRefId: " + course.schoolRefId);
             Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
             Console.WriteLine("leaCourseId: " + course.leaCourseId);
             Console.WriteLine("##### BEGIN OTHERIDS #####");
-            foreach (OtherId id in course.otherIds.otherId)
+            foreach (XOtherCourseIdType id in course.otherIds.otherId)
             {
                 Console.WriteLine("otherId id" + id.id);
                 Console.WriteLine("type: " + id.type);
@@ -957,16 +958,16 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN COURSES BY LEA
-        public static void XCourses_GetXCoursesByXLea(RicOneAPIClient ricOne)
+        public static void XCourses_GetXCoursesByXLea(RicOneApiClient ricOne)
         {
-            foreach (XCourse course in ricOne.sifXpress.GetXCoursesByXLea(refId))
+            foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXLea(refId))
             {
                 Console.WriteLine("refId: " + course.refId);
                 Console.WriteLine("schoolRefId: " + course.schoolRefId);
                 Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
                 Console.WriteLine("leaCourseId: " + course.leaCourseId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in course.otherIds.otherId)
+                foreach (XOtherCourseIdType id in course.otherIds.otherId)
                 {
                     Console.WriteLine("otherId id" + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -992,9 +993,9 @@ namespace RicOneAPI.Tests
 
         #region xRosters
         //RETURN ALL ROSTERS
-        public static void XRosters_GetXRosters(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRosters(RicOneApiClient ricOne)
         {
-            foreach(XRoster r in ricOne.sifXpress.GetXRosters())
+            foreach(XRosterType r in ricOne.sifXpress.GetXRosters())
             {
                 Console.WriteLine("refId: " + r.refId);
                 Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1008,7 +1009,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
                 
                 Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                foreach(MeetingTime mt in r.meetingTimes.meetingTime)
+                foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                 {
                     Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -1021,7 +1022,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END MEETING TIMES #####");
                 
                 Console.WriteLine("##### BEGIN STUDENTS #####");
-                foreach(PersonReference student in r.students.studentReference)
+                foreach (XPersonReferenceType student in r.students.studentReference)
                 {
                     Console.WriteLine("refId: " + student.refId);
                     Console.WriteLine("localId: " + student.localId);
@@ -1040,7 +1041,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END PRIMARY STAFF #####");
 
                 Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                foreach(Staff staff in r.otherStaffs.otherStaff)
+                foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                 {
                     Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                     Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -1055,9 +1056,9 @@ namespace RicOneAPI.Tests
  
         }
         //RETURN SINGLE ROSTER
-        public static void XRosters_GetXRoster(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRoster(RicOneApiClient ricOne)
         {
-            XRoster r = ricOne.sifXpress.GetXRoster(refId);
+            XRosterType r = ricOne.sifXpress.GetXRoster(refId);
 
             Console.WriteLine("refId: " + r.refId);
             Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1071,7 +1072,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
             Console.WriteLine("##### BEGIN MEETING TIMES #####");
-            foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+            foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
             {
                 Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -1084,7 +1085,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("##### END MEETING TIMES #####");
 
             Console.WriteLine("##### BEGIN STUDENTS #####");
-            foreach (PersonReference student in r.students.studentReference)
+            foreach (XPersonReferenceType student in r.students.studentReference)
             {
                 Console.WriteLine("refId: " + student.refId);
                 Console.WriteLine("localId: " + student.localId);
@@ -1103,7 +1104,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("##### END PRIMARY STAFF #####");
 
             Console.WriteLine("##### BEGIN OTHER STAFF #####");
-            foreach (Staff staff in r.otherStaffs.otherStaff)
+            foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
             {
                 Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                 Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -1116,9 +1117,9 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN ROSTERS BY LEA
-        public static void XRosters_GetXRostersByXLea(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXLea(RicOneApiClient ricOne)
         {
-            foreach (XRoster r in ricOne.sifXpress.GetXRostersByXLea(refId))
+            foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXLea(refId))
             {
                 Console.WriteLine("refId: " + r.refId);
                 Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1132,7 +1133,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
                 
                 Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                foreach(MeetingTime mt in r.meetingTimes.meetingTime)
+                foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                 {
                     Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -1145,7 +1146,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END MEETING TIMES #####");
                 
                 Console.WriteLine("##### BEGIN STUDENTS #####");
-                foreach(PersonReference student in r.students.studentReference)
+                foreach (XPersonReferenceType student in r.students.studentReference)
                 {
                     Console.WriteLine("refId: " + student.refId);
                     Console.WriteLine("localId: " + student.localId);
@@ -1164,7 +1165,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END PRIMARY STAFF #####");
 
                 Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                foreach(Staff staff in r.otherStaffs.otherStaff)
+                foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                 {
                     Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                     Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -1178,9 +1179,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY SCHOOL
-        public static void XRosters_GetXRostersByXSchool(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXSchool(RicOneApiClient ricOne)
         {
-            foreach (XRoster r in ricOne.sifXpress.GetXRostersByXSchool(refId))
+            foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXSchool(refId))
             {
                 Console.WriteLine("refId: " + r.refId);
                 Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1194,7 +1195,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                 Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                 {
                     Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -1207,7 +1208,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END MEETING TIMES #####");
 
                 Console.WriteLine("##### BEGIN STUDENTS #####");
-                foreach (PersonReference student in r.students.studentReference)
+                foreach (XPersonReferenceType student in r.students.studentReference)
                 {
                     Console.WriteLine("refId: " + student.refId);
                     Console.WriteLine("localId: " + student.localId);
@@ -1226,7 +1227,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END PRIMARY STAFF #####");
 
                 Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                foreach (Staff staff in r.otherStaffs.otherStaff)
+                foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                 {
                     Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                     Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -1240,9 +1241,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY CROUSE
-        public static void XRosters_GetXRostersByXCourse(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXCourse(RicOneApiClient ricOne)
         {
-            foreach (XRoster r in ricOne.sifXpress.GetXRostersByXCourse(refId))
+            foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXCourse(refId))
             {
                 Console.WriteLine("refId: " + r.refId);
                 Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1256,7 +1257,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                 Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                 {
                     Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -1269,7 +1270,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END MEETING TIMES #####");
 
                 Console.WriteLine("##### BEGIN STUDENTS #####");
-                foreach (PersonReference student in r.students.studentReference)
+                foreach (XPersonReferenceType student in r.students.studentReference)
                 {
                     Console.WriteLine("refId: " + student.refId);
                     Console.WriteLine("localId: " + student.localId);
@@ -1288,7 +1289,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END PRIMARY STAFF #####");
 
                 Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                foreach (Staff staff in r.otherStaffs.otherStaff)
+                foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                 {
                     Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                     Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -1302,9 +1303,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY STAFF
-        public static void XRosters_GetXRostersByXStaff(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXStaff(RicOneApiClient ricOne)
         {
-            foreach (XRoster r in ricOne.sifXpress.GetXRostersByXStaff(refId))
+            foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXStaff(refId))
             {
                 Console.WriteLine("refId: " + r.refId);
                 Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1318,7 +1319,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                 Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                 {
                     Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -1331,7 +1332,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END MEETING TIMES #####");
 
                 Console.WriteLine("##### BEGIN STUDENTS #####");
-                foreach (PersonReference student in r.students.studentReference)
+                foreach (XPersonReferenceType student in r.students.studentReference)
                 {
                     Console.WriteLine("refId: " + student.refId);
                     Console.WriteLine("localId: " + student.localId);
@@ -1350,7 +1351,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END PRIMARY STAFF #####");
 
                 Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                foreach (Staff staff in r.otherStaffs.otherStaff)
+                foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                 {
                     Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                     Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -1364,9 +1365,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY STUDENT
-        public static void XRosters_GetXRostersByXStudent(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXStudent(RicOneApiClient ricOne)
         {
-            foreach (XRoster r in ricOne.sifXpress.GetXRostersByXStudent(refId))
+            foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXStudent(refId))
             {
                 Console.WriteLine("refId: " + r.refId);
                 Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1380,7 +1381,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                 Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                 {
                     Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -1393,7 +1394,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END MEETING TIMES #####");
 
                 Console.WriteLine("##### BEGIN STUDENTS #####");
-                foreach (PersonReference student in r.students.studentReference)
+                foreach (XPersonReferenceType student in r.students.studentReference)
                 {
                     Console.WriteLine("refId: " + student.refId);
                     Console.WriteLine("localId: " + student.localId);
@@ -1412,7 +1413,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END PRIMARY STAFF #####");
 
                 Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                foreach (Staff staff in r.otherStaffs.otherStaff)
+                foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                 {
                     Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                     Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -1430,9 +1431,9 @@ namespace RicOneAPI.Tests
 
         #region xStaffs
         //RETURN ALL STAFFS
-        public static void XStaffs_GetXStaffs(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffs(RicOneApiClient ricOne)
         {
-            foreach (XStaff s in ricOne.sifXpress.GetXStaffs())
+            foreach (XStaffType s in ricOne.sifXpress.GetXStaffs())
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -1447,7 +1448,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
 	                Console.WriteLine("id: " + id.id);
 	                Console.WriteLine("type: " + id.type);
@@ -1464,7 +1465,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                 Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                 Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                foreach(PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                 {
                     Console.WriteLine("leaRefId: " + pa.leaRefId);
                     Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -1475,9 +1476,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SINGLE STAFF
-        public static void XStaffs_GetXStaff(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaff(RicOneApiClient ricOne)
         {
-            XStaff s = ricOne.sifXpress.GetXStaff(refId);
+            XStaffType s = ricOne.sifXpress.GetXStaff(refId);
 
             Console.WriteLine("refId: " + s.refId);
             Console.WriteLine("##### BEGIN NAME #####");
@@ -1492,7 +1493,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("loginId: " + s.loginId);
             Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
             Console.WriteLine("##### BEGIN OTHERIDS #####");
-            foreach (OtherId id in s.otherIds.otherId)
+            foreach (XOtherPersonIdType id in s.otherIds.otherId)
             {
                 Console.WriteLine("id: " + id.id);
                 Console.WriteLine("type: " + id.type);
@@ -1509,7 +1510,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
             Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
             Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-            foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+            foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
             {
                 Console.WriteLine("leaRefId: " + pa.leaRefId);
                 Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -1519,9 +1520,9 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN STAFFS BY LEA
-        public static void XStaffs_GetXStaffsByXLea(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXLea(RicOneApiClient ricOne)
         {
-            foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXLea(refId))
+            foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXLea(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -1536,7 +1537,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -1553,7 +1554,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                 Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                 Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                 {
                     Console.WriteLine("leaRefId: " + pa.leaRefId);
                     Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -1564,9 +1565,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STAFFS BY SCHOOL
-        public static void XStaffs_GetXStaffsByXSchool(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXSchool(RicOneApiClient ricOne)
         {
-            foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXSchool(refId))
+            foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXSchool(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -1581,7 +1582,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -1598,7 +1599,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                 Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                 Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                 {
                     Console.WriteLine("leaRefId: " + pa.leaRefId);
                     Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -1609,9 +1610,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STAFFS BY COURSE
-        public static void XStaffs_GetXStaffsByXCourse(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXCourse(RicOneApiClient ricOne)
         {
-            foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXCourse(refId))
+            foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXCourse(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -1626,7 +1627,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -1643,7 +1644,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                 Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                 Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                 {
                     Console.WriteLine("leaRefId: " + pa.leaRefId);
                     Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -1654,9 +1655,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STAFFS BY ROSTER
-        public static void XStaffs_GetXStaffsByXRoster(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXRoster(RicOneApiClient ricOne)
         {
-            foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXRoster(refId))
+            foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXRoster(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -1671,7 +1672,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -1688,7 +1689,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                 Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                 Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                 {
                     Console.WriteLine("leaRefId: " + pa.leaRefId);
                     Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -1702,9 +1703,9 @@ namespace RicOneAPI.Tests
 
         #region xStudents
         //RETURN ALL STUDENTS
-        public static void XStudents_GetXStudents(RicOneAPIClient ricOne)
-        { 
-            foreach (XStudent s in ricOne.sifXpress.GetXStudents())
+        public static void XStudents_GetXStudents(RicOneApiClient ricOne)
+        {
+            foreach (XStudentType s in ricOne.sifXpress.GetXStudents())
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -1716,7 +1717,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + s.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach(Name n in s.otherNames.name)
+                foreach (XPersonNameType n in s.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -1731,7 +1732,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -1755,7 +1756,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -1767,7 +1768,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + s.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach(Email e in s.otherEmails.email)
+                foreach (XEmailType e in s.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -1775,7 +1776,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END OTHEREMAILS #####");
                 Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                 Console.WriteLine("##### BEGIN RACES #####");
-                foreach(Race r in s.demographics.races.race)
+                foreach (XRaceType r in s.demographics.races.race)
                 {
                     Console.WriteLine("race: " + r.race);
                 }
@@ -1811,7 +1812,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END COUNSELOR #####");
                 Console.WriteLine("##### END ENROLLMENT #####");
                 Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                foreach(Enrollment e in s.otherEnrollments.enrollment)
+                foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                 {  
                     Console.WriteLine("leaRefId: " + e.leaRefId);
                     Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -1847,7 +1848,7 @@ namespace RicOneAPI.Tests
                 {
                     Console.WriteLine("contactPersonRefId: " + contactRefid);
                 }
-                foreach(Contact c in s.studentContacts.xContact)
+                foreach (XContactType c in s.studentContacts.xContact)
                 {
                     Console.WriteLine("##### BEGIN NAME #####");
                     Console.WriteLine("type: " + c.name.type);
@@ -1858,7 +1859,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -1871,7 +1872,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.localId);
                     Console.WriteLine(": " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -1895,7 +1896,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -1907,7 +1908,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -1916,7 +1917,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.sex);
                     Console.WriteLine(": " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach(ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -1933,7 +1934,7 @@ namespace RicOneAPI.Tests
                 }
                 Console.WriteLine("##### END STUDENTCONTACTS #####");
                 Console.WriteLine("##### BEGIN LANGUAGES #####");
-                foreach(Language l in s.languages.language)
+                foreach (XLanguageType l in s.languages.language)
                 {
                     Console.WriteLine("type: " + l.type);
                     Console.WriteLine("code: " + l.code);
@@ -1943,9 +1944,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SINGLE STUDENT
-        public static void XStudents_GetXStudent(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudent(RicOneApiClient ricOne)
         {
-            XStudent s = ricOne.sifXpress.GetXStudent(refId);
+            XStudentType s = ricOne.sifXpress.GetXStudent(refId);
 
             Console.WriteLine("refId: " + s.refId);
             Console.WriteLine("##### BEGIN NAME #####");
@@ -1957,7 +1958,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("suffix: " + s.name.suffix);
             Console.WriteLine("##### END NAME #####");
             Console.WriteLine("##### BEGIN OTHERNAME #####");
-            foreach (Name n in s.otherNames.name)
+            foreach (XPersonNameType n in s.otherNames.name)
             {
                 Console.WriteLine("type: " + n.type);
                 Console.WriteLine("prefix: " + n.prefix);
@@ -1972,7 +1973,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("loginId: " + s.loginId);
             Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
             Console.WriteLine("##### BEGIN OTHERIDS #####");
-            foreach (OtherId id in s.otherIds.otherId)
+            foreach (XOtherPersonIdType id in s.otherIds.otherId)
             {
                 Console.WriteLine("id: " + id.id);
                 Console.WriteLine("type: " + id.type);
@@ -1996,7 +1997,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
             Console.WriteLine("##### END PHONENUMBERS #####");
             Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-            foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+            foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
             {
                 Console.WriteLine("otherPhoneNumbers number: " + p.number);
                 Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2008,7 +2009,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("emailAddress: " + s.email.emailAddress);
             Console.WriteLine("##### END EMAIL #####");
             Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-            foreach (Email e in s.otherEmails.email)
+            foreach (XEmailType e in s.otherEmails.email)
             {
                 Console.WriteLine("emailType: " + e.emailType);
                 Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2016,7 +2017,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("##### END OTHEREMAILS #####");
             Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
             Console.WriteLine("##### BEGIN RACES #####");
-            foreach (Race r in s.demographics.races.race)
+            foreach (XRaceType r in s.demographics.races.race)
             {
                 Console.WriteLine("race: " + r.race);
             }
@@ -2052,7 +2053,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("##### END COUNSELOR #####");
             Console.WriteLine("##### END ENROLLMENT #####");
             Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-            foreach (Enrollment e in s.otherEnrollments.enrollment)
+            foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
             {
                 Console.WriteLine("leaRefId: " + e.leaRefId);
                 Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -2088,7 +2089,7 @@ namespace RicOneAPI.Tests
             {
                 Console.WriteLine("contactPersonRefId: " + contactRefid);
             }
-            foreach (Contact c in s.studentContacts.xContact)
+            foreach (XContactType c in s.studentContacts.xContact)
             {
                 Console.WriteLine("##### BEGIN NAME #####");
                 Console.WriteLine("type: " + c.name.type);
@@ -2099,7 +2100,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + c.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in c.otherNames.name)
+                foreach (XPersonNameType n in c.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -2112,7 +2113,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine(": " + c.localId);
                 Console.WriteLine(": " + c.loginId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in c.otherIds.otherId)
+                foreach (XOtherPersonIdType id in c.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -2136,7 +2137,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2148,7 +2149,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + c.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in c.otherEmails.email)
+                foreach (XEmailType e in c.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2157,7 +2158,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine(": " + c.sex);
                 Console.WriteLine(": " + c.employerType);
                 Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                 {
                     Console.WriteLine("studentRefId: " + csr.studentRefId);
                     Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -2174,7 +2175,7 @@ namespace RicOneAPI.Tests
             }
             Console.WriteLine("##### END STUDENTCONTACTS #####");
             Console.WriteLine("##### BEGIN LANGUAGES #####");
-            foreach (Language l in s.languages.language)
+            foreach (XLanguageType l in s.languages.language)
             {
                 Console.WriteLine("type: " + l.type);
                 Console.WriteLine("code: " + l.code);
@@ -2183,9 +2184,9 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN STUDENTS BY LEA
-        public static void XStudents_GetXStudentsByXLea(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXLea(RicOneApiClient ricOne)
         {
-            foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXLea(refId))
+            foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXLea(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -2197,7 +2198,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + s.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in s.otherNames.name)
+                foreach (XPersonNameType n in s.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -2212,7 +2213,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -2236,7 +2237,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2248,7 +2249,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + s.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in s.otherEmails.email)
+                foreach (XEmailType e in s.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2256,7 +2257,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END OTHEREMAILS #####");
                 Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                 Console.WriteLine("##### BEGIN RACES #####");
-                foreach (Race r in s.demographics.races.race)
+                foreach (XRaceType r in s.demographics.races.race)
                 {
                     Console.WriteLine("race: " + r.race);
                 }
@@ -2292,7 +2293,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END COUNSELOR #####");
                 Console.WriteLine("##### END ENROLLMENT #####");
                 Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                foreach (Enrollment e in s.otherEnrollments.enrollment)
+                foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                 {
                     Console.WriteLine("leaRefId: " + e.leaRefId);
                     Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -2328,7 +2329,7 @@ namespace RicOneAPI.Tests
                 {
                     Console.WriteLine("contactPersonRefId: " + contactRefid);
                 }
-                foreach (Contact c in s.studentContacts.xContact)
+                foreach (XContactType c in s.studentContacts.xContact)
                 {
                     Console.WriteLine("##### BEGIN NAME #####");
                     Console.WriteLine("type: " + c.name.type);
@@ -2339,7 +2340,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -2352,7 +2353,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.localId);
                     Console.WriteLine(": " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -2376,7 +2377,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2388,7 +2389,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2397,7 +2398,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.sex);
                     Console.WriteLine(": " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -2414,7 +2415,7 @@ namespace RicOneAPI.Tests
                 }
                 Console.WriteLine("##### END STUDENTCONTACTS #####");
                 Console.WriteLine("##### BEGIN LANGUAGES #####");
-                foreach (Language l in s.languages.language)
+                foreach (XLanguageType l in s.languages.language)
                 {
                     Console.WriteLine("type: " + l.type);
                     Console.WriteLine("code: " + l.code);
@@ -2424,9 +2425,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY SCHOOL
-        public static void XStudents_GetXStudentsByXSchool(RicOneAPIClient ricOne) 
+        public static void XStudents_GetXStudentsByXSchool(RicOneApiClient ricOne) 
         {
-            foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXSchool(refId))
+            foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXSchool(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -2438,7 +2439,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + s.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in s.otherNames.name)
+                foreach (XPersonNameType n in s.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -2453,7 +2454,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -2477,7 +2478,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2489,7 +2490,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + s.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in s.otherEmails.email)
+                foreach (XEmailType e in s.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2497,7 +2498,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END OTHEREMAILS #####");
                 Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                 Console.WriteLine("##### BEGIN RACES #####");
-                foreach (Race r in s.demographics.races.race)
+                foreach (XRaceType r in s.demographics.races.race)
                 {
                     Console.WriteLine("race: " + r.race);
                 }
@@ -2533,7 +2534,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END COUNSELOR #####");
                 Console.WriteLine("##### END ENROLLMENT #####");
                 Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                foreach (Enrollment e in s.otherEnrollments.enrollment)
+                foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                 {
                     Console.WriteLine("leaRefId: " + e.leaRefId);
                     Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -2569,7 +2570,7 @@ namespace RicOneAPI.Tests
                 {
                     Console.WriteLine("contactPersonRefId: " + contactRefid);
                 }
-                foreach (Contact c in s.studentContacts.xContact)
+                foreach (XContactType c in s.studentContacts.xContact)
                 {
                     Console.WriteLine("##### BEGIN NAME #####");
                     Console.WriteLine("type: " + c.name.type);
@@ -2580,7 +2581,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -2593,7 +2594,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.localId);
                     Console.WriteLine(": " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -2617,7 +2618,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2629,7 +2630,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2638,7 +2639,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.sex);
                     Console.WriteLine(": " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -2655,7 +2656,7 @@ namespace RicOneAPI.Tests
                 }
                 Console.WriteLine("##### END STUDENTCONTACTS #####");
                 Console.WriteLine("##### BEGIN LANGUAGES #####");
-                foreach (Language l in s.languages.language)
+                foreach (XLanguageType l in s.languages.language)
                 {
                     Console.WriteLine("type: " + l.type);
                     Console.WriteLine("code: " + l.code);
@@ -2665,9 +2666,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY ROSTER
-        public static void XStudents_GetXStudentsByXRoster(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXRoster(RicOneApiClient ricOne)
         {
-            foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXRoster(refId))
+            foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXRoster(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -2679,7 +2680,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + s.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in s.otherNames.name)
+                foreach (XPersonNameType n in s.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -2694,7 +2695,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -2718,7 +2719,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2730,7 +2731,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + s.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in s.otherEmails.email)
+                foreach (XEmailType e in s.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2738,7 +2739,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END OTHEREMAILS #####");
                 Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                 Console.WriteLine("##### BEGIN RACES #####");
-                foreach (Race r in s.demographics.races.race)
+                foreach (XRaceType r in s.demographics.races.race)
                 {
                     Console.WriteLine("race: " + r.race);
                 }
@@ -2774,7 +2775,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END COUNSELOR #####");
                 Console.WriteLine("##### END ENROLLMENT #####");
                 Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                foreach (Enrollment e in s.otherEnrollments.enrollment)
+                foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                 {
                     Console.WriteLine("leaRefId: " + e.leaRefId);
                     Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -2810,7 +2811,7 @@ namespace RicOneAPI.Tests
                 {
                     Console.WriteLine("contactPersonRefId: " + contactRefid);
                 }
-                foreach (Contact c in s.studentContacts.xContact)
+                foreach (XContactType c in s.studentContacts.xContact)
                 {
                     Console.WriteLine("##### BEGIN NAME #####");
                     Console.WriteLine("type: " + c.name.type);
@@ -2821,7 +2822,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -2834,7 +2835,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.localId);
                     Console.WriteLine(": " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -2858,7 +2859,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2870,7 +2871,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2879,7 +2880,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.sex);
                     Console.WriteLine(": " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -2896,7 +2897,7 @@ namespace RicOneAPI.Tests
                 }
                 Console.WriteLine("##### END STUDENTCONTACTS #####");
                 Console.WriteLine("##### BEGIN LANGUAGES #####");
-                foreach (Language l in s.languages.language)
+                foreach (XLanguageType l in s.languages.language)
                 {
                     Console.WriteLine("type: " + l.type);
                     Console.WriteLine("code: " + l.code);
@@ -2906,9 +2907,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY STAFF
-        public static void XStudents_GetXStudentsByXStaff(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXStaff(RicOneApiClient ricOne)
         {
-            foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXStaff(refId))
+            foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXStaff(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -2920,7 +2921,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + s.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in s.otherNames.name)
+                foreach (XPersonNameType n in s.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -2935,7 +2936,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -2959,7 +2960,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -2971,7 +2972,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + s.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in s.otherEmails.email)
+                foreach (XEmailType e in s.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -2979,7 +2980,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END OTHEREMAILS #####");
                 Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                 Console.WriteLine("##### BEGIN RACES #####");
-                foreach (Race r in s.demographics.races.race)
+                foreach (XRaceType r in s.demographics.races.race)
                 {
                     Console.WriteLine("race: " + r.race);
                 }
@@ -3015,7 +3016,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END COUNSELOR #####");
                 Console.WriteLine("##### END ENROLLMENT #####");
                 Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                foreach (Enrollment e in s.otherEnrollments.enrollment)
+                foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                 {
                     Console.WriteLine("leaRefId: " + e.leaRefId);
                     Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -3051,7 +3052,7 @@ namespace RicOneAPI.Tests
                 {
                     Console.WriteLine("contactPersonRefId: " + contactRefid);
                 }
-                foreach (Contact c in s.studentContacts.xContact)
+                foreach (XContactType c in s.studentContacts.xContact)
                 {
                     Console.WriteLine("##### BEGIN NAME #####");
                     Console.WriteLine("type: " + c.name.type);
@@ -3062,7 +3063,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -3075,7 +3076,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.localId);
                     Console.WriteLine(": " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -3099,7 +3100,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3111,7 +3112,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3120,7 +3121,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.sex);
                     Console.WriteLine(": " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -3137,7 +3138,7 @@ namespace RicOneAPI.Tests
                 }
                 Console.WriteLine("##### END STUDENTCONTACTS #####");
                 Console.WriteLine("##### BEGIN LANGUAGES #####");
-                foreach (Language l in s.languages.language)
+                foreach (XLanguageType l in s.languages.language)
                 {
                     Console.WriteLine("type: " + l.type);
                     Console.WriteLine("code: " + l.code);
@@ -3147,9 +3148,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY CONTACT
-        public static void XStudents_GetXStudentsByXContact(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXContact(RicOneApiClient ricOne)
         {
-            foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXContact(refId))
+            foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXContact(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -3161,7 +3162,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + s.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in s.otherNames.name)
+                foreach (XPersonNameType n in s.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -3176,7 +3177,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("loginId: " + s.loginId);
                 Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in s.otherIds.otherId)
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -3200,7 +3201,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3212,7 +3213,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + s.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in s.otherEmails.email)
+                foreach (XEmailType e in s.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3220,7 +3221,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END OTHEREMAILS #####");
                 Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                 Console.WriteLine("##### BEGIN RACES #####");
-                foreach (Race r in s.demographics.races.race)
+                foreach (XRaceType r in s.demographics.races.race)
                 {
                     Console.WriteLine("race: " + r.race);
                 }
@@ -3256,7 +3257,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("##### END COUNSELOR #####");
                 Console.WriteLine("##### END ENROLLMENT #####");
                 Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                foreach (Enrollment e in s.otherEnrollments.enrollment)
+                foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                 {
                     Console.WriteLine("leaRefId: " + e.leaRefId);
                     Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -3292,7 +3293,7 @@ namespace RicOneAPI.Tests
                 {
                     Console.WriteLine("contactPersonRefId: " + contactRefid);
                 }
-                foreach (Contact c in s.studentContacts.xContact)
+                foreach (XContactType c in s.studentContacts.xContact)
                 {
                     Console.WriteLine("##### BEGIN NAME #####");
                     Console.WriteLine("type: " + c.name.type);
@@ -3303,7 +3304,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -3316,7 +3317,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.localId);
                     Console.WriteLine(": " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -3340,7 +3341,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3352,7 +3353,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3361,7 +3362,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine(": " + c.sex);
                     Console.WriteLine(": " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -3378,7 +3379,7 @@ namespace RicOneAPI.Tests
                 }
                 Console.WriteLine("##### END STUDENTCONTACTS #####");
                 Console.WriteLine("##### BEGIN LANGUAGES #####");
-                foreach (Language l in s.languages.language)
+                foreach (XLanguageType l in s.languages.language)
                 {
                     Console.WriteLine("type: " + l.type);
                     Console.WriteLine("code: " + l.code);
@@ -3391,9 +3392,9 @@ namespace RicOneAPI.Tests
 
         #region xContacts
         //RETURN ALL CONTACTS
-        public static void XContacts_GetXContacts(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContacts(RicOneApiClient ricOne)
         {
-            foreach (XContact c in ricOne.sifXpress.GetXContacts())
+            foreach (XContactType c in ricOne.sifXpress.GetXContacts())
             {
                 Console.WriteLine("refId: " + c.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -3405,7 +3406,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + c.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in c.otherNames.name)
+                foreach (XPersonNameType n in c.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -3419,7 +3420,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("localId: " + c.localId);
                 Console.WriteLine("loginId: " + c.loginId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in c.otherIds.otherId)
+                foreach (XOtherPersonIdType id in c.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -3443,7 +3444,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3455,7 +3456,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + c.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in c.otherEmails.email)
+                foreach (XEmailType e in c.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3464,7 +3465,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("sex: " + c.sex);
                 Console.WriteLine("employerType: " + c.employerType);
                 Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                 {
                     Console.WriteLine("studentRefId: " + csr.studentRefId);
                     Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -3482,9 +3483,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SINGLE CONTACT
-        public static void XContacts_GetXContact(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContact(RicOneApiClient ricOne)
         {
-            XContact c = ricOne.sifXpress.GetXContact(refId);
+            XContactType c = ricOne.sifXpress.GetXContact(refId);
 
             Console.WriteLine("refId: " + c.refId);
             Console.WriteLine("##### BEGIN NAME #####");
@@ -3496,7 +3497,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("suffix: " + c.name.suffix);
             Console.WriteLine("##### END NAME #####");
             Console.WriteLine("##### BEGIN OTHERNAME #####");
-            foreach (Name n in c.otherNames.name)
+            foreach (XPersonNameType n in c.otherNames.name)
             {
                 Console.WriteLine("type: " + n.type);
                 Console.WriteLine("prefix: " + n.prefix);
@@ -3510,7 +3511,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("localId: " + c.localId);
             Console.WriteLine("loginId: " + c.loginId);
             Console.WriteLine("##### BEGIN OTHERIDS #####");
-            foreach (OtherId id in c.otherIds.otherId)
+            foreach (XOtherPersonIdType id in c.otherIds.otherId)
             {
                 Console.WriteLine("id: " + id.id);
                 Console.WriteLine("type: " + id.type);
@@ -3534,7 +3535,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
             Console.WriteLine("##### END PHONENUMBERS #####");
             Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-            foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+            foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
             {
                 Console.WriteLine("otherPhoneNumbers number: " + p.number);
                 Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3546,7 +3547,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("emailAddress: " + c.email.emailAddress);
             Console.WriteLine("##### END EMAIL #####");
             Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-            foreach (Email e in c.otherEmails.email)
+            foreach (XEmailType e in c.otherEmails.email)
             {
                 Console.WriteLine("emailType: " + e.emailType);
                 Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3555,7 +3556,7 @@ namespace RicOneAPI.Tests
             Console.WriteLine("sex: " + c.sex);
             Console.WriteLine("employerType: " + c.employerType);
             Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-            foreach (ContactStudentRelationship csr in c.relationships.relationship)
+            foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
             {
                 Console.WriteLine("studentRefId: " + csr.studentRefId);
                 Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -3572,9 +3573,9 @@ namespace RicOneAPI.Tests
             Console.WriteLine("========================================");
         }
         //RETURN CONTACTS BY LEA
-        public static void XContacts_GetXContactsByXLea(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContactsByXLea(RicOneApiClient ricOne)
         {
-            foreach (XContact c in ricOne.sifXpress.GetXContactsByXLea(refId))
+            foreach (XContactType c in ricOne.sifXpress.GetXContactsByXLea(refId))
             {
                 Console.WriteLine("refId: " + c.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -3586,7 +3587,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + c.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in c.otherNames.name)
+                foreach (XPersonNameType n in c.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -3600,7 +3601,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("localId: " + c.localId);
                 Console.WriteLine("loginId: " + c.loginId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in c.otherIds.otherId)
+                foreach (XOtherPersonIdType id in c.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -3624,7 +3625,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3636,7 +3637,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + c.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in c.otherEmails.email)
+                foreach (XEmailType e in c.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3645,7 +3646,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("sex: " + c.sex);
                 Console.WriteLine("employerType: " + c.employerType);
                 Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                 {
                     Console.WriteLine("studentRefId: " + csr.studentRefId);
                     Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -3663,9 +3664,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN CONTACTS BY SCHOOL
-        public static void XContacts_GetXContactsByXSchool(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContactsByXSchool(RicOneApiClient ricOne)
         {
-            foreach (XContact c in ricOne.sifXpress.GetXContactsByXSchool(refId))
+            foreach (XContactType c in ricOne.sifXpress.GetXContactsByXSchool(refId))
             {
                 Console.WriteLine("refId: " + c.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -3677,7 +3678,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + c.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in c.otherNames.name)
+                foreach (XPersonNameType n in c.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -3691,7 +3692,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("localId: " + c.localId);
                 Console.WriteLine("loginId: " + c.loginId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in c.otherIds.otherId)
+                foreach (XOtherPersonIdType id in c.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -3715,7 +3716,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3727,7 +3728,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + c.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in c.otherEmails.email)
+                foreach (XEmailType e in c.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3736,7 +3737,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("sex: " + c.sex);
                 Console.WriteLine("employerType: " + c.employerType);
                 Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                 {
                     Console.WriteLine("studentRefId: " + csr.studentRefId);
                     Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -3754,9 +3755,9 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN CONTACTS BY STUDENT
-        public static void XContacts_GetXContactsByXStudent(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContactsByXStudent(RicOneApiClient ricOne)
         {
-            foreach (XContact c in ricOne.sifXpress.GetXContactsByXStudent(refId))
+            foreach (XContactType c in ricOne.sifXpress.GetXContactsByXStudent(refId))
             {
                 Console.WriteLine("refId: " + c.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -3768,7 +3769,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("suffix: " + c.name.suffix);
                 Console.WriteLine("##### END NAME #####");
                 Console.WriteLine("##### BEGIN OTHERNAME #####");
-                foreach (Name n in c.otherNames.name)
+                foreach (XPersonNameType n in c.otherNames.name)
                 {
                     Console.WriteLine("type: " + n.type);
                     Console.WriteLine("prefix: " + n.prefix);
@@ -3782,7 +3783,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("localId: " + c.localId);
                 Console.WriteLine("loginId: " + c.loginId);
                 Console.WriteLine("##### BEGIN OTHERIDS #####");
-                foreach (OtherId id in c.otherIds.otherId)
+                foreach (XOtherPersonIdType id in c.otherIds.otherId)
                 {
                     Console.WriteLine("id: " + id.id);
                     Console.WriteLine("type: " + id.type);
@@ -3806,7 +3807,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                 Console.WriteLine("##### END PHONENUMBERS #####");
                 Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                 {
                     Console.WriteLine("otherPhoneNumbers number: " + p.number);
                     Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3818,7 +3819,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("emailAddress: " + c.email.emailAddress);
                 Console.WriteLine("##### END EMAIL #####");
                 Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                foreach (Email e in c.otherEmails.email)
+                foreach (XEmailType e in c.otherEmails.email)
                 {
                     Console.WriteLine("emailType: " + e.emailType);
                     Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -3827,7 +3828,7 @@ namespace RicOneAPI.Tests
                 Console.WriteLine("sex: " + c.sex);
                 Console.WriteLine("employerType: " + c.employerType);
                 Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                 {
                     Console.WriteLine("studentRefId: " + csr.studentRefId);
                     Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -3851,52 +3852,11 @@ namespace RicOneAPI.Tests
         #region xLeas
 
         //RETURN ALL LEAS
-        public static void XLeas_GetXLeasLastPage(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLeasLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXLeas); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXLeas); i++)
             {
-                foreach (XLea lea in ricOne.sifXpress.GetXLeas(i, navigationPageSize))
-                {
-                    Console.WriteLine("refId: " + lea.refId);
-                    Console.WriteLine("leaName: " + lea.leaName);
-                    Console.WriteLine("leaRefId: " + lea.leaRefId);
-                    Console.WriteLine("localId: " + lea.localId);
-                    Console.WriteLine("ncesId: " + lea.ncesId);
-                    Console.WriteLine("stateProvinceId: " + lea.stateProvinceId);
-                    
-                    Console.WriteLine("##### BEGIN ADDRESS #####");
-                    Console.WriteLine("addressType: " + lea.address.addressType);
-                    Console.WriteLine("city: " + lea.address.city);
-                    Console.WriteLine("line1: " + lea.address.line1);
-                    Console.WriteLine("line2: " + lea.address.line2);
-                    Console.WriteLine("countryCode: " + lea.address.countryCode);
-                    Console.WriteLine("postalCode: " + lea.address.postalCode);
-                    Console.WriteLine("stateProvince: " + lea.address.stateProvince);
-                    Console.WriteLine("##### END ADDRESS #####");
-                    Console.WriteLine("##### BEGIN PHONENUMBER #####");
-                    Console.WriteLine("number: " + lea.phoneNumber.number);
-                    Console.WriteLine("phoneNumberType: " + lea.phoneNumber.phoneNumberType);
-                    Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
-                    Console.WriteLine("##### END PHONENUMBER #####");
-                    Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
-                    {
-                        Console.WriteLine("number: " + p.number);
-                        Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
-                        Console.WriteLine("primaryIndicator: " + p.primaryIndicator);
-                    }
-                    Console.WriteLine("##### END OTHERPHONENUMBER #####");
-                    Console.WriteLine("========================================");
-                }
-                Console.WriteLine("######## PAGE " + i + " ########");
-            }
-        }
-        //RETURN LEAS BY SCHOOL
-        public static void XLeas_GetXLeasByXSchoolLastPage(RicOneAPIClient ricOne)
-        {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXLeasByXSchool, refId); i++)
-            {
-                foreach (XLea lea in ricOne.sifXpress.GetXLeasByXSchool(refId, i, navigationPageSize))
+                foreach (XLeaType lea in ricOne.sifXpress.GetXLeas(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -3920,7 +3880,48 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
+                    {
+                        Console.WriteLine("number: " + p.number);
+                        Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
+                        Console.WriteLine("primaryIndicator: " + p.primaryIndicator);
+                    }
+                    Console.WriteLine("##### END OTHERPHONENUMBER #####");
+                    Console.WriteLine("========================================");
+                }
+                Console.WriteLine("######## PAGE " + i + " ########");
+            }
+        }
+        //RETURN LEAS BY SCHOOL
+        public static void XLeas_GetXLeasByXSchoolLastPage(RicOneApiClient ricOne)
+        {
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXLeasByXSchool, refId); i++)
+            {
+                foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXSchool(refId, i, navigationPageSize))
+                {
+                    Console.WriteLine("refId: " + lea.refId);
+                    Console.WriteLine("leaName: " + lea.leaName);
+                    Console.WriteLine("leaRefId: " + lea.leaRefId);
+                    Console.WriteLine("localId: " + lea.localId);
+                    Console.WriteLine("ncesId: " + lea.ncesId);
+                    Console.WriteLine("stateProvinceId: " + lea.stateProvinceId);
+
+                    Console.WriteLine("##### BEGIN ADDRESS #####");
+                    Console.WriteLine("addressType: " + lea.address.addressType);
+                    Console.WriteLine("city: " + lea.address.city);
+                    Console.WriteLine("line1: " + lea.address.line1);
+                    Console.WriteLine("line2: " + lea.address.line2);
+                    Console.WriteLine("countryCode: " + lea.address.countryCode);
+                    Console.WriteLine("postalCode: " + lea.address.postalCode);
+                    Console.WriteLine("stateProvince: " + lea.address.stateProvince);
+                    Console.WriteLine("##### END ADDRESS #####");
+                    Console.WriteLine("##### BEGIN PHONENUMBER #####");
+                    Console.WriteLine("number: " + lea.phoneNumber.number);
+                    Console.WriteLine("phoneNumberType: " + lea.phoneNumber.phoneNumberType);
+                    Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
+                    Console.WriteLine("##### END PHONENUMBER #####");
+                    Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
+                    foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3934,11 +3935,11 @@ namespace RicOneAPI.Tests
 
         }
         //RETURN LEAS BY STUDENT
-        public static void XLeas_GetXLeasByXStudentLastPage(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLeasByXStudentLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXLeasByXStudent, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXLeasByXStudent, refId); i++)
             {
-                foreach (XLea lea in ricOne.sifXpress.GetXLeasByXStudent(refId, i, navigationPageSize))
+                foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXStudent(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -3962,7 +3963,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -3976,11 +3977,11 @@ namespace RicOneAPI.Tests
 
         }
         //RETURN LEAS BY CONTACT
-        public static void XLeas_GetXLeasByXContactLastPage(RicOneAPIClient ricOne)
+        public static void XLeas_GetXLeasByXContactLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXLeas); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXLeas); i++)
             {
-                foreach (XLea lea in ricOne.sifXpress.GetXLeas(i, navigationPageSize))
+                foreach (XLeaType lea in ricOne.sifXpress.GetXLeas(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -4004,7 +4005,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in lea.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4021,18 +4022,18 @@ namespace RicOneAPI.Tests
 
         #region xSchools
         //RETURN ALL SCHOOLS
-        public static void XSchools_GetXSchoolsLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchools); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchools); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchools(i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchools(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4060,7 +4061,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4074,18 +4075,18 @@ namespace RicOneAPI.Tests
         }
 
         //RETURN SCHOOLS BY LEA
-        public static void XSchools_GetXSchoolsByXLeaLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXLeaLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchoolsByXLea, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchoolsByXLea, refId); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXLea(refId, i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXLea(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4113,7 +4114,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4126,18 +4127,18 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY CALENDAR
-        public static void XSchools_GetXSchoolsByXCalendarLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXCalendarLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchoolsByXCalendar, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchoolsByXCalendar, refId); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXCalendar(refId, i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXCalendar(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4165,7 +4166,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4178,18 +4179,18 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY COURSE
-        public static void XSchools_GetXSchoolsByXCourseLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXCourseLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchoolsByXCourse, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchoolsByXCourse, refId); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXCourse(refId, i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXCourse(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4217,7 +4218,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4230,18 +4231,18 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY ROSTER
-        public static void XSchools_GetXSchoolsByXRosterLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXRosterLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchoolsByXRoster, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchoolsByXRoster, refId); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXRoster(refId, i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXRoster(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4269,7 +4270,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4282,18 +4283,18 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY STAFF
-        public static void XSchools_GetXSchoolsByXStaffLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXStaffLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchoolsByXStaff, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchoolsByXStaff, refId); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXStaff(refId, i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXStaff(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4321,7 +4322,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4334,18 +4335,18 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY STUDENT
-        public static void XSchools_GetXSchoolsByXStudentLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXStudentLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchoolsByXStudent, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchoolsByXStudent, refId); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXStudent(refId, i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXStudent(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4373,7 +4374,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4386,18 +4387,18 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN SCHOOLS BY CONTACT
-        public static void XSchools_GetXSchoolsByXContactLastPage(RicOneAPIClient ricOne)
+        public static void XSchools_GetXSchoolsByXContactLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXSchoolsByXContact, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXSchoolsByXContact, refId); i++)
             {
-                foreach (XSchool school in ricOne.sifXpress.GetXSchoolsByXContact(refId, i, navigationPageSize))
+                foreach (XSchoolType school in ricOne.sifXpress.GetXSchoolsByXContact(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
                     Console.WriteLine("localId: " + school.localId);
                     Console.WriteLine("stateProvinceId: " + school.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in school.otherIds.otherId)
+                    foreach (XOtherOrganizationIdType id in school.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4425,7 +4426,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + school.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBER #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
-                    foreach (PhoneNumber p in school.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in school.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -4438,20 +4439,20 @@ namespace RicOneAPI.Tests
             }
         }
         #endregion
-        
+
         #region xCalendars
         //RETURN ALL CALENDARS
-        public static void XCalendars_GetXCalendarsLastPage(RicOneAPIClient ricOne)
+        public static void XCalendars_GetXCalendarsLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXCalendars); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCalendars); i++)
             {
-                foreach (XCalendar calendar in ricOne.sifXpress.GetXCalendars(i, navigationPageSize))
+                foreach (XCalendarType calendar in ricOne.sifXpress.GetXCalendars(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
                     Console.WriteLine("schoolYear: " + calendar.schoolYear);
                     Console.WriteLine("##### BEGIN SESSIONLIST #####");
-                    foreach (SessionList sl in calendar.sessions.sessionList)
+                    foreach (XSessionType sl in calendar.sessions.sessionList)
                     {
                         Console.WriteLine("sessionType: " + sl.sessionType);
                         Console.WriteLine("sessionCode: " + sl.sessionCode);
@@ -4470,17 +4471,17 @@ namespace RicOneAPI.Tests
         }
 
         //RETURN CALENDARS BY SCHOOL
-        public static void XCalendars_GetXCalendarsByXSchoolLastPage(RicOneAPIClient ricOne)
+        public static void XCalendars_GetXCalendarsByXSchoolLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXCalendarsByXSchool, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCalendarsByXSchool, refId); i++)
             {
-                foreach (XCalendar calendar in ricOne.sifXpress.GetXCalendarsByXSchool(refId, i, navigationPageSize))
+                foreach (XCalendarType calendar in ricOne.sifXpress.GetXCalendarsByXSchool(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
                     Console.WriteLine("schoolYear: " + calendar.schoolYear);
                     Console.WriteLine("##### BEGIN SESSIONLIST #####");
-                    foreach (SessionList sl in calendar.sessions.sessionList)
+                    foreach (XSessionType sl in calendar.sessions.sessionList)
                     {
                         Console.WriteLine("sessionType: " + sl.sessionType);
                         Console.WriteLine("sessionCode: " + sl.sessionCode);
@@ -4498,21 +4499,21 @@ namespace RicOneAPI.Tests
             }
         }
         #endregion
-        
+
         #region xCourses
         //RETURN ALL COURSES
-        public static void XCourses_GetXCoursesLastPage(RicOneAPIClient ricOne)
+        public static void XCourses_GetXCoursesLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXCourses); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCourses); i++)
             {
-                foreach (XCourse course in ricOne.sifXpress.GetXCourses(i, navigationPageSize))
+                foreach (XCourseType course in ricOne.sifXpress.GetXCourses(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
                     Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
                     Console.WriteLine("leaCourseId: " + course.leaCourseId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in course.otherIds.otherId)
+                    foreach (XOtherCourseIdType id in course.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4538,18 +4539,18 @@ namespace RicOneAPI.Tests
         }
 
         //RETURN COURSES BY LEA
-        public static void XCourses_GetXCoursesByXLeaLastPage(RicOneAPIClient ricOne)
+        public static void XCourses_GetXCoursesByXLeaLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXCoursesByXLea, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCoursesByXLea, refId); i++)
             {
-                foreach (XCourse course in ricOne.sifXpress.GetXCoursesByXLea(refId, i, navigationPageSize))
+                foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXLea(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
                     Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
                     Console.WriteLine("leaCourseId: " + course.leaCourseId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in course.otherIds.otherId)
+                    foreach (XOtherCourseIdType id in course.otherIds.otherId)
                     {
                         Console.WriteLine("otherId id" + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -4574,14 +4575,14 @@ namespace RicOneAPI.Tests
             }
         }
         #endregion
-        
+
         #region xRosters
         //RETURN ALL ROSTERS
-        public static void XRosters_GetXRostersLastPage(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXRosters); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRosters); i++)
             {
-                foreach (XRoster r in ricOne.sifXpress.GetXRosters(i, navigationPageSize))
+                foreach (XRosterType r in ricOne.sifXpress.GetXRosters(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -4595,7 +4596,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                    foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                    foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                     {
                         Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -4608,7 +4609,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END MEETING TIMES #####");
 
                     Console.WriteLine("##### BEGIN STUDENTS #####");
-                    foreach (PersonReference student in r.students.studentReference)
+                    foreach (XPersonReferenceType student in r.students.studentReference)
                     {
                         Console.WriteLine("refId: " + student.refId);
                         Console.WriteLine("localId: " + student.localId);
@@ -4627,7 +4628,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END PRIMARY STAFF #####");
 
                     Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                    foreach (Staff staff in r.otherStaffs.otherStaff)
+                    foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                     {
                         Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                         Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -4644,11 +4645,11 @@ namespace RicOneAPI.Tests
         }
 
         //RETURN ROSTERS BY LEA
-        public static void XRosters_GetXRostersByXLeaLastPage(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXLeaLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXRostersByXLea, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXLea, refId); i++)
             {
-                foreach (XRoster r in ricOne.sifXpress.GetXRostersByXLea(refId, i, navigationPageSize))
+                foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXLea(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -4662,7 +4663,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                    foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                    foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                     {
                         Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -4675,7 +4676,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END MEETING TIMES #####");
 
                     Console.WriteLine("##### BEGIN STUDENTS #####");
-                    foreach (PersonReference student in r.students.studentReference)
+                    foreach (XPersonReferenceType student in r.students.studentReference)
                     {
                         Console.WriteLine("refId: " + student.refId);
                         Console.WriteLine("localId: " + student.localId);
@@ -4694,7 +4695,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END PRIMARY STAFF #####");
 
                     Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                    foreach (Staff staff in r.otherStaffs.otherStaff)
+                    foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                     {
                         Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                         Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -4710,11 +4711,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY SCHOOL
-        public static void XRosters_GetXRostersByXSchoolLastPage(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXSchoolLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXRostersByXSchool, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXSchool, refId); i++)
             {
-                foreach (XRoster r in ricOne.sifXpress.GetXRostersByXSchool(refId, i, navigationPageSize))
+                foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXSchool(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -4728,7 +4729,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                    foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                    foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                     {
                         Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -4741,7 +4742,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END MEETING TIMES #####");
 
                     Console.WriteLine("##### BEGIN STUDENTS #####");
-                    foreach (PersonReference student in r.students.studentReference)
+                    foreach (XPersonReferenceType student in r.students.studentReference)
                     {
                         Console.WriteLine("refId: " + student.refId);
                         Console.WriteLine("localId: " + student.localId);
@@ -4760,7 +4761,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END PRIMARY STAFF #####");
 
                     Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                    foreach (Staff staff in r.otherStaffs.otherStaff)
+                    foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                     {
                         Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                         Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -4776,11 +4777,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY CROUSE
-        public static void XRosters_GetXRostersByXCourseLastPage(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXCourseLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXRostersByXCourse, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXCourse, refId); i++)
             {
-                foreach (XRoster r in ricOne.sifXpress.GetXRostersByXCourse(refId, i, navigationPageSize))
+                foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXCourse(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -4794,7 +4795,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                    foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                    foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                     {
                         Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -4807,7 +4808,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END MEETING TIMES #####");
 
                     Console.WriteLine("##### BEGIN STUDENTS #####");
-                    foreach (PersonReference student in r.students.studentReference)
+                    foreach (XPersonReferenceType student in r.students.studentReference)
                     {
                         Console.WriteLine("refId: " + student.refId);
                         Console.WriteLine("localId: " + student.localId);
@@ -4826,7 +4827,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END PRIMARY STAFF #####");
 
                     Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                    foreach (Staff staff in r.otherStaffs.otherStaff)
+                    foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                     {
                         Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                         Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -4842,11 +4843,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY STAFF
-        public static void XRosters_GetXRostersByXStaffLastPage(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXStaffLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXRostersByXStaff, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXStaff, refId); i++)
             {
-                foreach (XRoster r in ricOne.sifXpress.GetXRostersByXStaff(refId, i, navigationPageSize))
+                foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXStaff(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -4860,7 +4861,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                    foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                    foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                     {
                         Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -4873,7 +4874,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END MEETING TIMES #####");
 
                     Console.WriteLine("##### BEGIN STUDENTS #####");
-                    foreach (PersonReference student in r.students.studentReference)
+                    foreach (XPersonReferenceType student in r.students.studentReference)
                     {
                         Console.WriteLine("refId: " + student.refId);
                         Console.WriteLine("localId: " + student.localId);
@@ -4892,7 +4893,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END PRIMARY STAFF #####");
 
                     Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                    foreach (Staff staff in r.otherStaffs.otherStaff)
+                    foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                     {
                         Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                         Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -4908,11 +4909,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN ROSTERS BY STUDENT
-        public static void XRosters_GetXRostersByXStudentLastPage(RicOneAPIClient ricOne)
+        public static void XRosters_GetXRostersByXStudentLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXRostersByXStudent, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXStudent, refId); i++)
             {
-                foreach (XRoster r in ricOne.sifXpress.GetXRostersByXStudent(refId, i, navigationPageSize))
+                foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXStudent(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -4926,7 +4927,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
-                    foreach (MeetingTime mt in r.meetingTimes.meetingTime)
+                    foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
                     {
                         Console.WriteLine("timeTableDay: " + mt.timeTableDay);
 
@@ -4939,7 +4940,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END MEETING TIMES #####");
 
                     Console.WriteLine("##### BEGIN STUDENTS #####");
-                    foreach (PersonReference student in r.students.studentReference)
+                    foreach (XPersonReferenceType student in r.students.studentReference)
                     {
                         Console.WriteLine("refId: " + student.refId);
                         Console.WriteLine("localId: " + student.localId);
@@ -4958,7 +4959,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END PRIMARY STAFF #####");
 
                     Console.WriteLine("##### BEGIN OTHER STAFF #####");
-                    foreach (Staff staff in r.otherStaffs.otherStaff)
+                    foreach (XStaffReferenceType staff in r.otherStaffs.otherStaff)
                     {
                         Console.WriteLine("refId: " + staff.staffPersonReference.refId);
                         Console.WriteLine("localId: " + staff.staffPersonReference.localId);
@@ -4974,14 +4975,14 @@ namespace RicOneAPI.Tests
             }
         }
         #endregion
-        
+
         #region xStaffs
         //RETURN ALL STAFFS
-        public static void XStaffs_GetXStaffsLastPage(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStaffs); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStaffs); i++)
             {
-                foreach (XStaff s in ricOne.sifXpress.GetXStaffs(i, navigationPageSize))
+                foreach (XStaffType s in ricOne.sifXpress.GetXStaffs(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -4996,7 +4997,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5013,7 +5014,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                     Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                     Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                    foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                    foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                     {
                         Console.WriteLine("leaRefId: " + pa.leaRefId);
                         Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -5027,11 +5028,11 @@ namespace RicOneAPI.Tests
         }
 
         //RETURN STAFFS BY LEA
-        public static void XStaffs_GetXStaffsByXLeaLastPage(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXLeaLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStaffsByXLea, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStaffsByXLea, refId); i++)
             {
-                foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXLea(refId, i, navigationPageSize))
+                foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXLea(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5046,7 +5047,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5063,7 +5064,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                     Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                     Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                    foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                    foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                     {
                         Console.WriteLine("leaRefId: " + pa.leaRefId);
                         Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -5076,11 +5077,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STAFFS BY SCHOOL
-        public static void XStaffs_GetXStaffsByXSchoolLastPage(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXSchoolLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStaffsByXSchool, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStaffsByXSchool, refId); i++)
             {
-                foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXSchool(refId, i, navigationPageSize))
+                foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXSchool(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5095,7 +5096,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5112,7 +5113,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                     Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                     Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                    foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                    foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                     {
                         Console.WriteLine("leaRefId: " + pa.leaRefId);
                         Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -5125,11 +5126,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STAFFS BY COURSE
-        public static void XStaffs_GetXStaffsByXCourseLastPage(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXCourseLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStaffsByXCourse, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStaffsByXCourse, refId); i++)
             {
-                foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXCourse(refId, i, navigationPageSize))
+                foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXCourse(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5144,7 +5145,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5161,7 +5162,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                     Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                     Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                    foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                    foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                     {
                         Console.WriteLine("leaRefId: " + pa.leaRefId);
                         Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -5174,11 +5175,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STAFFS BY ROSTER
-        public static void XStaffs_GetXStaffsByXRosterLastPage(RicOneAPIClient ricOne)
+        public static void XStaffs_GetXStaffsByXRosterLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStaffsByXRoster, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStaffsByXRoster, refId); i++)
             {
-                foreach (XStaff s in ricOne.sifXpress.GetXStaffsByXRoster(refId, i, navigationPageSize))
+                foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXRoster(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5193,7 +5194,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5210,7 +5211,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
                     Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
                     Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
-                    foreach (PersonAssignment pa in s.otherAssignments.staffPersonAssignment)
+                    foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
                     {
                         Console.WriteLine("leaRefId: " + pa.leaRefId);
                         Console.WriteLine("schoolRefId: " + pa.schoolRefId);
@@ -5223,14 +5224,14 @@ namespace RicOneAPI.Tests
             }
         }
         #endregion
-        
+
         #region xStudents
         //RETURN ALL STUDENTS
-        public static void XStudents_GetXStudentsLastPage(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStudents); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStudents); i++)
             {
-                foreach (XStudent s in ricOne.sifXpress.GetXStudents(i, navigationPageSize))
+                foreach (XStudentType s in ricOne.sifXpress.GetXStudents(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5242,7 +5243,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + s.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in s.otherNames.name)
+                    foreach (XPersonNameType n in s.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -5257,7 +5258,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5281,7 +5282,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -5293,7 +5294,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + s.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in s.otherEmails.email)
+                    foreach (XEmailType e in s.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -5301,7 +5302,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END OTHEREMAILS #####");
                     Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                     Console.WriteLine("##### BEGIN RACES #####");
-                    foreach (Race r in s.demographics.races.race)
+                    foreach (XRaceType r in s.demographics.races.race)
                     {
                         Console.WriteLine("race: " + r.race);
                     }
@@ -5337,7 +5338,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END COUNSELOR #####");
                     Console.WriteLine("##### END ENROLLMENT #####");
                     Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                    foreach (Enrollment e in s.otherEnrollments.enrollment)
+                    foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                     {
                         Console.WriteLine("leaRefId: " + e.leaRefId);
                         Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -5373,7 +5374,7 @@ namespace RicOneAPI.Tests
                     {
                         Console.WriteLine("contactPersonRefId: " + contactRefid);
                     }
-                    foreach (Contact c in s.studentContacts.xContact)
+                    foreach (XContactType c in s.studentContacts.xContact)
                     {
                         Console.WriteLine("##### BEGIN NAME #####");
                         Console.WriteLine("type: " + c.name.type);
@@ -5384,7 +5385,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("suffix: " + c.name.suffix);
                         Console.WriteLine("##### END NAME #####");
                         Console.WriteLine("##### BEGIN OTHERNAME #####");
-                        foreach (Name n in c.otherNames.name)
+                        foreach (XPersonNameType n in c.otherNames.name)
                         {
                             Console.WriteLine("type: " + n.type);
                             Console.WriteLine("prefix: " + n.prefix);
@@ -5397,7 +5398,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.localId);
                         Console.WriteLine(": " + c.loginId);
                         Console.WriteLine("##### BEGIN OTHERIDS #####");
-                        foreach (OtherId id in c.otherIds.otherId)
+                        foreach (XOtherPersonIdType id in c.otherIds.otherId)
                         {
                             Console.WriteLine("id: " + id.id);
                             Console.WriteLine("type: " + id.type);
@@ -5421,7 +5422,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                         Console.WriteLine("##### END PHONENUMBERS #####");
                         Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                        foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                        foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                         {
                             Console.WriteLine("otherPhoneNumbers number: " + p.number);
                             Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -5433,7 +5434,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("emailAddress: " + c.email.emailAddress);
                         Console.WriteLine("##### END EMAIL #####");
                         Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                        foreach (Email e in c.otherEmails.email)
+                        foreach (XEmailType e in c.otherEmails.email)
                         {
                             Console.WriteLine("emailType: " + e.emailType);
                             Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -5442,7 +5443,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.sex);
                         Console.WriteLine(": " + c.employerType);
                         Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                        foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                        foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                         {
                             Console.WriteLine("studentRefId: " + csr.studentRefId);
                             Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -5459,7 +5460,7 @@ namespace RicOneAPI.Tests
                     }
                     Console.WriteLine("##### END STUDENTCONTACTS #####");
                     Console.WriteLine("##### BEGIN LANGUAGES #####");
-                    foreach (Language l in s.languages.language)
+                    foreach (XLanguageType l in s.languages.language)
                     {
                         Console.WriteLine("type: " + l.type);
                         Console.WriteLine("code: " + l.code);
@@ -5472,11 +5473,11 @@ namespace RicOneAPI.Tests
         }
 
         //RETURN STUDENTS BY LEA
-        public static void XStudents_GetXStudentsByXLeaLastPage(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXLeaLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStudentsByXLea, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStudentsByXLea, refId); i++)
             {
-                foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXLea(refId, i, navigationPageSize))
+                foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXLea(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5488,7 +5489,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + s.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in s.otherNames.name)
+                    foreach (XPersonNameType n in s.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -5503,7 +5504,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5527,7 +5528,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -5539,7 +5540,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + s.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in s.otherEmails.email)
+                    foreach (XEmailType e in s.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -5547,7 +5548,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END OTHEREMAILS #####");
                     Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                     Console.WriteLine("##### BEGIN RACES #####");
-                    foreach (Race r in s.demographics.races.race)
+                    foreach (XRaceType r in s.demographics.races.race)
                     {
                         Console.WriteLine("race: " + r.race);
                     }
@@ -5583,7 +5584,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END COUNSELOR #####");
                     Console.WriteLine("##### END ENROLLMENT #####");
                     Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                    foreach (Enrollment e in s.otherEnrollments.enrollment)
+                    foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                     {
                         Console.WriteLine("leaRefId: " + e.leaRefId);
                         Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -5619,7 +5620,7 @@ namespace RicOneAPI.Tests
                     {
                         Console.WriteLine("contactPersonRefId: " + contactRefid);
                     }
-                    foreach (Contact c in s.studentContacts.xContact)
+                    foreach (XContactType c in s.studentContacts.xContact)
                     {
                         Console.WriteLine("##### BEGIN NAME #####");
                         Console.WriteLine("type: " + c.name.type);
@@ -5630,7 +5631,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("suffix: " + c.name.suffix);
                         Console.WriteLine("##### END NAME #####");
                         Console.WriteLine("##### BEGIN OTHERNAME #####");
-                        foreach (Name n in c.otherNames.name)
+                        foreach (XPersonNameType n in c.otherNames.name)
                         {
                             Console.WriteLine("type: " + n.type);
                             Console.WriteLine("prefix: " + n.prefix);
@@ -5643,7 +5644,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.localId);
                         Console.WriteLine(": " + c.loginId);
                         Console.WriteLine("##### BEGIN OTHERIDS #####");
-                        foreach (OtherId id in c.otherIds.otherId)
+                        foreach (XOtherPersonIdType id in c.otherIds.otherId)
                         {
                             Console.WriteLine("id: " + id.id);
                             Console.WriteLine("type: " + id.type);
@@ -5667,7 +5668,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                         Console.WriteLine("##### END PHONENUMBERS #####");
                         Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                        foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                        foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                         {
                             Console.WriteLine("otherPhoneNumbers number: " + p.number);
                             Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -5679,7 +5680,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("emailAddress: " + c.email.emailAddress);
                         Console.WriteLine("##### END EMAIL #####");
                         Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                        foreach (Email e in c.otherEmails.email)
+                        foreach (XEmailType e in c.otherEmails.email)
                         {
                             Console.WriteLine("emailType: " + e.emailType);
                             Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -5688,7 +5689,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.sex);
                         Console.WriteLine(": " + c.employerType);
                         Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                        foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                        foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                         {
                             Console.WriteLine("studentRefId: " + csr.studentRefId);
                             Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -5705,7 +5706,7 @@ namespace RicOneAPI.Tests
                     }
                     Console.WriteLine("##### END STUDENTCONTACTS #####");
                     Console.WriteLine("##### BEGIN LANGUAGES #####");
-                    foreach (Language l in s.languages.language)
+                    foreach (XLanguageType l in s.languages.language)
                     {
                         Console.WriteLine("type: " + l.type);
                         Console.WriteLine("code: " + l.code);
@@ -5717,11 +5718,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY SCHOOL
-        public static void XStudents_GetXStudentsByXSchoolLastPage(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXSchoolLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStudentsByXSchool, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStudentsByXSchool, refId); i++)
             {
-                foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXSchool(refId, i, navigationPageSize))
+                foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXSchool(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5733,7 +5734,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + s.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in s.otherNames.name)
+                    foreach (XPersonNameType n in s.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -5748,7 +5749,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -5772,7 +5773,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -5784,7 +5785,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + s.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in s.otherEmails.email)
+                    foreach (XEmailType e in s.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -5792,7 +5793,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END OTHEREMAILS #####");
                     Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                     Console.WriteLine("##### BEGIN RACES #####");
-                    foreach (Race r in s.demographics.races.race)
+                    foreach (XRaceType r in s.demographics.races.race)
                     {
                         Console.WriteLine("race: " + r.race);
                     }
@@ -5828,7 +5829,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END COUNSELOR #####");
                     Console.WriteLine("##### END ENROLLMENT #####");
                     Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                    foreach (Enrollment e in s.otherEnrollments.enrollment)
+                    foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                     {
                         Console.WriteLine("leaRefId: " + e.leaRefId);
                         Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -5864,7 +5865,7 @@ namespace RicOneAPI.Tests
                     {
                         Console.WriteLine("contactPersonRefId: " + contactRefid);
                     }
-                    foreach (Contact c in s.studentContacts.xContact)
+                    foreach (XContactType c in s.studentContacts.xContact)
                     {
                         Console.WriteLine("##### BEGIN NAME #####");
                         Console.WriteLine("type: " + c.name.type);
@@ -5875,7 +5876,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("suffix: " + c.name.suffix);
                         Console.WriteLine("##### END NAME #####");
                         Console.WriteLine("##### BEGIN OTHERNAME #####");
-                        foreach (Name n in c.otherNames.name)
+                        foreach (XPersonNameType n in c.otherNames.name)
                         {
                             Console.WriteLine("type: " + n.type);
                             Console.WriteLine("prefix: " + n.prefix);
@@ -5888,7 +5889,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.localId);
                         Console.WriteLine(": " + c.loginId);
                         Console.WriteLine("##### BEGIN OTHERIDS #####");
-                        foreach (OtherId id in c.otherIds.otherId)
+                        foreach (XOtherPersonIdType id in c.otherIds.otherId)
                         {
                             Console.WriteLine("id: " + id.id);
                             Console.WriteLine("type: " + id.type);
@@ -5912,7 +5913,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                         Console.WriteLine("##### END PHONENUMBERS #####");
                         Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                        foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                        foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                         {
                             Console.WriteLine("otherPhoneNumbers number: " + p.number);
                             Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -5924,7 +5925,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("emailAddress: " + c.email.emailAddress);
                         Console.WriteLine("##### END EMAIL #####");
                         Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                        foreach (Email e in c.otherEmails.email)
+                        foreach (XEmailType e in c.otherEmails.email)
                         {
                             Console.WriteLine("emailType: " + e.emailType);
                             Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -5933,7 +5934,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.sex);
                         Console.WriteLine(": " + c.employerType);
                         Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                        foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                        foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                         {
                             Console.WriteLine("studentRefId: " + csr.studentRefId);
                             Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -5950,7 +5951,7 @@ namespace RicOneAPI.Tests
                     }
                     Console.WriteLine("##### END STUDENTCONTACTS #####");
                     Console.WriteLine("##### BEGIN LANGUAGES #####");
-                    foreach (Language l in s.languages.language)
+                    foreach (XLanguageType l in s.languages.language)
                     {
                         Console.WriteLine("type: " + l.type);
                         Console.WriteLine("code: " + l.code);
@@ -5962,11 +5963,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY ROSTER
-        public static void XStudents_GetXStudentsByXRosterLastPage(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXRosterLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStudentsByXRoster, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStudentsByXRoster, refId); i++)
             {
-                foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXRoster(refId, i, navigationPageSize))
+                foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXRoster(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -5978,7 +5979,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + s.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in s.otherNames.name)
+                    foreach (XPersonNameType n in s.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -5993,7 +5994,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -6017,7 +6018,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6029,7 +6030,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + s.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in s.otherEmails.email)
+                    foreach (XEmailType e in s.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6037,7 +6038,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END OTHEREMAILS #####");
                     Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                     Console.WriteLine("##### BEGIN RACES #####");
-                    foreach (Race r in s.demographics.races.race)
+                    foreach (XRaceType r in s.demographics.races.race)
                     {
                         Console.WriteLine("race: " + r.race);
                     }
@@ -6073,7 +6074,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END COUNSELOR #####");
                     Console.WriteLine("##### END ENROLLMENT #####");
                     Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                    foreach (Enrollment e in s.otherEnrollments.enrollment)
+                    foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                     {
                         Console.WriteLine("leaRefId: " + e.leaRefId);
                         Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -6109,7 +6110,7 @@ namespace RicOneAPI.Tests
                     {
                         Console.WriteLine("contactPersonRefId: " + contactRefid);
                     }
-                    foreach (Contact c in s.studentContacts.xContact)
+                    foreach (XContactType c in s.studentContacts.xContact)
                     {
                         Console.WriteLine("##### BEGIN NAME #####");
                         Console.WriteLine("type: " + c.name.type);
@@ -6120,7 +6121,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("suffix: " + c.name.suffix);
                         Console.WriteLine("##### END NAME #####");
                         Console.WriteLine("##### BEGIN OTHERNAME #####");
-                        foreach (Name n in c.otherNames.name)
+                        foreach (XPersonNameType n in c.otherNames.name)
                         {
                             Console.WriteLine("type: " + n.type);
                             Console.WriteLine("prefix: " + n.prefix);
@@ -6133,7 +6134,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.localId);
                         Console.WriteLine(": " + c.loginId);
                         Console.WriteLine("##### BEGIN OTHERIDS #####");
-                        foreach (OtherId id in c.otherIds.otherId)
+                        foreach (XOtherPersonIdType id in c.otherIds.otherId)
                         {
                             Console.WriteLine("id: " + id.id);
                             Console.WriteLine("type: " + id.type);
@@ -6157,7 +6158,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                         Console.WriteLine("##### END PHONENUMBERS #####");
                         Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                        foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                        foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                         {
                             Console.WriteLine("otherPhoneNumbers number: " + p.number);
                             Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6169,7 +6170,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("emailAddress: " + c.email.emailAddress);
                         Console.WriteLine("##### END EMAIL #####");
                         Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                        foreach (Email e in c.otherEmails.email)
+                        foreach (XEmailType e in c.otherEmails.email)
                         {
                             Console.WriteLine("emailType: " + e.emailType);
                             Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6178,7 +6179,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.sex);
                         Console.WriteLine(": " + c.employerType);
                         Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                        foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                        foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                         {
                             Console.WriteLine("studentRefId: " + csr.studentRefId);
                             Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -6195,7 +6196,7 @@ namespace RicOneAPI.Tests
                     }
                     Console.WriteLine("##### END STUDENTCONTACTS #####");
                     Console.WriteLine("##### BEGIN LANGUAGES #####");
-                    foreach (Language l in s.languages.language)
+                    foreach (XLanguageType l in s.languages.language)
                     {
                         Console.WriteLine("type: " + l.type);
                         Console.WriteLine("code: " + l.code);
@@ -6207,11 +6208,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY STAFF
-        public static void XStudents_GetXStudentsByXStaffLastPage(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXStaffLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStudentsByXStaff, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStudentsByXStaff, refId); i++)
             {
-                foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXStaff(refId, i, navigationPageSize))
+                foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXStaff(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -6223,7 +6224,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + s.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in s.otherNames.name)
+                    foreach (XPersonNameType n in s.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -6238,7 +6239,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -6262,7 +6263,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6274,7 +6275,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + s.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in s.otherEmails.email)
+                    foreach (XEmailType e in s.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6282,7 +6283,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END OTHEREMAILS #####");
                     Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                     Console.WriteLine("##### BEGIN RACES #####");
-                    foreach (Race r in s.demographics.races.race)
+                    foreach (XRaceType r in s.demographics.races.race)
                     {
                         Console.WriteLine("race: " + r.race);
                     }
@@ -6318,7 +6319,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END COUNSELOR #####");
                     Console.WriteLine("##### END ENROLLMENT #####");
                     Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                    foreach (Enrollment e in s.otherEnrollments.enrollment)
+                    foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                     {
                         Console.WriteLine("leaRefId: " + e.leaRefId);
                         Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -6354,7 +6355,7 @@ namespace RicOneAPI.Tests
                     {
                         Console.WriteLine("contactPersonRefId: " + contactRefid);
                     }
-                    foreach (Contact c in s.studentContacts.xContact)
+                    foreach (XContactType c in s.studentContacts.xContact)
                     {
                         Console.WriteLine("##### BEGIN NAME #####");
                         Console.WriteLine("type: " + c.name.type);
@@ -6365,7 +6366,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("suffix: " + c.name.suffix);
                         Console.WriteLine("##### END NAME #####");
                         Console.WriteLine("##### BEGIN OTHERNAME #####");
-                        foreach (Name n in c.otherNames.name)
+                        foreach (XPersonNameType n in c.otherNames.name)
                         {
                             Console.WriteLine("type: " + n.type);
                             Console.WriteLine("prefix: " + n.prefix);
@@ -6378,7 +6379,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.localId);
                         Console.WriteLine(": " + c.loginId);
                         Console.WriteLine("##### BEGIN OTHERIDS #####");
-                        foreach (OtherId id in c.otherIds.otherId)
+                        foreach (XOtherPersonIdType id in c.otherIds.otherId)
                         {
                             Console.WriteLine("id: " + id.id);
                             Console.WriteLine("type: " + id.type);
@@ -6402,7 +6403,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                         Console.WriteLine("##### END PHONENUMBERS #####");
                         Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                        foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                        foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                         {
                             Console.WriteLine("otherPhoneNumbers number: " + p.number);
                             Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6414,7 +6415,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("emailAddress: " + c.email.emailAddress);
                         Console.WriteLine("##### END EMAIL #####");
                         Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                        foreach (Email e in c.otherEmails.email)
+                        foreach (XEmailType e in c.otherEmails.email)
                         {
                             Console.WriteLine("emailType: " + e.emailType);
                             Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6423,7 +6424,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.sex);
                         Console.WriteLine(": " + c.employerType);
                         Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                        foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                        foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                         {
                             Console.WriteLine("studentRefId: " + csr.studentRefId);
                             Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -6440,7 +6441,7 @@ namespace RicOneAPI.Tests
                     }
                     Console.WriteLine("##### END STUDENTCONTACTS #####");
                     Console.WriteLine("##### BEGIN LANGUAGES #####");
-                    foreach (Language l in s.languages.language)
+                    foreach (XLanguageType l in s.languages.language)
                     {
                         Console.WriteLine("type: " + l.type);
                         Console.WriteLine("code: " + l.code);
@@ -6452,11 +6453,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN STUDENTS BY CONTACT
-        public static void XStudents_GetXStudentsByXContactLastPage(RicOneAPIClient ricOne)
+        public static void XStudents_GetXStudentsByXContactLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXStudentsByXContact, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStudentsByXContact, refId); i++)
             {
-                foreach (XStudent s in ricOne.sifXpress.GetXStudentsByXContact(refId, i, navigationPageSize))
+                foreach (XStudentType s in ricOne.sifXpress.GetXStudentsByXContact(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -6468,7 +6469,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + s.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in s.otherNames.name)
+                    foreach (XPersonNameType n in s.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -6483,7 +6484,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("loginId: " + s.loginId);
                     Console.WriteLine("stateProvinceIdloginId: " + s.stateProvinceId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in s.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in s.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -6507,7 +6508,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + s.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in s.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in s.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6519,7 +6520,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + s.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in s.otherEmails.email)
+                    foreach (XEmailType e in s.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6527,7 +6528,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END OTHEREMAILS #####");
                     Console.WriteLine("##### BEGIN DEMOGRAPHICS #####");
                     Console.WriteLine("##### BEGIN RACES #####");
-                    foreach (Race r in s.demographics.races.race)
+                    foreach (XRaceType r in s.demographics.races.race)
                     {
                         Console.WriteLine("race: " + r.race);
                     }
@@ -6563,7 +6564,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("##### END COUNSELOR #####");
                     Console.WriteLine("##### END ENROLLMENT #####");
                     Console.WriteLine("##### BEGIN OTHERENROLLMENT #####");
-                    foreach (Enrollment e in s.otherEnrollments.enrollment)
+                    foreach (XEnrollmentType e in s.otherEnrollments.enrollment)
                     {
                         Console.WriteLine("leaRefId: " + e.leaRefId);
                         Console.WriteLine("schoolRefId: " + e.schoolRefId);
@@ -6599,7 +6600,7 @@ namespace RicOneAPI.Tests
                     {
                         Console.WriteLine("contactPersonRefId: " + contactRefid);
                     }
-                    foreach (Contact c in s.studentContacts.xContact)
+                    foreach (XContactType c in s.studentContacts.xContact)
                     {
                         Console.WriteLine("##### BEGIN NAME #####");
                         Console.WriteLine("type: " + c.name.type);
@@ -6610,7 +6611,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("suffix: " + c.name.suffix);
                         Console.WriteLine("##### END NAME #####");
                         Console.WriteLine("##### BEGIN OTHERNAME #####");
-                        foreach (Name n in c.otherNames.name)
+                        foreach (XPersonNameType n in c.otherNames.name)
                         {
                             Console.WriteLine("type: " + n.type);
                             Console.WriteLine("prefix: " + n.prefix);
@@ -6623,7 +6624,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.localId);
                         Console.WriteLine(": " + c.loginId);
                         Console.WriteLine("##### BEGIN OTHERIDS #####");
-                        foreach (OtherId id in c.otherIds.otherId)
+                        foreach (XOtherPersonIdType id in c.otherIds.otherId)
                         {
                             Console.WriteLine("id: " + id.id);
                             Console.WriteLine("type: " + id.type);
@@ -6647,7 +6648,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                         Console.WriteLine("##### END PHONENUMBERS #####");
                         Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                        foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                        foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                         {
                             Console.WriteLine("otherPhoneNumbers number: " + p.number);
                             Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6659,7 +6660,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine("emailAddress: " + c.email.emailAddress);
                         Console.WriteLine("##### END EMAIL #####");
                         Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                        foreach (Email e in c.otherEmails.email)
+                        foreach (XEmailType e in c.otherEmails.email)
                         {
                             Console.WriteLine("emailType: " + e.emailType);
                             Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6668,7 +6669,7 @@ namespace RicOneAPI.Tests
                         Console.WriteLine(": " + c.sex);
                         Console.WriteLine(": " + c.employerType);
                         Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                        foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                        foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                         {
                             Console.WriteLine("studentRefId: " + csr.studentRefId);
                             Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -6685,7 +6686,7 @@ namespace RicOneAPI.Tests
                     }
                     Console.WriteLine("##### END STUDENTCONTACTS #####");
                     Console.WriteLine("##### BEGIN LANGUAGES #####");
-                    foreach (Language l in s.languages.language)
+                    foreach (XLanguageType l in s.languages.language)
                     {
                         Console.WriteLine("type: " + l.type);
                         Console.WriteLine("code: " + l.code);
@@ -6697,14 +6698,14 @@ namespace RicOneAPI.Tests
             }
         }
         #endregion
-        
+
         #region xContacts
         //RETURN ALL CONTACTS
-        public static void XContacts_GetXContactsLastPage(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContactsLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXContacts); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXContacts); i++)
             {
-                foreach (XContact c in ricOne.sifXpress.GetXContacts(i, navigationPageSize))
+                foreach (XContactType c in ricOne.sifXpress.GetXContacts(i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -6716,7 +6717,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -6730,7 +6731,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("localId: " + c.localId);
                     Console.WriteLine("loginId: " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -6754,7 +6755,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6766,7 +6767,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6775,7 +6776,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("sex: " + c.sex);
                     Console.WriteLine("employerType: " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -6796,11 +6797,11 @@ namespace RicOneAPI.Tests
         }
 
         //RETURN CONTACTS BY LEA
-        public static void XContacts_GetXContactsByXLeaLastPage(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContactsByXLeaLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXContactsByXLea, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXContactsByXLea, refId); i++)
             {
-                foreach (XContact c in ricOne.sifXpress.GetXContactsByXLea(refId, i, navigationPageSize))
+                foreach (XContactType c in ricOne.sifXpress.GetXContactsByXLea(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -6812,7 +6813,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -6826,7 +6827,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("localId: " + c.localId);
                     Console.WriteLine("loginId: " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -6850,7 +6851,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6862,7 +6863,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6871,7 +6872,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("sex: " + c.sex);
                     Console.WriteLine("employerType: " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -6891,11 +6892,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN CONTACTS BY SCHOOL
-        public static void XContacts_GetXContactsByXSchoolLastPage(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContactsByXSchoolLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXContactsByXSchool, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXContactsByXSchool, refId); i++)
             {
-                foreach (XContact c in ricOne.sifXpress.GetXContactsByXSchool(refId, i, navigationPageSize))
+                foreach (XContactType c in ricOne.sifXpress.GetXContactsByXSchool(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -6907,7 +6908,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -6921,7 +6922,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("localId: " + c.localId);
                     Console.WriteLine("loginId: " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -6945,7 +6946,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -6957,7 +6958,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -6966,7 +6967,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("sex: " + c.sex);
                     Console.WriteLine("employerType: " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);
@@ -6986,11 +6987,11 @@ namespace RicOneAPI.Tests
             }
         }
         //RETURN CONTACTS BY STUDENT
-        public static void XContacts_GetXContactsByXStudentLastPage(RicOneAPIClient ricOne)
+        public static void XContacts_GetXContactsByXStudentLastPage(RicOneApiClient ricOne)
         {
-            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SIFxPress.ServicePath.GetXContactsByXStudent, refId); i++)
+            for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXContactsByXStudent, refId); i++)
             {
-                foreach (XContact c in ricOne.sifXpress.GetXContactsByXStudent(refId, i, navigationPageSize))
+                foreach (XContactType c in ricOne.sifXpress.GetXContactsByXStudent(refId, i, navigationPageSize))
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -7002,7 +7003,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("suffix: " + c.name.suffix);
                     Console.WriteLine("##### END NAME #####");
                     Console.WriteLine("##### BEGIN OTHERNAME #####");
-                    foreach (Name n in c.otherNames.name)
+                    foreach (XPersonNameType n in c.otherNames.name)
                     {
                         Console.WriteLine("type: " + n.type);
                         Console.WriteLine("prefix: " + n.prefix);
@@ -7016,7 +7017,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("localId: " + c.localId);
                     Console.WriteLine("loginId: " + c.loginId);
                     Console.WriteLine("##### BEGIN OTHERIDS #####");
-                    foreach (OtherId id in c.otherIds.otherId)
+                    foreach (XOtherPersonIdType id in c.otherIds.otherId)
                     {
                         Console.WriteLine("id: " + id.id);
                         Console.WriteLine("type: " + id.type);
@@ -7040,7 +7041,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("primaryIndicator: " + c.phoneNumber.primaryIndicator);
                     Console.WriteLine("##### END PHONENUMBERS #####");
                     Console.WriteLine("##### BEGIN OTHERPHONENUMBERS #####");
-                    foreach (PhoneNumber p in c.otherPhoneNumbers.phoneNumber)
+                    foreach (XTelephoneType p in c.otherPhoneNumbers.phoneNumber)
                     {
                         Console.WriteLine("otherPhoneNumbers number: " + p.number);
                         Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
@@ -7052,7 +7053,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("emailAddress: " + c.email.emailAddress);
                     Console.WriteLine("##### END EMAIL #####");
                     Console.WriteLine("##### BEGIN OTHEREMAILS #####");
-                    foreach (Email e in c.otherEmails.email)
+                    foreach (XEmailType e in c.otherEmails.email)
                     {
                         Console.WriteLine("emailType: " + e.emailType);
                         Console.WriteLine("emailAddress: " + e.emailAddress);
@@ -7061,7 +7062,7 @@ namespace RicOneAPI.Tests
                     Console.WriteLine("sex: " + c.sex);
                     Console.WriteLine("employerType: " + c.employerType);
                     Console.WriteLine("##### BEGIN CONTACTRELATIONSHIPS #####");
-                    foreach (ContactStudentRelationship csr in c.relationships.relationship)
+                    foreach (XContactStudentRelationshipType csr in c.relationships.relationship)
                     {
                         Console.WriteLine("studentRefId: " + csr.studentRefId);
                         Console.WriteLine("relationshipCode: " + csr.relationshipCode);

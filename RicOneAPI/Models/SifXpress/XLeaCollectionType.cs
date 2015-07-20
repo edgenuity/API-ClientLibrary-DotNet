@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RicOneAPI.Models.SIFxPress
+namespace RicOneApi.Models.SifXpress
 {
     /// <summary>
-    /// Root Object
+    /// XLeaCollectionType
     /// </summary>
-    public class XLeasRoot
+    public class XLeaCollectionType
     {
-        public XLeasRoot()
+        public XLeaCollectionType()
         {
             xLeas = null;
+            xLea = new List<XLeaType>();
         }
         public XLeaCollectionType xLeas { get; set; }
+        public List<XLeaType> xLea { get; set; }
+   
     }
 }

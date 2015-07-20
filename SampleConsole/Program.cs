@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RicOneAPI.Api;
-using RicOneAPI.Models.Authentication;
-using RicOneAPI.Models.SIFxPress;
+using RicOneApi.Api;
+using RicOneApi.Models.Authentication;
+using RicOneApi.Models.SifXpress;
 
 namespace SampleConsole
 {
@@ -17,9 +17,9 @@ namespace SampleConsole
         const string username = "Full_3";
         const string password = "Full_3";
         //Optional
-        const string providerId = "South Central RIC - Test Data Provider 1";
-        static string navigationPage = "1";
-        static string navigationPageSize = "5";
+        const string providerId = "SCRIC - Test Data Provider 1";
+        //static int navigationPage = 1;
+        static int navigationPageSize = 500;
 
         #endregion
         static void Main(string[] args)
@@ -28,22 +28,26 @@ namespace SampleConsole
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {
-                RicOneAPIClient ricOne = new RicOneAPIClient(e); //Pass endpoint info to data API (token, href)
+                RicOneApiClient ricOne = new RicOneApiClient(e); //Pass endpoint info to data API (token, href)
 
-                foreach (XLea l in ricOne.sifXpress.GetXLeas()) //Iterate through each xLea
+                foreach (XLeaType l in ricOne.sifXpress.GetXLeas()) //Iterate through each xLea
                 {
-                    foreach (XRoster r in ricOne.sifXpress.GetXRostersByXLea(l.refId, navigationPage, navigationPageSize)) //Get each roster for each lea refId w/ paging
+                    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXLea, l.refId); i++ ) //Get max page size for rosters by lea
                     {
-                        Console.WriteLine("courseTitle: " + r.courseTitle);
-                        foreach (PersonReference p in r.students.studentReference) //Students for each course
+                        foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXLea(l.refId, i, navigationPageSize)) //Get each roster for each lea refId w/ paging
                         {
-                            Console.WriteLine("refId: " + p.refId);
-                            Console.WriteLine("localId: " + p.localId);
-                            Console.WriteLine("givenName: " + p.givenName);
-                            Console.WriteLine("familyName: " + p.familyName);
+                            Console.WriteLine("courseTitle: " + r.courseTitle);
+                            foreach (XPersonReferenceType p in r.students.studentReference) //Students for each course
+                            {
+                                Console.WriteLine("refId: " + p.refId);
+                                Console.WriteLine("localId: " + p.localId);
+                                Console.WriteLine("givenName: " + p.givenName);
+                                Console.WriteLine("familyName: " + p.familyName);
+                            }
                         }
-
+                        Console.WriteLine("######## PAGE " + i + " ########");
                     }
+                    
                 }
             }
 

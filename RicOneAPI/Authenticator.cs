@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
-using RicOneAPI.Models.Authentication;
+using RicOneApi.Models.Authentication;
 
-namespace RicOneAPI.Api
+namespace RicOneApi.Api
 {
     /// <summary>
     /// Contains methods to authenticate and pull data from OAuth server

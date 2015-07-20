@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RicOneAPI.Models.Authentication
+namespace RicOneApi.Models.Authentication
 {
     /// <summary>
     /// Endpoint type

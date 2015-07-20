@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using RestSharp;
 
-namespace RicOneAPI.Api
+namespace RicOneApi.Api
 {
  public class Util
     {

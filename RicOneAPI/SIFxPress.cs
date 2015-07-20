@@ -7,22 +7,22 @@ using System.Net;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
-using RicOneAPI.Models.Authentication;
-using RicOneAPI.Models.SIFxPress;
-using RicOneAPI;
+using RicOneApi.Models.Authentication;
+using RicOneApi.Models.SifXpress;
+using RicOneApi;
 
-namespace RicOneAPI.Api
+namespace RicOneApi.Api
 {
     /// <summary>
     /// Static class built off of RICOne client to allow access to SIFxPress data model objects
     /// </summary>
-    public class SIFxPress
+    public class SifXpress
     {
         private string token;
         private RestClient restClient;
         private string baseApiUrl;
 
-        public SIFxPress(string token, string baseApiUrl, RestClient restClient)
+        public SifXpress(string token, string baseApiUrl, RestClient restClient)
         {
             this.token = token;
             this.baseApiUrl = baseApiUrl;
@@ -37,7 +37,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeas(int? navigationPage, int? navigationPageSize)
+        public List<XLeaType> GetXLeas(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -45,8 +45,8 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XLeasRoot>(request);
-          
+            var response = restClient.Execute<XLeaCollectionType>(request);
+            
             Util.ResponseHandler(response);
 
             return response.Data.xLeas.xLea;
@@ -58,13 +58,13 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeas()
+        public List<XLeaType> GetXLeas()
         {
             RestRequest request = new RestRequest("xLeas", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XLeasRoot>(request);
-        
+            var response = restClient.Execute<XLeaCollectionType>(request);
+     
             Util.ResponseHandler(response);
 
             return response.Data.xLeas.xLea;
@@ -75,7 +75,7 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XLea GetXLea(string refId, int? navigationPage, int? navigationPageSize)
+        public XLeaType GetXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -84,7 +84,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XLeas>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -96,13 +96,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XLea GetXLea(string refId)
+        public XLeaType GetXLea(string refId)
         {
             RestRequest request = new RestRequest("xLeas/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XLeas>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -115,7 +115,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XLeaType> GetXLeasByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -124,7 +124,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XLeasRoot>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -135,13 +135,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXSchool(string refId)
+        public List<XLeaType> GetXLeasByXSchool(string refId)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XLeasRoot>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -154,7 +154,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXStudent(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XLeaType> GetXLeasByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -163,7 +163,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XLeasRoot>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -174,13 +174,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXStudent(string refId)
+        public List<XLeaType> GetXLeasByXStudent(string refId)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XLeasRoot>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -193,7 +193,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXContact(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XLeaType> GetXLeasByXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -202,7 +202,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XLeasRoot>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -213,13 +213,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XLea> GetXLeasByXContact(string refId)
+        public List<XLeaType> GetXLeasByXContact(string refId)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XLeasRoot>(request);
+            var response = restClient.Execute<XLeaCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -235,7 +235,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchools(int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchools(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -243,7 +243,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -253,12 +253,12 @@ namespace RicOneAPI.Api
         /// Request all Schools
         /// </summary>
         /// <returns></returns>
-        public List<XSchool> GetXSchools()
+        public List<XSchoolType> GetXSchools()
         {
             RestRequest request = new RestRequest("xSchools", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -271,7 +271,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XSchool GetXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        public XSchoolType GetXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -280,7 +280,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchools>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -291,13 +291,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XSchool GetXSchool(string refId)
+        public XSchoolType GetXSchool(string refId)
         {
             RestRequest request = new RestRequest("xSchools/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchools>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -310,7 +310,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchoolsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -319,7 +319,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -330,13 +330,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXLea(string refId)
+        public List<XSchoolType> GetXSchoolsByXLea(string refId)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -349,7 +349,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXCalendar(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchoolsByXCalendar(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCalendars/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -358,7 +358,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -369,13 +369,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXCalendar(string refId)
+        public List<XSchoolType> GetXSchoolsByXCalendar(string refId)
         {
             RestRequest request = new RestRequest("xCalendars/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -388,7 +388,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXCourse(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchoolsByXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -397,7 +397,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -408,13 +408,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXCourse(string refId)
+        public List<XSchoolType> GetXSchoolsByXCourse(string refId)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -427,7 +427,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchoolsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -436,7 +436,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -447,13 +447,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXRoster(string refId)
+        public List<XSchoolType> GetXSchoolsByXRoster(string refId)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -466,7 +466,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXStaff(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchoolsByXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -475,7 +475,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -486,13 +486,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXStaff(string refId)
+        public List<XSchoolType> GetXSchoolsByXStaff(string refId)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -506,7 +506,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchoolsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -515,7 +515,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -526,13 +526,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXStudent(string refId)
+        public List<XSchoolType> GetXSchoolsByXStudent(string refId)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -545,7 +545,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXContact(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XSchoolType> GetXSchoolsByXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -554,7 +554,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -565,13 +565,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XSchool> GetXSchoolsByXContact(string refId)
+        public List<XSchoolType> GetXSchoolsByXContact(string refId)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XSchoolsRoot>(request);
+            var response = restClient.Execute<XSchoolCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -587,7 +587,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCalendar> GetXCalendars(int? navigationPage, int? navigationPageSize)
+        public List<XCalendarType> GetXCalendars(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCalendars", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -595,7 +595,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XCalendarsRoot>(request);
+            var response = restClient.Execute<XCalendarCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -605,12 +605,12 @@ namespace RicOneAPI.Api
         /// Request all Calendars
         /// </summary>
         /// <returns></returns>
-        public List<XCalendar> GetXCalendars()
+        public List<XCalendarType> GetXCalendars()
         {
             RestRequest request = new RestRequest("xCalendars", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XCalendarsRoot>(request);
+            var response = restClient.Execute<XCalendarCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -623,7 +623,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XCalendar GetXCalendar(string refId, int? navigationPage, int? navigationPageSize)
+        public XCalendarType GetXCalendar(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCalendars/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -632,7 +632,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XCalendars>(request);
+            var response = restClient.Execute<XCalendarCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -643,13 +643,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XCalendar GetXCalendar(string refId)
+        public XCalendarType GetXCalendar(string refId)
         {
             RestRequest request = new RestRequest("xCalendars/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XCalendars>(request);
+            var response = restClient.Execute<XCalendarCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -662,7 +662,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCalendar> GetXCalendarsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XCalendarType> GetXCalendarsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xCalendars", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -671,7 +671,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XCalendarsRoot>(request);
+            var response = restClient.Execute<XCalendarCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -682,13 +682,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XCalendar> GetXCalendarsByXSchool(string refId)
+        public List<XCalendarType> GetXCalendarsByXSchool(string refId)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xCalendars", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XCalendarsRoot>(request);
+            var response = restClient.Execute<XCalendarCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -703,7 +703,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCourse> GetXCourses(int? navigationPage, int? navigationPageSize)
+        public List<XCourseType> GetXCourses(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -711,7 +711,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XCoursesRoot>(request);
+            var response = restClient.Execute<XCourseCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -721,12 +721,12 @@ namespace RicOneAPI.Api
         /// Request all Courses
         /// </summary>
         /// <returns></returns>
-        public List<XCourse> GetXCourses()
+        public List<XCourseType> GetXCourses()
         {
             RestRequest request = new RestRequest("xCourses", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XCoursesRoot>(request);
+            var response = restClient.Execute<XCourseCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -740,7 +740,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XCourse GetXCourse(string refId, int? navigationPage, int? navigationPageSize)
+        public XCourseType GetXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -749,7 +749,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XCourses>(request);
+            var response = restClient.Execute<XCourseCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -760,13 +760,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XCourse GetXCourse(string refId)
+        public XCourseType GetXCourse(string refId)
         {
             RestRequest request = new RestRequest("xCourses/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XCourses>(request);
+            var response = restClient.Execute<XCourseCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -779,7 +779,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XCourse> GetXCoursesByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XCourseType> GetXCoursesByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xCourses", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -788,7 +788,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XCoursesRoot>(request);
+            var response = restClient.Execute<XCourseCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -799,13 +799,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XCourse> GetXCoursesByXLea(string refId)
+        public List<XCourseType> GetXCoursesByXLea(string refId)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xCourses", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XCoursesRoot>(request);
+            var response = restClient.Execute<XCourseCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -821,7 +821,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRosters(int? navigationPage, int? navigationPageSize)
+        public List<XRosterType> GetXRosters(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -829,7 +829,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -839,12 +839,12 @@ namespace RicOneAPI.Api
         /// Request all Rosters
         /// </summary>
         /// <returns></returns>
-        public List<XRoster> GetXRosters()
+        public List<XRosterType> GetXRosters()
         {
             RestRequest request = new RestRequest("xRosters", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -857,7 +857,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XRoster GetXRoster(string refId, int? navigationPage, int? navigationPageSize)
+        public XRosterType GetXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
         RestRequest request = new RestRequest("xRosters/{refId}", Method.GET);
         request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -866,7 +866,7 @@ namespace RicOneAPI.Api
         request.AddParameter("navigationPage", navigationPage);
         request.AddParameter("navigationPageSize", navigationPageSize);
 
-        var response = restClient.Execute<XRosters>(request);
+        var response = restClient.Execute<XRosterCollectionType>(request);
 
         Util.ResponseHandler(response);
 
@@ -877,13 +877,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XRoster GetXRoster(string refId)
+        public XRosterType GetXRoster(string refId)
         {
         RestRequest request = new RestRequest("xRosters/{refId}", Method.GET);
         request.AddParameter("refId", refId, ParameterType.UrlSegment);
         request.AddHeader("Accept", "application/json");
 
-        var response = restClient.Execute<XRosters>(request);
+        var response = restClient.Execute<XRosterCollectionType>(request);
 
         Util.ResponseHandler(response);
 
@@ -896,7 +896,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XRosterType> GetXRostersByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -905,7 +905,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -916,13 +916,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXLea(string refId)
+        public List<XRosterType> GetXRostersByXLea(string refId)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -935,7 +935,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XRosterType> GetXRostersByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -944,7 +944,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -955,13 +955,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXSchool(string refId)
+        public List<XRosterType> GetXRostersByXSchool(string refId)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -974,7 +974,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXCourse(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XRosterType> GetXRostersByXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -983,7 +983,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -994,13 +994,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXCourse(string refId)
+        public List<XRosterType> GetXRostersByXCourse(string refId)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1013,7 +1013,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXStaff(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XRosterType> GetXRostersByXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1022,7 +1022,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1033,13 +1033,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXStaff(string refId)
+        public List<XRosterType> GetXRostersByXStaff(string refId)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1052,7 +1052,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXStudent(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XRosterType> GetXRostersByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1061,7 +1061,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1072,13 +1072,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XRoster> GetXRostersByXStudent(string refId)
+        public List<XRosterType> GetXRostersByXStudent(string refId)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XRostersRoot>(request);
+            var response = restClient.Execute<XRosterCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1094,7 +1094,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffs(int? navigationPage, int? navigationPageSize)
+        public List<XStaffType> GetXStaffs(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -1102,7 +1102,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1112,12 +1112,12 @@ namespace RicOneAPI.Api
         /// Request all Staffs
         /// </summary>
         /// <returns></returns>
-        public List<XStaff> GetXStaffs()
+        public List<XStaffType> GetXStaffs()
         {
             RestRequest request = new RestRequest("xStaffs", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1130,7 +1130,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XStaff GetXStaff(string refId, int? navigationPage, int? navigationPageSize)
+        public XStaffType GetXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1139,7 +1139,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStaffs>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1150,13 +1150,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XStaff GetXStaff(string refId)
+        public XStaffType GetXStaff(string refId)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStaffs>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1169,7 +1169,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStaffType> GetXStaffsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1178,7 +1178,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1189,13 +1189,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXLea(string refId)
+        public List<XStaffType> GetXStaffsByXLea(string refId)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1208,7 +1208,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStaffType> GetXStaffsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1217,7 +1217,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1228,13 +1228,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXSchool(string refId)
+        public List<XStaffType> GetXStaffsByXSchool(string refId)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1247,7 +1247,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXCourse(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStaffType> GetXStaffsByXCourse(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1256,7 +1256,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1267,13 +1267,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXCourse(string refId)
+        public List<XStaffType> GetXStaffsByXCourse(string refId)
         {
             RestRequest request = new RestRequest("xCourses/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1286,7 +1286,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStaffType> GetXStaffsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1295,7 +1295,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1306,13 +1306,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStaff> GetXStaffsByXRoster(string refId)
+        public List<XStaffType> GetXStaffsByXRoster(string refId)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStaffsRoot>(request);
+            var response = restClient.Execute<XStaffCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1328,7 +1328,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudents(int? navigationPage, int? navigationPageSize)
+        public List<XStudentType> GetXStudents(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -1336,7 +1336,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1346,12 +1346,12 @@ namespace RicOneAPI.Api
         /// Request all Students
         /// </summary>
         /// <returns></returns>
-        public List<XStudent> GetXStudents()
+        public List<XStudentType> GetXStudents()
         {
             RestRequest request = new RestRequest("xStudents", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1364,7 +1364,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XStudent GetXStudent(string refId, int? navigationPage, int? navigationPageSize)
+        public XStudentType GetXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1373,7 +1373,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStudents>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1384,13 +1384,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XStudent GetXStudent(string refId)
+        public XStudentType GetXStudent(string refId)
         {
             RestRequest request = new RestRequest("xStudents/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStudents>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1403,7 +1403,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStudentType> GetXStudentsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1412,7 +1412,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1423,13 +1423,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXLea(string refId)
+        public List<XStudentType> GetXStudentsByXLea(string refId)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1442,7 +1442,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStudentType> GetXStudentsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1451,7 +1451,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1462,13 +1462,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXSchool(string refId)
+        public List<XStudentType> GetXStudentsByXSchool(string refId)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1481,7 +1481,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStudentType> GetXStudentsByXRoster(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1490,7 +1490,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1501,13 +1501,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXRoster(string refId)
+        public List<XStudentType> GetXStudentsByXRoster(string refId)
         {
             RestRequest request = new RestRequest("xRosters/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1520,7 +1520,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXStaff(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStudentType> GetXStudentsByXStaff(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1529,7 +1529,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1540,13 +1540,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXStaff(string refId)
+        public List<XStudentType> GetXStudentsByXStaff(string refId)
         {
             RestRequest request = new RestRequest("xStaffs/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1559,7 +1559,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXContact(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XStudentType> GetXStudentsByXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1568,7 +1568,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1579,13 +1579,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XStudent> GetXStudentsByXContact(string refId)
+        public List<XStudentType> GetXStudentsByXContact(string refId)
         {
             RestRequest request = new RestRequest("xContacts/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XStudentsRoot>(request);
+            var response = restClient.Execute<XStudentCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1601,7 +1601,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContacts(int? navigationPage, int? navigationPageSize)
+        public List<XContactType> GetXContacts(int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts", Method.GET);
             request.AddHeader("Accept", "application/json");
@@ -1609,7 +1609,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1619,12 +1619,12 @@ namespace RicOneAPI.Api
         /// Request all Contacts
         /// </summary>
         /// <returns></returns>
-        public List<XContact> GetXContacts()
+        public List<XContactType> GetXContacts()
         {
             RestRequest request = new RestRequest("xContacts", Method.GET);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1637,7 +1637,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public XContact GetXContact(string refId, int? navigationPage, int? navigationPageSize)
+        public XContactType GetXContact(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xContacts/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1646,7 +1646,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XContacts>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1657,13 +1657,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public XContact GetXContact(string refId)
+        public XContactType GetXContact(string refId)
         {
             RestRequest request = new RestRequest("xContacts/{refId}", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XContacts>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1676,7 +1676,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XContactType> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1685,7 +1685,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1696,13 +1696,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXLea(string refId)
+        public List<XContactType> GetXContactsByXLea(string refId)
         {
             RestRequest request = new RestRequest("xLeas/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1715,7 +1715,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XContactType> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1724,7 +1724,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1735,13 +1735,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXSchool(string refId)
+        public List<XContactType> GetXContactsByXSchool(string refId)
         {
             RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1754,7 +1754,7 @@ namespace RicOneAPI.Api
         /// <param name="navigationPage"></param>
         /// <param name="navigationPageSize"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
+        public List<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
@@ -1763,7 +1763,7 @@ namespace RicOneAPI.Api
             request.AddParameter("navigationPage", navigationPage);
             request.AddParameter("navigationPageSize", navigationPageSize);
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
@@ -1774,13 +1774,13 @@ namespace RicOneAPI.Api
         /// </summary>
         /// <param name="refId"></param>
         /// <returns></returns>
-        public List<XContact> GetXContactsByXStudent(string refId)
+        public List<XContactType> GetXContactsByXStudent(string refId)
         {
             RestRequest request = new RestRequest("xStudents/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddHeader("Accept", "application/json");
 
-            var response = restClient.Execute<XContactsRoot>(request);
+            var response = restClient.Execute<XContactCollectionType>(request);
 
             Util.ResponseHandler(response);
 
