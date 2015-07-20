@@ -13,7 +13,7 @@ or implied.
 See the License for the specific language governing permissions and limitations under the License.
 
 
-The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/)
+The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/).
 The client library supports OAuth2 authentication.
 
 ## v1.1
