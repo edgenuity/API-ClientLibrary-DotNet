@@ -1833,7 +1833,13 @@ namespace RicOneApi.Api
         }
 
         public ServicePath myServicePath { get; set; }
-
+        /// <summary>
+        /// Max page value for specified service path object
+        /// </summary>
+        /// <param name="navigationPageSize"></param>
+        /// <param name="p"></param>
+        /// <param name="refId"></param>
+        /// <returns></returns>
         public int GetLastPage(int navigationPageSize, ServicePath p, string refId)
         {
             string path = "";
@@ -2004,7 +2010,12 @@ namespace RicOneApi.Api
 
             return navigationLastPage;
         }
-
+        /// <summary>
+        /// Max page value for specified service path object
+        /// </summary>
+        /// <param name="navigationPageSize"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public int GetLastPage(int navigationPageSize, ServicePath p)
         {
             string path = "";
