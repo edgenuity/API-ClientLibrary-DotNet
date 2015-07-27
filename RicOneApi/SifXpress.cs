@@ -1791,6 +1791,9 @@ namespace RicOneApi.Api
 
         #region navigationLastPage
 
+        /// <summary>
+        /// Enumerator used to retrieve service path object for max page size
+        /// </summary>
         public enum ServicePath
         {
             GetXLeas = 1,

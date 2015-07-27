@@ -3849,7 +3849,7 @@ namespace RicOneApi.Tests
 
         #region navigationLastPage
 
-        #region xLeas
+        //#region xLeas
 
         ////RETURN ALL LEAS
         //public static void XLeas_GetXLeasLastPage(RicOneApiClient ricOne)
@@ -7081,7 +7081,7 @@ namespace RicOneApi.Tests
         //        Console.WriteLine("######## PAGE " + i + " ########");
         //    }
         //}
-        #endregion
+        //#endregion
         #endregion
     }
 }

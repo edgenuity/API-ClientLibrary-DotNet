@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RicOneApi.Models.Authentication
 {
+    /// <summary>
+    /// UserInfo type contains id, user_name, token, and list of endpoints
+    /// </summary>
     public class UserInfo
     {
         public string id { get; set; }

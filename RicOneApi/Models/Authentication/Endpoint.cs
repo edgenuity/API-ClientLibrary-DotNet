@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RicOneApi.Models.Authentication
 {
     /// <summary>
-    /// Endpoint type
+    /// Endpoint type contatins enpoint name, href, and token
     /// </summary>
    public class Endpoint
     {
