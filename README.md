@@ -2,13 +2,6 @@ Copyright © 2014-2015 New York State Education Department. All rights reserved.
 
 # RICOne API .NET Client Library
 The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/).
-The client library supports OAuth2 authentication.
-
-## v1.1
-* Added max page size
-* Renamed SIFxPress model files to reflect data API naming types
-
-## v1.0
 
 ### Features
 * Makes calls to the RICOne API using the SIFxPress model in .NET projects
@@ -39,3 +32,11 @@ foreach (Endpoint e in auth.GetEndpoints())
 const string username = "YOUR USERNAME";
 const string password = "YOUR PASSWORD";
 ```
+## Change Log
+### v1.1.1
+* Modified Endpoint.java model file to include provider id
+* In Authenticator.java, switched GetEndPoints() to match on provider id versus provider name
+
+### v1.1
+* Added max page size
+* Renamed SIFxPress model files to reflect data API naming types
