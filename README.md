@@ -34,8 +34,8 @@ const string password = "YOUR PASSWORD";
 ```
 ## Change Log
 ### v1.1.1
-* Modified Endpoint.java model file to include provider id
-* In Authenticator.java, switched GetEndPoints() to match on provider id versus provider name
+* Modified Endpoint.cs model file to include provider id
+* In Authenticator.cs, switched GetEndPoints() to match on provider id versus provider name
 
 ### v1.1
 * Added max page size
