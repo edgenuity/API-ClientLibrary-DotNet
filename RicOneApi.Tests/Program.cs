@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.1.1
+ * Since       2015-09-11
+ * Filename    Program.cs
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +19,10 @@ namespace RicOneApi.Tests
     class Program
     { 
         #region Test Constants
-        const string username = "Full_3";
-        const string password = "Full_3";
+        const string username = "Demo1";
+        const string password = "Demo1";
         //const string providerId = "North East Regional Information Center - productio";
-        const string providerId = "SCRIC - Test Data Provider 1";
+        const string providerId = "NERIC01";
         //static int navigationPage = 1;
         //static int navigationPageSize = 2;
         //static int navigationPageSize = 100;

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.1.1
+ * Since       2015-09-11
+ * Filename    Program.cs
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +21,7 @@ namespace SampleConsole
         const string username = "YOUR USERNAME";
         const string password = "YOUR PASSWORD";
         //Optional
-        const string providerId = "North East Regional Information Center - productio";
+        const string providerId = "NERIC01";
         //static int navigationPage = 1;
         static int navigationPageSize = 500;
 
