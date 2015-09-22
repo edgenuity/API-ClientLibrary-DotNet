@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.Net;
+using System.Net.Security;
 using RicOneApi.Api;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Models.SifXpress;
@@ -21,8 +23,8 @@ namespace RicOneApi.Tests
         #region Test Constants
         const string username = "Demo1";
         const string password = "Demo1";
-        //const string providerId = "North East Regional Information Center - productio";
-        const string providerId = "NERIC01";
+        const string providerId = "SCRICAPIT01";
+        //const string providerId = "NERIC01";
         //static int navigationPage = 1;
         //static int navigationPageSize = 2;
         //static int navigationPageSize = 100;
@@ -51,6 +53,8 @@ namespace RicOneApi.Tests
 
         static void Main(string[] args)
         {
+            // Temporary for invalid cert on 5.5
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             Authenticator auth = new Authenticator(username, password);
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
@@ -61,6 +65,8 @@ namespace RicOneApi.Tests
                 //XLeas_GetXLeas(ricOne);
                 //XLeas_GetXLea(ricOne);
                 //XLeas_GetXLeasByXSchool(ricOne);
+                //XLeas_GetXLeasByXRoster(ricOne); //new
+                //XLeas_GetXLeasByXStaff(ricOne); //new
                 //XLeas_GetXLeasByXStudent(ricOne);
                 //XLeas_GetXLeasByXContact(ricOne);
                 #endregion
@@ -81,6 +87,7 @@ namespace RicOneApi.Tests
 
                 //XCalendars_GetXCalendars(ricOne);
                 //XCalendars_GetXCalendar(ricOne);
+                //XCalendars_GetXCalendarsByXLea(ricOne); //new
                 //XCalendars_GetXCalendarsByXSchool(ricOne);
 
                 #endregion
@@ -90,6 +97,8 @@ namespace RicOneApi.Tests
                 //XCourses_GetXCourses(ricOne);
                 //XCourses_GetXCourse(ricOne);
                 //XCourses_GetXCoursesByXLea(ricOne);
+                //XCourses_GetXCoursesByXSchool(ricOne); //new
+                //XCourses_GetXCoursesByXRoster(ricOne); //new
 
                 #endregion
 
@@ -112,6 +121,7 @@ namespace RicOneApi.Tests
                 //XStaffs_GetXStaffsByXSchool(ricOne);
                 //XStaffs_GetXStaffsByXCourse(ricOne);
                 //XStaffs_GetXStaffsByXRoster(ricOne);
+                //XStaffs_GetXStaffsByXStudent(ricOne); //new
                 #endregion
 
                 #region xStudents
@@ -137,6 +147,8 @@ namespace RicOneApi.Tests
                 #region xLeas
                 //XLeas_GetXLeasLastPage(ricOne);
                 //XLeas_GetXLeasByXSchoolLastPage(ricOne);
+                //XLeas_GetXLeasByXRosterLastPage(ricOne); //new
+                //XLeas_GetXLeasByXStaffLastPage(ricOne); //new
                 //XLeas_GetXLeasByXStudentLastPage(ricOne);
                 //XLeas_GetXLeasByXContactLastPage(ricOne);
                 #endregion
@@ -154,12 +166,15 @@ namespace RicOneApi.Tests
 
                 #region xCalendars
                 //XCalendars_GetXCalendarsLastPage(ricOne);
+                //XCalendars_GetXCalendarsByXLeaLastPage(ricOne); //new
                 //XCalendars_GetXCalendarsByXSchoolLastPage(ricOne);
                 #endregion
 
                 #region xCourses
                 //XCourses_GetXCoursesLastPage(ricOne);
                 //XCourses_GetXCoursesByXLeaLastPage(ricOne);
+                //XCourses_GetXCoursesByXSchoolLastPage(ricOne); //new
+                //XCourses_GetXCoursesByXRosterLastPage(ricOne); //new
                 #endregion
 
                 #region xRosters
@@ -177,6 +192,7 @@ namespace RicOneApi.Tests
                 //XStaffs_GetXStaffsByXSchoolLastPage(ricOne);
                 //XStaffs_GetXStaffsByXCourseLastPage(ricOne);
                 //XStaffs_GetXStaffsByXRosterLastPage(ricOne);
+                //XStaffs_GetXStaffsByXStudentLastPage(ricOne); //new
                 #endregion
 
                 #region xStudents
@@ -281,6 +297,80 @@ namespace RicOneApi.Tests
         public static void XLeas_GetXLeasByXSchool(RicOneApiClient ricOne)
         {
             foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXSchool(refId))
+            {
+                Console.WriteLine("refId: " + lea.refId);
+                Console.WriteLine("leaName: " + lea.leaName);
+                Console.WriteLine("leaRefId: " + lea.leaRefId);
+                Console.WriteLine("localId: " + lea.localId);
+                Console.WriteLine("ncesId: " + lea.ncesId);
+                Console.WriteLine("stateProvinceId: " + lea.stateProvinceId);
+
+                Console.WriteLine("##### BEGIN ADDRESS #####");
+                Console.WriteLine("addressType: " + lea.address.addressType);
+                Console.WriteLine("city: " + lea.address.city);
+                Console.WriteLine("line1: " + lea.address.line1);
+                Console.WriteLine("line2: " + lea.address.line2);
+                Console.WriteLine("countryCode: " + lea.address.countryCode);
+                Console.WriteLine("postalCode: " + lea.address.postalCode);
+                Console.WriteLine("stateProvince: " + lea.address.stateProvince);
+                Console.WriteLine("##### END ADDRESS #####");
+                Console.WriteLine("##### BEGIN PHONENUMBER #####");
+                Console.WriteLine("number: " + lea.phoneNumber.number);
+                Console.WriteLine("phoneNumberType: " + lea.phoneNumber.phoneNumberType);
+                Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
+                Console.WriteLine("##### END PHONENUMBER #####");
+                Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
+                foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
+                {
+                    Console.WriteLine("number: " + p.number);
+                    Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
+                    Console.WriteLine("primaryIndicator: " + p.primaryIndicator);
+                }
+                Console.WriteLine("##### END OTHERPHONENUMBER #####");
+                Console.WriteLine("========================================");
+            }
+        }
+        //RETURN LEAS BY ROSTER
+        public static void XLeas_GetXLeasByXRoster(RicOneApiClient ricOne)
+        {
+            foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXRoster(refId))
+            {
+                Console.WriteLine("refId: " + lea.refId);
+                Console.WriteLine("leaName: " + lea.leaName);
+                Console.WriteLine("leaRefId: " + lea.leaRefId);
+                Console.WriteLine("localId: " + lea.localId);
+                Console.WriteLine("ncesId: " + lea.ncesId);
+                Console.WriteLine("stateProvinceId: " + lea.stateProvinceId);
+
+                Console.WriteLine("##### BEGIN ADDRESS #####");
+                Console.WriteLine("addressType: " + lea.address.addressType);
+                Console.WriteLine("city: " + lea.address.city);
+                Console.WriteLine("line1: " + lea.address.line1);
+                Console.WriteLine("line2: " + lea.address.line2);
+                Console.WriteLine("countryCode: " + lea.address.countryCode);
+                Console.WriteLine("postalCode: " + lea.address.postalCode);
+                Console.WriteLine("stateProvince: " + lea.address.stateProvince);
+                Console.WriteLine("##### END ADDRESS #####");
+                Console.WriteLine("##### BEGIN PHONENUMBER #####");
+                Console.WriteLine("number: " + lea.phoneNumber.number);
+                Console.WriteLine("phoneNumberType: " + lea.phoneNumber.phoneNumberType);
+                Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
+                Console.WriteLine("##### END PHONENUMBER #####");
+                Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
+                foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
+                {
+                    Console.WriteLine("number: " + p.number);
+                    Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
+                    Console.WriteLine("primaryIndicator: " + p.primaryIndicator);
+                }
+                Console.WriteLine("##### END OTHERPHONENUMBER #####");
+                Console.WriteLine("========================================");
+            }
+        }
+        //RETURN LEAS BY STAFF
+        public static void XLeas_GetXLeasByXStaff(RicOneApiClient ricOne)
+        {
+            foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXStaff(refId))
             {
                 Console.WriteLine("refId: " + lea.refId);
                 Console.WriteLine("leaName: " + lea.leaName);
@@ -873,6 +963,30 @@ namespace RicOneApi.Tests
             Console.WriteLine("##### END SESSIONLIST #####");
             Console.WriteLine("========================================");
         }
+        //RETURN CALENDARS BY LEA
+        public static void XCalendars_GetXCalendarsByXLea(RicOneApiClient ricOne)
+        {
+            foreach (XCalendarType calendar in ricOne.sifXpress.GetXCalendarsByXLea(refId))
+            {
+                Console.WriteLine("refId: " + calendar.refId);
+                Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
+                Console.WriteLine("schoolYear: " + calendar.schoolYear);
+                Console.WriteLine("##### BEGIN SESSIONLIST #####");
+                foreach (XSessionType sl in calendar.sessions.sessionList)
+                {
+                    Console.WriteLine("sessionType: " + sl.sessionType);
+                    Console.WriteLine("sessionCode: " + sl.sessionCode);
+                    Console.WriteLine("description: " + sl.description);
+                    Console.WriteLine("markingTerm: " + sl.markingTerm);
+                    Console.WriteLine("schedulingTerm: " + sl.schedulingTerm);
+                    Console.WriteLine("linkedSessionCode: " + sl.linkedSessionCode);
+                    Console.WriteLine("startDate: " + sl.startDate);
+                    Console.WriteLine("endDate: " + sl.endDate);
+                }
+                Console.WriteLine("##### END SESSIONLIST #####");
+                Console.WriteLine("========================================");
+            }
+        }
         //RETURN CALENDARS BY SCHOOL
         public static void XCalendars_GetXCalendarsByXSchool(RicOneApiClient ricOne)
         {
@@ -967,6 +1081,70 @@ namespace RicOneApi.Tests
         public static void XCourses_GetXCoursesByXLea(RicOneApiClient ricOne)
         {
             foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXLea(refId))
+            {
+                Console.WriteLine("refId: " + course.refId);
+                Console.WriteLine("schoolRefId: " + course.schoolRefId);
+                Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
+                Console.WriteLine("leaCourseId: " + course.leaCourseId);
+                Console.WriteLine("##### BEGIN OTHERIDS #####");
+                foreach (XOtherCourseIdType id in course.otherIds.otherId)
+                {
+                    Console.WriteLine("otherId id" + id.id);
+                    Console.WriteLine("type: " + id.type);
+                }
+                Console.WriteLine("##### END OTHERIDS #####");
+                Console.WriteLine("courseTitle: " + course.courseTitle);
+                Console.WriteLine("description: " + course.description);
+                Console.WriteLine("subject: " + course.subject);
+                Console.WriteLine("##### BEGIN APPLICABLEEDUCATIONLEVELS #####");
+                foreach (String ael in course.applicableEducationLevels.applicableEducationLevel)
+                {
+                    Console.WriteLine("applicableEducationLevel: " + ael);
+                }
+                Console.WriteLine("##### END APPLICABLEEDUCATIONLEVELS #####");
+                Console.WriteLine("scedCourseCode: " + course.scedCourseCode);
+                Console.WriteLine("scedCourseLevelCode: " + course.scedCourseLevelCode);
+                Console.WriteLine("scedCourseSubjectAreaCode: " + course.scedCourseSubjectAreaCode);
+
+                Console.WriteLine("========================================");
+            }
+        }
+        //RETURN COURSES BY SCHOOL
+        public static void XCourses_GetXCoursesByXSchool(RicOneApiClient ricOne)
+        {
+            foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXSchool(refId))
+            {
+                Console.WriteLine("refId: " + course.refId);
+                Console.WriteLine("schoolRefId: " + course.schoolRefId);
+                Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
+                Console.WriteLine("leaCourseId: " + course.leaCourseId);
+                Console.WriteLine("##### BEGIN OTHERIDS #####");
+                foreach (XOtherCourseIdType id in course.otherIds.otherId)
+                {
+                    Console.WriteLine("otherId id" + id.id);
+                    Console.WriteLine("type: " + id.type);
+                }
+                Console.WriteLine("##### END OTHERIDS #####");
+                Console.WriteLine("courseTitle: " + course.courseTitle);
+                Console.WriteLine("description: " + course.description);
+                Console.WriteLine("subject: " + course.subject);
+                Console.WriteLine("##### BEGIN APPLICABLEEDUCATIONLEVELS #####");
+                foreach (String ael in course.applicableEducationLevels.applicableEducationLevel)
+                {
+                    Console.WriteLine("applicableEducationLevel: " + ael);
+                }
+                Console.WriteLine("##### END APPLICABLEEDUCATIONLEVELS #####");
+                Console.WriteLine("scedCourseCode: " + course.scedCourseCode);
+                Console.WriteLine("scedCourseLevelCode: " + course.scedCourseLevelCode);
+                Console.WriteLine("scedCourseSubjectAreaCode: " + course.scedCourseSubjectAreaCode);
+
+                Console.WriteLine("========================================");
+            }
+        }
+        //RETURN COURSES BY ROSTER
+        public static void XCourses_GetXCoursesByXRoster(RicOneApiClient ricOne)
+        {
+            foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXRoster(refId))
             {
                 Console.WriteLine("refId: " + course.refId);
                 Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1664,6 +1842,51 @@ namespace RicOneApi.Tests
         public static void XStaffs_GetXStaffsByXRoster(RicOneApiClient ricOne)
         {
             foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXRoster(refId))
+            {
+                Console.WriteLine("refId: " + s.refId);
+                Console.WriteLine("##### BEGIN NAME #####");
+                Console.WriteLine("type: " + s.name.type);
+                Console.WriteLine("prefix: " + s.name.prefix);
+                Console.WriteLine("familyName: " + s.name.familyName);
+                Console.WriteLine("givenName: " + s.name.givenName);
+                Console.WriteLine("middleName: " + s.name.middleName);
+                Console.WriteLine("suffix: " + s.name.suffix);
+                Console.WriteLine("##### END NAME #####");
+                Console.WriteLine("localId: " + s.localId);
+                Console.WriteLine("loginId: " + s.loginId);
+                Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
+                Console.WriteLine("##### BEGIN OTHERIDS #####");
+                foreach (XOtherPersonIdType id in s.otherIds.otherId)
+                {
+                    Console.WriteLine("id: " + id.id);
+                    Console.WriteLine("type: " + id.type);
+                }
+                Console.WriteLine("##### END OTHERIDS #####");
+                Console.WriteLine("sex: " + s.sex);
+                Console.WriteLine("##### BEGIN EMAIL #####");
+                Console.WriteLine("emailType: " + s.email.emailType);
+                Console.WriteLine("emailAddress: " + s.email.emailAddress);
+                Console.WriteLine("##### END EMAIL #####");
+                Console.WriteLine("##### BEGIN PRIMARYASSIGNMENT #####");
+                Console.WriteLine("leaRefId: " + s.primaryAssignment.leaRefId);
+                Console.WriteLine("schoolRefId: " + s.primaryAssignment.schoolRefId);
+                Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
+                Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
+                Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
+                foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
+                {
+                    Console.WriteLine("leaRefId: " + pa.leaRefId);
+                    Console.WriteLine("schoolRefId: " + pa.schoolRefId);
+                    Console.WriteLine("jobFunction: " + pa.jobFunction);
+                }
+                Console.WriteLine("##### END OTHERASSIGNMENT #####");
+                Console.WriteLine("========================================");
+            }
+        }
+        //RETURN STAFFS BY STUDENT
+        public static void XStaffs_GetXStaffsByXStudent(RicOneApiClient ricOne)
+        {
+            foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXStudent(refId))
             {
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -3940,6 +4163,88 @@ namespace RicOneApi.Tests
         //    }
 
         //}
+        ////RETURN LEAS BY ROSTER
+        //public static void XLeas_GetXLeasByXRosterLastPage(RicOneApiClient ricOne)
+        //{
+        //    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXLeasByXRoster, refId); i++)
+        //    {
+        //        foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXRoster(refId, i, navigationPageSize))
+        //        {
+        //            Console.WriteLine("refId: " + lea.refId);
+        //            Console.WriteLine("leaName: " + lea.leaName);
+        //            Console.WriteLine("leaRefId: " + lea.leaRefId);
+        //            Console.WriteLine("localId: " + lea.localId);
+        //            Console.WriteLine("ncesId: " + lea.ncesId);
+        //            Console.WriteLine("stateProvinceId: " + lea.stateProvinceId);
+
+        //            Console.WriteLine("##### BEGIN ADDRESS #####");
+        //            Console.WriteLine("addressType: " + lea.address.addressType);
+        //            Console.WriteLine("city: " + lea.address.city);
+        //            Console.WriteLine("line1: " + lea.address.line1);
+        //            Console.WriteLine("line2: " + lea.address.line2);
+        //            Console.WriteLine("countryCode: " + lea.address.countryCode);
+        //            Console.WriteLine("postalCode: " + lea.address.postalCode);
+        //            Console.WriteLine("stateProvince: " + lea.address.stateProvince);
+        //            Console.WriteLine("##### END ADDRESS #####");
+        //            Console.WriteLine("##### BEGIN PHONENUMBER #####");
+        //            Console.WriteLine("number: " + lea.phoneNumber.number);
+        //            Console.WriteLine("phoneNumberType: " + lea.phoneNumber.phoneNumberType);
+        //            Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
+        //            Console.WriteLine("##### END PHONENUMBER #####");
+        //            Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
+        //            foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
+        //            {
+        //                Console.WriteLine("number: " + p.number);
+        //                Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
+        //                Console.WriteLine("primaryIndicator: " + p.primaryIndicator);
+        //            }
+        //            Console.WriteLine("##### END OTHERPHONENUMBER #####");
+        //            Console.WriteLine("========================================");
+        //        }
+        //        Console.WriteLine("######## PAGE " + i + " ########");
+        //    }
+        //}
+        ////RETURN LEAS BY STAFF
+        //public static void XLeas_GetXLeasByXStaffLastPage(RicOneApiClient ricOne)
+        //{
+        //    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXLeasByXStaff, refId); i++)
+        //    {
+        //        foreach (XLeaType lea in ricOne.sifXpress.GetXLeasByXStaff(refId, i, navigationPageSize))
+        //        {
+        //            Console.WriteLine("refId: " + lea.refId);
+        //            Console.WriteLine("leaName: " + lea.leaName);
+        //            Console.WriteLine("leaRefId: " + lea.leaRefId);
+        //            Console.WriteLine("localId: " + lea.localId);
+        //            Console.WriteLine("ncesId: " + lea.ncesId);
+        //            Console.WriteLine("stateProvinceId: " + lea.stateProvinceId);
+
+        //            Console.WriteLine("##### BEGIN ADDRESS #####");
+        //            Console.WriteLine("addressType: " + lea.address.addressType);
+        //            Console.WriteLine("city: " + lea.address.city);
+        //            Console.WriteLine("line1: " + lea.address.line1);
+        //            Console.WriteLine("line2: " + lea.address.line2);
+        //            Console.WriteLine("countryCode: " + lea.address.countryCode);
+        //            Console.WriteLine("postalCode: " + lea.address.postalCode);
+        //            Console.WriteLine("stateProvince: " + lea.address.stateProvince);
+        //            Console.WriteLine("##### END ADDRESS #####");
+        //            Console.WriteLine("##### BEGIN PHONENUMBER #####");
+        //            Console.WriteLine("number: " + lea.phoneNumber.number);
+        //            Console.WriteLine("phoneNumberType: " + lea.phoneNumber.phoneNumberType);
+        //            Console.WriteLine("primaryIndicator: " + lea.phoneNumber.primaryIndicator);
+        //            Console.WriteLine("##### END PHONENUMBER #####");
+        //            Console.WriteLine("##### BEGIN OTHERPHONENUMBER #####");
+        //            foreach (XTelephoneType p in lea.otherPhoneNumbers.phoneNumber)
+        //            {
+        //                Console.WriteLine("number: " + p.number);
+        //                Console.WriteLine("phoneNumberType: " + p.phoneNumberType);
+        //                Console.WriteLine("primaryIndicator: " + p.primaryIndicator);
+        //            }
+        //            Console.WriteLine("##### END OTHERPHONENUMBER #####");
+        //            Console.WriteLine("========================================");
+        //        }
+        //        Console.WriteLine("######## PAGE " + i + " ########");
+        //    }
+        //}
         ////RETURN LEAS BY STUDENT
         //public static void XLeas_GetXLeasByXStudentLastPage(RicOneApiClient ricOne)
         //{
@@ -4475,7 +4780,34 @@ namespace RicOneApi.Tests
         //        Console.WriteLine("######## PAGE " + i + " ########");
         //    }
         //}
-
+        ////RETURN CALENDARS BY LEA
+        //public static void XCalendars_GetXCalendarsByXLeaLastPage(RicOneApiClient ricOne)
+        //{
+        //    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCalendarsByXLea, refId); i++)
+        //    {
+        //        foreach (XCalendarType calendar in ricOne.sifXpress.GetXCalendarsByXLea(refId, i, navigationPageSize))
+        //        {
+        //            Console.WriteLine("refId: " + calendar.refId);
+        //            Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
+        //            Console.WriteLine("schoolYear: " + calendar.schoolYear);
+        //            Console.WriteLine("##### BEGIN SESSIONLIST #####");
+        //            foreach (XSessionType sl in calendar.sessions.sessionList)
+        //            {
+        //                Console.WriteLine("sessionType: " + sl.sessionType);
+        //                Console.WriteLine("sessionCode: " + sl.sessionCode);
+        //                Console.WriteLine("description: " + sl.description);
+        //                Console.WriteLine("markingTerm: " + sl.markingTerm);
+        //                Console.WriteLine("schedulingTerm: " + sl.schedulingTerm);
+        //                Console.WriteLine("linkedSessionCode: " + sl.linkedSessionCode);
+        //                Console.WriteLine("startDate: " + sl.startDate);
+        //                Console.WriteLine("endDate: " + sl.endDate);
+        //            }
+        //            Console.WriteLine("##### END SESSIONLIST #####");
+        //            Console.WriteLine("========================================");
+        //        }
+        //        Console.WriteLine("######## PAGE " + i + " ########");
+        //    }
+        //}
         ////RETURN CALENDARS BY SCHOOL
         //public static void XCalendars_GetXCalendarsByXSchoolLastPage(RicOneApiClient ricOne)
         //{
@@ -4550,6 +4882,78 @@ namespace RicOneApi.Tests
         //    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCoursesByXLea, refId); i++)
         //    {
         //        foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXLea(refId, i, navigationPageSize))
+        //        {
+        //            Console.WriteLine("refId: " + course.refId);
+        //            Console.WriteLine("schoolRefId: " + course.schoolRefId);
+        //            Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
+        //            Console.WriteLine("leaCourseId: " + course.leaCourseId);
+        //            Console.WriteLine("##### BEGIN OTHERIDS #####");
+        //            foreach (XOtherCourseIdType id in course.otherIds.otherId)
+        //            {
+        //                Console.WriteLine("otherId id" + id.id);
+        //                Console.WriteLine("type: " + id.type);
+        //            }
+        //            Console.WriteLine("##### END OTHERIDS #####");
+        //            Console.WriteLine("courseTitle: " + course.courseTitle);
+        //            Console.WriteLine("description: " + course.description);
+        //            Console.WriteLine("subject: " + course.subject);
+        //            Console.WriteLine("##### BEGIN APPLICABLEEDUCATIONLEVELS #####");
+        //            foreach (String ael in course.applicableEducationLevels.applicableEducationLevel)
+        //            {
+        //                Console.WriteLine("applicableEducationLevel: " + ael);
+        //            }
+        //            Console.WriteLine("##### END APPLICABLEEDUCATIONLEVELS #####");
+        //            Console.WriteLine("scedCourseCode: " + course.scedCourseCode);
+        //            Console.WriteLine("scedCourseLevelCode: " + course.scedCourseLevelCode);
+        //            Console.WriteLine("scedCourseSubjectAreaCode: " + course.scedCourseSubjectAreaCode);
+
+        //            Console.WriteLine("========================================");
+        //        }
+        //        Console.WriteLine("######## PAGE " + i + " ########");
+        //    }
+        //}
+        ////RETURN COURSES BY SCHOOL
+        //public static void XCourses_GetXCoursesByXSchoolLastPage(RicOneApiClient ricOne)
+        //{
+        //     for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCoursesByXSchool, refId); i++)
+        //    {
+        //        foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXSchool(refId, i, navigationPageSize))
+        //        {
+        //            Console.WriteLine("refId: " + course.refId);
+        //            Console.WriteLine("schoolRefId: " + course.schoolRefId);
+        //            Console.WriteLine("schoolCourseId: " + course.schoolCourseId);
+        //            Console.WriteLine("leaCourseId: " + course.leaCourseId);
+        //            Console.WriteLine("##### BEGIN OTHERIDS #####");
+        //            foreach (XOtherCourseIdType id in course.otherIds.otherId)
+        //            {
+        //                Console.WriteLine("otherId id" + id.id);
+        //                Console.WriteLine("type: " + id.type);
+        //            }
+        //            Console.WriteLine("##### END OTHERIDS #####");
+        //            Console.WriteLine("courseTitle: " + course.courseTitle);
+        //            Console.WriteLine("description: " + course.description);
+        //            Console.WriteLine("subject: " + course.subject);
+        //            Console.WriteLine("##### BEGIN APPLICABLEEDUCATIONLEVELS #####");
+        //            foreach (String ael in course.applicableEducationLevels.applicableEducationLevel)
+        //            {
+        //                Console.WriteLine("applicableEducationLevel: " + ael);
+        //            }
+        //            Console.WriteLine("##### END APPLICABLEEDUCATIONLEVELS #####");
+        //            Console.WriteLine("scedCourseCode: " + course.scedCourseCode);
+        //            Console.WriteLine("scedCourseLevelCode: " + course.scedCourseLevelCode);
+        //            Console.WriteLine("scedCourseSubjectAreaCode: " + course.scedCourseSubjectAreaCode);
+
+        //            Console.WriteLine("========================================");
+        //        }
+        //        Console.WriteLine("######## PAGE " + i + " ########");
+        //    }
+        //}
+        ////RETURN COURSES BY ROSTER
+        //public static void XCourses_GetXCoursesByXRosterLastPage(RicOneApiClient ricOne)
+        //{
+        //    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXCoursesByXRoster, refId); i++)
+        //    {
+        //        foreach (XCourseType course in ricOne.sifXpress.GetXCoursesByXRoster(refId, i, navigationPageSize))
         //        {
         //            Console.WriteLine("refId: " + course.refId);
         //            Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -5186,6 +5590,55 @@ namespace RicOneApi.Tests
         //    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStaffsByXRoster, refId); i++)
         //    {
         //        foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXRoster(refId, i, navigationPageSize))
+        //        {
+        //            Console.WriteLine("refId: " + s.refId);
+        //            Console.WriteLine("##### BEGIN NAME #####");
+        //            Console.WriteLine("type: " + s.name.type);
+        //            Console.WriteLine("prefix: " + s.name.prefix);
+        //            Console.WriteLine("familyName: " + s.name.familyName);
+        //            Console.WriteLine("givenName: " + s.name.givenName);
+        //            Console.WriteLine("middleName: " + s.name.middleName);
+        //            Console.WriteLine("suffix: " + s.name.suffix);
+        //            Console.WriteLine("##### END NAME #####");
+        //            Console.WriteLine("localId: " + s.localId);
+        //            Console.WriteLine("loginId: " + s.loginId);
+        //            Console.WriteLine("stateProvinceId: " + s.stateProvinceId);
+        //            Console.WriteLine("##### BEGIN OTHERIDS #####");
+        //            foreach (XOtherPersonIdType id in s.otherIds.otherId)
+        //            {
+        //                Console.WriteLine("id: " + id.id);
+        //                Console.WriteLine("type: " + id.type);
+        //            }
+        //            Console.WriteLine("##### END OTHERIDS #####");
+        //            Console.WriteLine("sex: " + s.sex);
+        //            Console.WriteLine("##### BEGIN EMAIL #####");
+        //            Console.WriteLine("emailType: " + s.email.emailType);
+        //            Console.WriteLine("emailAddress: " + s.email.emailAddress);
+        //            Console.WriteLine("##### END EMAIL #####");
+        //            Console.WriteLine("##### BEGIN PRIMARYASSIGNMENT #####");
+        //            Console.WriteLine("leaRefId: " + s.primaryAssignment.leaRefId);
+        //            Console.WriteLine("schoolRefId: " + s.primaryAssignment.schoolRefId);
+        //            Console.WriteLine("jobFunction: " + s.primaryAssignment.jobFunction);
+        //            Console.WriteLine("##### END PRIMARYASSIGNMENT #####");
+        //            Console.WriteLine("##### BEGIN OTHERASSIGNMENT #####");
+        //            foreach (XStaffPersonAssignmentType pa in s.otherAssignments.staffPersonAssignment)
+        //            {
+        //                Console.WriteLine("leaRefId: " + pa.leaRefId);
+        //                Console.WriteLine("schoolRefId: " + pa.schoolRefId);
+        //                Console.WriteLine("jobFunction: " + pa.jobFunction);
+        //            }
+        //            Console.WriteLine("##### END OTHERASSIGNMENT #####");
+        //            Console.WriteLine("========================================");
+        //        }
+        //        Console.WriteLine("######## PAGE " + i + " ########");
+        //    }
+        //}
+        ////RETURN STAFFS BY STUDENT
+        //public static void XStaffs_GetXStaffsByXStudentLastPage(RicOneApiClient ricOne)
+        //{
+        //    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXStaffsByXStudent, refId); i++)
+        //    {
+        //        foreach (XStaffType s in ricOne.sifXpress.GetXStaffsByXStudent(refId, i, navigationPageSize))
         //        {
         //            Console.WriteLine("refId: " + s.refId);
         //            Console.WriteLine("##### BEGIN NAME #####");
