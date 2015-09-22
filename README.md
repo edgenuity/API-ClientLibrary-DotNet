@@ -33,6 +33,16 @@ const string username = "YOUR USERNAME";
 const string password = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.1.2
+* Additional Service Paths
+     * xLeas/{id}/xCalendars
+     * xSchools/{id}/xCourses
+     * xSaffs/{id}/xLeas
+     * xRosters/{id}/xLeas
+     * xRosters/{id}/xCourses
+     * xStudents/{id}/xStaffs
+* Added System.Net assembly due to invalid certificate on testing server 
+
 ### v1.1.1
 * Modified Endpoint.cs model file to include provider id
 * In Authenticator.cs, switched GetEndPoints() to match on provider id versus provider name
