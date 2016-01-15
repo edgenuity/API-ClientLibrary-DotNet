@@ -20,7 +20,7 @@ namespace RicOneApi.Api
     /// </summary>
     public class Authenticator
     {
-        const string oauthBaseUrl = "http://oauth.riconeapi.net/login";
+        const string oauthBaseUrl = "http://auth.ricone.org/login";
 
         private string username;
         private string password;

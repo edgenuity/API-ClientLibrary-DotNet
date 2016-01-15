@@ -33,6 +33,9 @@ const string username = "YOUR USERNAME";
 const string password = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.1.3
+* Updated auth url
+
 ### v1.1.2
 * Additional Service Paths
      * xLeas/{id}/xCalendars
