@@ -18,7 +18,7 @@ namespace SampleConsole
     class Program
     {
         #region Test Constants
-        const string authUrl = "http://auth.test.ricone.org/login";
+        const string authUrl = "AUTH URL";
         const string username = "YOUR USERNAME";
         const string password = "YOUR PASSWORD";
         //Optional
@@ -29,7 +29,7 @@ namespace SampleConsole
         #endregion
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(authUrl, username, password); //Pass username and password to authenticate to Auth server
+            Authenticator auth = new Authenticator(authUrl, username, password); //Pass auth url, username, and password to authenticate to auth server
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {

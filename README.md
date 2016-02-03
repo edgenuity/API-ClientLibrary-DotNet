@@ -5,12 +5,12 @@ The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://
 
 ### Features
 * Makes calls to the RICOne API using the SIFxPress model in .NET projects
-* User can login to OAuth server using credentials to retrieve provider information
+* User can login to auth server using credentials to retrieve provider information
 * Uses POCO object responses
 
 #### Basic Use
 ```csharp
-Authenticator auth = new Authenticator(username, password);
+Authenticator auth = new Authenticator(authUrl, username, password);
 
 foreach (Endpoint e in auth.GetEndpoints())
 {
@@ -20,19 +20,23 @@ foreach (Endpoint e in auth.GetEndpoints())
 
 ### Project Contents
 * RicOneApi - Client Library
-* RicOneApi.Tests - Test Console Outputs
+* RicOneApi.Tests - Test console outputs of all service paths
 * SampleConsole - Simple console app showing use
 
 ### Getting Started
 1. Download the Project
-2. Get your OAuth server credentials
+2. Get your auth server credentials
 3. Open SampleConsole
-4. Add credentials to username and password
+4. Add the auth url and credentials to username and password
 ```csharp
+const string authUrl = "AUTH URL";
 const string username = "YOUR USERNAME";
 const string password = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.1.3.1
+* Auth url now configurable
+
 ### v1.1.3
 * Updated auth url
 
