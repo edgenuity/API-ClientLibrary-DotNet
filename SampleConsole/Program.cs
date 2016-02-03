@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1.1
- * Since       2015-09-11
+ * Version     1.1.3.1
+ * Since       2016-02-03
  * Filename    Program.cs
  */
 using System;
@@ -18,6 +18,7 @@ namespace SampleConsole
     class Program
     {
         #region Test Constants
+        const string authUrl = "http://auth.test.ricone.org/login";
         const string username = "YOUR USERNAME";
         const string password = "YOUR PASSWORD";
         //Optional
@@ -28,7 +29,7 @@ namespace SampleConsole
         #endregion
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(username, password); //Pass username and password to authenticate to OAuth server
+            Authenticator auth = new Authenticator(authUrl, username, password); //Pass username and password to authenticate to Auth server
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {

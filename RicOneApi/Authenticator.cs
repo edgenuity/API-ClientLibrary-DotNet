@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1.1
- * Since       2015-09-11
+ * Version     1.1.3.1
+ * Since       2016-02-03
  * Filename    Authenticator.cs
  */
 using System;
@@ -16,28 +16,28 @@ using RicOneApi.Models.Authentication;
 namespace RicOneApi.Api
 {
     /// <summary>
-    /// Contains methods to authenticate and pull data from OAuth server
+    /// Contains methods to authenticate and pull data from auth server
     /// </summary>
     public class Authenticator
     {
-        const string oauthBaseUrl = "http://auth.ricone.org/login";
-
+        private string authUrl;
         private string username;
         private string password;
 
         private readonly RestClient client;
 
         /// <summary>
-        /// Establish connection to authenticate to OAuth server
+        /// Establish connection to authenticate to auth server
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="restClient"></param>
-        public Authenticator(string username, string password, RestClient restClient = null)
+        public Authenticator(string authUrl, string username, string password, RestClient restClient = null)
         {
+            this.authUrl = authUrl;
             this.username = username;
             this.password = password;
-            client = restClient ?? new RestClient(oauthBaseUrl);
+            client = restClient ?? new RestClient(authUrl);
         }
         /// <summary>
         /// Request user id, user_name, token, and list of endpoints

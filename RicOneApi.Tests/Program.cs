@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1.1
- * Since       2015-09-11
+ * Version     1.1.3.1
+ * Since       2016-02-03
  * Filename    Program.cs
  */
 using System;
@@ -21,10 +21,10 @@ namespace RicOneApi.Tests
     class Program
     { 
         #region Test Constants
+        const string authUrl = "http://auth.test.ricone.org/login";
         const string username = "Demo1";
         const string password = "Demo1";
-        const string providerId = "SCRICAPIT01";
-        //const string providerId = "NERIC01";
+        const string providerId = "NERIC01";
         //static int navigationPage = 1;
         //static int navigationPageSize = 2;
         //static int navigationPageSize = 100;
@@ -53,9 +53,7 @@ namespace RicOneApi.Tests
 
         static void Main(string[] args)
         {
-            // Temporary for invalid cert on 5.5
-            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            Authenticator auth = new Authenticator(username, password);
+            Authenticator auth = new Authenticator(authUrl, username, password);
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
