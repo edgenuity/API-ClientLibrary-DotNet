@@ -24,10 +24,11 @@ foreach (Endpoint e in auth.GetEndpoints())
 * SampleConsole - Simple console app showing use
 
 ### Getting Started
-1. Download the Project
-2. Get your auth server credentials
-3. Open SampleConsole
-4. Add the auth url and credentials to username and password
+1. View the library [documentation](https://docs.google.com/document/d/1SiNPq6jetOqyYdpSJG_77paEV5YELcSGjfj-YcbY2f0/pub)
+2. Download the Project
+3. Get your auth server credentials
+4. Open SampleConsole
+5. Add the auth url and credentials to username and password
 ```csharp
 const string authUrl = "AUTH URL";
 const string username = "YOUR USERNAME";
