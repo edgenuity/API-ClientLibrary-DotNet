@@ -18,8 +18,8 @@ namespace RicOneApi.Tests
     {
         #region Test Constants
         const string authUrl = "http://auth.test.ricone.org/login";
-        const string username = "dpaDemo";
-        const string password = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+        const string clientId = "dpaDemo";
+        const string clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
         const string providerId = "workshop";
         static int navigationPageSize = 10;
         //static int navigationPageSize = 50;
@@ -55,7 +55,7 @@ namespace RicOneApi.Tests
 
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(authUrl, username, password);
+            Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {

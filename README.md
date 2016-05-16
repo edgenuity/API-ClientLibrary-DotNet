@@ -10,7 +10,7 @@ The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://
 
 #### Basic Use
 ```csharp
-Authenticator auth = new Authenticator(authUrl, username, password);
+Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 
 foreach (Endpoint e in auth.GetEndpoints())
 {
@@ -28,11 +28,11 @@ foreach (Endpoint e in auth.GetEndpoints())
 2. Download the Project
 3. Get your auth server credentials
 4. Open SampleConsole
-5. Add the auth url and credentials to username and password
+5. Add the auth url and credentials to clientId and clientSecret
 ```csharp
 const string authUrl = "AUTH URL";
-const string username = "YOUR USERNAME";
-const string password = "YOUR PASSWORD";
+const string clientId = "YOUR USERNAME";
+const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
 ### v1.2

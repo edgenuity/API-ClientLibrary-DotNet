@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1.3.1
- * Since       2016-02-03
+ * Version     1.2
+ * Since       2016-05-16
  * Filename    Authenticator.cs
  */
 using System;
@@ -21,22 +21,22 @@ namespace RicOneApi.Api
     public class Authenticator
     {
         private string authUrl;
-        private string username;
-        private string password;
+        private string clientId;
+        private string clientSecret;
 
         private readonly RestClient client;
 
         /// <summary>
         /// Establish connection to authenticate to auth server
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="clientId"></param>
+        /// <param name="clientSecret"></param>
         /// <param name="restClient"></param>
-        public Authenticator(string authUrl, string username, string password, RestClient restClient = null)
+        public Authenticator(string authUrl, string clientId, string clientSecret, RestClient restClient = null)
         {
             this.authUrl = authUrl;
-            this.username = username;
-            this.password = password;
+            this.clientId = clientId;
+            this.clientSecret = clientSecret;
             client = restClient ?? new RestClient(authUrl);
         }
         /// <summary>
@@ -45,13 +45,13 @@ namespace RicOneApi.Api
         /// <returns></returns>
         public UserInfo GetUserInfo()
         {
-            client.Authenticator = new SimpleAuthenticator("username", this.username, "password", this.password);
+            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
 
             var request = new RestRequest(Method.POST);
 
             // Adds Request Body parameters for username and password
-            request.AddParameter("username", this.username, ParameterType.RequestBody);
-            request.AddParameter("password", this.password, ParameterType.RequestBody);
+            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
             var response = client.Execute<UserInfo>(request);
             
@@ -65,13 +65,13 @@ namespace RicOneApi.Api
         /// <returns></returns>
         public List<Endpoint> GetEndpoints(string providerId)
         {
-            client.Authenticator = new SimpleAuthenticator("username", this.username, "password", this.password);
+            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
 
             var request = new RestRequest(Method.POST);
 
             // Adds Request Body parameters for username and password
-            request.AddParameter("username", this.username, ParameterType.RequestBody);
-            request.AddParameter("password", this.password, ParameterType.RequestBody);
+            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
             var response = client.Execute<UserInfo>(request);
 
@@ -94,13 +94,13 @@ namespace RicOneApi.Api
         /// <returns></returns>
         public List<Endpoint> GetEndpoints()
         {
-            client.Authenticator = new SimpleAuthenticator("username", this.username, "password", this.password);
+            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
 
             var request = new RestRequest(Method.POST);
 
             // Adds Request Body parameters for username and password
-            request.AddParameter("username", this.username, ParameterType.RequestBody);
-            request.AddParameter("password", this.password, ParameterType.RequestBody);
+            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
             var response = client.Execute<UserInfo>(request);
 

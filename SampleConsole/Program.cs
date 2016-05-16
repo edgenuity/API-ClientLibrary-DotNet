@@ -18,18 +18,23 @@ namespace SampleConsole
     class Program
     {
         #region Test Constants
-        const string authUrl = "AUTH URL";
-        const string username = "YOUR USERNAME";
-        const string password = "YOUR PASSWORD";
-        //Optional
-        const string providerId = "sandbox";
+        const  String authUrl = "http://auth.test.ricone.org/login";
+	    const  String clientId = "dpademo";
+	    const  String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+	    const  String providerId = "sandbox";
+        //const string authUrl = "AUTH URL";
+        //const string clientId = "YOUR USERNAME";
+        //const string clientSecret = "YOUR PASSWORD";
+        
+        ////Optional
+        //const string providerId = "PROVIDER ID";
         //static int navigationPage = 1;
         static int navigationPageSize = 500;
 
         #endregion
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(authUrl, username, password); //Pass auth url, username, and password to authenticate to auth server
+            Authenticator auth = new Authenticator(authUrl, clientId, clientSecret); //Pass auth url, username, and password to authenticate to auth server
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {
