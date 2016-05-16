@@ -18,16 +18,12 @@ namespace SampleConsole
     class Program
     {
         #region Test Constants
-        const  String authUrl = "http://auth.test.ricone.org/login";
-	    const  String clientId = "dpademo";
-	    const  String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
-	    const  String providerId = "sandbox";
-        //const string authUrl = "AUTH URL";
-        //const string clientId = "YOUR USERNAME";
-        //const string clientSecret = "YOUR PASSWORD";
-        
-        ////Optional
-        //const string providerId = "PROVIDER ID";
+        const string authUrl = "AUTH URL";
+        const string clientId = "YOUR USERNAME";
+        const string clientSecret = "YOUR PASSWORD";
+
+        //Optional
+        const string providerId = "PROVIDER ID";
         //static int navigationPage = 1;
         static int navigationPageSize = 500;
 
