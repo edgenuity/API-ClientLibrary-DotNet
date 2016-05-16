@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1.3.1
- * Since       2016-02-03
+ * Version     1.2
+ * Since       2016-05-13
  * Filename    Program.cs
  */
 using System;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RicOneApi.Api;
 using RicOneApi.Models.Authentication;
-using RicOneApi.Models.SifXpress;
+using RicOneApi.Models.XPress;
 
 namespace SampleConsole
 {
@@ -22,7 +22,7 @@ namespace SampleConsole
         const string username = "YOUR USERNAME";
         const string password = "YOUR PASSWORD";
         //Optional
-        const string providerId = "NERIC01";
+        const string providerId = "sandbox";
         //static int navigationPage = 1;
         static int navigationPageSize = 500;
 
@@ -35,11 +35,11 @@ namespace SampleConsole
             {
                 RicOneApiClient ricOne = new RicOneApiClient(e); //Pass endpoint info to data API (token, href)
 
-                foreach (XLeaType l in ricOne.sifXpress.GetXLeas()) //Iterate through each xLea
+                foreach (XLeaType l in ricOne.xPress.GetXLeas().Data) //Iterate through each xLea
                 {
-                    for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXLea, l.refId); i++ ) //Get max page size for rosters by lea
+                    for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXLea, l.refId); i++ ) //Get max page size for rosters by lea
                     {
-                        foreach (XRosterType r in ricOne.sifXpress.GetXRostersByXLea(l.refId, i, navigationPageSize)) //Get each roster for each lea refId w/ paging
+                        foreach (XRosterType r in ricOne.xPress.GetXRostersByXLea(l.refId, i, navigationPageSize).Data) //Get each roster for each lea refId w/ paging
                         {
                             Console.WriteLine("courseTitle: " + r.courseTitle);
                             foreach (XPersonReferenceType p in r.students.studentReference) //Students for each course

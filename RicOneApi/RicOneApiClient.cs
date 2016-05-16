@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-24
+ * Version     1.2
+ * Since       2016-05-05
  * Filename    RicOneApiClient.cs
  */
 using System;
@@ -14,7 +14,7 @@ using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
 using RicOneApi.Models.Authentication;
-using RicOneApi.Models.SifXpress;
+using RicOneApi.Models.XPress;
 using RicOneApi;
 
 namespace RicOneApi.Api
@@ -27,7 +27,7 @@ namespace RicOneApi.Api
         private string token;
         private RestClient restClient;
         private string baseApiUrl;
-        public SifXpress sifXpress;
+        public XPress xPress;
 
         /// <summary>
         /// Use endpoint values to authenticate to data API
@@ -39,7 +39,7 @@ namespace RicOneApi.Api
             this.baseApiUrl = endpoint.href;
             this.restClient = new RestClient(baseApiUrl);
             restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
-            sifXpress = new SifXpress(token, baseApiUrl, restClient);
+            xPress = new XPress(token, baseApiUrl, restClient);
 
         }
         /// <summary>
@@ -53,7 +53,7 @@ namespace RicOneApi.Api
             this.baseApiUrl = baseApiUrl;
             this.restClient = new RestClient(baseApiUrl);
             restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
-            sifXpress = new SifXpress(token, baseApiUrl, restClient);
+            xPress = new XPress(token, baseApiUrl, restClient);
            
         }
     }

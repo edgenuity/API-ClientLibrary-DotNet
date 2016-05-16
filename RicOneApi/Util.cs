@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-24
+ * Version     1.2
+ * Since       2016-05-11
  * Filename    Util.cs
  */
 using System;
@@ -35,6 +35,23 @@ namespace RicOneApi.Api
             {
                 Console.WriteLine("HttpError: " + httpStatusCode.ToString());
             }
+        }
+
+        /// <summary>
+        /// Method to iterate through the response header list and concatenates a string to return header fields and values
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        public static string BuildHeader(IRestResponse response)
+        {
+            string headerOut = null;
+
+            foreach (var header in response.Headers.ToList())
+            {
+                headerOut = headerOut + header.Name + "=[" + header.Value + "] ";
+            }
+
+            return headerOut;
         }
 
         #endregion

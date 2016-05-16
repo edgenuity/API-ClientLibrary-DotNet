@@ -35,6 +35,16 @@ const string username = "YOUR USERNAME";
 const string password = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.2
+* Paging passed via header
+* Dropped SIF prefix from SIFXPress class, now XPress
+* Ability to access response status code, status message, and headers
+* Removed LoginId from XContactType, XStaffType, and XStudentType
+* Added XAppProvisioningInfoType
+	* Added to XContactType, XStaffType, and XStudentType
+* Changed XYearGroupListType to XGradeLevelListType
+	* Changed in XSchoolType
+
 ### v1.1.3.1
 * Auth url now configurable
 

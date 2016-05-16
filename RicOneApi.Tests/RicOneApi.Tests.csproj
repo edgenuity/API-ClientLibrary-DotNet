@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RicOneApi.Tests.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">
       <HintPath>..\RicOneAPI\bin\Debug\RestSharp.dll</HintPath>
@@ -46,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Paging.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
