@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RicOneApi.Tests.Program</StartupObject>
+    <StartupObject>RicOneApi.Tests.TokenInfo</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">
@@ -52,6 +52,7 @@
     <Compile Include="Paging.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RicOneAPI\RicOneApi.csproj">

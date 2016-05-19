@@ -35,6 +35,11 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.2.1
+* Added GetToken() method to Authenticator
+* Added GetDecodedToken() method to Authenticator
+	* Returns JWT token payload values: application_id, iss, iat, exp
+	
 ### v1.2
 * Paging passed via header
 * Dropped SIF prefix from SIFXPress class, now XPress

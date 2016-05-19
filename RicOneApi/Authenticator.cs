@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2
- * Since       2016-05-16
+ * Version     1.2.1
+ * Since       2016-05-18
  * Filename    Authenticator.cs
  */
 using System;
@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
 using RicOneApi.Models.Authentication;
+using Newtonsoft.Json;
 
 namespace RicOneApi.Api
 {
@@ -54,8 +55,27 @@ namespace RicOneApi.Api
             request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
             var response = client.Execute<UserInfo>(request);
-            
+
             return response.Data;
+        }
+
+        /// <summary>
+        /// Token value
+        /// </summary>
+        /// <returns></returns>
+        public String GetToken()
+        {
+            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
+
+            var request = new RestRequest(Method.POST);
+
+            // Adds Request Body parameters for username and password
+            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
+
+            var response = client.Execute<UserInfo>(request);
+
+            return response.Data.token;
         }
 
         /// <summary>
@@ -86,7 +106,7 @@ namespace RicOneApi.Api
             }
 
             return endpoints;
-        
+
         }
         /// <summary>
         /// Request all endpoints
@@ -107,5 +127,32 @@ namespace RicOneApi.Api
             return response.Data.endpoint;
 
         }
-    }
+
+        /// <summary>
+        /// Payload data inside an encrypted JWT token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public DecodedToken GetDecodedToken(String token)
+	    {
+		    try
+		    {
+                //Console.WriteLine(token);
+			    String[] base64EncodedSegments = token.Split('.');
+                DecodedToken dt = JsonConvert.DeserializeObject<DecodedToken> (base64UrlDecode(base64EncodedSegments[1]));
+
+			    return dt;	
+		    }
+		    catch(Exception e)
+		    {
+			    return null;
+		    }			
+	    }
+
+        public String base64UrlDecode(String input)
+        {   
+            byte[] newBytes = JWT.JsonWebToken.Base64UrlDecode(input);
+            return System.Text.Encoding.UTF8.GetString(newBytes);
+        }
+    }	
 }
