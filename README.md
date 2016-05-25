@@ -24,7 +24,7 @@ foreach (Endpoint e in auth.GetEndpoints())
 * SampleConsole - Simple console app showing use
 
 ### Getting Started
-1. View the library <a href="https://docs.google.com/document/d/1SiNPq6jetOqyYdpSJG_77paEV5YELcSGjfj-YcbY2f0/pub" target="_blank">documentation</a>
+1. View the library <a href="http://www.ricone.org/vendors/ric-one-api/net-client-developers-guide/" target="_blank">documentation</a>
 2. Download the Project
 3. Get your auth server credentials
 4. Open SampleConsole
