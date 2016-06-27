@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RicOneApi.Api;
+using System.Configuration;
 
 namespace RicOneApi.Tests
 {
     class TokenInfo
     {
         #region Test Constants
-        const string authUrl = "http://auth.test.ricone.org/login";
-        const string clientId = "dpaDemo";
-        const string clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+        static string authUrl = ConfigurationManager.AppSettings["authUrl"];
+        static string clientId = ConfigurationManager.AppSettings["authClientId"];
+        static string clientSecret = ConfigurationManager.AppSettings["authClientSecret"];
         #endregion
         static void Main(string[] args)
         {

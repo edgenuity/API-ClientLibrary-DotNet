@@ -21,11 +21,23 @@ namespace RicOneApi.Api
     /// </summary>
     public class Authenticator
     {
+        private static readonly Authenticator instance = new Authenticator();
         private string authUrl;
         private string clientId;
         private string clientSecret;
 
-        private readonly RestClient client;
+        private readonly RestClient _client;
+        private RestRequest _request;
+
+        private Authenticator() { }
+
+        public static Authenticator Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
         /// <summary>
         /// Establish connection to authenticate to auth server
@@ -38,7 +50,8 @@ namespace RicOneApi.Api
             this.authUrl = authUrl;
             this.clientId = clientId;
             this.clientSecret = clientSecret;
-            client = restClient ?? new RestClient(authUrl);
+            _client = restClient ?? new RestClient(authUrl);
+
         }
         /// <summary>
         /// Request user id, user_name, token, and list of endpoints
@@ -46,15 +59,15 @@ namespace RicOneApi.Api
         /// <returns></returns>
         public UserInfo GetUserInfo()
         {
-            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
+            _client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
 
-            var request = new RestRequest(Method.POST);
+            _request = new RestRequest(Method.POST);
 
             // Adds Request Body parameters for username and password
-            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
-            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
+            _request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            _request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
-            var response = client.Execute<UserInfo>(request);
+            var response = _client.Execute<UserInfo>(_request);
 
             return response.Data;
         }
@@ -65,15 +78,15 @@ namespace RicOneApi.Api
         /// <returns></returns>
         public String GetToken()
         {
-            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
+            _client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
 
-            var request = new RestRequest(Method.POST);
+            _request = new RestRequest(Method.POST);
 
             // Adds Request Body parameters for username and password
-            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
-            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
+            _request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            _request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
-            var response = client.Execute<UserInfo>(request);
+            var response = _client.Execute<UserInfo>(_request);
 
             return response.Data.token;
         }
@@ -85,15 +98,15 @@ namespace RicOneApi.Api
         /// <returns></returns>
         public List<Endpoint> GetEndpoints(string providerId)
         {
-            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
+            _client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
 
-            var request = new RestRequest(Method.POST);
+            _request = new RestRequest(Method.POST);
 
             // Adds Request Body parameters for username and password
-            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
-            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
+            _request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            _request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
-            var response = client.Execute<UserInfo>(request);
+            var response = _client.Execute<UserInfo>(_request);
 
             List<Endpoint> endpoints = new List<Endpoint>();
 
@@ -114,15 +127,15 @@ namespace RicOneApi.Api
         /// <returns></returns>
         public List<Endpoint> GetEndpoints()
         {
-            client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
+            _client.Authenticator = new SimpleAuthenticator("username", this.clientId, "password", this.clientSecret);
 
-            var request = new RestRequest(Method.POST);
+            _request = new RestRequest(Method.POST);
 
             // Adds Request Body parameters for username and password
-            request.AddParameter("username", this.clientId, ParameterType.RequestBody);
-            request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
+            _request.AddParameter("username", this.clientId, ParameterType.RequestBody);
+            _request.AddParameter("password", this.clientSecret, ParameterType.RequestBody);
 
-            var response = client.Execute<UserInfo>(request);
+            var response = _client.Execute<UserInfo>(_request);
 
             return response.Data.endpoint;
 
@@ -134,25 +147,25 @@ namespace RicOneApi.Api
         /// <param name="token"></param>
         /// <returns></returns>
         public DecodedToken GetDecodedToken(String token)
-	    {
-		    try
-		    {
+        {
+            try
+            {
                 //Console.WriteLine(token);
-			    String[] base64EncodedSegments = token.Split('.');
-                DecodedToken dt = JsonConvert.DeserializeObject<DecodedToken> (base64UrlDecode(base64EncodedSegments[1]));
+                String[] base64EncodedSegments = token.Split('.');
+                DecodedToken dt = JsonConvert.DeserializeObject<DecodedToken>(base64UrlDecode(base64EncodedSegments[1]));
 
-			    return dt;	
-		    }
-		    catch(Exception e)
-		    {
-			    return null;
-		    }			
-	    }
+                return dt;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
         public String base64UrlDecode(String input)
-        {   
+        {
             byte[] newBytes = JWT.JsonWebToken.Base64UrlDecode(input);
             return System.Text.Encoding.UTF8.GetString(newBytes);
         }
-    }	
+    }
 }

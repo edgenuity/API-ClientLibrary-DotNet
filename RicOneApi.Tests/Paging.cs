@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2
- * Since       2016-05-11
+ * Version     1.3
+ * Since       2016-06-24
  * Filename    Paging.cs
  */
 using System;
@@ -11,16 +11,17 @@ using System.Text;
 using RicOneApi.Api;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Models.XPress;
+using System.Configuration;
 
 namespace RicOneApi.Tests
 {
     class Paging
     {
         #region Test Constants
-        const string authUrl = "http://auth.test.ricone.org/login";
-        const string clientId = "dpaDemo";
-        const string clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
-        const string providerId = "workshop";
+        static string authUrl = ConfigurationManager.AppSettings["authUrl"];
+        static string clientId = ConfigurationManager.AppSettings["authClientId"];
+        static string clientSecret = ConfigurationManager.AppSettings["authClientSecret"];
+        static string providerId = ConfigurationManager.AppSettings["authProviderId"];
         static int navigationPageSize = 10;
         //static int navigationPageSize = 50;
         //static int navigationPageSize = 100;
@@ -59,75 +60,75 @@ namespace RicOneApi.Tests
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                RicOneApiClient ricOne = new RicOneApiClient(e);
+                XPress xPress = new XPress(auth.GetToken(), e.href);
 
                 #region navigationLastPage
 
                 #region xLeas
-                //XLeas_GetXLeasLastPage(ricOne);
-                //XLeas_GetXLeasByXSchoolLastPage(ricOne);
-                //XLeas_GetXLeasByXRosterLastPage(ricOne);
-                //XLeas_GetXLeasByXStaffLastPage(ricOne);
-                //XLeas_GetXLeasByXStudentLastPage(ricOne);
-                //XLeas_GetXLeasByXContactLastPage(ricOne);
+                XLeas_GetXLeasLastPage(xPress);
+                //XLeas_GetXLeasByXSchoolLastPage(xPress);
+                //XLeas_GetXLeasByXRosterLastPage(xPress);
+                //XLeas_GetXLeasByXStaffLastPage(xPress);
+                //XLeas_GetXLeasByXStudentLastPage(xPress);
+                //XLeas_GetXLeasByXContactLastPage(xPress);
                 #endregion
 
                 #region xSchools
-                //XSchools_GetXSchoolsLastPage(ricOne);
-                //XSchools_GetXSchoolsByXLeaLastPage(ricOne);
-                //XSchools_GetXSchoolsByXCalendarLastPage(ricOne);
-                //XSchools_GetXSchoolsByXCourseLastPage(ricOne);
-                //XSchools_GetXSchoolsByXRosterLastPage(ricOne);
-                //XSchools_GetXSchoolsByXStaffLastPage(ricOne);
-                //XSchools_GetXSchoolsByXStudentLastPage(ricOne);
-                //XSchools_GetXSchoolsByXContactLastPage(ricOne);
+                //XSchools_GetXSchoolsLastPage(xPress);
+                //XSchools_GetXSchoolsByXLeaLastPage(xPress);
+                //XSchools_GetXSchoolsByXCalendarLastPage(xPress);
+                //XSchools_GetXSchoolsByXCourseLastPage(xPress);
+                //XSchools_GetXSchoolsByXRosterLastPage(xPress);
+                //XSchools_GetXSchoolsByXStaffLastPage(xPress);
+                //XSchools_GetXSchoolsByXStudentLastPage(xPress);
+                //XSchools_GetXSchoolsByXContactLastPage(xPress);
                 #endregion
 
                 #region xCalendars
-                //XCalendars_GetXCalendarsLastPage(ricOne);
-                //XCalendars_GetXCalendarsByXLeaLastPage(ricOne);
-                //XCalendars_GetXCalendarsByXSchoolLastPage(ricOne);
+                //XCalendars_GetXCalendarsLastPage(xPress);
+                //XCalendars_GetXCalendarsByXLeaLastPage(xPress);
+                //XCalendars_GetXCalendarsByXSchoolLastPage(xPress);
                 #endregion
 
                 #region xCourses
-                //XCourses_GetXCoursesLastPage(ricOne);
-                //XCourses_GetXCoursesByXLeaLastPage(ricOne);
-                //XCourses_GetXCoursesByXSchoolLastPage(ricOne);
-                //XCourses_GetXCoursesByXRosterLastPage(ricOne);
+                //XCourses_GetXCoursesLastPage(xPress);
+                //XCourses_GetXCoursesByXLeaLastPage(xPress);
+                //XCourses_GetXCoursesByXSchoolLastPage(xPress);
+                //XCourses_GetXCoursesByXRosterLastPage(xPress);
                 #endregion
 
                 #region xRosters
-                //XRosters_GetXRostersLastPage(ricOne);
-                //XRosters_GetXRostersByXLeaLastPage(ricOne);
-                //XRosters_GetXRostersByXSchoolLastPage(ricOne);
-                //XRosters_GetXRostersByXCourseLastPage(ricOne);
-                //XRosters_GetXRostersByXStaffLastPage(ricOne);
-                //XRosters_GetXRostersByXStudentLastPage(ricOne);
+                //XRosters_GetXRostersLastPage(xPress);
+                //XRosters_GetXRostersByXLeaLastPage(xPress);
+                //XRosters_GetXRostersByXSchoolLastPage(xPress);
+                //XRosters_GetXRostersByXCourseLastPage(xPress);
+                //XRosters_GetXRostersByXStaffLastPage(xPress);
+                //XRosters_GetXRostersByXStudentLastPage(xPress);
                 #endregion
 
                 #region xStaffs
-                //XStaffs_GetXStaffsLastPage(ricOne);
-                //XStaffs_GetXStaffsByXLeaLastPage(ricOne);
-                //XStaffs_GetXStaffsByXSchoolLastPage(ricOne);
-                //XStaffs_GetXStaffsByXCourseLastPage(ricOne);
-                //XStaffs_GetXStaffsByXRosterLastPage(ricOne);
-                //XStaffs_GetXStaffsByXStudentLastPage(ricOne);
+                //XStaffs_GetXStaffsLastPage(xPress);
+                //XStaffs_GetXStaffsByXLeaLastPage(xPress);
+                //XStaffs_GetXStaffsByXSchoolLastPage(xPress);
+                //XStaffs_GetXStaffsByXCourseLastPage(xPress);
+                //XStaffs_GetXStaffsByXRosterLastPage(xPress);
+                //XStaffs_GetXStaffsByXStudentLastPage(xPress);
                 #endregion
 
                 #region xStudents
-                //XStudents_GetXStudentsLastPage(ricOne);
-                //XStudents_GetXStudentsByXLeaLastPage(ricOne);
-                //XStudents_GetXStudentsByXSchoolLastPage(ricOne);
-                //XStudents_GetXStudentsByXRosterLastPage(ricOne);
-                //XStudents_GetXStudentsByXStaffLastPage(ricOne);
-                //XStudents_GetXStudentsByXContactLastPage(ricOne);
+                //XStudents_GetXStudentsLastPage(xPress);
+                //XStudents_GetXStudentsByXLeaLastPage(xPress);
+                //XStudents_GetXStudentsByXSchoolLastPage(xPress);
+                //XStudents_GetXStudentsByXRosterLastPage(xPress);
+                //XStudents_GetXStudentsByXStaffLastPage(xPress);
+                //XStudents_GetXStudentsByXContactLastPage(xPress);
                 #endregion
 
                 #region xContacts
-                //XContacts_GetXContactsLastPage(ricOne);
-                //XContacts_GetXContactsByXLeaLastPage(ricOne);
-                //XContacts_GetXContactsByXSchoolLastPage(ricOne);
-                //XContacts_GetXContactsByXStudentLastPage(ricOne);
+                //XContacts_GetXContactsLastPage(xPress);
+                //XContacts_GetXContactsByXLeaLastPage(xPress);
+                //XContacts_GetXContactsByXSchoolLastPage(xPress);
+                //XContacts_GetXContactsByXStudentLastPage(xPress);
                 #endregion
                 #endregion
             }
@@ -140,13 +141,12 @@ namespace RicOneApi.Tests
         #region xLeas
 
         //RETURN ALL LEAS
-        public static void XLeas_GetXLeasLastPage(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeas); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeas); i++)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeas(i, navigationPageSize).Data)
+                foreach (XLeaType lea in xPress.GetXLeas(i, navigationPageSize).Data)
                 {
-                    Console.WriteLine(ricOne.xPress.GetXLeas(i, navigationPageSize).Header);
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
                     Console.WriteLine("leaRefId: " + lea.leaRefId);
@@ -182,11 +182,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY SCHOOL
-        public static void XLeas_GetXLeasByXSchoolLastPage(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXSchoolLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXSchool, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXSchool, refId); i++)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXSchool(refId, i, navigationPageSize).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXSchool(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -224,11 +224,11 @@ namespace RicOneApi.Tests
 
         }
         //RETURN LEAS BY ROSTER
-        public static void XLeas_GetXLeasByXRosterLastPage(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXRosterLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXRoster, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXRoster, refId); i++)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXRoster(refId, i, navigationPageSize).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXRoster(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -265,11 +265,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY STAFF
-        public static void XLeas_GetXLeasByXStaffLastPage(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXStaffLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXStaff, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXStaff, refId); i++)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXStaff(refId, i, navigationPageSize).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXStaff(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -306,11 +306,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY STUDENT
-        public static void XLeas_GetXLeasByXStudentLastPage(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXStudentLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXStudent, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXStudent, refId); i++)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXStudent(refId, i, navigationPageSize).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXStudent(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -348,11 +348,11 @@ namespace RicOneApi.Tests
 
         }
         //RETURN LEAS BY CONTACT
-        public static void XLeas_GetXLeasByXContactLastPage(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXContactLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXContact, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXLeasByXContact, refId); i++)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXContact(refId, i, navigationPageSize).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXContact(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -393,11 +393,11 @@ namespace RicOneApi.Tests
 
         #region xSchools
         //RETURN ALL SCHOOLS
-        public static void XSchools_GetXSchoolsLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchools); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchools); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchools(i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchools(i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -446,11 +446,11 @@ namespace RicOneApi.Tests
         }
 
         //RETURN SCHOOLS BY LEA
-        public static void XSchools_GetXSchoolsByXLeaLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXLeaLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXLea, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXLea, refId); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXLea(refId, i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXLea(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -498,11 +498,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY CALENDAR
-        public static void XSchools_GetXSchoolsByXCalendarLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXCalendarLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXCalendar, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXCalendar, refId); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXCalendar(refId, i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXCalendar(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -550,11 +550,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY COURSE
-        public static void XSchools_GetXSchoolsByXCourseLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXCourseLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXCourse, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXCourse, refId); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXCourse(refId, i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXCourse(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -602,11 +602,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY ROSTER
-        public static void XSchools_GetXSchoolsByXRosterLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXRosterLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXRoster, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXRoster, refId); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXRoster(refId, i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXRoster(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -654,11 +654,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY STAFF
-        public static void XSchools_GetXSchoolsByXStaffLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXStaffLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXStaff, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXStaff, refId); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXStaff(refId, i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXStaff(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -706,11 +706,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY STUDENT
-        public static void XSchools_GetXSchoolsByXStudentLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXStudentLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXStudent, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXStudent, refId); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXStudent(refId, i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXStudent(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -758,11 +758,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY CONTACT
-        public static void XSchools_GetXSchoolsByXContactLastPage(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXContactLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXContact, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXSchoolsByXContact, refId); i++)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXContact(refId, i, navigationPageSize).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXContact(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -813,11 +813,11 @@ namespace RicOneApi.Tests
 
         #region xCalendars
         //RETURN ALL CALENDARS
-        public static void XCalendars_GetXCalendarsLastPage(RicOneApiClient ricOne)
+        public static void XCalendars_GetXCalendarsLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCalendars); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCalendars); i++)
             {  
-                foreach (XCalendarType calendar in ricOne.xPress.GetXCalendars(i, navigationPageSize).Data)
+                foreach (XCalendarType calendar in xPress.GetXCalendars(i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
@@ -841,11 +841,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CALENDARS BY LEA
-        public static void XCalendars_GetXCalendarsByXLeaLastPage(RicOneApiClient ricOne)
+        public static void XCalendars_GetXCalendarsByXLeaLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCalendarsByXLea, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCalendarsByXLea, refId); i++)
             {
-                foreach (XCalendarType calendar in ricOne.xPress.GetXCalendarsByXLea(refId, i, navigationPageSize).Data)
+                foreach (XCalendarType calendar in xPress.GetXCalendarsByXLea(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
@@ -869,11 +869,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CALENDARS BY SCHOOL
-        public static void XCalendars_GetXCalendarsByXSchoolLastPage(RicOneApiClient ricOne)
+        public static void XCalendars_GetXCalendarsByXSchoolLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCalendarsByXSchool, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCalendarsByXSchool, refId); i++)
             {
-                foreach (XCalendarType calendar in ricOne.xPress.GetXCalendarsByXSchool(refId, i, navigationPageSize).Data)
+                foreach (XCalendarType calendar in xPress.GetXCalendarsByXSchool(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
@@ -900,11 +900,11 @@ namespace RicOneApi.Tests
 
         #region xCourses
         //RETURN ALL COURSES
-        public static void XCourses_GetXCoursesLastPage(RicOneApiClient ricOne)
+        public static void XCourses_GetXCoursesLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCourses); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCourses); i++)
             {
-                foreach (XCourseType course in ricOne.xPress.GetXCourses(i, navigationPageSize).Data)
+                foreach (XCourseType course in xPress.GetXCourses(i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -937,11 +937,11 @@ namespace RicOneApi.Tests
         }
 
         //RETURN COURSES BY LEA
-        public static void XCourses_GetXCoursesByXLeaLastPage(RicOneApiClient ricOne)
+        public static void XCourses_GetXCoursesByXLeaLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCoursesByXLea, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCoursesByXLea, refId); i++)
             {
-                foreach (XCourseType course in ricOne.xPress.GetXCoursesByXLea(refId, i, navigationPageSize).Data)
+                foreach (XCourseType course in xPress.GetXCoursesByXLea(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -973,11 +973,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN COURSES BY SCHOOL
-        public static void XCourses_GetXCoursesByXSchoolLastPage(RicOneApiClient ricOne)
+        public static void XCourses_GetXCoursesByXSchoolLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCoursesByXSchool, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCoursesByXSchool, refId); i++)
             {
-                foreach (XCourseType course in ricOne.xPress.GetXCoursesByXSchool(refId, i, navigationPageSize).Data)
+                foreach (XCourseType course in xPress.GetXCoursesByXSchool(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1009,11 +1009,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN COURSES BY ROSTER
-        public static void XCourses_GetXCoursesByXRosterLastPage(RicOneApiClient ricOne)
+        public static void XCourses_GetXCoursesByXRosterLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCoursesByXRoster, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXCoursesByXRoster, refId); i++)
             {
-                foreach (XCourseType course in ricOne.xPress.GetXCoursesByXRoster(refId, i, navigationPageSize).Data)
+                foreach (XCourseType course in xPress.GetXCoursesByXRoster(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1048,11 +1048,11 @@ namespace RicOneApi.Tests
 
         #region xRosters
         //RETURN ALL ROSTERS
-        public static void XRosters_GetXRostersLastPage(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRosters); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRosters); i++)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRosters(i, navigationPageSize).Data)
+                foreach (XRosterType r in xPress.GetXRosters(i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1115,11 +1115,11 @@ namespace RicOneApi.Tests
         }
 
         //RETURN ROSTERS BY LEA
-        public static void XRosters_GetXRostersByXLeaLastPage(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXLeaLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXLea, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXLea, refId); i++)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXLea(refId, i, navigationPageSize).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXLea(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1181,11 +1181,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY SCHOOL
-        public static void XRosters_GetXRostersByXSchoolLastPage(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXSchoolLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXSchool, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXSchool, refId); i++)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXSchool(refId, i, navigationPageSize).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXSchool(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1247,11 +1247,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY CROUSE
-        public static void XRosters_GetXRostersByXCourseLastPage(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXCourseLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXCourse, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXCourse, refId); i++)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXCourse(refId, i, navigationPageSize).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXCourse(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1313,11 +1313,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY STAFF
-        public static void XRosters_GetXRostersByXStaffLastPage(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXStaffLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXStaff, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXStaff, refId); i++)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXStaff(refId, i, navigationPageSize).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXStaff(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1379,11 +1379,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY STUDENT
-        public static void XRosters_GetXRostersByXStudentLastPage(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXStudentLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXStudent, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXStudent, refId); i++)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXStudent(refId, i, navigationPageSize).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXStudent(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1448,11 +1448,11 @@ namespace RicOneApi.Tests
 
         #region xStaffs
         //RETURN ALL STAFFS
-        public static void XStaffs_GetXStaffsLastPage(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffs); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffs); i++)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffs(i, navigationPageSize).Data)
+                foreach (XStaffType s in xPress.GetXStaffs(i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1498,11 +1498,11 @@ namespace RicOneApi.Tests
         }
 
         //RETURN STAFFS BY LEA
-        public static void XStaffs_GetXStaffsByXLeaLastPage(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXLeaLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXLea, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXLea, refId); i++)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXLea(refId, i, navigationPageSize).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXLea(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1547,11 +1547,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY SCHOOL
-        public static void XStaffs_GetXStaffsByXSchoolLastPage(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXSchoolLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXSchool, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXSchool, refId); i++)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXSchool(refId, i, navigationPageSize).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXSchool(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1596,11 +1596,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY COURSE
-        public static void XStaffs_GetXStaffsByXCourseLastPage(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXCourseLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXCourse, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXCourse, refId); i++)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXCourse(refId, i, navigationPageSize).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXCourse(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1645,11 +1645,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY ROSTER
-        public static void XStaffs_GetXStaffsByXRosterLastPage(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXRosterLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXRoster, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXRoster, refId); i++)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXRoster(refId, i, navigationPageSize).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXRoster(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1694,11 +1694,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY STUDENT
-        public static void XStaffs_GetXStaffsByXStudentLastPage(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXStudentLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXStudent, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStaffsByXStudent, refId); i++)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXStudent(refId, i, navigationPageSize).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXStudent(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1746,11 +1746,11 @@ namespace RicOneApi.Tests
 
         #region xStudents
         //RETURN ALL STUDENTS
-        public static void XStudents_GetXStudentsLastPage(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudents); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudents); i++)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudents(i, navigationPageSize).Data)
+                foreach (XStudentType s in xPress.GetXStudents(i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1992,11 +1992,11 @@ namespace RicOneApi.Tests
         }
 
         //RETURN STUDENTS BY LEA
-        public static void XStudents_GetXStudentsByXLeaLastPage(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXLeaLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXLea, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXLea, refId); i++)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXLea(refId, i, navigationPageSize).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXLea(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -2237,11 +2237,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY SCHOOL
-        public static void XStudents_GetXStudentsByXSchoolLastPage(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXSchoolLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXSchool, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXSchool, refId); i++)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXSchool(refId, i, navigationPageSize).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXSchool(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -2482,11 +2482,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY ROSTER
-        public static void XStudents_GetXStudentsByXRosterLastPage(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXRosterLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXRoster, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXRoster, refId); i++)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXRoster(refId, i, navigationPageSize).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXRoster(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -2727,11 +2727,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY STAFF
-        public static void XStudents_GetXStudentsByXStaffLastPage(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXStaffLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXStaff, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXStaff, refId); i++)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXStaff(refId, i, navigationPageSize).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXStaff(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -2972,11 +2972,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY CONTACT
-        public static void XStudents_GetXStudentsByXContactLastPage(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXContactLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXContact, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXStudentsByXContact, refId); i++)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXContact(refId, i, navigationPageSize).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXContact(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3220,11 +3220,11 @@ namespace RicOneApi.Tests
 
         #region xContacts
         //RETURN ALL CONTACTS
-        public static void XContacts_GetXContactsLastPage(RicOneApiClient ricOne)
+        public static void XContacts_GetXContactsLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContacts); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContacts); i++)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContacts(i, navigationPageSize).Data)
+                foreach (XContactType c in xPress.GetXContacts(i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3316,11 +3316,11 @@ namespace RicOneApi.Tests
         }
 
         //RETURN CONTACTS BY LEA
-        public static void XContacts_GetXContactsByXLeaLastPage(RicOneApiClient ricOne)
+        public static void XContacts_GetXContactsByXLeaLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContactsByXLea, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContactsByXLea, refId); i++)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContactsByXLea(refId, i, navigationPageSize).Data)
+                foreach (XContactType c in xPress.GetXContactsByXLea(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3411,11 +3411,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CONTACTS BY SCHOOL
-        public static void XContacts_GetXContactsByXSchoolLastPage(RicOneApiClient ricOne)
+        public static void XContacts_GetXContactsByXSchoolLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContactsByXSchool, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContactsByXSchool, refId); i++)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContactsByXSchool(refId, i, navigationPageSize).Data)
+                foreach (XContactType c in xPress.GetXContactsByXSchool(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3506,11 +3506,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CONTACTS BY STUDENT
-        public static void XContacts_GetXContactsByXStudentLastPage(RicOneApiClient ricOne)
+        public static void XContacts_GetXContactsByXStudentLastPage(XPress xPress)
         {
-            for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContactsByXStudent, refId); i++)
+            for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXContactsByXStudent, refId); i++)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContactsByXStudent(refId, i, navigationPageSize).Data)
+                foreach (XContactType c in xPress.GetXContactsByXStudent(refId, i, navigationPageSize).Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");

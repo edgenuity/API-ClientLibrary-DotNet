@@ -1,6 +1,6 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2
+ * Version     1.2.2
  * Since       2016-05-13
  * Filename    XPress.cs
  */
@@ -20,7 +20,7 @@ using RicOneApi;
 namespace RicOneApi.Api
 {
     /// <summary>
-    /// Static class built off of RICOne client to allow access to SIFxPress data model objects
+    /// Static class built off of RICOne client to allow access to xPress data model objects
     /// </summary>
     public class XPress
     {
@@ -28,11 +28,12 @@ namespace RicOneApi.Api
         private RestClient restClient;
         private string baseApiUrl;
 
-        public XPress(string token, string baseApiUrl, RestClient restClient)
+        public XPress(string token, string baseApiUrl)
         {
             this.token = token;
             this.baseApiUrl = baseApiUrl;
-            this.restClient = restClient;
+            this.restClient = new RestClient(baseApiUrl);
+            this.restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
         }
 
 
@@ -3974,6 +3975,312 @@ namespace RicOneApi.Api
             return navigationLastPage;
         }
 
+        #endregion
+        #region App Provisioning Info
+        /// <summary>
+        /// Create staff usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStaffType> CreateXStaffUsers(string refId)
+        {
+            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("createUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStaffCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xStaffs.xStaff;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Delete generated staff passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStaffType> DeleteXStaffUsers(string refId)
+        {
+            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("deleteUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStaffCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xStaffs.xStaff;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Return generated staff usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStaffType> GetXStaffUsers(string refId)
+        {
+            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("getUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStaffCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xStaffs.xStaff;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Create student usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStudentType> CreateXStudentUsers(string refId)
+        {
+            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("createUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStudentCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xStudents.xStudent;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Delete generated student passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStudentType> DeleteXStudentUsers(string refId)
+        {
+            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("deleteUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStudentCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xStudents.xStudent;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Return generated student usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStudentType> GetXStudentUsers(string refId)
+        {
+            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("getUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStudentCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xStudents.xStudent;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Create contact usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        private ResponseMulti<XContactType> CreateXContactUsers(string refId)
+        {
+            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("createUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XContactCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xContacts.xContact;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Delete generated contact passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+
+        private ResponseMulti<XContactType> DeleteXContactUsers(string refId)
+        {
+            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("deleteUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XContactCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xContacts.xContact;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Return generated contact usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        private ResponseMulti<XContactType> GetXContactUsers(string refId)
+        {
+            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("getUsers", "true");
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XContactCollectionType>(request);
+            Console.WriteLine(response.ResponseUri);
+            try
+            {
+                output.Data = response.Data.xContacts.xContact;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
         #endregion
     }
 }

@@ -35,6 +35,15 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.3
+* Code cleanup
+	* Removed RicOneApiClient.cs
+	* Reworked Authenticator.cs
+* Included example loading authentication values from config file
+
+### v1.2.2
+* Added xStaff and xStudent account provisioning methods
+
 ### v1.2.1
 * Added GetToken() method to Authenticator
 * Added GetDecodedToken() method to Authenticator

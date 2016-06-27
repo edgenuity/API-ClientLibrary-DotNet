@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2
- * Since       2016-05-13
+ * Version     1.3
+ * Since       2016-06-24
  * Filename    Program.cs
  */
 using System;
@@ -34,13 +34,13 @@ namespace SampleConsole
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {
-                RicOneApiClient ricOne = new RicOneApiClient(e); //Pass endpoint info to data API (token, href)
+                XPress xPress = new XPress(auth.GetToken(), e.href); //Pass endpoint info to data API (token, href)
 
-                foreach (XLeaType l in ricOne.xPress.GetXLeas().Data) //Iterate through each xLea
+                foreach (XLeaType l in xPress.GetXLeas().Data) //Iterate through each xLea
                 {
-                    for (int i = 1; i <= ricOne.xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXLea, l.refId); i++ ) //Get max page size for rosters by lea
+                    for (int i = 1; i <= xPress.GetLastPage(navigationPageSize, XPress.ServicePath.GetXRostersByXLea, l.refId); i++ ) //Get max page size for rosters by lea
                     {
-                        foreach (XRosterType r in ricOne.xPress.GetXRostersByXLea(l.refId, i, navigationPageSize).Data) //Get each roster for each lea refId w/ paging
+                        foreach (XRosterType r in xPress.GetXRostersByXLea(l.refId, i, navigationPageSize).Data) //Get each roster for each lea refId w/ paging
                         {
                             Console.WriteLine("courseTitle: " + r.courseTitle);
                             foreach (XPersonReferenceType p in r.students.studentReference) //Students for each course

@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2
- * Since       2016-05-11
+ * Version     1.3
+ * Since       2016-06-24
  * Filename    Program.cs
  */
 using System;
@@ -15,16 +15,18 @@ using System.Net.Security;
 using RicOneApi.Api;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Models.XPress;
+using System.Configuration;
 
 namespace RicOneApi.Tests
 {
     class Program
     { 
         #region Test Constants
-        const string authUrl = "http://auth.test.ricone.org/login";
-        const string clientId = "dpaDemo";
-        const string clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
-        const string providerId = "workshop";
+        static string authUrl = ConfigurationManager.AppSettings["authUrl"];
+        static string clientId = ConfigurationManager.AppSettings["authClientId"];
+        static string clientSecret = ConfigurationManager.AppSettings["authClientSecret"];
+        static string providerId = ConfigurationManager.AppSettings["authProviderId"];
+        //static string token = ConfigurationManager.AppSettings["authToken"];
 
         // Null:
         static string refId = null;
@@ -57,90 +59,91 @@ namespace RicOneApi.Tests
         static void Main(string[] args)
         {
             Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                RicOneApiClient ricOne = new RicOneApiClient(e);
+                XPress xPress = new XPress(auth.GetToken(), e.href);
 
                 #region xLeas
-                //XLeas_GetXLeas(ricOne);
-                //XLeas_GetXLea(ricOne);
-                //XLeas_GetXLeasByXSchool(ricOne);
-                //XLeas_GetXLeasByXRoster(ricOne);
-                //XLeas_GetXLeasByXStaff(ricOne);
-                //XLeas_GetXLeasByXStudent(ricOne);
-                //XLeas_GetXLeasByXContact(ricOne);
+                XLeas_GetXLeas(xPress);
+                //XLeas_GetXLea(xPress);
+                //XLeas_GetXLeasByXSchool(xPress);
+                //XLeas_GetXLeasByXRoster(xPress);
+                //XLeas_GetXLeasByXStaff(xPress);
+                //XLeas_GetXLeasByXStudent(xPress);
+                //XLeas_GetXLeasByXContact(xPress);
                 #endregion
 
                 #region xSchools
-                //XSchools_GetXSchools(ricOne);
-                //XSchools_GetXSchool(ricOne);
-                //XSchools_GetXSchoolsByXLea(ricOne);
-                //XSchools_GetXSchoolsByXCalendar(ricOne);
-                //XSchools_GetXSchoolsByXCourse(ricOne);
-                //XSchools_GetXSchoolsByXRoster(ricOne);
-                //XSchools_GetXSchoolsByXStaff(ricOne);
-                //XSchools_GetXSchoolsByXStudent(ricOne);
-                //XSchools_GetXSchoolsByXContact(ricOne);
+                //XSchools_GetXSchools(xPress);
+                //XSchools_GetXSchool(xPress);
+                //XSchools_GetXSchoolsByXLea(xPress);
+                //XSchools_GetXSchoolsByXCalendar(xPress);
+                //XSchools_GetXSchoolsByXCourse(xPress);
+                //XSchools_GetXSchoolsByXRoster(xPress);
+                //XSchools_GetXSchoolsByXStaff(xPress);
+                //XSchools_GetXSchoolsByXStudent(xPress);
+                //XSchools_GetXSchoolsByXContact(xPress);
                 #endregion
 
                 #region xCalendars
 
-                //XCalendars_GetXCalendars(ricOne);
-                //XCalendars_GetXCalendar(ricOne);
-                //XCalendars_GetXCalendarsByXLea(ricOne); 
-                //XCalendars_GetXCalendarsByXSchool(ricOne);
+                //XCalendars_GetXCalendars(xPress);
+                //XCalendars_GetXCalendar(xPress);
+                //XCalendars_GetXCalendarsByXLea(xPress); 
+                //XCalendars_GetXCalendarsByXSchool(xPress);
 
                 #endregion
 
                 #region xCourses
 
-                //XCourses_GetXCourses(ricOne);
-                //XCourses_GetXCourse(ricOne);
-                //XCourses_GetXCoursesByXLea(ricOne);
-                //XCourses_GetXCoursesByXSchool(ricOne);
-                //XCourses_GetXCoursesByXRoster(ricOne);
+                //XCourses_GetXCourses(xPress);
+                //XCourses_GetXCourse(xPress);
+                //XCourses_GetXCoursesByXLea(xPress);
+                //XCourses_GetXCoursesByXSchool(xPress);
+                //XCourses_GetXCoursesByXRoster(xPress);
 
                 #endregion
 
                 #region xRosters
 
-                //XRosters_GetXRosters(ricOne);
-                //XRosters_GetXRoster(ricOne);
-                //XRosters_GetXRostersByXLea(ricOne);
-                //XRosters_GetXRostersByXSchool(ricOne);
-                //XRosters_GetXRostersByXCourse(ricOne);
-                //XRosters_GetXRostersByXStaff(ricOne);
-                //XRosters_GetXRostersByXStudent(ricOne);
+                //XRosters_GetXRosters(xPress);
+                //XRosters_GetXRoster(xPress);
+                //XRosters_GetXRostersByXLea(xPress);
+                //XRosters_GetXRostersByXSchool(xPress);
+                //XRosters_GetXRostersByXCourse(xPress);
+                //XRosters_GetXRostersByXStaff(xPress);
+                //XRosters_GetXRostersByXStudent(xPress);
 
                 #endregion
 
                 #region xStaffs
-                //XStaffs_GetXStaffs(ricOne);
-                //XStaffs_GetXStaff(ricOne);
-                //XStaffs_GetXStaffsByXLea(ricOne);
-                //XStaffs_GetXStaffsByXSchool(ricOne);
-                //XStaffs_GetXStaffsByXCourse(ricOne);
-                //XStaffs_GetXStaffsByXRoster(ricOne);
-                //XStaffs_GetXStaffsByXStudent(ricOne);
+                //XStaffs_GetXStaffs(xPress);
+                //XStaffs_GetXStaff(xPress);
+                //XStaffs_GetXStaffsByXLea(xPress);
+                //XStaffs_GetXStaffsByXSchool(xPress);
+                //XStaffs_GetXStaffsByXCourse(xPress);
+                //XStaffs_GetXStaffsByXRoster(xPress);
+                //XStaffs_GetXStaffsByXStudent(xPress);
                 #endregion
 
                 #region xStudents
-                //XStudents_GetXStudents(ricOne);
-                //XStudents_GetXStudent(ricOne);
-                //XStudents_GetXStudentsByXLea(ricOne);
-                //XStudents_GetXStudentsByXSchool(ricOne);
-                //XStudents_GetXStudentsByXRoster(ricOne);
-                //XStudents_GetXStudentsByXStaff(ricOne);
-                //XStudents_GetXStudentsByXContact(ricOne);
+                //XStudents_GetXStudents(xPress);
+                //XStudents_GetXStudent(xPress);
+                //XStudents_GetXStudentsByXLea(xPress);
+                //XStudents_GetXStudentsByXSchool(xPress);
+                //XStudents_GetXStudentsByXRoster(xPress);
+                //XStudents_GetXStudentsByXStaff(xPress);
+                //XStudents_GetXStudentsByXContact(xPress);
                 #endregion
 
                 #region xContacts
-                //XContacts_GetXContacts(ricOne);
-                //XContacts_GetXContact(ricOne);
-                //XContacts_GetXContactsByXLea(ricOne);
-                //XContacts_GetXContactsByXSchool(ricOne);
-                //XContacts_GetXContactsByXStudent(ricOne);
+                //XContacts_GetXContacts(xPress);
+                //XContacts_GetXContact(xPress);
+                //XContacts_GetXContactsByXLea(xPress);
+                //XContacts_GetXContactsByXSchool(xPress);
+                //XContacts_GetXContactsByXStudent(xPress);
                 #endregion
             }
 
@@ -150,11 +153,11 @@ namespace RicOneApi.Tests
         #region xLeas
 
         //RETURN ALL LEAS
-        public static void XLeas_GetXLeas(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeas(XPress xPress)
         {
-            if(ricOne.xPress.GetXLeas().Data != null)
+            if(xPress.GetXLeas().Data != null)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeas().Data)
+                foreach (XLeaType lea in xPress.GetXLeas().Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -190,11 +193,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE LEA
-        public static void XLeas_GetXLea(RicOneApiClient ricOne)
+        public static void XLeas_GetXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXLea(refId).Data != null)
+            if (xPress.GetXLea(refId).Data != null)
             {
-                XLeaType lea = ricOne.xPress.GetXLea(refId).Data;
+                XLeaType lea = xPress.GetXLea(refId).Data;
             
                 Console.WriteLine("refId: " + lea.refId);
                 Console.WriteLine("leaName: " + lea.leaName);
@@ -229,11 +232,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY SCHOOL
-        public static void XLeas_GetXLeasByXSchool(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXSchool(XPress xPress)
         {
-            if (ricOne.xPress.GetXLeasByXSchool(refId).Data != null)
+            if (xPress.GetXLeasByXSchool(refId).Data != null)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXSchool(refId).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXSchool(refId).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -269,11 +272,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY ROSTER
-        public static void XLeas_GetXLeasByXRoster(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXRoster(XPress xPress)
         {
-            if (ricOne.xPress.GetXLeasByXRoster(refId) != null)
+            if (xPress.GetXLeasByXRoster(refId) != null)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXRoster(refId).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXRoster(refId).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -309,11 +312,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY STAFF
-        public static void XLeas_GetXLeasByXStaff(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXStaff(XPress xPress)
         {
-            if (ricOne.xPress.GetXLeasByXStaff(refId) != null)
+            if (xPress.GetXLeasByXStaff(refId) != null)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXStaff(refId).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXStaff(refId).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -349,11 +352,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY STUDENT
-        public static void XLeas_GetXLeasByXStudent(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXStudent(XPress xPress)
         {
-            if (ricOne.xPress.GetXLeasByXStudent(refId).Data != null)
+            if (xPress.GetXLeasByXStudent(refId).Data != null)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXStudent(refId).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXStudent(refId).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -389,11 +392,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN LEAS BY CONTACT
-        public static void XLeas_GetXLeasByXContact(RicOneApiClient ricOne)
+        public static void XLeas_GetXLeasByXContact(XPress xPress)
         {
-            if (ricOne.xPress.GetXLeasByXContact(refId) != null)
+            if (xPress.GetXLeasByXContact(refId) != null)
             {
-                foreach (XLeaType lea in ricOne.xPress.GetXLeasByXContact(refId).Data)
+                foreach (XLeaType lea in xPress.GetXLeasByXContact(refId).Data)
                 {
                     Console.WriteLine("refId: " + lea.refId);
                     Console.WriteLine("leaName: " + lea.leaName);
@@ -433,11 +436,11 @@ namespace RicOneApi.Tests
 
         #region xSchools
         //RETURN ALL SCHOOLS
-        public static void XSchools_GetXSchools(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchools(XPress xPress)
         {
-            if (ricOne.xPress.GetXSchools().Data != null)
+            if (xPress.GetXSchools().Data != null)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchools().Data)
+                foreach (XSchoolType school in xPress.GetXSchools().Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -484,11 +487,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE SCHOOL
-        public static void XSchools_GetXSchool(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchool(XPress xPress)
         {
-            if(ricOne.xPress.GetXSchool(refId).Data != null)
+            if(xPress.GetXSchool(refId).Data != null)
             {
-                XSchoolType school = ricOne.xPress.GetXSchool(refId).Data;
+                XSchoolType school = xPress.GetXSchool(refId).Data;
 
                 Console.WriteLine("refId: " + school.refId);
                 Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -535,11 +538,11 @@ namespace RicOneApi.Tests
             
         }
         //RETURN SCHOOLS BY LEA
-        public static void XSchools_GetXSchoolsByXLea(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXSchoolsByXLea(refId).Data != null)
+            if (xPress.GetXSchoolsByXLea(refId).Data != null)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXLea(refId).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXLea(refId).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -586,11 +589,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY CALENDAR
-        public static void XSchools_GetXSchoolsByXCalendar(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXCalendar(XPress xPress)
         {
-            if (ricOne.xPress.GetXSchoolsByXCalendar(refId) != null)
+            if (xPress.GetXSchoolsByXCalendar(refId) != null)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXCalendar(refId).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXCalendar(refId).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -637,11 +640,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY COURSE
-        public static void XSchools_GetXSchoolsByXCourse(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXCourse(XPress xPress)
         {
-            if (ricOne.xPress.GetXSchoolsByXCourse(refId).Data != null)
+            if (xPress.GetXSchoolsByXCourse(refId).Data != null)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXCourse(refId).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXCourse(refId).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -688,11 +691,11 @@ namespace RicOneApi.Tests
             }
          }
         //RETURN SCHOOLS BY ROSTER
-        public static void XSchools_GetXSchoolsByXRoster(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXRoster(XPress xPress)
          {
-             if (ricOne.xPress.GetXSchoolsByXRoster(refId).Data != null)
+             if (xPress.GetXSchoolsByXRoster(refId).Data != null)
              {
-                 foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXRoster(refId).Data)
+                 foreach (XSchoolType school in xPress.GetXSchoolsByXRoster(refId).Data)
                  {
                      Console.WriteLine("refId: " + school.refId);
                      Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -739,11 +742,11 @@ namespace RicOneApi.Tests
              }
          }
         //RETURN SCHOOLS BY STAFF
-        public static void XSchools_GetXSchoolsByXStaff(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXStaff(XPress xPress)
         {
-            if (ricOne.xPress.GetXSchoolsByXStaff(refId).Data != null)
+            if (xPress.GetXSchoolsByXStaff(refId).Data != null)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXStaff(refId).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXStaff(refId).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -790,11 +793,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY STUDENT
-        public static void XSchools_GetXSchoolsByXStudent(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXStudent(XPress xPress)
         {
-            if (ricOne.xPress.GetXSchoolsByXStudent(refId).Data != null)
+            if (xPress.GetXSchoolsByXStudent(refId).Data != null)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXStudent(refId).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXStudent(refId).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -841,11 +844,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SCHOOLS BY CONTACT
-        public static void XSchools_GetXSchoolsByXContact(RicOneApiClient ricOne)
+        public static void XSchools_GetXSchoolsByXContact(XPress xPress)
         {
-            if (ricOne.xPress.GetXSchoolsByXContact(refId).Data != null)
+            if (xPress.GetXSchoolsByXContact(refId).Data != null)
             {
-                foreach (XSchoolType school in ricOne.xPress.GetXSchoolsByXContact(refId).Data)
+                foreach (XSchoolType school in xPress.GetXSchoolsByXContact(refId).Data)
                 {
                     Console.WriteLine("refId: " + school.refId);
                     Console.WriteLine("leaRefId: " + school.leaRefId);
@@ -895,11 +898,11 @@ namespace RicOneApi.Tests
 
         #region xCalendars
         //RETURN ALL CALENDARS
-        public static void XCalendars_GetXCalendars(RicOneApiClient ricOne)
+        public static void XCalendars_GetXCalendars(XPress xPress)
         {
-            if (ricOne.xPress.GetXCalendars().Data != null)
+            if (xPress.GetXCalendars().Data != null)
             {
-                foreach (XCalendarType calendar in ricOne.xPress.GetXCalendars().Data)
+                foreach (XCalendarType calendar in xPress.GetXCalendars().Data)
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
@@ -922,11 +925,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE CALENDAR
-        public static void XCalendars_GetXCalendar(RicOneApiClient ricOne)
+        public static void XCalendars_GetXCalendar(XPress xPress)
         {
-            if(ricOne.xPress.GetXCalendar(refId).Data != null)
+            if(xPress.GetXCalendar(refId).Data != null)
             {
-                XCalendarType calendar = ricOne.xPress.GetXCalendar(refId).Data;
+                XCalendarType calendar = xPress.GetXCalendar(refId).Data;
 
                 Console.WriteLine("refId: " + calendar.refId);
                 Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
@@ -948,11 +951,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CALENDARS BY LEA
-        public static void XCalendars_GetXCalendarsByXLea(RicOneApiClient ricOne)
+        public static void XCalendars_GetXCalendarsByXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXCalendarsByXLea(refId).Data != null)
+            if (xPress.GetXCalendarsByXLea(refId).Data != null)
             {
-                foreach (XCalendarType calendar in ricOne.xPress.GetXCalendarsByXLea(refId).Data)
+                foreach (XCalendarType calendar in xPress.GetXCalendarsByXLea(refId).Data)
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
@@ -975,11 +978,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CALENDARS BY SCHOOL
-        public static void XCalendars_GetXCalendarsByXSchool(RicOneApiClient ricOne)
+        public static void XCalendars_GetXCalendarsByXSchool(XPress xPress)
         {
-            if (ricOne.xPress.GetXCalendarsByXSchool(refId).Data != null)
+            if (xPress.GetXCalendarsByXSchool(refId).Data != null)
             {
-                foreach (XCalendarType calendar in ricOne.xPress.GetXCalendarsByXSchool(refId).Data)
+                foreach (XCalendarType calendar in xPress.GetXCalendarsByXSchool(refId).Data)
                 {
                     Console.WriteLine("refId: " + calendar.refId);
                     Console.WriteLine("schoolRefId: " + calendar.schoolRefId);
@@ -1005,11 +1008,11 @@ namespace RicOneApi.Tests
 
         #region xCourses
         //RETURN ALL COURSES
-        public static void XCourses_GetXCourses(RicOneApiClient ricOne)
+        public static void XCourses_GetXCourses(XPress xPress)
         {
-            if (ricOne.xPress.GetXCourses().Data != null)
+            if (xPress.GetXCourses().Data != null)
             {
-                foreach(XCourseType course in ricOne.xPress.GetXCourses().Data)
+                foreach(XCourseType course in xPress.GetXCourses().Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1040,11 +1043,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE COURSE
-        public static void XCourses_GetXCourse(RicOneApiClient ricOne)
+        public static void XCourses_GetXCourse(XPress xPress)
         {
-            if(ricOne.xPress.GetXCourse(refId).Data != null)
+            if(xPress.GetXCourse(refId).Data != null)
             {
-                XCourseType course = ricOne.xPress.GetXCourse(refId).Data;
+                XCourseType course = xPress.GetXCourse(refId).Data;
             
                 Console.WriteLine("refId: " + course.refId);
                 Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1074,11 +1077,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN COURSES BY LEA
-        public static void XCourses_GetXCoursesByXLea(RicOneApiClient ricOne)
+        public static void XCourses_GetXCoursesByXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXCoursesByXLea(refId).Data != null)
+            if (xPress.GetXCoursesByXLea(refId).Data != null)
             {
-                foreach (XCourseType course in ricOne.xPress.GetXCoursesByXLea(refId).Data)
+                foreach (XCourseType course in xPress.GetXCoursesByXLea(refId).Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1109,11 +1112,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN COURSES BY SCHOOL
-        public static void XCourses_GetXCoursesByXSchool(RicOneApiClient ricOne)
+        public static void XCourses_GetXCoursesByXSchool(XPress xPress)
         {
-            if (ricOne.xPress.GetXCoursesByXSchool(refId).Data != null)
+            if (xPress.GetXCoursesByXSchool(refId).Data != null)
             {
-                foreach (XCourseType course in ricOne.xPress.GetXCoursesByXSchool(refId).Data)
+                foreach (XCourseType course in xPress.GetXCoursesByXSchool(refId).Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1144,11 +1147,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN COURSES BY ROSTER
-        public static void XCourses_GetXCoursesByXRoster(RicOneApiClient ricOne)
+        public static void XCourses_GetXCoursesByXRoster(XPress xPress)
         {
-            if (ricOne.xPress.GetXCoursesByXRoster(refId) != null)
+            if (xPress.GetXCoursesByXRoster(refId) != null)
             {
-                foreach (XCourseType course in ricOne.xPress.GetXCoursesByXRoster(refId).Data)
+                foreach (XCourseType course in xPress.GetXCoursesByXRoster(refId).Data)
                 {
                     Console.WriteLine("refId: " + course.refId);
                     Console.WriteLine("schoolRefId: " + course.schoolRefId);
@@ -1182,11 +1185,11 @@ namespace RicOneApi.Tests
 
         #region xRosters
         //RETURN ALL ROSTERS
-        public static void XRosters_GetXRosters(RicOneApiClient ricOne)
+        public static void XRosters_GetXRosters(XPress xPress)
         {
-            if (ricOne.xPress.GetXRosters().Data != null)
+            if (xPress.GetXRosters().Data != null)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRosters().Data)
+                foreach (XRosterType r in xPress.GetXRosters().Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1247,11 +1250,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE ROSTER
-        public static void XRosters_GetXRoster(RicOneApiClient ricOne)
+        public static void XRosters_GetXRoster(XPress xPress)
         {
-            if(ricOne.xPress.GetXRoster(refId).Data != null)
+            if(xPress.GetXRoster(refId).Data != null)
             {
-                XRosterType r = ricOne.xPress.GetXRoster(refId).Data;
+                XRosterType r = xPress.GetXRoster(refId).Data;
 
                 Console.WriteLine("refId: " + r.refId);
                 Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1311,11 +1314,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY LEA
-        public static void XRosters_GetXRostersByXLea(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXRostersByXLea(refId).Data != null)
+            if (xPress.GetXRostersByXLea(refId).Data != null)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXLea(refId).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXLea(refId).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1376,11 +1379,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY SCHOOL
-        public static void XRosters_GetXRostersByXSchool(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXSchool(XPress xPress)
         {
-            if (ricOne.xPress.GetXRostersByXSchool(refId).Data != null)
+            if (xPress.GetXRostersByXSchool(refId).Data != null)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXSchool(refId).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXSchool(refId).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1441,11 +1444,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY CROUSE
-        public static void XRosters_GetXRostersByXCourse(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXCourse(XPress xPress)
         {
-            if (ricOne.xPress.GetXRostersByXCourse(refId).Data != null)
+            if (xPress.GetXRostersByXCourse(refId).Data != null)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXCourse(refId).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXCourse(refId).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1506,11 +1509,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY STAFF
-        public static void XRosters_GetXRostersByXStaff(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXStaff(XPress xPress)
         {
-            if (ricOne.xPress.GetXRostersByXStaff(refId).Data != null)
+            if (xPress.GetXRostersByXStaff(refId).Data != null)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXStaff(refId).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXStaff(refId).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1571,11 +1574,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN ROSTERS BY STUDENT
-        public static void XRosters_GetXRostersByXStudent(RicOneApiClient ricOne)
+        public static void XRosters_GetXRostersByXStudent(XPress xPress)
         {
-            if (ricOne.xPress.GetXRostersByXStudent(refId).Data != null)
+            if (xPress.GetXRostersByXStudent(refId).Data != null)
             {
-                foreach (XRosterType r in ricOne.xPress.GetXRostersByXStudent(refId).Data)
+                foreach (XRosterType r in xPress.GetXRostersByXStudent(refId).Data)
                 {
                     Console.WriteLine("refId: " + r.refId);
                     Console.WriteLine("courseRefId: " + r.courseRefId);
@@ -1640,11 +1643,11 @@ namespace RicOneApi.Tests
 
         #region xStaffs
         //RETURN ALL STAFFS
-        public static void XStaffs_GetXStaffs(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffs(XPress xPress)
         {
-            if (ricOne.xPress.GetXStaffs().Data != null)
+            if (xPress.GetXStaffs().Data != null)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffs().Data)
+                foreach (XStaffType s in xPress.GetXStaffs().Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1687,11 +1690,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE STAFF
-        public static void XStaffs_GetXStaff(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaff(XPress xPress)
         {
-            if(ricOne.xPress.GetXStaff(refId).Data != null)
+            if(xPress.GetXStaff(refId).Data != null)
             {
-                XStaffType s = ricOne.xPress.GetXStaff(refId).Data;
+                XStaffType s = xPress.GetXStaff(refId).Data;
 
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -1734,11 +1737,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY LEA
-        public static void XStaffs_GetXStaffsByXLea(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXStaffsByXLea(refId).Data != null)
+            if (xPress.GetXStaffsByXLea(refId).Data != null)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXLea(refId).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXLea(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1782,11 +1785,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY SCHOOL
-        public static void XStaffs_GetXStaffsByXSchool(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXSchool(XPress xPress)
         {
-            if (ricOne.xPress.GetXStaffsByXSchool(refId).Data != null)
+            if (xPress.GetXStaffsByXSchool(refId).Data != null)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXSchool(refId).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXSchool(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1830,11 +1833,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY COURSE
-        public static void XStaffs_GetXStaffsByXCourse(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXCourse(XPress xPress)
         {
-            if (ricOne.xPress.GetXStaffsByXCourse(refId).Data != null)
+            if (xPress.GetXStaffsByXCourse(refId).Data != null)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXCourse(refId).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXCourse(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1878,11 +1881,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY ROSTER
-        public static void XStaffs_GetXStaffsByXRoster(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXRoster(XPress xPress)
         {
-            if (ricOne.xPress.GetXStaffsByXRoster(refId).Data != null)
+            if (xPress.GetXStaffsByXRoster(refId).Data != null)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXRoster(refId).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXRoster(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1926,11 +1929,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STAFFS BY STUDENT
-        public static void XStaffs_GetXStaffsByXStudent(RicOneApiClient ricOne)
+        public static void XStaffs_GetXStaffsByXStudent(XPress xPress)
         {
-            if (ricOne.xPress.GetXStaffsByXStudent(refId).Data != null)
+            if (xPress.GetXStaffsByXStudent(refId).Data != null)
             {
-                foreach (XStaffType s in ricOne.xPress.GetXStaffsByXStudent(refId).Data)
+                foreach (XStaffType s in xPress.GetXStaffsByXStudent(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -1977,11 +1980,11 @@ namespace RicOneApi.Tests
 
         #region xStudents
         //RETURN ALL STUDENTS
-        public static void XStudents_GetXStudents(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudents(XPress xPress)
         {
-            if (ricOne.xPress.GetXStudents().Data != null)
+            if (xPress.GetXStudents().Data != null)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudents().Data)
+                foreach (XStudentType s in xPress.GetXStudents().Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -2221,11 +2224,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE STUDENT
-        public static void XStudents_GetXStudent(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudent(XPress xPress)
         {
-            if(ricOne.xPress.GetXStudent(refId).Data != null)
+            if(xPress.GetXStudent(refId).Data != null)
             {
-                XStudentType s = ricOne.xPress.GetXStudent(refId).Data;
+                XStudentType s = xPress.GetXStudent(refId).Data;
 
                 Console.WriteLine("refId: " + s.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -2464,11 +2467,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY LEA
-        public static void XStudents_GetXStudentsByXLea(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXStudentsByXLea(refId).Data != null)
+            if (xPress.GetXStudentsByXLea(refId).Data != null)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXLea(refId).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXLea(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -2708,11 +2711,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY SCHOOL
-        public static void XStudents_GetXStudentsByXSchool(RicOneApiClient ricOne) 
+        public static void XStudents_GetXStudentsByXSchool(XPress xPress) 
         {
-            if (ricOne.xPress.GetXStudentsByXSchool(refId).Data != null)
+            if (xPress.GetXStudentsByXSchool(refId).Data != null)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXSchool(refId).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXSchool(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -2952,11 +2955,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY ROSTER
-        public static void XStudents_GetXStudentsByXRoster(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXRoster(XPress xPress)
         {
-            if (ricOne.xPress.GetXStudentsByXRoster(refId).Data != null)
+            if (xPress.GetXStudentsByXRoster(refId).Data != null)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXRoster(refId).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXRoster(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3196,11 +3199,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY STAFF
-        public static void XStudents_GetXStudentsByXStaff(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXStaff(XPress xPress)
         {
-            if (ricOne.xPress.GetXStudentsByXStaff(refId).Data != null)
+            if (xPress.GetXStudentsByXStaff(refId).Data != null)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXStaff(refId).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXStaff(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3440,11 +3443,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN STUDENTS BY CONTACT
-        public static void XStudents_GetXStudentsByXContact(RicOneApiClient ricOne)
+        public static void XStudents_GetXStudentsByXContact(XPress xPress)
         {
-            if (ricOne.xPress.GetXStudentsByXContact(refId).Data != null)
+            if (xPress.GetXStudentsByXContact(refId).Data != null)
             {
-                foreach (XStudentType s in ricOne.xPress.GetXStudentsByXContact(refId).Data)
+                foreach (XStudentType s in xPress.GetXStudentsByXContact(refId).Data)
                 {
                     Console.WriteLine("refId: " + s.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3687,11 +3690,11 @@ namespace RicOneApi.Tests
 
         #region xContacts
         //RETURN ALL CONTACTS
-        public static void XContacts_GetXContacts(RicOneApiClient ricOne)
+        public static void XContacts_GetXContacts(XPress xPress)
         {
-            if (ricOne.xPress.GetXContacts().Data != null)
+            if (xPress.GetXContacts().Data != null)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContacts().Data)
+                foreach (XContactType c in xPress.GetXContacts().Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3780,11 +3783,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN SINGLE CONTACT
-        public static void XContacts_GetXContact(RicOneApiClient ricOne)
+        public static void XContacts_GetXContact(XPress xPress)
         {
-            if(ricOne.xPress.GetXContact(refId).Data != null)
+            if(xPress.GetXContact(refId).Data != null)
             {
-                XContactType c = ricOne.xPress.GetXContact(refId).Data;
+                XContactType c = xPress.GetXContact(refId).Data;
 
                 Console.WriteLine("refId: " + c.refId);
                 Console.WriteLine("##### BEGIN NAME #####");
@@ -3873,11 +3876,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CONTACTS BY LEA
-        public static void XContacts_GetXContactsByXLea(RicOneApiClient ricOne)
+        public static void XContacts_GetXContactsByXLea(XPress xPress)
         {
-            if (ricOne.xPress.GetXContactsByXLea(refId).Data != null)
+            if (xPress.GetXContactsByXLea(refId).Data != null)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContactsByXLea(refId).Data)
+                foreach (XContactType c in xPress.GetXContactsByXLea(refId).Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -3967,11 +3970,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CONTACTS BY SCHOOL
-        public static void XContacts_GetXContactsByXSchool(RicOneApiClient ricOne)
+        public static void XContacts_GetXContactsByXSchool(XPress xPress)
         {
-            if (ricOne.xPress.GetXContactsByXSchool(refId).Data != null)
+            if (xPress.GetXContactsByXSchool(refId).Data != null)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContactsByXSchool(refId).Data)
+                foreach (XContactType c in xPress.GetXContactsByXSchool(refId).Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
@@ -4061,11 +4064,11 @@ namespace RicOneApi.Tests
             }
         }
         //RETURN CONTACTS BY STUDENT
-        public static void XContacts_GetXContactsByXStudent(RicOneApiClient ricOne)
+        public static void XContacts_GetXContactsByXStudent(XPress xPress)
         {
-            if (ricOne.xPress.GetXContactsByXStudent(refId).Data != null)
+            if (xPress.GetXContactsByXStudent(refId).Data != null)
             {
-                foreach (XContactType c in ricOne.xPress.GetXContactsByXStudent(refId).Data)
+                foreach (XContactType c in xPress.GetXContactsByXStudent(refId).Data)
                 {
                     Console.WriteLine("refId: " + c.refId);
                     Console.WriteLine("##### BEGIN NAME #####");
