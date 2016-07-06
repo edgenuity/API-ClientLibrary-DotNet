@@ -14,7 +14,7 @@ Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 
 foreach (Endpoint e in auth.GetEndpoints())
 {
-	RicOneApiClient ricOne = new RicOneApiClient(e);
+	XPress xPress = new XPress(auth.GetToken(), e.href);
 }
 ```
 
@@ -36,7 +36,7 @@ const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
 ### v1.3
-* Code cleanup
+* Code clean-up
 	* Removed RicOneApiClient.cs
 	* Reworked Authenticator.cs
 * Included example loading authentication values from config file

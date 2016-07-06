@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2.1
- * Since       2016-05-18
+ * Version     1.3
+ * Since       2016-06-29
  * Filename    Authenticator.cs
  */
 using System;

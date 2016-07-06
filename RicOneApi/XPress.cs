@@ -3992,7 +3992,7 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStaffCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
+
             try
             {
                 output.Data = response.Data.xStaffs.xStaff;
@@ -4025,7 +4025,7 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStaffCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
+
             try
             {
                 output.Data = response.Data.xStaffs.xStaff;
@@ -4059,7 +4059,7 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStaffCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
+
             try
             {
                 output.Data = response.Data.xStaffs.xStaff;
@@ -4093,7 +4093,7 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStudentCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
+
             try
             {
                 output.Data = response.Data.xStudents.xStudent;
@@ -4127,7 +4127,7 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStudentCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
+
             try
             {
                 output.Data = response.Data.xStudents.xStudent;
@@ -4161,7 +4161,7 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStudentCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
+
             try
             {
                 output.Data = response.Data.xStudents.xStudent;
