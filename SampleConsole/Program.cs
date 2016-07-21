@@ -34,7 +34,7 @@ namespace SampleConsole
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {
-                XPress xPress = new XPress(auth.GetToken(), e.href); //Pass endpoint info to data API (token, href)
+                XPress xPress = new XPress(e.href); //Pass endpoint info to data API (token, href)
 
                 foreach (XLeaType l in xPress.GetXLeas().Data) //Iterate through each xLea
                 {
