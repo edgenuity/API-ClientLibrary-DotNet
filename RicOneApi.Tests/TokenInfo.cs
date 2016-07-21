@@ -19,12 +19,12 @@ namespace RicOneApi.Tests
             Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 
             string token = auth.GetToken();
-            
+
             Console.WriteLine(auth.GetDecodedToken(token).application_id);
             Console.WriteLine(auth.GetDecodedToken(token).iss);
             Console.WriteLine(auth.GetDecodedToken(token).iat);
             Console.WriteLine(auth.GetDecodedToken(token).exp);
-           
+
             Console.Read(); 
         }
 

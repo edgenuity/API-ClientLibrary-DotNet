@@ -22,7 +22,7 @@ namespace RicOneApi.Tests
             //Get endpoints by provider
             foreach (RicOneApi.Models.Authentication.Endpoint e in auth.GetEndpoints(providerId))
             {
-                XPress xPress = new XPress(auth.GetToken(), e.href);
+                XPress xPress = new XPress(e.href);
 
                 //Staff
                 //xPress.CreateXStaffUsers(refId);

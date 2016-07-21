@@ -1,11 +1,11 @@
-Copyright © 2014-2015 New York State Education Department. All rights reserved.
+Copyright © 2014-2016 New York State Education Department. All rights reserved.
 
 # RICOne API .NET Client Library
 The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/).
 
 ### Features
-* Makes calls to the RICOne API using the SIFxPress model in .NET projects
-* User can login to auth server using credentials to retrieve provider information
+* Makes calls to the RICOne API using the xPress model in .NET projects
+* User can login to the authentication server using credentials to retrieve provider information
 * Uses POCO object responses
 
 #### Basic Use
@@ -14,7 +14,7 @@ Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 
 foreach (Endpoint e in auth.GetEndpoints())
 {
-	XPress xPress = new XPress(auth.GetToken(), e.href);
+	XPress xPress = new XPress(e.href);
 }
 ```
 
@@ -26,7 +26,7 @@ foreach (Endpoint e in auth.GetEndpoints())
 ### Getting Started
 1. View the library <a href="http://www.ricone.org/vendors/ric-one-api/net-client-developers-guide/" target="_blank">documentation</a>
 2. Download the Project
-3. Get your auth server credentials
+3. Get your OAuth server credentials
 4. Open SampleConsole
 5. Add the auth url and credentials to clientId and clientSecret
 ```csharp
@@ -35,6 +35,11 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.3.1
+* Modified Authenticator.cs
+* Modified XPress.cs
+	* Check token expiration and refresh if expired
+	
 ### v1.3
 * Code clean-up
 	* Removed RicOneApiClient.cs

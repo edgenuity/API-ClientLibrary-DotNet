@@ -63,7 +63,7 @@ namespace RicOneApi.Tests
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                XPress xPress = new XPress(auth.GetToken(), e.href);
+                XPress xPress = new XPress(e.href);
 
                 #region xLeas
                 XLeas_GetXLeas(xPress);

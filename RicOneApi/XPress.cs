@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2.2
- * Since       2016-05-13
+ * Version     1.3.1
+ * Since       2016-07-20
  * Filename    XPress.cs
  */
 using System;
@@ -24,18 +24,24 @@ namespace RicOneApi.Api
     /// </summary>
     public class XPress
     {
-        private string token;
         private RestClient restClient;
         private string baseApiUrl;
 
-        public XPress(string token, string baseApiUrl)
+        public XPress(string baseApiUrl)
         {
-            this.token = token;
             this.baseApiUrl = baseApiUrl;
             this.restClient = new RestClient(baseApiUrl);
-            this.restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
-        }
 
+            if (Authenticator.Instance.ConvertUnixTime(Authenticator.Instance.GetDecodedToken(Authenticator.Instance.GetToken()).exp) <= DateTime.Now)
+            {
+                Authenticator.Instance.RefreshToken();
+                this.restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
+            }
+            else
+            {
+                this.restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
+            }
+        }
 
         # region xLeas
         /// <summary>
