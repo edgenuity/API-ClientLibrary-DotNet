@@ -64,7 +64,7 @@ namespace RicOneApi.Api
         /// <param name="authUrl"></param>
         /// <param name="clientId"></param>
         /// <param name="clientSecret"></param>
-        public void Login(string authUrl, string clientId, string clientSecret)
+        private void Login(string authUrl, string clientId, string clientSecret)
         {
             _client.Authenticator = new SimpleAuthenticator("username", clientId, "password", clientSecret);
             //_request = SetRequest(clientId, clientSecret);   
@@ -81,7 +81,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Re-authenticates with authentication server if token is expired
         /// </summary>
-        public void RefreshToken()
+        internal void RefreshToken()
         {
 
             Login(_authUrl, _clientId, _clientSecret);
@@ -143,13 +143,13 @@ namespace RicOneApi.Api
             }
         }
 
-        public String base64UrlDecode(String input)
+        internal String base64UrlDecode(String input)
         {
             byte[] newBytes = JWT.JsonWebToken.Base64UrlDecode(input);
             return System.Text.Encoding.UTF8.GetString(newBytes);
         }
 
-        public DateTime ConvertUnixTime(long unixDate)
+        internal DateTime ConvertUnixTime(long unixDate)
         {
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             DateTime date = dt.AddSeconds(unixDate).ToLocalTime();
