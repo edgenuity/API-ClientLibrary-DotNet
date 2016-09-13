@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.3.1
- * Since       2016-07-20
+ * Version     1.4
+ * Since       2016-09-12
  * Filename    XPress.cs
  */
 using System;
@@ -31,8 +31,9 @@ namespace RicOneApi.Api
         {
             this.baseApiUrl = baseApiUrl;
             this.restClient = new RestClient(baseApiUrl);
+            DecodedToken dt = new DecodedToken(Authenticator.Instance.GetToken());
 
-            if (Authenticator.Instance.ConvertUnixTime(Authenticator.Instance.GetDecodedToken(Authenticator.Instance.GetToken()).exp) <= DateTime.Now)
+            if (Util.ConvertUnixTime(dt.GetDecodedToken().exp) <= DateTime.Now)
             {
                 Authenticator.Instance.RefreshToken();
                 this.restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");

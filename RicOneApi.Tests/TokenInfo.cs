@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RicOneApi.Api;
+using RicOneApi.Models.Authentication;
 using System.Configuration;
 
 namespace RicOneApi.Tests
@@ -16,14 +17,16 @@ namespace RicOneApi.Tests
         #endregion
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+            Authenticator auth = Authenticator.Instance;
+            auth.Authenticate(authUrl, clientId, clientSecret);
 
-            string token = auth.GetToken();
+            //string token = auth.GetToken();
+            DecodedToken dt = new DecodedToken(auth.GetToken());
 
-            Console.WriteLine(auth.GetDecodedToken(token).application_id);
-            Console.WriteLine(auth.GetDecodedToken(token).iss);
-            Console.WriteLine(auth.GetDecodedToken(token).iat);
-            Console.WriteLine(auth.GetDecodedToken(token).exp);
+            Console.WriteLine(dt.GetDecodedToken().application_id);
+            Console.WriteLine(dt.GetDecodedToken().iss);
+            Console.WriteLine(dt.GetDecodedToken().iat);
+            Console.WriteLine(dt.GetDecodedToken().exp);
 
             Console.Read(); 
         }

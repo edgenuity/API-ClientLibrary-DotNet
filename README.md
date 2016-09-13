@@ -10,7 +10,8 @@ The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://
 
 #### Basic Use
 ```csharp
-Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+Authenticator auth = Authenticator.Instance;
+auth.Authenticate(authUrl, clientId, clientSecret);
 
 foreach (Endpoint e in auth.GetEndpoints())
 {
@@ -35,6 +36,10 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.4
+* Updated Authenticator class to include Authenticate() where the auth server url and credentials are passed
+* Removed GetDecodedToken from Authenticator class and moved it to the DecodedToken class
+
 ### v1.3.1
 * Modified Authenticator.cs
 * Modified XPress.cs

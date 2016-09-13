@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.3
- * Since       2016-06-24
+ * Version     1.4
+ * Since       2016-09-12
  * Filename    Paging.cs
  */
 using System;
@@ -56,7 +56,9 @@ namespace RicOneApi.Tests
 
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+            Authenticator auth = Authenticator.Instance;
+            auth.Authenticate(authUrl, clientId, clientSecret);
+
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {

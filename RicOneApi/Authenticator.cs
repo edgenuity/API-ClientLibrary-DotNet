@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.3.1
- * Since       2016-07-20
+ * Version     1.4
+ * Since       2016-09-12
  * Filename    Authenticator.cs
  */
 using System;
@@ -49,7 +49,7 @@ namespace RicOneApi.Api
         /// <param name="clientId"></param>
         /// <param name="clientSecret"></param>
         /// <param name="restClient"></param>
-        public Authenticator(string authUrl, string clientId, string clientSecret)
+        public void Authenticate(string authUrl, string clientId, string clientSecret)
         {
             _authUrl = authUrl;
             _clientId = clientId;
@@ -122,40 +122,5 @@ namespace RicOneApi.Api
         {
             return _response.Data.endpoint;
         }
-
-        /// <summary>
-        /// Payload data inside an encrypted JWT token
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public DecodedToken GetDecodedToken(String token)
-        {
-            try
-            {
-                String[] base64EncodedSegments = token.Split('.');
-                DecodedToken dt = JsonConvert.DeserializeObject<DecodedToken>(base64UrlDecode(base64EncodedSegments[1]));
-
-                return dt;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }
-
-        internal String base64UrlDecode(String input)
-        {
-            byte[] newBytes = JWT.JsonWebToken.Base64UrlDecode(input);
-            return System.Text.Encoding.UTF8.GetString(newBytes);
-        }
-
-        internal DateTime ConvertUnixTime(long unixDate)
-        {
-            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            DateTime date = dt.AddSeconds(unixDate).ToLocalTime();
-
-            return date;
-        }
-
     }
 }

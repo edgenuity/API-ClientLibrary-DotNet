@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.3.1
- * Since       2016-07-20
+ * Version     1.4
+ * Since       2016-09-12
  * Filename    NewAuth.cs
  */
 using System;
@@ -19,16 +19,18 @@ namespace RicOneApi.Tests
         #region Test Constants
         static string authUrl = "https://auth.test.ricone.org/login";
         static string clientId = "dpaDemo";
-        static string clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+        static string clientSecret = "deecd889bff5ed0101a86680752f5f9";
         static string providerId = "workshop";
         #endregion
 
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+            Authenticator auth = Authenticator.Instance;
+            auth.Authenticate(authUrl, clientId, clientSecret);
+
             while (true)
             {
-                foreach (Endpoint e in auth.GetEndpoints())
+                foreach (Endpoint e in auth.GetEndpoints(providerId))
                 {
                     XPress xPress = new XPress(e.href);
 

@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.2
- * Since       2016-05-11
+ * Version     1.4
+ * Since       2016-09-12
  * Filename    Util.cs
  */
 using System;
@@ -52,6 +52,14 @@ namespace RicOneApi.Api
             }
 
             return headerOut;
+        }
+        
+        internal static DateTime ConvertUnixTime(long unixDate)
+        {
+            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            DateTime date = dt.AddSeconds(unixDate).ToLocalTime();
+
+            return date;
         }
 
         #endregion

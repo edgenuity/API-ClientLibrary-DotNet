@@ -18,7 +18,9 @@ namespace RicOneApi.Tests
         static string refId = "106E9449-3FF4-499E-B94F-BCE557C013CE";
         static void Main(string[] args)
         {
-            Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+            Authenticator auth = Authenticator.Instance;
+            auth.Authenticate(authUrl, clientId, clientSecret);
+
             //Get endpoints by provider
             foreach (RicOneApi.Models.Authentication.Endpoint e in auth.GetEndpoints(providerId))
             {
