@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.4.1
+ * Since       2016-12-02
  * Filename    XMeetingTimeType.cs
  */
 using System;
@@ -24,7 +24,8 @@ namespace RicOneApi.Models.XPress
             roomNumber = null;
             classBeginningTime = null;
             classEndingTime = null;
-
+            sessionCode = null;
+            schoolCalendarRefId = null;
         }
         public string timeTableDay { get; set; }
         public XDayListType classMeetingDays { get; set; }
@@ -32,5 +33,7 @@ namespace RicOneApi.Models.XPress
         public string roomNumber { get; set; }
         public string classBeginningTime { get; set; }
         public string classEndingTime { get; set; }
+        public string sessionCode { get; set; }
+        public string schoolCalendarRefId { get; set; }
     }
 }

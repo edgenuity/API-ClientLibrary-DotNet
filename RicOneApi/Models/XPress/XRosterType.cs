@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.4.1
+ * Since       2016-12-02
  * Filename    XRosterType.cs
  */
 using System;
@@ -43,7 +43,9 @@ namespace RicOneApi.Models.XPress
         public string schoolRefId { get; set; }
         public string schoolSectionId { get; set; }
         public string schoolYear { get; set; }
+        [Obsolete("Use sessionCode in XMeetingTimeType")]
         public string sessionCode { get; set; }
+        [Obsolete("Use schoolCalendarRefId in XMeetingTimeType")]
         public string schoolCalendarRefId { get; set; }
         public XMeetingTimeListType meetingTimes { get; set; }
         public XStudentReferenceListType students { get; set; }
