@@ -13,9 +13,21 @@ using RestSharp;
 
 namespace RicOneApi.Api
 {
- public class Util
+    public class Util
     {
         #region Helpers
+        /// <summary>
+        /// Convert a DateTime value to an ISO8601 date/timestamp String value
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static string TimestampToISO8601(DateTime date)
+        {
+            DateTime dt = date;
+            String str = dt.ToString("s");
+            return str;
+        }
+
         /// <summary>
         /// Response handler to return HTTP Status Codes if an error with a request occurs
         /// </summary>
@@ -25,8 +37,8 @@ namespace RicOneApi.Api
             HttpStatusCode httpStatusCode = response.StatusCode;
 
             if (httpStatusCode == HttpStatusCode.OK ||
-               httpStatusCode == HttpStatusCode.Created ||
-               httpStatusCode == HttpStatusCode.NoContent)
+                httpStatusCode == HttpStatusCode.Created ||
+                httpStatusCode == HttpStatusCode.NoContent)
             {
                 //Console.WriteLine(httpStatusCode);
                 return;
@@ -42,7 +54,7 @@ namespace RicOneApi.Api
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static string BuildHeader(IRestResponse response)
+        internal static string BuildHeader(IRestResponse response)
         {
             string headerOut = null;
 

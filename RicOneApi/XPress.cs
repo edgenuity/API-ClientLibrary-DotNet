@@ -79,7 +79,38 @@ namespace RicOneApi.Api
 
             return output;
         }
+        /// <summary>
+        /// All Lea value changes from a given point
+        /// </summary>
+        /// <param name="opaqueMarker"></param>
+        /// <returns></returns>
+        public ResponseMulti<XLeaType> GetXLeas(string opaqueMarker)
+        {
+            ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 
+            RestRequest request = new RestRequest("xLeas", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XLeaCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xLeas.xLea;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
         /// <summary>
         /// Request all Leas
         /// </summary>
@@ -538,6 +569,38 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
             request.AddHeader("navigationPage", navigationPage.ToString());
             request.AddHeader("navigationPageSize", navigationPageSize.ToString());
+
+            var response = restClient.Execute<XSchoolCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xSchools.xSchool;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// All School value changes from a given point
+        /// </summary>
+        /// <param name="opaqueMarker"></param>
+        /// <returns></returns>
+        public ResponseMulti<XSchoolType> GetXSchools(string opaqueMarker)
+        {
+            ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+
+            RestRequest request = new RestRequest("xSchools", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XSchoolCollectionType>(request);
 
@@ -1172,6 +1235,38 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// All Calendar value changes from a given point
+        /// </summary>
+        /// <param name="opaqueMarker"></param>
+        /// <returns></returns>
+        public ResponseMulti<XCalendarType> GetXCalendars(string opaqueMarker)
+        {
+            ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
+
+            RestRequest request = new RestRequest("xCalendars", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
+            
+            var response = restClient.Execute<XCalendarCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xCalendars.xCalendar;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Request all Calendars
         /// </summary>
         /// <returns></returns>
@@ -1422,6 +1517,38 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
             request.AddHeader("navigationPage", navigationPage.ToString());
             request.AddHeader("navigationPageSize", navigationPageSize.ToString());
+
+            var response = restClient.Execute<XCourseCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xCourses.xCourse;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// All Coruse value changes from a given point
+        /// </summary>
+        /// <param name="opaqueMarker"></param>
+        /// <returns></returns>
+        public ResponseMulti<XCourseType> GetXCourses(string opaqueMarker)
+        {
+            ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
+
+            RestRequest request = new RestRequest("xCourses", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XCourseCollectionType>(request);
 
@@ -1764,6 +1891,38 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
             request.AddHeader("navigationPage", navigationPage.ToString());
             request.AddHeader("navigationPageSize", navigationPageSize.ToString());
+
+            var response = restClient.Execute<XRosterCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xRosters.xRoster;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// All Roster value changes from a given point
+        /// </summary>
+        /// <param name="opaqueMarker"></param>
+        /// <returns></returns>
+        public ResponseMulti<XRosterType> GetXRosters(string opaqueMarker)
+        {
+            ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
+
+            RestRequest request = new RestRequest("xRosters", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XRosterCollectionType>(request);
 
@@ -2261,6 +2420,38 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// All Staff value changes from a given point
+        /// </summary>
+        /// <param name="opaqueMarker"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStaffType> GetXStaffs(string opaqueMarker)
+        {
+            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+            RestRequest request = new RestRequest("xStaffs", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStaffCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStaffs.xStaff;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Request all Staffs
         /// </summary>
         /// <returns></returns>
@@ -2716,6 +2907,33 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
             request.AddHeader("navigationPage", navigationPage.ToString());
             request.AddHeader("navigationPageSize", navigationPageSize.ToString());
+
+            var response = restClient.Execute<XStudentCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStudents.xStudent;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        public ResponseMulti<XStudentType> GetXStudents(string opaqueMarker)
+        {
+            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+            RestRequest request = new RestRequest("xStudents", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStudentCollectionType>(request);
 
@@ -3192,6 +3410,38 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
             request.AddHeader("navigationPage", navigationPage.ToString());
             request.AddHeader("navigationPageSize", navigationPageSize.ToString());
+
+            var response = restClient.Execute<XContactCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xContacts.xContact;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// All Contact value changes from a given point
+        /// </summary>
+        /// <param name="opaqueMarker"></param>
+        /// <returns></returns>
+        public ResponseMulti<XContactType> GetXContacts(string opaqueMarker)
+        {
+            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+
+            RestRequest request = new RestRequest("xContacts", Method.GET);
+            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
+            request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XContactCollectionType>(request);
 
