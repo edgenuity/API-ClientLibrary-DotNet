@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.4
- * Since       2016-09-12
+ * Version     1.5.1
+ * Since       2017-01-27
  * Filename    XPress.cs
  */
 using System;
@@ -12,10 +12,12 @@ using System.Threading.Tasks;
 using System.Net;
 using RestSharp;
 using RestSharp.Authenticators;
-using RestSharp.Deserializers;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Models.XPress;
 using RicOneApi;
+using Newtonsoft.Json;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace RicOneApi.Api
 {
@@ -114,21 +116,31 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request all Leas
         /// </summary>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
         /// <returns></returns>
         public ResponseMulti<XLeaType> GetXLeas()
         {
             ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 
             RestRequest request = new RestRequest("xLeas", Method.GET);
-            request.AddHeader("Accept", "application/json");
+            //request.AddHeader("Accept", "application/json");
+            request.AddHeader("Accept", "application/xml");
 
             var response = restClient.Execute<XLeaCollectionType>(request);
+            
+            //XmlSerializer xmlSerializer = new XmlSerializer(response.Data.xLeas.xLea.GetType());
 
             try
             {
                 output.Data = response.Data.xLeas.xLea;
+                //output.Json = JsonConvert.SerializeObject(response.Data, Formatting.Indented);
+
+                //using (StringWriter textWriter = new StringWriter())
+                //{
+                //    xmlSerializer.Serialize(textWriter, response);
+                //    output.Xml = textWriter.ToString();
+                //}
+                //output.Xml = response.Content;
+                
                 output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
                 output.Header = Util.BuildHeader(response);
@@ -193,18 +205,52 @@ namespace RicOneApi.Api
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XLeaCollectionType>(request);
-  
+
             try
             {
                 output.Data = response.Data.xLea.First();
-                output.StatusCode = (int) response.StatusCode;
+                output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
                 output.Header = Util.BuildHeader(response);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 output.Data = null;
-                output.StatusCode = (int) response.StatusCode;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Request single Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseSingle<XLeaType> GetXLea(string idType, string id)
+        {
+            ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XLeaCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xLea.First();
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
                 output.Header = Util.BuildHeader(response);
             }
@@ -258,6 +304,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xSchools/{refId}/xLeas", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XLeaCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xLeas.xLea;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Leas associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XLeaType> GetXLeasByXSchool(string idType, string id)
+        {
+            ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}/xLeas", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XLeaCollectionType>(request);
@@ -720,6 +800,40 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// Request School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseSingle<XSchoolType> GetXSchool(string idType, string id)
+        {
+            ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XSchoolCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xSchool.First();
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Returns Schools associated to a specific Lea by refId
         /// </summary>
         /// <param name="refId"></param>
@@ -766,6 +880,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xLeas/{refId}/xSchools", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XSchoolCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xSchools.xSchool;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Schools associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXLea(string idType, string id)
+        {
+            ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}/xSchools", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XSchoolCollectionType>(request);
@@ -1433,6 +1581,40 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// Returns Calendars associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XCalendarType> GetXCalendarsByXLea(string idType, string id)
+        {
+            ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}/xCalendars", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XCalendarCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xCalendars.xCalendar;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Returns Calendars associated to a specific School by refId
         /// </summary>
         /// <param name="refId"></param>
@@ -1479,6 +1661,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xSchools/{refId}/xCalendars", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XCalendarCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xCalendars.xCalendar;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Calendars associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string idType, string id)
+        {
+            ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}/xCalendars", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XCalendarCollectionType>(request);
@@ -1737,6 +1953,40 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// Returns Courses associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXLea(string idType, string id)
+        {
+            ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}/xCourses", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XCourseCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xCourses.xCourse;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Returns Courses associated to a specific School by refId
         /// </summary>
         /// <param name="refId"></param>
@@ -1783,6 +2033,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xSchools/{refId}/xCourses", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XCourseCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xCourses.xCourse;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Courses associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXSchool(string idType, string id)
+        {
+            ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}/xCourses", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XCourseCollectionType>(request);
@@ -2110,6 +2394,40 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// Returns Rosters associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XRosterType> GetXRostersByXLea(string idType, string id)
+        {
+            ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}/xRosters", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XRosterCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xRosters.xRoster;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Returns Rosters associated to a specific School by refId
         /// </summary>
         /// <param name="refId"></param>
@@ -2156,6 +2474,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xSchools/{refId}/xRosters", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XRosterCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xRosters.xRoster;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Rosters associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XRosterType> GetXRostersByXSchool(string idType, string id)
+        {
+            ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}/xRosters", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XRosterCollectionType>(request);
@@ -2618,6 +2970,40 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// Returns Staff associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXLea(string idType, string id)
+        {
+            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}/xStaffs", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStaffCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStaffs.xStaff;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Returns Staffs associated to a specific School by refId
         /// </summary>
         /// <param name="refId"></param>
@@ -2664,6 +3050,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStaffCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStaffs.xStaff;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Staff associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXSchool(string idType, string id)
+        {
+            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}/xStaffs", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStaffCollectionType>(request);
@@ -3121,6 +3541,40 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// Returns Students associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXLea(string idType, string id)
+        {
+            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}/xStudents", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStudentCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStudents.xStudent;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Returns Students associated to a specific School by refId
         /// </summary>
         /// <param name="refId"></param>
@@ -3167,6 +3621,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStudentCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStudents.xStudent;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Students associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXSchool(string idType, string id)
+        {
+            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}/xStudents", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XStudentCollectionType>(request);
@@ -3629,6 +4117,39 @@ namespace RicOneApi.Api
             return output;
         }
         /// <summary>
+        /// Returns Contacts associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XContactType> GetXContactsByXLea(string idType, string id)
+        {
+            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+
+            RestRequest request = new RestRequest("xLeas/{id}/xContacts", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XContactCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xContacts.xContact;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
         /// Returns Contacts associated to a specific School by refId
         /// </summary>
         /// <param name="refId"></param>
@@ -3675,6 +4196,40 @@ namespace RicOneApi.Api
 
             RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XContactCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xContacts.xContact;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+        /// <summary>
+        /// Returns Contacts associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// </summary>
+        /// <param name="idType"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResponseMulti<XContactType> GetXContactsByXSchool(string idType, string id)
+        {
+            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+
+            RestRequest request = new RestRequest("xSchools/{id}/xContacts", Method.GET);
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.AddHeader("IdType", idType);
             request.AddHeader("Accept", "application/json");
 
             var response = restClient.Execute<XContactCollectionType>(request);

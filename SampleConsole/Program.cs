@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.3
- * Since       2016-06-24
+ * Version     1.5
+ * Since       2017-01-13
  * Filename    Program.cs
  */
 using System;
@@ -29,8 +29,9 @@ namespace SampleConsole
 
         #endregion
         static void Main(string[] args)
-        {
-            Authenticator auth = new Authenticator(authUrl, clientId, clientSecret); //Pass auth url, username, and password to authenticate to auth server
+        { 
+            Authenticator auth = Authenticator.Instance;
+            auth.Authenticate(authUrl, clientId, clientSecret); //Pass auth url, username, and password to authenticate to auth server
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {

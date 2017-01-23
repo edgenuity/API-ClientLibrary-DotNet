@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.4
- * Since       2016-09-12
+ * Version     1.5
+ * Since       2017-01-13
  * Filename    Authenticator.cs
  */
 using System;
@@ -13,6 +13,7 @@ using RestSharp;
 using RestSharp.Authenticators;
 using RicOneApi.Models.Authentication;
 using Newtonsoft.Json;
+using RicOneApi.Exceptions;
 
 namespace RicOneApi.Api
 {
@@ -66,16 +67,29 @@ namespace RicOneApi.Api
         /// <param name="clientSecret"></param>
         private void Login(string authUrl, string clientId, string clientSecret)
         {
-            _client.Authenticator = new SimpleAuthenticator("username", clientId, "password", clientSecret);
-            //_request = SetRequest(clientId, clientSecret);   
+            try
+            {
+                _client.Authenticator = new SimpleAuthenticator("username", clientId, "password", clientSecret);
+                //_request = SetRequest(clientId, clientSecret);   
 
-            _request = new RestRequest(Method.POST);
+                _request = new RestRequest(Method.POST);
 
-            // Adds Request Body parameters for username and password
-            _request.AddParameter("username", clientId, ParameterType.RequestBody);
-            _request.AddParameter("password", clientSecret, ParameterType.RequestBody);
+                // Adds Request Body parameters for username and password
+                _request.AddParameter("username", clientId, ParameterType.RequestBody);
+                _request.AddParameter("password", clientSecret, ParameterType.RequestBody);
 
-            _response = _client.Execute<UserInfo>(_request);
+                _response = _client.Execute<UserInfo>(_request);
+
+                if (_response.ErrorException != null)
+                {
+                    throw new AuthenticationException();
+                }
+            }
+            catch(Exception e)
+            {
+                throw new AuthenticationException("401 UNAUTHORIZED", e);
+            }
+           
         }
 
         /// <summary>

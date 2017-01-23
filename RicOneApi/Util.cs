@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.4
- * Since       2016-09-12
+ * Version     1.5
+ * Since       2016-12-22
  * Filename    Util.cs
  */
 using System;

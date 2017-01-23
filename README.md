@@ -36,11 +36,20 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.5.1
+* Added ability to request xLea or xSchool objects by BEDS or Local Id code.
+	* xLeas/{id}
+	* xSchools/{id}
+	* xLeas/{id}/xObject
+	* xSchools/{id}/xObject
+	
 ### v1.5
 * Added Changes Since support to XPress.cs
 	* Supported calls include: GetXLeas(string), GetXSchools(string), GetXCalendars(string), GetXCoursess(string), GetXRosters(string), GetXStaffs(string), GetXStudents(string), GetXContactss(string)
 	* More info on Changes Since can be found in the API Developer's Guide <a href="http://www.ricone.org/vendors/ric-one-api/api-developers-guide/" target="_blank">here</a>
 * Added TimestampToISO8601(Date) to Util.cs
+* Added custom exception class for failed authentication - AuthenticationException.cs
+	* Will return 401 UNAUTHORIZED message on failed login attempt
 
 ### v1.4.1
 * Modifications to the xPress data model

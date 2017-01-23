@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RicOneApi.Tests.ChangesSince</StartupObject>
+    <StartupObject>RicOneApi.Tests.IdType</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">
@@ -68,6 +68,9 @@
     <Compile Include="AppAccountProvisioning.cs" />
     <Compile Include="AuthInfo.cs" />
     <Compile Include="ChangesSince.cs" />
+    <Compile Include="IdType.cs" />
+    <Compile Include="JsonXmlReturn.cs" />
+    <Compile Include="TestExceptions.cs" />
     <Compile Include="NewAuth.cs" />
     <Compile Include="Paging.cs" />
     <Compile Include="Program.cs" />
