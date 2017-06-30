@@ -1,4 +1,4 @@
-Copyright © 2014-2016 New York State Education Department. All rights reserved.
+Copyright © 2014-2017 New York State Education Department. All rights reserved.
 
 # RICOne API .NET Client Library
 The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/).
@@ -36,6 +36,11 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.5.2
+* Entry/Exit Codes now available
+    * Added XOtherCodeListType & XOtherCodeType POCOs
+    * Added entryType & exitType to XEnrollmentType
+	
 ### v1.5.1
 * Added ability to request xLea or xSchool objects by BEDS or Local Id code.
 	* xLeas/{id}
