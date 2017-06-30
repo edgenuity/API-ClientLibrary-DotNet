@@ -24,7 +24,9 @@ namespace RicOneApi.Models.XPress
             responsibleSchoolType = null;
             membershipType = null;
             entryDate = null;
+            entryType = null;
             exitDate = null;
+            exitType = null;
             homeRoomNumber = null;
             homeRoomTeacher = new XPersonReferenceType();
             gradeLevel = null;
@@ -37,7 +39,9 @@ namespace RicOneApi.Models.XPress
         public string responsibleSchoolType { get; set; }
         public string membershipType { get; set; }
         public string entryDate { get; set; }
+        public XOtherCodeListType entryType { get; set; }
         public string exitDate { get; set; }
+        public XOtherCodeListType exitType { get; set; }
         public string homeRoomNumber { get; set; }
         public XPersonReferenceType homeRoomTeacher { get; set; }
         public string gradeLevel { get; set; }

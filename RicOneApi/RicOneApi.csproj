@@ -57,6 +57,8 @@
     <Compile Include="Authenticator.cs" />
     <Compile Include="Exceptions\AuthenticationException.cs" />
     <Compile Include="Models\Authentication\DecodedToken.cs" />
+    <Compile Include="Models\XPress\XOtherCodeListType.cs" />
+    <Compile Include="Models\XPress\XOtherCodeType.cs" />
     <Compile Include="ResponseMulti.cs" />
     <Compile Include="ResponseSingle.cs" />
     <Compile Include="Models\Authentication\Endpoint.cs" />

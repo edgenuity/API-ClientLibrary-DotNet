@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RicOneApi.Tests.IdType</StartupObject>
+    <StartupObject>RicOneApi.Tests.EntryExit</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">
@@ -68,6 +68,7 @@
     <Compile Include="AppAccountProvisioning.cs" />
     <Compile Include="AuthInfo.cs" />
     <Compile Include="ChangesSince.cs" />
+    <Compile Include="EntryExit.cs" />
     <Compile Include="IdType.cs" />
     <Compile Include="JsonXmlReturn.cs" />
     <Compile Include="TestExceptions.cs" />
