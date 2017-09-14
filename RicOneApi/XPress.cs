@@ -4860,6 +4860,44 @@ namespace RicOneApi.Api
         /// Return generated staff usernames and passwords by school
         /// </summary>
         /// <param name="refId"></param>
+        /// <param name="navigationPage"></param>
+        /// <param name="navigationPageSize"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStaffType> GetXStaffUsers(string refId, int? navigationPage, int? navigationPageSize)
+        {
+            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("getUsers", "true");
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("navigationPage", navigationPage.ToString());
+            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
+
+            var response = restClient.Execute<XStaffCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStaffs.xStaff;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Return generated staff usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
         /// <returns></returns>
         public ResponseMulti<XStaffType> GetXStaffUsers(string refId)
         {
@@ -4937,6 +4975,44 @@ namespace RicOneApi.Api
             request.AddParameter("refId", refId, ParameterType.UrlSegment);
             request.AddQueryParameter("deleteUsers", "true");
             request.AddHeader("Accept", "application/json");
+
+            var response = restClient.Execute<XStudentCollectionType>(request);
+
+            try
+            {
+                output.Data = response.Data.xStudents.xStudent;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+            catch (Exception)
+            {
+                output.Data = null;
+                output.StatusCode = (int)response.StatusCode;
+                output.Message = response.StatusDescription;
+                output.Header = Util.BuildHeader(response);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Return generated student usernames and passwords by school
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <param name="navigationPage"></param>
+        /// <param name="navigationPageSize"></param>
+        /// <returns></returns>
+        public ResponseMulti<XStudentType> GetXStudentUsers(string refId, int? navigationPage, int? navigationPageSize)
+        {
+            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
+            request.AddParameter("refId", refId, ParameterType.UrlSegment);
+            request.AddQueryParameter("getUsers", "true");
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("navigationPage", navigationPage.ToString());
+            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
 
             var response = restClient.Execute<XStudentCollectionType>(request);
 

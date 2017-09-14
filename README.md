@@ -40,6 +40,9 @@ const string clientSecret = "YOUR PASSWORD";
 * Entry/Exit Codes now available
     * Added XOtherCodeListType & XOtherCodeType POCOs
     * Added entryType & exitType to XEnrollmentType
+* Added paging methods when retrieving staff and student accounts via AUPP
+    * GetXStaffUsers(string refId, int? navigationPage, int? navigationPageSize)
+    * GetXStudentUsers(string refId, int? navigationPage, int? navigationPageSize)
 	
 ### v1.5.1
 * Added ability to request xLea or xSchool objects by BEDS or Local Id code.
