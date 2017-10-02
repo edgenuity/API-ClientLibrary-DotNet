@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RicOneApi.Tests.EntryExit</StartupObject>
+    <StartupObject>RicOneApi.Tests.NewAuth</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">

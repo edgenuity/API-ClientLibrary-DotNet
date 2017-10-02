@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.5
- * Since       2017-01-13
+ * Version     1.5.3
+ * Since       2017-09-26
  * Filename    Authenticator.cs
  */
 using System;
@@ -32,24 +32,27 @@ namespace RicOneApi.Api
 
         private Authenticator() { }
 
+        /// <summary>
+        /// Singleton instantiation.
+        /// </summary>
         public static Authenticator Instance
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = new Authenticator();
                 }
                 return instance;
             }
         }
-       
-         /// <summary>
-        /// Establish connection to authenticate to authentication server
+
+        /// <summary>
+        /// Establish connection to authenticate to OAuth server.
         /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="clientSecret"></param>
-        /// <param name="restClient"></param>
+        /// <param name="authUrl">The authentication server url.</param>
+        /// <param name="clientId">The clientId for the application.</param>
+        /// <param name="clientSecret">The clientSecret for the application.</param>
         public void Authenticate(string authUrl, string clientId, string clientSecret)
         {
             _authUrl = authUrl;
@@ -60,11 +63,11 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
-        /// Post to authentication server with provided credentials
+        /// POST to authentication server with provided credentials.
         /// </summary>
-        /// <param name="authUrl"></param>
-        /// <param name="clientId"></param>
-        /// <param name="clientSecret"></param>
+        /// <param name="authUrl">The authentication server url.</param>
+        /// <param name="clientId">The clientId for the application.</param>
+        /// <param name="clientSecret">The clientSecret for the application.</param>
         private void Login(string authUrl, string clientId, string clientSecret)
         {
             try
@@ -85,15 +88,15 @@ namespace RicOneApi.Api
                     throw new AuthenticationException();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new AuthenticationException("401 UNAUTHORIZED", e);
             }
-           
+
         }
 
         /// <summary>
-        /// Re-authenticates with authentication server if token is expired
+        /// Re-authenticates with authentication server if token is expired.
         /// </summary>
         internal void RefreshToken()
         {
@@ -101,20 +104,20 @@ namespace RicOneApi.Api
             Login(_authUrl, _clientId, _clientSecret);
         }
 
-        // <summary>
-        /// Token value
+        /// <summary>
+        /// Retrieve an application's token.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Token value of type String.</returns>
         public String GetToken()
         {
             return _response.Data.token;
         }
 
         /// <summary>
-        /// Endpoint by specified providerId
+        /// Details of a specific endpoint by providerId.
         /// </summary>
-        /// <param name="providerId"></param>
-        /// <returns></returns>
+        /// <param name="providerId">The providerId to be returned.</param>
+        /// <returns>A list of type Endpoint by specified providerId.</returns>
         public List<Endpoint> GetEndpoints(string providerId)
         {
             List<Endpoint> endpoints = new List<Endpoint>();
@@ -129,12 +132,37 @@ namespace RicOneApi.Api
             return endpoints;
         }
         /// <summary>
-        /// All endpoints
+        /// A list of all endpoints an application is associated with and it's details.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of type Endpoint.</returns>
         public List<Endpoint> GetEndpoints()
         {
             return _response.Data.endpoint;
+        }
+
+        /// <summary>
+        /// Details of a single endpoint if returnAllEndpoints set to false. If returnAllEndpoints is true,
+        /// details of all endpoints associated to application are returned.
+        /// </summary>
+        /// <param name="providerId">The providerId to be returned.</param>
+        /// <param name="returnAllEndpoints">All endpoints the application is associated with.</param>
+        /// <returns>A list of type Endpoint if Boolean set to true otherwise a single endpoint.</returns>
+        public List<Endpoint> GetEndpoints(string providerId, bool returnAllEndpoints)
+        {
+            List<Endpoint> endpoints = new List<Endpoint>();
+
+            foreach (Endpoint e in _response.Data.endpoint)
+            {
+                if (returnAllEndpoints)
+                {
+                    endpoints.Add(e);
+                }
+                else if (e.provider_id.Equals(providerId))
+                {
+                    endpoints.Add(e);
+                }
+            }
+            return endpoints;
         }
     }
 }

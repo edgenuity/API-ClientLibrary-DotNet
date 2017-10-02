@@ -20,7 +20,7 @@ namespace RicOneApi.Tests
         static string authUrl = "https://auth.test.ricone.org/login";
         static string clientId = "dpaDemo";
         static string clientSecret = "deecd889bff5ed0101a86680752f5f9";
-        static string providerId = "workshop";
+        static string providerId = "sandbox";
         #endregion
 
         static void Main(string[] args)
@@ -28,24 +28,29 @@ namespace RicOneApi.Tests
             Authenticator auth = Authenticator.Instance;
             auth.Authenticate(authUrl, clientId, clientSecret);
 
-            while (true)
+            foreach (Endpoint e in auth.GetEndpoints(providerId, false))
             {
-                foreach (Endpoint e in auth.GetEndpoints(providerId))
-                {
-                    XPress xPress = new XPress(e.href);
-
-                    foreach (XLeaType l in xPress.GetXLeas().Data)
-                    {
-                        Console.WriteLine(e.provider_id + " | " + l.leaName + " | " + e.token);
-                        ////					for(XSchoolType s : xPress.getXSchoolsByXLea(l.getRefId()).getData())
-                        ////					{
-                        ////						System.out.println(s.getSchoolName() + " | " + e.getToken());
-                        ////					}
-                    }
-                }
-                //System.Threading.Thread.Sleep(5000);
-                System.Threading.Thread.Sleep(300000);
+                Console.WriteLine(e.name + " | " + e.href + " | " + e.provider_id + " | " + e.token + Console.Out.NewLine);
             }
+
+            //while (true)
+            //{
+            //    foreach (Endpoint e in auth.GetEndpoints(providerId))
+            //    {
+            //        XPress xPress = new XPress(e.href);
+
+            //        foreach (XLeaType l in xPress.GetXLeas().Data)
+            //        {
+            //            Console.WriteLine(e.provider_id + " | " + l.leaName + " | " + e.token);
+            //            ////					for(XSchoolType s : xPress.getXSchoolsByXLea(l.getRefId()).getData())
+            //            ////					{
+            //            ////						System.out.println(s.getSchoolName() + " | " + e.getToken());
+            //            ////					}
+            //        }
+            //    }
+            //    //System.Threading.Thread.Sleep(5000);
+            //    System.Threading.Thread.Sleep(300000);
+            //}
 
             Console.Read();
         }

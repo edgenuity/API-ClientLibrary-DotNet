@@ -36,6 +36,12 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.5.3
+* New method added to Authenticator class
+    * GetEndpoints(String providerId, Boolean returnAllEndpoints)
+        * Ability to look for a specific provider endpoint and all assigned endpoints to an application if Boolean value set to true.
+          If Boolean is false and provider endpoint defined, only that endpoints details will be returned.
+		  
 ### v1.5.2
 * Entry/Exit Codes now available
     * Added XOtherCodeListType & XOtherCodeType POCOs
