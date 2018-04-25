@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RicOneApi.Tests.NewAuth</StartupObject>
+    <StartupObject>RicOneApi.Tests.JsonXmlReturn</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">

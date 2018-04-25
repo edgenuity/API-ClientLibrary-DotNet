@@ -14,7 +14,7 @@ namespace RicOneApi.Models.XPress
     /// <summary>
     /// XLeaCollectionType
     /// </summary>
-    public class XLeaCollectionType
+    public class XLeaCollectionType : ICollectionType<XLeaCollectionType, XLeaType>
     {
         public XLeaCollectionType()
         {
@@ -23,6 +23,30 @@ namespace RicOneApi.Models.XPress
         }
         public XLeaCollectionType xLeas { get; set; }
         public List<XLeaType> xLea { get; set; }
-   
+
+
+        public XLeaCollectionType GetCollectionType
+        {
+            get
+            {
+                return xLeas;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public List<XLeaType> GetObject
+        {
+            get
+            {
+                return xLea;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

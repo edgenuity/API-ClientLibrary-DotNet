@@ -1,13 +1,14 @@
-﻿/*
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * Version     1.5
  * Since       2017-01-13
  * Filename    AuthenticationException.cs
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace RicOneApi.Exceptions
 {
