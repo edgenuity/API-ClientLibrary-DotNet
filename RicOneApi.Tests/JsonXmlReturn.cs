@@ -22,7 +22,7 @@ namespace RicOneApi.Tests
         {
             Authenticator auth = Authenticator.Instance;
             auth.Authenticate(authUrl, clientId, clientSecret);
-      
+            Console.WriteLine(auth.GetToken());
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
                 XPress xPress = new XPress(e.href);
@@ -43,6 +43,10 @@ namespace RicOneApi.Tests
                 //{
                 //    Console.WriteLine(s.leaRefId);
                 //}
+
+                //XLeaType lea = xPress.GetXLea("03ACF04F-DC12-411A-9A42-E8323516D699").Data;
+                //Console.WriteLine(lea.refId);
+                //Console.WriteLine(lea.leaName);
 
             }
 

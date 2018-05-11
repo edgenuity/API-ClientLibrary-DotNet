@@ -56,8 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authenticator.cs" />
-    <Compile Include="Common\Objects\XLeaObject.cs" />
+    <Compile Include="Common\Objects\ServicePath.cs" />
+    <Compile Include="Common\Objects\XLeasObject.cs" />
+    <Compile Include="Common\Rest\AUPPEnum.cs" />
     <Compile Include="Common\Rest\RestHeader.cs" />
+    <Compile Include="Common\Rest\RestProperties.cs" />
+    <Compile Include="Common\Rest\RestQueryParameter.cs" />
     <Compile Include="Common\Rest\RestResponse.cs" />
     <Compile Include="Exceptions\AuthenticationException.cs" />
     <Compile Include="Models\Authentication\DecodedToken.cs" />

@@ -15,7 +15,7 @@ namespace RicOneApi.Models.XPress
     /// <summary>
     /// XLeaType
     /// </summary>
-    public class XLeaType : IType<XLeaType>
+    public class XLeaType
     {
         public XLeaType()
         {
@@ -41,6 +41,7 @@ namespace RicOneApi.Models.XPress
         public XTelephoneType phoneNumber { get; set; }
         public XTelephoneListType otherPhoneNumbers { get; set; }
 
+        public XLeaCollectionType GetObjects { get; set; }
         public XLeaType GetObject
         {
             get
