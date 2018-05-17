@@ -1,15 +1,12 @@
-﻿/*
+﻿using RestSharp.Deserializers;
+using System;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.7
+ * Since       2018-05-14
  * Filename    XStaffType.cs
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RestSharp.Deserializers;
-
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
@@ -41,5 +38,13 @@ namespace RicOneApi.Models.XPress
         public XEmailType email { get; set; }
         public XStaffPersonAssignmentType primaryAssignment { get; set; }
         public XStaffPersonAssignmentListType otherAssignments { get; set; }
+
+        public XStaffCollectionType GetObjects { get; set; }
+        public XStaffType GetObject
+        {
+            get { return this; }
+            set { throw new NotImplementedException(); }
+        }
+
     }
 }

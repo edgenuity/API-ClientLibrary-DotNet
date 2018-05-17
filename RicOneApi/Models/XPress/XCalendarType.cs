@@ -1,15 +1,12 @@
-﻿/*
- * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
- * Filename    XCalendarType.cs
- */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using RestSharp.Deserializers;
 
+/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.7
+ * Since       2018-05-14
+ * Filename    XCalendarType.cs
+ */
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
@@ -29,5 +26,12 @@ namespace RicOneApi.Models.XPress
         public string schoolRefId { get; set; }
         public string schoolYear { get; set; }
         public XSessionListType sessions { get; set; }
+
+        public XCalendarCollectionType GetObjects { get; set; }
+        public XCalendarType GetObject
+        {
+            get { return this; }
+            set { throw new NotImplementedException(); }
+        }
     }
 }

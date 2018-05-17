@@ -1,15 +1,12 @@
-﻿/*
- * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
- * Filename    XContactType.cs
- */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using RestSharp.Deserializers;
 
+/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.7
+ * Since       2018-05-14
+ * Filename    XContactType.cs
+ */
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
@@ -49,5 +46,13 @@ namespace RicOneApi.Models.XPress
         public string sex { get; set; }
         public string employerType { get; set; }
         public XContactStudentRelationshipListType relationships { get; set; }
+
+        public XContactCollectionType GetObjects { get; set; }
+        public XContactType GetObject
+        {
+            get { return this; }
+            set { throw new NotImplementedException(); }
+        }
+
     }
 }

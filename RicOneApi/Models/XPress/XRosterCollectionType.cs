@@ -1,20 +1,17 @@
-﻿/*
+﻿using System.Collections.Generic;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.7
+ * Since       2018-05-14
  * Filename    XRosterCollectionType.cs
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
     /// XRosterCollectionType
     /// </summary>
-    public class XRosterCollectionType
+    public class XRosterCollectionType : ICollectionType<XRosterType, XRosterCollectionType>
     {
         public XRosterCollectionType()
         {
@@ -23,5 +20,17 @@ namespace RicOneApi.Models.XPress
         }
         public XRosterCollectionType xRosters { get; set; }
         public List<XRosterType> xRoster { get; set; }
+
+        public XRosterCollectionType GetObjects
+        {
+            get { return xRosters; }
+            set { xRosters = value; }
+        }
+
+        public List<XRosterType> GetObject
+        {
+            get { return xRoster; }
+            set { xRoster = value; }
+        }
     }
 }

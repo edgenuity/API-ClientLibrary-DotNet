@@ -1,15 +1,12 @@
-﻿/*
- * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
- * Filename    XLeaType.cs
- */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using RestSharp.Deserializers;
 
+/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.7
+ * Since       2018-05-14
+ * Filename    XLeaType.cs
+ */
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
@@ -44,14 +41,8 @@ namespace RicOneApi.Models.XPress
         public XLeaCollectionType GetObjects { get; set; }
         public XLeaType GetObject
         {
-            get
-            {
-                return this;
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return this; }
+            set { throw new NotImplementedException(); }
         }
     }
 }

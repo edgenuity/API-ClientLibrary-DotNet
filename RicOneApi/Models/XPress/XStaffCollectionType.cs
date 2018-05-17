@@ -1,20 +1,17 @@
-﻿/*
+﻿using System.Collections.Generic;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.7
+ * Since       2018-05-14
  * Filename    XStaffCollectionType.cs
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
     /// XStaffCollectionType
     /// </summary>
-    public class XStaffCollectionType
+    public class XStaffCollectionType : ICollectionType<XStaffType, XStaffCollectionType>
     {
         public XStaffCollectionType()
         {
@@ -23,5 +20,17 @@ namespace RicOneApi.Models.XPress
         }
         public XStaffCollectionType xStaffs { get; set; }
         public List<XStaffType> xStaff { get; set; }
+
+        public XStaffCollectionType GetObjects
+        {
+            get { return xStaffs; }
+            set { xStaffs = value; }
+        }
+
+        public List<XStaffType> GetObject
+        {
+            get { return xStaff; }
+            set { xStaff = value; }
+        }
     }
 }

@@ -1,20 +1,17 @@
-﻿/*
+﻿using System.Collections.Generic;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.7
+ * Since       2018-05-14
  * Filename    XCourseCollectionType.cs
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
     /// XCourseCollectionType
     /// </summary>
-    public class XCourseCollectionType
+    public class XCourseCollectionType : ICollectionType<XCourseType, XCourseCollectionType>
     {
         public XCourseCollectionType()
         {
@@ -23,5 +20,17 @@ namespace RicOneApi.Models.XPress
         }
         public XCourseCollectionType xCourses { get; set; }
         public List<XCourseType> xCourse { get; set; }
+
+        public XCourseCollectionType GetObjects
+        {
+            get { return xCourses; }
+            set { xCourses = value; }
+        }
+
+        public List<XCourseType> GetObject
+        {
+            get { return xCourse; }
+            set { xCourse = value; }
+        }
     }
 }

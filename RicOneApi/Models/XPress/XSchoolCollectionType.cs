@@ -1,20 +1,17 @@
-﻿/*
+﻿using System.Collections.Generic;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.7
+ * Since       2018-05-14
  * Filename    XSchoolCollectionType.cs
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
     /// XSchoolCollectionType
     /// </summary>
-    public class XSchoolCollectionType
+    public class XSchoolCollectionType : ICollectionType<XSchoolType, XSchoolCollectionType>
     {
         public XSchoolCollectionType()
         {
@@ -23,5 +20,17 @@ namespace RicOneApi.Models.XPress
         }
         public XSchoolCollectionType xSchools { get; set; }
         public List<XSchoolType> xSchool { get; set; }
+
+        public XSchoolCollectionType GetObjects
+        {
+            get { return xSchools; }
+            set { xSchools = value; }
+        }
+
+        public List<XSchoolType> GetObject
+        {
+            get { return xSchool; }
+            set { xSchool = value; }
+        }
     }
 }

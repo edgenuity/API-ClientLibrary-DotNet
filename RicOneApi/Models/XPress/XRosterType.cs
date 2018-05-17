@@ -1,15 +1,12 @@
-﻿/*
- * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.4.1
- * Since       2016-12-02
- * Filename    XRosterType.cs
- */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using RestSharp.Deserializers;
 
+/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.7
+ * Since       2018-05-14
+ * Filename    XRosterType.cs
+ */
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
@@ -51,5 +48,12 @@ namespace RicOneApi.Models.XPress
         public XStudentReferenceListType students { get; set; }
         public XStaffReferenceType primaryStaff { get; set; }  
         public XStaffReferenceListType otherStaffs { get; set; }
+
+        public XRosterCollectionType GetObjects { get; set; }
+        public XRosterType GetObject
+        {
+            get { return this; }
+            set { throw new NotImplementedException(); }
+        }
     }
 }

@@ -56,17 +56,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authenticator.cs" />
+    <Compile Include="Common\Objects\AUPPObject.cs" />
+    <Compile Include="Common\Objects\GetLastPageObject.cs" />
     <Compile Include="Common\Objects\ServicePath.cs" />
+    <Compile Include="Common\Objects\XCalendarsObject.cs" />
+    <Compile Include="Common\Objects\XContactsObject.cs" />
+    <Compile Include="Common\Objects\XCoursesObject.cs" />
     <Compile Include="Common\Objects\XLeasObject.cs" />
+    <Compile Include="Common\Objects\XRostersObject.cs" />
+    <Compile Include="Common\Objects\XSchoolsObject.cs" />
+    <Compile Include="Common\Objects\XStaffsObject.cs" />
+    <Compile Include="Common\Objects\XStudentsObject.cs" />
     <Compile Include="Common\Rest\AUPPEnum.cs" />
     <Compile Include="Common\Rest\RestHeader.cs" />
     <Compile Include="Common\Rest\RestProperties.cs" />
     <Compile Include="Common\Rest\RestQueryParameter.cs" />
-    <Compile Include="Common\Rest\RestResponse.cs" />
+    <Compile Include="Common\Rest\RestReturn.cs" />
     <Compile Include="Exceptions\AuthenticationException.cs" />
     <Compile Include="Models\Authentication\DecodedToken.cs" />
     <Compile Include="Models\XPress\ICollectionType.cs" />
-    <Compile Include="Models\XPress\IType.cs" />
     <Compile Include="Models\XPress\XOtherCodeListType.cs" />
     <Compile Include="Models\XPress\XOtherCodeType.cs" />
     <Compile Include="Common\Rest\ResponseMulti.cs" />

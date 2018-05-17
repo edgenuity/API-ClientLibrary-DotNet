@@ -1,14 +1,11 @@
-﻿/*
+﻿using System.Collections.Generic;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.1
- * Since       2015-07-20
+ * Version     1.7
+ * Since       2018-05-14
  * Filename    XLeaCollectionType.cs
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace RicOneApi.Models.XPress
 {
     /// <summary>
@@ -27,28 +24,14 @@ namespace RicOneApi.Models.XPress
 
         public XLeaCollectionType GetObjects
         {
-            get
-            {
-                return xLeas;
-            }
-            set
-            {
-                xLeas = value;
-            }
-
+            get { return xLeas; }
+            set { xLeas = value; }
         }
 
         public List<XLeaType> GetObject
         {
-            get
-            {
-                return xLea;
-            }
-            set
-            {
-                xLea = value;
-            }
-
+            get { return xLea; }
+            set { xLea = value; }
         }
     }
 }

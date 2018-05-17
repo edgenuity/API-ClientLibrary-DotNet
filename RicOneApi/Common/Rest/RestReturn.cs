@@ -2,23 +2,26 @@
 using RicOneApi.Api;
 using RicOneApi.Models.XPress;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
+/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.7
+ * Since       2018-05-14
+ */
 namespace RicOneApi.Common.Rest
 {
-    class RestResponse
+    class RestReturn
     {
         private int navigationLastPage;
 
         /// <summary>
         /// Generic REST call for list objects.
         /// </summary>
-        /// <typeparam name="E"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="rc"></param>
-        /// <param name="rp"></param>
+        /// <typeparam name="E">Object Type.</typeparam>
+        /// <typeparam name="T">Collection Object Type.</typeparam>
+        /// <param name="rc">REST client.</param>
+        /// <param name="rp">REST properties for request.</param>
         /// <returns>Multiple object response for a REST call.</returns>
         public ResponseMulti<E> MakeAllRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
@@ -46,10 +49,10 @@ namespace RicOneApi.Common.Rest
         /// <summary>
         /// Generic REST call for single objects.
         /// </summary>
-        /// <typeparam name="E"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="rc"></param>
-        /// <param name="rp"></param>
+        /// <typeparam name="E">Object Type.</typeparam>
+        /// <typeparam name="T">Collection Object Type.</typeparam>
+        /// <param name="rc">REST client.</param>
+        /// <param name="rp">REST properties for request.</param>
         /// <returns>Single object response for a REST call.</returns>
         public ResponseSingle<E> MakeSingleRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
@@ -78,8 +81,8 @@ namespace RicOneApi.Common.Rest
         /// REST Header and Query Parameter builder method. Adds headers for JSON, paging, local/beds ids,
         /// and school year. Adds query parameters for changesSince and AUPP.
         /// </summary>
-        /// <param name="rc"></param>
-        /// <param name="rp"></param>
+        /// <param name="rc">REST client.</param>
+        /// <param name="rp">REST properties for request.</param>
         /// <returns>The request with appropriate headers and query parameters.</returns>
         private RestRequest RequestBuilder(RestClient rc, RestProperties rp)
         {
