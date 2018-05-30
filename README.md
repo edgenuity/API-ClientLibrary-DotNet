@@ -42,7 +42,7 @@ const string clientSecret = "YOUR PASSWORD";
     * Available on all methods except except ones that accept the opaqueMarker for changes since
     ```csharp
     int schoolYear = 2018;
-    xPress.GetXLeas(schoolYear).getData();
+    xPress.GetXLeas(schoolYear).Data;
     ```
 * Added paging requests for changes since
     ```csharp
