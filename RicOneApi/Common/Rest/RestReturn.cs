@@ -6,15 +6,13 @@ using System.Linq;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7
+ * Version     1.6
  * Since       2018-05-14
  */
 namespace RicOneApi.Common.Rest
 {
     class RestReturn
     {
-        private int navigationLastPage;
-
         /// <summary>
         /// Generic REST call for list objects.
         /// </summary>
@@ -23,7 +21,7 @@ namespace RicOneApi.Common.Rest
         /// <param name="rc">REST client.</param>
         /// <param name="rp">REST properties for request.</param>
         /// <returns>Multiple object response for a REST call.</returns>
-        public ResponseMulti<E> MakeAllRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
+        internal ResponseMulti<E> MakeAllRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
             ResponseMulti<E> output = new ResponseMulti<E>();
             RestRequest request = RequestBuilder(rc, rp);
@@ -31,6 +29,12 @@ namespace RicOneApi.Common.Rest
 
             try
             {
+                if (rp.RestHeader.HasPaging())
+                {
+                    NavigationLastPage = NavigationLastPage = Int32.Parse(response.Headers.ToList()
+                    .Find(x => x.Name.Equals("navigationLastPage", StringComparison.CurrentCultureIgnoreCase))
+                    .Value.ToString());
+                }
                 output.Data = response.Data.GetObjects.GetObject;
                 output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
@@ -54,11 +58,11 @@ namespace RicOneApi.Common.Rest
         /// <param name="rc">REST client.</param>
         /// <param name="rp">REST properties for request.</param>
         /// <returns>Single object response for a REST call.</returns>
-        public ResponseSingle<E> MakeSingleRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
+        internal ResponseSingle<E> MakeSingleRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
             ResponseSingle<E> output = new ResponseSingle<E>();
             RestRequest request = RequestBuilder(rc, rp);
-            var response = rc.Execute<T>(request);;
+            var response = rc.Execute<T>(request);
                 
             try
             {
@@ -100,7 +104,7 @@ namespace RicOneApi.Common.Rest
             }
             if(rp.RestHeader.HasIdType())
             {
-                request.AddParameter("Id", rp.RestHeader.Id, ParameterType.UrlSegment);
+                request.AddParameter("id", rp.RestHeader.Id, ParameterType.UrlSegment);
                 request.AddHeader("IdType", rp.RestHeader.IdType);
             }
             if (rp.RestHeader.HasSchoolYear())
@@ -111,7 +115,21 @@ namespace RicOneApi.Common.Rest
             {
                 request.AddQueryParameter("changesSinceMarker", rp.RestQueryParameter.OpaqueMarker);
             }
+            if(rp.RestQueryParameter.IsCreateUsers())
+            {
+                request.AddQueryParameter("createUsers", "true");
+            }
+            if (rp.RestQueryParameter.IsDeleteUsers())
+            {
+                request.AddQueryParameter("deleteUsers", "true");
+            }
+            if (rp.RestQueryParameter.IsGetUsers())
+            {
+                request.AddQueryParameter("getUsers", "true");
+            }
             return request;
         }
+
+        public int NavigationLastPage { get; set; }
     }
 }

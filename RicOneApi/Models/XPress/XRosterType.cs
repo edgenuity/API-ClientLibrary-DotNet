@@ -3,7 +3,7 @@ using RestSharp.Deserializers;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7
+ * Version     1.6
  * Since       2018-05-14
  * Filename    XRosterType.cs
  */

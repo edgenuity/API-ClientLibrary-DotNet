@@ -1,6 +1,6 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7
+ * Version     1.6
  * Since       2018-05-14
  */
 namespace RicOneApi.Common.Rest
@@ -17,6 +17,11 @@ namespace RicOneApi.Common.Rest
         public RestQueryParameter(string opaqueMarker)
         {
             this.opaqueMarker = opaqueMarker;
+        }
+
+        public RestQueryParameter(AUPPEnum aupp)
+        {
+            this.aupp = aupp;
         }
 
         public string OpaqueMarker { get => opaqueMarker; set => opaqueMarker = value; }

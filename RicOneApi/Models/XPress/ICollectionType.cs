@@ -5,7 +5,7 @@ using System.Text;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7
+ * Version     1.6
  * Since       2018-04-24
  */
 namespace RicOneApi.Models.XPress

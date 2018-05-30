@@ -4,7 +4,7 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7
+ * Version     1.6
  * Since       2018-05-15
  */
 namespace RicOneApi.Common.Objects
@@ -119,7 +119,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request single xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>Single xSchools type.</returns>
         internal ResponseSingle<XSchoolType> GetXSchool(string refId)
         {
@@ -133,7 +133,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request single xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Single xSchools type.</returns>
         internal ResponseSingle<XSchoolType> GetXSchool(string refId, int? schoolYear)
@@ -179,7 +179,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xLea by refId.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXLea(string refId)
         {
@@ -193,7 +193,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xLea by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXLea(string refId, int? schoolYear)
@@ -208,7 +208,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xLea by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xSchools type.</returns>
@@ -224,7 +224,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xLea by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -241,7 +241,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCalendar by refId.
         /// </summary>
-        /// <param name="refId">RefId of xCalendars.</param>
+        /// <param name="refId">RefId of xCalendar.</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXCalendar(string refId)
         {
@@ -255,7 +255,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCalendar by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xCalendars.</param>
+        /// <param name="refId">RefId of xCalendar.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXCalendar(string refId, int? schoolYear)
@@ -270,7 +270,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCalendar by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xCalendars.</param>
+        /// <param name="refId">RefId of xCalendar.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xSchools type.</returns>
@@ -286,7 +286,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCalendar by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xCalendars.</param>
+        /// <param name="refId">RefId of xCalendar.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -303,7 +303,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCourse by refId.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXCourse(string refId)
         {
@@ -317,7 +317,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCourse by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXCourse(string refId, int? schoolYear)
@@ -332,7 +332,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCourse by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xSchools type.</returns>
@@ -348,7 +348,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xCourse by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -365,7 +365,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xRoster by refId.
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXRoster(string refId)
         {
@@ -379,7 +379,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xRoster by refId by school year. 
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXRoster(string refId, int? schoolYear)
@@ -394,7 +394,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xRoster by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xSchools type.</returns>
@@ -410,7 +410,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xRoster by refId with paging by school year. 
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -427,7 +427,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStaff by refId.
         /// </summary>
-        /// <param name="refId">RefId of xStaffs.</param>
+        /// <param name="refId">RefId of xStaff.</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXStaff(string refId)
         {
@@ -441,7 +441,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStaff by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xStaffs.</param>
+        /// <param name="refId">RefId of xStaff.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXStaff(string refId, int? schoolYear)
@@ -456,7 +456,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStaff by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xStaffs.</param>
+        /// <param name="refId">RefId of xStaff.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xSchools type.</returns>
@@ -472,7 +472,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStaff by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xStaffs.</param>
+        /// <param name="refId">RefId of xStaff.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -489,7 +489,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStudent by refId.
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXStudent(string refId)
         {
@@ -503,7 +503,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStudent by refId by school year. 
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXStudent(string refId, int? schoolYear)
@@ -518,7 +518,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStudent by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xSchools type.</returns>
@@ -534,7 +534,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xStudent by refId with paging by school year. 
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -551,7 +551,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xContact by refId.
         /// </summary>
-        /// <param name="refId">RefId of xContacts.</param>
+        /// <param name="refId">RefId of xContact.</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXContact(string refId)
         {
@@ -565,7 +565,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xContact by refId by school year. 
         /// </summary>
-        /// <param name="refId">RefId of xContacts.</param>
+        /// <param name="refId">RefId of xContact.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         internal ResponseMulti<XSchoolType> GetXSchoolsByXContact(string refId, int? schoolYear)
@@ -580,7 +580,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xContact by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xContacts.</param>
+        /// <param name="refId">RefId of xContact.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xSchools type.</returns>
@@ -596,7 +596,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xSchools associated to a specific xContact by refId with paging by school year. 
         /// </summary>
-        /// <param name="refId">RefId of xContacts.</param>
+        /// <param name="refId">RefId of xContact.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>

@@ -4,7 +4,7 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7
+ * Version     1.6
  * Since       2018-05-15
  */
 namespace RicOneApi.Common.Objects
@@ -119,7 +119,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request single xStaff by refId.
         /// </summary>
-        /// <param name="refId">RefId of xStaffs.</param>
+        /// <param name="refId">RefId of xStaff.</param>
         /// <returns>Single xStaffs type.</returns>
         internal ResponseSingle<XStaffType> GetXStaff(string refId)
         {
@@ -133,7 +133,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request single xStaff by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xStaffs.</param>
+        /// <param name="refId">RefId of xStaff.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Single xStaffs type.</returns>
         internal ResponseSingle<XStaffType> GetXStaff(string refId, int? schoolYear)
@@ -148,7 +148,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xLea by refId.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXLea(string refId)
         {
@@ -162,7 +162,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xLea by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXLea(string refId, int? schoolYear)
@@ -177,7 +177,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xLea by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xStaffs type.</returns>
@@ -193,7 +193,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xLea by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="refId">RefId of xLea.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -210,7 +210,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXSchool(string refId)
         {
@@ -224,7 +224,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXSchool(string refId, int? schoolYear)
@@ -239,7 +239,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xStaffs type.</returns>
@@ -255,7 +255,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -272,7 +272,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xCourse by refId.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXCourse(string refId)
         {
@@ -286,7 +286,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xCourse by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXCourse(string refId, int? schoolYear)
@@ -302,7 +302,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xCourse by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xStaffs type.</returns>
@@ -318,7 +318,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xCourse by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xCourses.</param>
+        /// <param name="refId">RefId of xCourse.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -335,7 +335,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xRoster by refId.
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXRoster(string refId)
         {
@@ -349,7 +349,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xRoster by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXRoster(string refId, int? schoolYear)
@@ -364,7 +364,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xRoster by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xStaffs type.</returns>
@@ -380,7 +380,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xRoster by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xRosters.</param>
+        /// <param name="refId">RefId of xRoster.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -397,7 +397,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xStudent by refId.
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXStudent(string refId)
         {
@@ -411,7 +411,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xStudent by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xStaffs type.</returns>
         internal ResponseMulti<XStaffType> GetXStaffsByXStudent(string refId, int? schoolYear)
@@ -426,7 +426,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xStudent by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xStaffs type.</returns>
@@ -442,7 +442,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xStaffs associated to a specific xStudent by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>

@@ -36,9 +36,61 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.6
+* Support for multiple school years
+    * Integer value, i.e. 2018 for the 2017-2018 school year
+    * Available on all methods except except ones that accept the opaqueMarker for changes since
+    ```csharp
+    int schoolYear = 2018;
+    xPress.GetXLeas(schoolYear).getData();
+    ```
+* Added paging requests for changes since
+    ```csharp
+    GetXRosters(int? navigationPage, int? navigationPageSize, string opaqueMarker);
+    ```
+* Changed order of GetLastPage method
+    ```csharp
+    //NEW
+    GetLastPage(ServicePath servicePath, int? navigationPageSize)
+    GetLastPage(ServicePath servicePath, string refId, int? navigationPageSize);
+
+    //OLD
+    GetLastPage(int? navigationPageSize, ServicePath servicePath)
+    GetLastPage(int? navigationPageSize, ServicePath servicePath, string refId);
+
+* Removed the single object REST calls with paging
+	```csharp
+	GetXLea(string refId, int? navigationPage, int? navigationPageSize);
+	GetXSchool(string refId, int? navigationPage, int? navigationPageSize);
+	GetXCalendar(string refId, int? navigationPage, int? navigationPageSize);
+	GetXCourse(string refId, int? navigationPage, int? navigationPageSize);
+	GetXRoster(string refId, int? navigationPage, int? navigationPageSize);
+	GetXStaff(string refId, int? navigationPage, int? navigationPageSize);
+	GetXStudent(string refId, int? navigationPage, int? navigationPageSize);
+	GetXContact(string refId, int? navigationPage, int? navigationPageSize);
+	```
+* Removed the following REST calls by beds or local id, as they are not supported in the API
+    ```csharp
+    GetXLeasByXSchool(string idType, string id);
+    GetXSchoolsByXLea(string idType, string id);
+    GetXCalendarsByXLea(string idType, string id);
+    GetXCalendarsByXSchool(string idType, string id);
+    GetXCoursesByXLea(string idType, string id);
+    GetXCoursesByXSchool(string idType, string id);
+    GetXRostersByXLea(string idType, string id);
+    GetXRostersByXSchool(string idType, string id);
+    GetXStaffsByXLea(string idType, string id);
+    GetXStaffsByXSchool(string idType, string id);
+    GetXStudentsByXLea(string idType, string id);
+    GetXStudentsByXSchool(string idType, string id);
+    GetXContactsByXLea(string idType, string id);
+    GetXContactsByXSchool(string idType, string id);
+    ```
+* Internal code cleanup
+	
 ### v1.5.3
 * New method added to Authenticator class
-    * GetEndpoints(String providerId, Boolean returnAllEndpoints)
+    * GetEndpoints(string providerId, Boolean returnAllEndpoints)
         * Ability to look for a specific provider endpoint and all assigned endpoints to an application if Boolean value set to true.
           If Boolean is false and provider endpoint defined, only that endpoints details will be returned.
 		  

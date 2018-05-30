@@ -1,25 +1,15 @@
-﻿/*
- * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.5.1
- * Since       2017-01-27
- * Filename    XPress.cs
- */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
+﻿using System;
 using RestSharp;
-using RestSharp.Authenticators;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Models.XPress;
-using RicOneApi;
-using Newtonsoft.Json;
-using System.IO;
-using System.Xml.Serialization;
 using RicOneApi.Common.Objects;
 
+/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.6
+ * Since       2018-05-25
+ * Filename    XPress.cs
+ */
 namespace RicOneApi.Api
 {
     /// <summary>
@@ -35,22 +25,37 @@ namespace RicOneApi.Api
         private readonly XStaffsObject xStaffsObject;
         private readonly XStudentsObject xStudentsObject;
         private readonly XContactsObject xContactsObject;
+        private readonly GetLastPageObject getLastPageObject;
+        private readonly AUPPObject aUPPObject;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="baseApiUrl"></param>
         public XPress(string baseApiUrl)
         {
-            RestClient restClient = new RestClient(baseApiUrl);
-            xLeasObject = new XLeasObject(restClient, baseApiUrl);
-            //this.baseApiUrl = baseApiUrl;
+            RestClient rc = new RestClient(baseApiUrl);
+            xLeasObject = new XLeasObject(rc, baseApiUrl);
+            xSchoolsObject = new XSchoolsObject(rc, baseApiUrl);
+            xCalendarsObject = new XCalendarsObject(rc, baseApiUrl);
+            xCoursesObject = new XCoursesObject(rc, baseApiUrl);
+            xRostersObject = new XRostersObject(rc, baseApiUrl);
+            xStaffsObject = new XStaffsObject(rc, baseApiUrl);
+            xStudentsObject = new XStudentsObject(rc, baseApiUrl);
+            xContactsObject = new XContactsObject(rc, baseApiUrl);
+            getLastPageObject = new GetLastPageObject(rc, baseApiUrl);
+            aUPPObject = new AUPPObject(rc, baseApiUrl);
+
             DecodedToken dt = new DecodedToken(Authenticator.Instance.GetToken());
 
             if (Util.ConvertUnixTime(dt.GetDecodedToken().exp) <= DateTime.Now)
             {
                 Authenticator.Instance.RefreshToken();
-                restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
+                rc.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
             }
             else
             {
-                restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
+                rc.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
             }
         }
 
@@ -166,7 +171,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xLeas associated to a specific xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>List of xLeas type.</returns>
         public ResponseMulti<XLeaType> GetXLeasByXSchool(string refId)
         {
@@ -176,7 +181,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xLeas associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xLeas type.</returns>
         public ResponseMulti<XLeaType> GetXLeasByXSchool(string refId, int? schoolYear)
@@ -187,7 +192,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xLeas associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xLeas type.</returns>
@@ -199,7 +204,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xLeas associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -461,7 +466,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request single xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>Single xSchools type.</returns>
         public ResponseSingle<XSchoolType> GetXSchool(string refId)
         {
@@ -471,7 +476,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request single xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Single xSchools type.</returns>
         public ResponseSingle<XSchoolType> GetXSchool(string refId, int? schoolYear)
@@ -960,7 +965,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCalendars associated to a specific xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>List of xCalendars type.</returns>
         public ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string refId)
         {
@@ -970,7 +975,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCalendars associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xCalendars type.</returns>
         public ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string refId, int? schoolYear)
@@ -981,7 +986,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCalendars associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xCalendars type.</returns>
@@ -993,7 +998,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCalendars associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -1139,7 +1144,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCourses associated to a specific xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>List of xCourses type.</returns>
         public ResponseMulti<XCourseType> GetXCoursesByXSchool(string refId)
         {
@@ -1149,7 +1154,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCourses associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xCourses type.</returns>
         public ResponseMulti<XCourseType> GetXCoursesByXSchool(string refId, int? schoolYear)
@@ -1160,7 +1165,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCourses associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xCourses type.</returns>
@@ -1172,7 +1177,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xCourses associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -1366,7 +1371,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xRosters associated to a specific xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>List of xRosters type.</returns>
         public ResponseMulti<XRosterType> GetXRostersByXSchool(string refId)
         {
@@ -1376,7 +1381,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xRosters associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xRosters type.</returns>
         public ResponseMulti<XRosterType> GetXRostersByXSchool(string refId, int? schoolYear)
@@ -1387,7 +1392,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xRosters associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xRosters type.</returns>
@@ -1399,7 +1404,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xRosters associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -1685,7 +1690,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>List of xStaffs type.</returns>
         public ResponseMulti<XStaffType> GetXStaffsByXSchool(string refId)
         {
@@ -1695,7 +1700,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xStaffs type.</returns>
         public ResponseMulti<XStaffType> GetXStaffsByXSchool(string refId, int? schoolYear)
@@ -1706,7 +1711,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xStaffs type.</returns>
@@ -1718,7 +1723,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -2003,7 +2008,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStudents associated to a specific xSchool by refId.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <returns>List of xStudents type.</returns>
         public ResponseMulti<XStudentType> GetXStudentsByXSchool(string refId)
         {
@@ -2013,7 +2018,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStudents associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xStudents type.</returns>
         public ResponseMulti<XStudentType> GetXStudentsByXSchool(string refId, int? schoolYear)
@@ -2024,7 +2029,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStudents associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xStudents type.</returns>
@@ -2036,7 +2041,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xStudents associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId">RefId of xSchools.</param>
+        /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
@@ -2188,1210 +2193,408 @@ namespace RicOneApi.Api
 
         #region xContacts
         /// <summary>
-        /// Request all Contacts
+        /// Request all xContacts.
         /// </summary>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
-        /// <returns></returns>
-        public ResponseMulti<XContactType> GetXContacts(int? navigationPage, int? navigationPageSize)
-        {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xContacts", Method.GET);
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", navigationPage.ToString());
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
-        }
-        /// <summary>
-        /// All Contact value changes from a given point
-        /// </summary>
-        /// <param name="opaqueMarker"></param>
-        /// <returns></returns>
-        public ResponseMulti<XContactType> GetXContacts(string opaqueMarker)
-        {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xContacts", Method.GET);
-            request.AddQueryParameter("changesSinceMarker", opaqueMarker);
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
-        }
-        /// <summary>
-        /// Request all Contacts
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>List of xContacts type.</returns>
         public ResponseMulti<XContactType> GetXContacts()
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xContacts", Method.GET);
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContacts();
         }
+
         /// <summary>
-        /// Request single Contact by refId
+        /// Request all xContacts by school year.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
-        /// <returns></returns>
-        public ResponseSingle<XContactType> GetXContact(string refId, int? navigationPage, int? navigationPageSize)
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContacts(int? schoolYear)
         {
-            ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
-
-            RestRequest request = new RestRequest("xContacts/{refId}", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", navigationPage.ToString());
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContact.First();
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContacts(schoolYear);
         }
+
         /// <summary>
-        /// Request single Contact by refId
+        /// Request all xContacts with paging.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContacts(int? navigationPage, int? navigationPageSize)
+        {
+            return xContactsObject.GetXContacts(navigationPage, navigationPageSize);
+        }
+
+        /// <summary>
+        /// Request all xContacts with paging by school year.
+        /// </summary>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContacts(int? navigationPage, int? navigationPageSize, int? schoolYear)
+        {
+            return xContactsObject.GetXContacts(navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point.
+        /// </summary>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContacts(string opaqueMarker)
+        {
+            return xContactsObject.GetXContacts(opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point with paging.
+        /// </summary>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContacts(int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xContactsObject.GetXContacts(navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request single xContact by refId.
+        /// </summary>
+        /// <param name="refId">RefId of xContacts.</param>
+        /// <returns>Single xContacts type.</returns>
         public ResponseSingle<XContactType> GetXContact(string refId)
         {
-            ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
-
-            RestRequest request = new RestRequest("xContacts/{refId}", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContact.First();
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContact(refId);
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific Lea by refId
+        /// Request single xContact by refId by school year.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
-        /// <returns></returns>
-        public ResponseMulti<XContactType> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        /// <param name="refId">RefId of xContacts.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>Single xContacts type.</returns>
+        public ResponseSingle<XContactType> GetXContact(string refId, int? schoolYear)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xLeas/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", navigationPage.ToString());
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContact(refId, schoolYear);
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific Lea by refId
+        /// Request xContacts associated to a specific xLea by refId.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xLeas.</param>
+        /// <returns>List of xContacts type.</returns>
         public ResponseMulti<XContactType> GetXContactsByXLea(string refId)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xLeas/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContactsByXLea(refId);
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// Request xContacts associated to a specific xLea by refId by school year.
         /// </summary>
-        /// <param name="idType"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ResponseMulti<XContactType> GetXContactsByXLea(string idType, string id)
+        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXLea(string refId, int? schoolYear)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xLeas/{id}/xContacts", Method.GET);
-            request.AddParameter("id", id, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContactsByXLea(refId, schoolYear);
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific School by refId
+        /// Request xContacts associated to a specific xLea by refId with paging.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
-        /// <returns></returns>
-        public ResponseMulti<XContactType> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", navigationPage.ToString());
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContactsByXLea(refId, navigationPage, navigationPageSize);
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific School by refId
+        /// Request xContacts associated to a specific xLea by refId with paging by school year.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xLeas.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
+        {
+            return xContactsObject.GetXContactsByXLea(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request xContacts associated to a specific xSchool by refId.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xContacts type.</returns>
         public ResponseMulti<XContactType> GetXContactsByXSchool(string refId)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContactsByXSchool(refId);
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+        /// Request xContacts associated to a specific xSchool by refId by school year.
         /// </summary>
-        /// <param name="idType"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ResponseMulti<XContactType> GetXContactsByXSchool(string idType, string id)
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXSchool(string refId, int? schoolYear)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xSchools/{id}/xContacts", Method.GET);
-            request.AddParameter("id", id, ParameterType.UrlSegment);
-            request.AddHeader("IdType", idType);
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return xContactsObject.GetXContactsByXSchool(refId, schoolYear);
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific Student by refId
+        /// Request xContacts associated to a specific xSchool by refId with paging.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
-        /// <returns></returns>
-        public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+            return xContactsObject.GetXContactsByXSchool(refId, navigationPage, navigationPageSize);
 
-            RestRequest request = new RestRequest("xStudents/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", navigationPage.ToString());
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
         }
+
         /// <summary>
-        /// Returns Contacts associated to a specific Student by refId
+        /// Request xContacts associated to a specific xSchool by refId with paging by school year.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
+        {
+            return xContactsObject.GetXContactsByXSchool(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request xContacts associated to a specific xStudent by refId.
+        /// </summary>
+        /// <param name="refId">RefId of xStudents.</param>
+        /// <returns>List of xContacts type.</returns>
         public ResponseMulti<XContactType> GetXContactsByXStudent(string refId)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+            return xContactsObject.GetXContactsByXStudent(refId);
+        }
 
-            RestRequest request = new RestRequest("xStudents/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("Accept", "application/json");
+        /// <summary>
+        /// Request xContacts associated to a specific xStudent by refId by school year.
+        /// </summary>
+        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? schoolYear)
+        {
+            return xContactsObject.GetXContactsByXStudent(refId, schoolYear);
+        }
 
-            var response = restClient.Execute<XContactCollectionType>(request);
+        /// <summary>
+        /// Request xContacts associated to a specific xStudent by refId with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize)
+        {
+            return xContactsObject.GetXContactsByXStudent(refId, navigationPage, navigationPageSize);
+        }
 
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+        /// <summary>
+        /// Request xContacts associated to a specific xStudent by refId with paging by school year.
+        /// </summary>
+        /// <param name="refId">RefId of xStudents.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
+        {
+            return xContactsObject.GetXContactsByXStudent(refId, navigationPage, navigationPageSize, schoolYear);
         }
 
         #endregion
 
         #region navigationLastPage
-
         /// <summary>
-        /// Enumerator used to retrieve service path object for max page size
+        /// Returns the max page value for specified service path object.
         /// </summary>
-        public enum ServicePath
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>Integer value.</returns>
+        public int GetLastPage(ServicePath servicePath, int? navigationPageSize)
         {
-            GetXLeas = 1,
-            GetXLeasByXSchool = 2,
-            GetXLeasByXStudent = 3,
-            GetXLeasByXContact = 4,
-            GetXSchools = 5,
-            GetXSchoolsByXLea = 6,
-            GetXSchoolsByXCalendar = 7,
-            GetXSchoolsByXCourse = 8,
-            GetXSchoolsByXRoster = 9,
-            GetXSchoolsByXStaff = 10,
-            GetXSchoolsByXStudent = 11,
-            GetXSchoolsByXContact = 12,
-            GetXCalendars = 13,
-            GetXCalendarsByXSchool = 14,
-            GetXCourses = 15,
-            GetXCoursesByXLea = 16,
-            GetXRosters = 17,
-            GetXRostersByXLea = 18,
-            GetXRostersByXSchool = 19,
-            GetXRostersByXCourse = 20,
-            GetXRostersByXStaff = 21,
-            GetXRostersByXStudent = 22,
-            GetXStaffs = 23,
-            GetXStaffsByXLea = 24,
-            GetXStaffsByXSchool = 25,
-            GetXStaffsByXCourse = 26,
-            GetXStaffsByXRoster = 27,
-            GetXStudents = 28,
-            GetXStudentsByXLea = 29,
-            GetXStudentsByXSchool = 30,
-            GetXStudentsByXRoster = 31,
-            GetXStudentsByXStaff = 32,
-            GetXStudentsByXContact = 33,
-            GetXContacts = 34,
-            GetXContactsByXLea = 35,
-            GetXContactsByXSchool = 36,
-            GetXContactsByXStudent = 37,
-            GetXLeasByXRoster = 38,
-            GetXLeasByXStaff = 39,
-            GetXCalendarsByXLea = 40,
-            GetXCoursesByXSchool = 41,
-            GetXCoursesByXRoster = 42,
-            GetXStaffsByXStudent = 43
+            return getLastPageObject.GetLastPage(servicePath, navigationPageSize);
         }
 
-        public ServicePath myServicePath { get; set; }
         /// <summary>
-        /// Max page value for specified service path object
+        /// Returns the max page value for specified service path object by school year.
         /// </summary>
-        /// <param name="navigationPageSize"></param>
-        /// <param name="p"></param>
-        /// <param name="refId"></param>
-        /// <returns></returns>
-        public int GetLastPage(int navigationPageSize, ServicePath p, string refId)
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear"></param>
+        /// <returns>Integer value.</returns>
+        public int GetLastPage(ServicePath servicePath, int? navigationPageSize, int? schoolYear)
         {
-            string path = "";
-            int navigationLastPage = 0;
-
-            switch (p)
-            {
-                case ServicePath.GetXLeas:
-                    path = "xLeas";
-                    break;
-                case ServicePath.GetXLeasByXSchool:
-                    path = "xSchools/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXRoster:
-                    path = "xRosters/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXStaff:
-                    path = "xStaffs/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXStudent:
-                    path = "xStudents/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXContact:
-                    path = "xContacts/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXSchools:
-                    path = "xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXLea:
-                    path = "xLeas/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXCalendar:
-                    path = "xCalendars/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXCourse:
-                    path = "xCourses/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXRoster:
-                    path = "xRosters/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXStaff:
-                    path = "xStaffs/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXStudent:
-                    path = "xStudents/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXContact:
-                    path = "xContacts/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXCalendars:
-                    path = "xCalendars";
-                    break;
-                case ServicePath.GetXCalendarsByXLea:
-                    path = "xLeas/{refId}/xCalendars";
-                    break;
-                case ServicePath.GetXCalendarsByXSchool:
-                    path = "xSchools/{refId}/xCalendars";
-                    break;
-                case ServicePath.GetXCourses:
-                    path = "xCourses";
-                    break;
-                case ServicePath.GetXCoursesByXLea:
-                    path = "xLeas/{refId}/xCourses";
-                    break;
-                case ServicePath.GetXCoursesByXSchool:
-                    path = "xSchools/{refId}/xCourses";
-                    break;
-                case ServicePath.GetXCoursesByXRoster:
-                    path = "xRosters/{refId}/xCourses";
-                    break;
-                case ServicePath.GetXRosters:
-                    path = "xRosters";
-                    break;
-                case ServicePath.GetXRostersByXLea:
-                    path = "xLeas/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXSchool:
-                    path = "xSchools/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXCourse:
-                    path = "xCourses/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXStaff:
-                    path = "xStaffs/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXStudent:
-                    path = "xStudents/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXStaffs:
-                    path = "xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXLea:
-                    path = "xLeas/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXSchool:
-                    path = "xSchools/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXCourse:
-                    path = "xCourses/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXRoster:
-                    path = "xRosters/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXStudent:
-                    path = "xStudents/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStudents:
-                    path = "xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXLea:
-                    path = "xLeas/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXSchool:
-                    path = "xSchools/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXRoster:
-                    path = "xRosters/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXStaff:
-                    path = "xStaffs/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXContact:
-                    path = "xContacts/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXContacts:
-                    path = "xContacts";
-                    break;
-                case ServicePath.GetXContactsByXLea:
-                    path = "xLeas/{refId}/xContacts";
-                    break;
-                case ServicePath.GetXContactsByXSchool:
-                    path = "xSchools/{refId}/xContacts";
-                    break;
-                case ServicePath.GetXContactsByXStudent:
-                    path = "xStudents/{refId}/xContacts";
-                    break;
-            }
-
-            RestRequest request = new RestRequest(path, Method.GET);
-            request.AddHeader("Accept", "application/json");
-
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddHeader("navigationPage", "1");
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute(request);
-
-            try
-            {
-                navigationLastPage = Int32.Parse(response.Headers.ToList()
-                .Find(x => x.Name.Equals("navigationLastPage", StringComparison.CurrentCultureIgnoreCase))
-                .Value.ToString());
-            }
-            catch (NullReferenceException)
-            {
-                navigationLastPage = 0;
-            }
-
-            return navigationLastPage;
+            return getLastPageObject.GetLastPage(servicePath, navigationPageSize, schoolYear);
         }
+
         /// <summary>
-        /// Max page value for specified service path object
+        /// Returns the max page value for specified service path object.
         /// </summary>
-        /// <param name="navigationPageSize"></param>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        public int GetLastPage(int navigationPageSize, ServicePath p)
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="refId">RefId of xObject.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>Integer value.</returns>
+        public int GetLastPage(ServicePath servicePath, string refId, int? navigationPageSize)
         {
-            string path = "";
-            int navigationLastPage = 0;
+            return getLastPageObject.GetLastPage(servicePath, refId, navigationPageSize);
+        }
 
-            switch (p)
-            {
-                case ServicePath.GetXLeas:
-                    path = "xLeas";
-                    break;
-                case ServicePath.GetXLeasByXSchool:
-                    path = "xSchools/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXRoster:
-                    path = "xRosters/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXStaff:
-                    path = "xStaffs/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXStudent:
-                    path = "xStudents/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXLeasByXContact:
-                    path = "xContacts/{refId}/xLeas";
-                    break;
-                case ServicePath.GetXSchools:
-                    path = "xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXLea:
-                    path = "xLeas/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXCalendar:
-                    path = "xCalendars/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXCourse:
-                    path = "xCourses/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXRoster:
-                    path = "xRosters/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXStaff:
-                    path = "xStaffs/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXStudent:
-                    path = "xStudents/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXSchoolsByXContact:
-                    path = "xContacts/{refId}/xSchools";
-                    break;
-                case ServicePath.GetXCalendars:
-                    path = "xCalendars";
-                    break;
-                case ServicePath.GetXCalendarsByXLea:
-                    path = "xLeas/{refId}/xCalendars";
-                    break;
-                case ServicePath.GetXCalendarsByXSchool:
-                    path = "xSchools/{refId}/xCalendars";
-                    break;
-                case ServicePath.GetXCourses:
-                    path = "xCourses";
-                    break;
-                case ServicePath.GetXCoursesByXLea:
-                    path = "xLeas/{refId}/xCourses";
-                    break;
-                case ServicePath.GetXCoursesByXSchool:
-                    path = "xSchools/{refId}/xCourses";
-                    break;
-                case ServicePath.GetXCoursesByXRoster:
-                    path = "xRosters/{refId}/xCourses";
-                    break;
-                case ServicePath.GetXRosters:
-                    path = "xRosters";
-                    break;
-                case ServicePath.GetXRostersByXLea:
-                    path = "xLeas/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXSchool:
-                    path = "xSchools/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXCourse:
-                    path = "xCourses/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXStaff:
-                    path = "xStaffs/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXRostersByXStudent:
-                    path = "xStudents/{refId}/xRosters";
-                    break;
-                case ServicePath.GetXStaffs:
-                    path = "xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXLea:
-                    path = "xLeas/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXSchool:
-                    path = "xSchools/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXCourse:
-                    path = "xCourses/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXRoster:
-                    path = "xRosters/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStaffsByXStudent:
-                    path = "xStudents/{refId}/xStaffs";
-                    break;
-                case ServicePath.GetXStudents:
-                    path = "xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXLea:
-                    path = "xLeas/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXSchool:
-                    path = "xSchools/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXRoster:
-                    path = "xRosters/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXStaff:
-                    path = "xStaffs/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXStudentsByXContact:
-                    path = "xContacts/{refId}/xStudents";
-                    break;
-                case ServicePath.GetXContacts:
-                    path = "xContacts";
-                    break;
-                case ServicePath.GetXContactsByXLea:
-                    path = "xLeas/{refId}/xContacts";
-                    break;
-                case ServicePath.GetXContactsByXSchool:
-                    path = "xSchools/{refId}/xContacts";
-                    break;
-                case ServicePath.GetXContactsByXStudent:
-                    path = "xStudents/{refId}/xContacts";
-                    break;
-            }
-
-            RestRequest request = new RestRequest(path, Method.GET);
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", "1");
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute(request);
-
-            try
-            {
-                navigationLastPage = Int32.Parse(response.Headers.ToList()
-                .Find(x => x.Name.Equals("navigationLastPage", StringComparison.CurrentCultureIgnoreCase))
-                .Value.ToString());
-            }
-            catch (NullReferenceException)
-            {
-                navigationLastPage = 0;
-            }
-
-            return navigationLastPage;
+        /// <summary>
+        /// Returns the max page value for specified service path object.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="refId">RefId of xObject.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear"></param>
+        /// <returns>Integer value.</returns>
+        public int GetLastPage(ServicePath servicePath, string refId, int? navigationPageSize, int? schoolYear)
+        {
+            return getLastPageObject.GetLastPage(servicePath, refId, navigationPageSize, schoolYear);
         }
 
         #endregion
+
         #region App Provisioning Info
         /// <summary>
-        /// Create staff usernames and passwords by school
+        /// Request creation of xStaffs usernames and passwords by xSchool.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xStaffs type.</returns>
         public ResponseMulti<XStaffType> CreateXStaffUsers(string refId)
         {
-            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("createUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XStaffCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStaffs.xStaff;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return aUPPObject.CreateXStaffUsers(refId);
         }
+
         /// <summary>
-        /// Delete generated staff passwords by school
+        /// Request deletion of generated xStaffs passwords by xSchool.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xStaffs type.</returns>
         public ResponseMulti<XStaffType> DeleteXStaffUsers(string refId)
         {
-            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("deleteUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XStaffCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStaffs.xStaff;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return aUPPObject.DeleteXStaffUsers(refId);
         }
 
         /// <summary>
-        /// Return generated staff usernames and passwords by school
+        /// Request generated xStaffs usernames and passwords by xSchool.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
-        /// <returns></returns>
-        public ResponseMulti<XStaffType> GetXStaffUsers(string refId, int? navigationPage, int? navigationPageSize)
-        {
-            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("getUsers", "true");
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", navigationPage.ToString());
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute<XStaffCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStaffs.xStaff;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
-        }
-
-        /// <summary>
-        /// Return generated staff usernames and passwords by school
-        /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xStaffs type.</returns>
         public ResponseMulti<XStaffType> GetXStaffUsers(string refId)
         {
-            ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStaffs", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("getUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XStaffCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStaffs.xStaff;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return aUPPObject.GetXStaffUsers(refId);
         }
 
         /// <summary>
-        /// Create student usernames and passwords by school
+        /// Request generated xStaffs usernames and passwords by xSchool with paging.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffUsers(string refId, int? navigationPage, int? navigationPageSize)
+        {
+            return aUPPObject.GetXStaffUsers(refId, navigationPage, navigationPageSize);
+        }
+
+        /// <summary>
+        /// Request creation of xStudents usernames and passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xStudents type.</returns>
         public ResponseMulti<XStudentType> CreateXStudentUsers(string refId)
         {
-            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("createUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XStudentCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStudents.xStudent;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return aUPPObject.CreateXStudentUsers(refId);
         }
 
         /// <summary>
-        /// Delete generated student passwords by school
+        /// Request deletion of generated xStudents passwords by xSchool.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xStudents type.</returns>
         public ResponseMulti<XStudentType> DeleteXStudentUsers(string refId)
         {
-            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("deleteUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XStudentCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStudents.xStudent;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return aUPPObject.DeleteXStudentUsers(refId);
         }
 
         /// <summary>
-        /// Return generated student usernames and passwords by school
+        /// Request generated xStudents usernames and passwords by xSchool.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <param name="navigationPage"></param>
-        /// <param name="navigationPageSize"></param>
-        /// <returns></returns>
-        public ResponseMulti<XStudentType> GetXStudentUsers(string refId, int? navigationPage, int? navigationPageSize)
-        {
-            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("getUsers", "true");
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("navigationPage", navigationPage.ToString());
-            request.AddHeader("navigationPageSize", navigationPageSize.ToString());
-
-            var response = restClient.Execute<XStudentCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStudents.xStudent;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
-        }
-
-        /// <summary>
-        /// Return generated student usernames and passwords by school
-        /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xStudents type.</returns>
         public ResponseMulti<XStudentType> GetXStudentUsers(string refId)
         {
-            ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xStudents", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("getUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XStudentCollectionType>(request);
-
-            try
-            {
-                output.Data = response.Data.xStudents.xStudent;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return aUPPObject.GetXStudentUsers(refId);
         }
 
         /// <summary>
-        /// Create contact usernames and passwords by school
+        /// Request generated xStudents usernames and passwords by xSchool.
         /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
-        private ResponseMulti<XContactType> CreateXContactUsers(string refId)
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentUsers(string refId, int? navigationPage, int? navigationPageSize)
         {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("createUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
-        }
-        /// <summary>
-        /// Delete generated contact passwords by school
-        /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
-
-        private ResponseMulti<XContactType> DeleteXContactUsers(string refId)
-        {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
-
-            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("deleteUsers", "true");
-            request.AddHeader("Accept", "application/json");
-
-            var response = restClient.Execute<XContactCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-
-            return output;
+            return aUPPObject.GetXStudentUsers(refId, navigationPage, navigationPageSize);
         }
 
-        /// <summary>
-        /// Return generated contact usernames and passwords by school
-        /// </summary>
-        /// <param name="refId"></param>
-        /// <returns></returns>
-        private ResponseMulti<XContactType> GetXContactUsers(string refId)
-        {
-            ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+        ///// <summary>
+        ///// Request creation of xContacts usernames and passwords by xSchool.
+        ///// </summary>
+        ///// <param name="refId">RefId of xSchool.</param>
+        ///// <returns>List of xContacts type.</returns>
+        //private ResponseMulti<XContactType> CreateXContactUsers(string refId)
+        //{
+        //    return aUPPObject.CreateXContactUsers(refId);
+        //}
+        ///// <summary>
+        ///// Request deletion of generated xContacts passwords by xSchool.
+        ///// </summary>
+        ///// <param name="refId">RefId of xSchool.</param>
+        ///// <returns>List of xContacts type.</returns>
 
-            RestRequest request = new RestRequest("xSchools/{refId}/xContacts", Method.GET);
-            request.AddParameter("refId", refId, ParameterType.UrlSegment);
-            request.AddQueryParameter("getUsers", "true");
-            request.AddHeader("Accept", "application/json");
+        //private ResponseMulti<XContactType> DeleteXContactUsers(string refId)
+        //{
+        //    return aUPPObject.DeleteXContactUsers(refId);
+        //}
 
-            var response = restClient.Execute<XContactCollectionType>(request);
-            Console.WriteLine(response.ResponseUri);
-            try
-            {
-                output.Data = response.Data.xContacts.xContact;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
-            catch (Exception)
-            {
-                output.Data = null;
-                output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
-                output.Header = Util.BuildHeader(response);
-            }
+        ///// <summary>
+        ///// Request generated xContacts usernames and passwords by xSchool.
+        ///// </summary>
+        ///// <param name="refId">RefId of xSchool.</param>
+        ///// <returns>List of xContacts type.</returns>
+        //private ResponseMulti<XContactType> GetXContactUsers(string refId)
+        //{
+        //    return aUPPObject.GetXContactUsers(refId);
+        //}
 
-            return output;
-        }
+        ///// <summary>
+        ///// Request generated xContacts usernames and passwords by xSchool with paging.
+        ///// </summary>
+        ///// <param name="refId">RefId of xSchool.</param>
+        ///// <param name="navigationPage">Page to retrieve.</param>
+        ///// <param name="navigationPageSize">Number of resources to retrieve.</param
+        ///// <returns>List of xContacts type.</returns>
+        //private ResponseMulti<XContactType> GetXContactUsers(string refId, int? navigationPage, int? navigationPageSize)
+        //{
+        //    return aUPPObject.GetXContactUsers(refId, navigationPage, navigationPageSize);
+        //}
         #endregion
     }
 }
