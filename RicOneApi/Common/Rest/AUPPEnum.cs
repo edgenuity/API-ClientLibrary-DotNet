@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.6.1
+ * Since       2018-06-01
+ */
 namespace RicOneApi.Common.Rest
 {
+    /// <summary>
+    /// Class that mimics an enumerator that stores a text value.
+    /// </summary>
     class AUPPEnum
     {
-        public static readonly AUPPEnum CREATE = new AUPPEnum("create");
-        public static readonly AUPPEnum DELETE = new AUPPEnum("delete");
-        public static readonly AUPPEnum GET = new AUPPEnum("get");
+        internal static readonly AUPPEnum CREATE = new AUPPEnum("create");
+        internal static readonly AUPPEnum DELETE = new AUPPEnum("delete");
+        internal static readonly AUPPEnum GET = new AUPPEnum("get");
 
         private AUPPEnum(string value)
         {
             Value = value;
         }
 
-        public string Value { get; private set; }
+        internal string Value { get; private set; }
     }
 }

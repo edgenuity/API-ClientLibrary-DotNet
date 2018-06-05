@@ -6,11 +6,14 @@ using System.Linq;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.6.1
+ * Since       2018-06-01
  */
 namespace RicOneApi.Common.Rest
 {
+    /// <summary>
+    /// Class that handles requests and responses to the API.
+    /// </summary>
     class RestReturn
     {
         /// <summary>
@@ -36,6 +39,8 @@ namespace RicOneApi.Common.Rest
                     .Value.ToString());
                 }
                 output.Data = response.Data.GetObjects.GetObject;
+                output.Json = response.Content;
+                output.Xml = Util.ConvertJson2Xml(response.Content);
                 output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
                 output.Header = Util.BuildHeader(response);
@@ -43,6 +48,8 @@ namespace RicOneApi.Common.Rest
             catch (Exception)
             {
                 output.Data = null;
+                output.Json = null;
+                output.Xml = null;
                 output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
                 output.Header = Util.BuildHeader(response);
@@ -63,10 +70,12 @@ namespace RicOneApi.Common.Rest
             ResponseSingle<E> output = new ResponseSingle<E>();
             RestRequest request = RequestBuilder(rc, rp);
             var response = rc.Execute<T>(request);
-                
+
             try
             {
                 output.Data = response.Data.GetObject.First();
+                output.Json = response.Content;
+                output.Xml = Util.ConvertJson2Xml(response.Content);
                 output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
                 output.Header = Util.BuildHeader(response);
@@ -74,6 +83,8 @@ namespace RicOneApi.Common.Rest
             catch (Exception)
             {
                 output.Data = default(E);
+                output.Json = null;
+                output.Xml = null;
                 output.StatusCode = (int)response.StatusCode;
                 output.Message = response.StatusDescription;
                 output.Header = Util.BuildHeader(response);
@@ -91,9 +102,9 @@ namespace RicOneApi.Common.Rest
         private RestRequest RequestBuilder(RestClient rc, RestProperties rp)
         {
             RestRequest request = new RestRequest(rp.ServicePath.GetServicePath(), Method.GET);
-            request.AddHeader("Accept", "application/json");
+            //request.AddHeader("Accept", "application/json");
 
-            if(!String.IsNullOrEmpty(rp.RefId))
+            if (!String.IsNullOrEmpty(rp.RefId))
             {
                 request.AddParameter("refId", rp.RefId, ParameterType.UrlSegment);
             }
@@ -130,6 +141,9 @@ namespace RicOneApi.Common.Rest
             return request;
         }
 
-        public int NavigationLastPage { get; set; }
+        /// <summary>
+        /// Accessor method that holds navigation last page integer value.
+        /// </summary>
+        internal int NavigationLastPage { get; set; }
     }
 }

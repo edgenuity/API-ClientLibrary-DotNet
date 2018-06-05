@@ -5,6 +5,9 @@
  */
 namespace RicOneApi.Common.Rest
 {
+    /// <summary>
+    /// Accessor class for request query parameters. This includes opaque marker, and account user passwrod provisioning.
+    /// </summary>
     class RestQueryParameter
     {
         private string opaqueMarker;

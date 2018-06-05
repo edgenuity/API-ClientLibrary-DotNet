@@ -8,6 +8,10 @@ using System;
  */
 namespace RicOneApi.Common.Rest
 {
+    /// <summary>
+    /// Accessor class used for building requests based on provided values. This includes base API url, servicepath, refid, 
+    /// REST headers, and REST query parameters.
+    /// </summary>
     class RestProperties
     {
         private String baseUrl;

@@ -36,6 +36,20 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.6.1
+* Added support to return responses as JSON or XML strings.
+	```csharp
+	//JSON
+	xPress.GetXLeas().Json;
+	
+	//XML
+	xPress.GetXLeas().Xml;
+	```
+* Added support to request staff and students by state and local ids.
+  * xStaffs/{id}
+  * xStudents/{id}
+* Additional code cleanup
+
 ### v1.6
 * Support for multiple school years
     * Integer value, i.e. 2018 for the 2017-2018 school year

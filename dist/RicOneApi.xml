@@ -65,14 +65,14 @@
         </member>
         <member name="T:RicOneApi.Api.XPress">
             <summary>
-            Static class that allows access to the xPress data model objects.
+            Class that allows access to the xPress data model objects.
             </summary>
         </member>
         <member name="M:RicOneApi.Api.XPress.#ctor(System.String)">
             <summary>
-            
+            Class that allows access to the xPress data model objects.
             </summary>
-            <param name="baseApiUrl"></param>
+            <param name="baseApiUrl">The base URL for an API endpoint.</param>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXLeas">
             <summary>
@@ -1213,6 +1213,23 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>Single xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaff(System.String,System.String)">
+            <summary>
+            Request single xStaff by State or Local Id.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
+            <returns>Single xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaff(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request single xStaff by State or Local Id by school year.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>Single xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXStaffsByXLea(System.String)">
             <summary>
             Request xStaffs associated to a specific xLea by refId.
@@ -1441,6 +1458,23 @@
             Request single xStudent by refId by school year.
             </summary>
             <param name="refId">RefId of xStudents.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>Single xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudent(System.String,System.String)">
+            <summary>
+            Request single xStudent by State or Local Id.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
+            <returns>Single xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudent(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request single xStudent by State or Local Id by school year.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>Single xStudents type.</returns>
         </member>
@@ -1873,25 +1907,31 @@
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <returns>List of xStudents type.</returns>
         </member>
-        <member name="M:RicOneApi.Api.Util.TimestampToISO8601(System.DateTime)">
+        <member name="T:RicOneApi.Api.Util">
             <summary>
-            Convert a DateTime value to an ISO8601 date/timestamp String value
+            Utility class for various internal helper methods.
             </summary>
-            <param name="date"></param>
-            <returns></returns>
-        </member>
-        <member name="M:RicOneApi.Api.Util.ResponseHandler(RestSharp.IRestResponse)">
-            <summary>
-            Response handler to return HTTP Status Codes if an error with a request occurs
-            </summary>
-            <param name="response"></param>
         </member>
         <member name="M:RicOneApi.Api.Util.BuildHeader(RestSharp.IRestResponse)">
             <summary>
-            Method to iterate through the response header list and concatenates a string to return header fields and values
+            Method to iterate through the response header list and concatenates a string to return header fields and values.
             </summary>
-            <param name="response"></param>
-            <returns></returns>
+            <param name="response">REST response.</param>
+            <returns>A String value.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.Util.ConvertUnixTime(System.Int64)">
+            <summary>
+            Convert long UNIX/DateTime to DateTime.
+            </summary>
+            <param name="unixDate">Long date/time</param>
+            <returns>A DateTime value.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.Util.ConvertJson2Xml(System.String)">
+            <summary>
+            Converts a JSON string to an XML string.
+            </summary>
+            <param name="json">JSON string response.</param>
+            <returns>A string XML value.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.AUPPObject">
             <summary>
@@ -2012,6 +2052,286 @@
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear"></param>
             <returns>Integer value.</returns>
+        </member>
+        <member name="T:RicOneApi.Common.Objects.ServicePath">
+            <summary>
+            Class that stores service path information. Used for GetLastPage().
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeas">
+            <summary>
+            Returns all Leas.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeaByRefId">
+            <summary>
+            Returns a single Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeaById">
+            <summary>
+            Returns a single Lea by BEDS code or Local Id.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeasByXSchool">
+            <summary>
+            Returns Leas associated to a specific School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeasByXRoster">
+            <summary>
+            Returns Leas associated to a specific Roster by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeasByXStaff">
+            <summary>
+            Returns Leas associated to a specific Staff by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeasByXStudent">
+            <summary>
+            Returns Leas associated to a specific Student by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXLeasByXContact">
+            <summary>
+            Returns Leas associated to a specific Contact by refId
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchools">
+            <summary>
+            Returns all Schools.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolByRefId">
+            <summary>
+            Returns a single School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolById">
+            <summary>
+            Returns a single School by BEDS code or Local Id.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolsByXLea">
+            <summary>
+            Returns Schools associated to a specific Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolsByXCalendar">
+            <summary>
+            Returns Schools associated to a specific Calendar by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolsByXCourse">
+            <summary>
+            Returns Schools associated to a specific Course by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolsByXRoster">
+            <summary>
+            Returns Schools associated to a specific Roster by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolsByXStaff">
+            <summary>
+            Returns Schools associated to a specific Staff by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolsByXStudent">
+            <summary>
+            Returns Schools associated to a specific Student by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXSchoolsByXContact">
+            <summary>
+            Returns Schools associated to a specific Contact by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCalendars">
+            <summary>
+            Returns all Calendars.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCalendarByRefId">
+            <summary>
+            Returns a single Calendar by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCalendarsByXLea">
+            <summary>
+            Returns Calendars associated to a specific Lea by refId
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCalendarsByXSchool">
+            <summary>
+            Returns Calendars associated to a specific School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCourses">
+            <summary>
+            Returns all Courses.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCourseByRefId">
+            <summary>
+            Returns a single Course by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCoursesByXLea">
+            <summary>
+            Returns Courses associated to a specific Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCoursesByXSchool">
+            <summary>
+            Returns Courses associated to a specific School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXCoursesByXRoster">
+            <summary>
+            Returns Courses associated to a specific Roster by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXRosters">
+            <summary>
+            Returns all Rosters.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXRosterByRefId">
+            <summary>
+            Returns a single Roster by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXRostersByXLea">
+            <summary>
+            Returns Rosters associated to a specific Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXRostersByXSchool">
+            <summary>
+            Returns Rosters associated to a specific School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXRostersByXCourse">
+            <summary>
+            Returns Rosters associated to a specific Course by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXRostersByXStaff">
+            <summary>
+            Returns Sections associated to a specific Staff by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXRostersByXStudent">
+            <summary>
+            Returns Rosters associated to a specific Student by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffs">
+            <summary>
+            Returns all Staff.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffByRefId">
+            <summary>
+            Returns a single Staff by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffById">
+            <summary>
+            Returns a single Staff by state or local id.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffsByXLea">
+            <summary>
+            Returns Staff associated to a specific Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffsByXSchool">
+            <summary>
+            Returns Staff associated to a specific School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffsByXCourse">
+            <summary>
+            Returns Staff associated to a specific Course by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffsByXRoster">
+            <summary>
+            Returns Staff associated to a specific Roster by refId
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStaffsByXStudent">
+            <summary>
+            Returns Staff associated to a specific Student by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudents">
+            <summary>
+            Returns all Students.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudentByRefId">
+            <summary>
+            Returns a single Student by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudentById">
+            <summary>
+            Returns a single Student by state or local id.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudentsByXLea">
+            <summary>
+            Returns Students associated to a specific Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudentsByXSchool">
+            <summary>
+            Returns Students associated to a specific School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudentsByXRoster">
+            <summary>
+            Returns Students associated to a specific Roster by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudentsByXStaff">
+            <summary>
+            Returns Students associated to a specific Staff by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXStudentsByXContact">
+            <summary>
+            Returns Students associated to a specific Contact by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXContacts">
+            <summary>
+            Returns all Contacts.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXContactByRefId">
+            <summary>
+            Returns a single Contact by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXContactsByXLea">
+            <summary>
+            Returns Contacts associated to a specific Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXContactsByXSchool">
+            <summary>
+            Returns Contacts associated to a specific School by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXContactsByXStudent">
+            <summary>
+            Returns Contacts associated to a specific Student by refId.
+            </summary>
         </member>
         <member name="T:RicOneApi.Common.Objects.XCalendarsObject">
             <summary>
@@ -3396,6 +3716,23 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>Single xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaff(System.String,System.String)">
+            <summary>
+            Request single xStaff by State or Local Id.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
+            <returns>Single xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaff(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request single xStaff by State or Local Id by school year.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>Single xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXLea(System.String)">
             <summary>
             Request xStaffs associated to a specific xLea by refId.
@@ -3639,6 +3976,23 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>Single xStudents type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudent(System.String,System.String)">
+            <summary>
+            Request single xStudent by State or Local Id.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
+            <returns>Single xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudent(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request single xStudent by State or Local Id by school year.
+            </summary>
+            <param name="idType">Header value can be set to state or local.</param>
+            <param name="id">State or Local Id.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>Single xStudents type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXLea(System.String)">
             <summary>
             Request xStudents associated to a specific xLea by refId.
@@ -3809,6 +4163,32 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStudents type.</returns>
         </member>
+        <member name="T:RicOneApi.Common.Rest.AUPPEnum">
+            <summary>
+            Class that mimics an enumerator that stores a text value.
+            </summary>
+        </member>
+        <member name="T:RicOneApi.Common.Rest.RestHeader">
+            <summary>
+            Accessor class for request headers. This includes paging, id, and shcool year. 
+            </summary>
+        </member>
+        <member name="T:RicOneApi.Common.Rest.RestProperties">
+            <summary>
+            Accessor class used for building requests based on provided values. This includes base API url, servicepath, refid, 
+            REST headers, and REST query parameters.
+            </summary>
+        </member>
+        <member name="T:RicOneApi.Common.Rest.RestQueryParameter">
+            <summary>
+            Accessor class for request query parameters. This includes opaque marker, and account user passwrod provisioning.
+            </summary>
+        </member>
+        <member name="T:RicOneApi.Common.Rest.RestReturn">
+            <summary>
+            Class that handles requests and responses to the API.
+            </summary>
+        </member>
         <member name="M:RicOneApi.Common.Rest.RestReturn.MakeAllRequest``2(RestSharp.RestClient,RicOneApi.Common.Rest.RestProperties)">
             <summary>
             Generic REST call for list objects.
@@ -3837,6 +4217,11 @@
             <param name="rc">REST client.</param>
             <param name="rp">REST properties for request.</param>
             <returns>The request with appropriate headers and query parameters.</returns>
+        </member>
+        <member name="P:RicOneApi.Common.Rest.RestReturn.NavigationLastPage">
+            <summary>
+            Accessor method that holds navigation last page integer value.
+            </summary>
         </member>
         <member name="M:RicOneApi.Models.Authentication.DecodedToken.GetDecodedToken">
             <summary>
@@ -4138,6 +4523,78 @@
         <member name="T:RicOneApi.Models.XPress.XGradeLevelListType">
             <summary>
             XGradeLevelListType
+            </summary>
+        </member>
+        <member name="T:RicOneApi.ResponseMulti`1">
+            <summary>
+            Generic class used to store response information on xPress list objects.
+            </summary>
+            <typeparam name="T">xPress Object.</typeparam>
+        </member>
+        <member name="P:RicOneApi.ResponseMulti`1.Data">
+            <summary>
+            xObject response data.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseMulti`1.Json">
+            <summary>
+            JSON string response.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseMulti`1.Xml">
+            <summary>
+            XML string response.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseMulti`1.StatusCode">
+            <summary>
+            Response status code.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseMulti`1.Message">
+            <summary>
+            Response message.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseMulti`1.Header">
+            <summary>
+            Response header.
+            </summary>
+        </member>
+        <member name="T:RicOneApi.ResponseSingle`1">
+            <summary>
+            Generic class used to store response information on xPress single objects.
+            </summary>
+            <typeparam name="T">xPress Object.</typeparam>
+        </member>
+        <member name="P:RicOneApi.ResponseSingle`1.Data">
+            <summary>
+            xObject response data.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseSingle`1.Json">
+            <summary>
+            JSON string response.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseSingle`1.Xml">
+            <summary>
+            XML string response.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseSingle`1.StatusCode">
+            <summary>
+            Response status code.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseSingle`1.Message">
+            <summary>
+            Response message.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.ResponseSingle`1.Header">
+            <summary>
+            Response header.
             </summary>
         </member>
     </members>

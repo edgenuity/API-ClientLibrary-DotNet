@@ -6,8 +6,8 @@ using System.Configuration;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-23
+ * Version     1.6.1
+ * Since       2018-06-04
  * Filename    Program.cs
  */
 namespace RicOneApi.Tests
@@ -35,7 +35,15 @@ namespace RicOneApi.Tests
         const String COURSE_REFID = "50F2377E-29BD-45C6-950C-C41B3432FC0A";
         const String ROSTER_REFID = "00BAD4F5-9CF4-4D49-A8CC-666D02180300";
         const String STAFF_REFID = "0C6E7BFA-4E4E-4F82-BCE8-C27729A79F29";
+        const String STAFF_STATEIDTYPE = "state";
+        const String STAFF_STATEID = "999999999";
+        const String STAFF_LOCALIDTYPE = "local";
+        const String STAFF_LOCALID = "4200";
         const String STUDENT_REFID = "3089EF6E-143D-4C58-ABF3-8CED68B7AEEE";
+        const String STUDENT_STATEIDTYPE = "state";
+        const String STUDENT_STATEID = "1642758164";
+        const String STUDENT_LOCALIDTYPE = "local";
+        const String STUDENT_LOCALID = "611112189";
         const String CONTACT_REFID = "0BFFDDCF-B25C-423B-BC65-553DE0B95F4B";
         #endregion
 
@@ -117,6 +125,7 @@ namespace RicOneApi.Tests
                 #region xStudents
                 //XStudents_GetXStudents(xPress);
                 //XStudents_GetXStudent(xPress);
+                //XStudents_GetXStudentByStateId(xPress);
                 //XStudents_GetXStudentsByXLea(xPress);
                 //XStudents_GetXStudentsByXSchool(xPress);
                 //XStudents_GetXStudentsByXRoster(xPress);
@@ -195,6 +204,8 @@ namespace RicOneApi.Tests
             Console.WriteLine("-----xStaffs-----");
             Console.WriteLine(String.Format(format, "GetXStaffs()", xPress.GetXStaffs().StatusCode));
             Console.WriteLine(String.Format(format, "GetXStaff(STAFF_REFID)", xPress.GetXStaff(STAFF_REFID).StatusCode));
+            Console.WriteLine(String.Format(format, "GetXStaff(STAFF_STATEID)", xPress.GetXStaff(STAFF_STATEIDTYPE, STAFF_STATEID).StatusCode));
+            Console.WriteLine(String.Format(format, "GetXStaff(STAFF_LOCALID)", xPress.GetXStaff(STAFF_LOCALIDTYPE, STAFF_LOCALID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXStaffsByXLea(LEA_REFID)", xPress.GetXStaffsByXLea(LEA_REFID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXStaffsByXSchool(SCHOOL_REFID)", xPress.GetXStaffsByXSchool(SCHOOL_REFID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXStaffsByXCourse(COURSE_REFID)", xPress.GetXStaffsByXCourse(COURSE_REFID).StatusCode));
@@ -205,6 +216,8 @@ namespace RicOneApi.Tests
             Console.WriteLine("-----xStudents-----");
             Console.WriteLine(String.Format(format, "GetXStudents()", xPress.GetXStudents().StatusCode));
             Console.WriteLine(String.Format(format, "GetXStudent(STUDENT_REFID)", xPress.GetXStudent(STUDENT_REFID).StatusCode));
+            Console.WriteLine(String.Format(format, "GetXStudent(STUDENT_STATEID)", xPress.GetXStudent(STUDENT_STATEIDTYPE, STUDENT_STATEID).StatusCode));
+            Console.WriteLine(String.Format(format, "GetXStudent(STUDENT_LOCALID)", xPress.GetXStudent(STUDENT_LOCALIDTYPE, STUDENT_LOCALID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXStudentsByXLea(LEA_REFID)", xPress.GetXStudentsByXLea(LEA_REFID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXStudentsByXSchool(SCHOOL_REFID)", xPress.GetXStudentsByXSchool(SCHOOL_REFID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXStudentsByXRoster(ROSTER_REFID)", xPress.GetXStudentsByXRoster(ROSTER_REFID).StatusCode));
@@ -217,6 +230,8 @@ namespace RicOneApi.Tests
             Console.WriteLine(String.Format(format, "GetXContactsByXLea(LEA_REFID)", xPress.GetXContactsByXLea(LEA_REFID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXContactsByXSchool(SCHOOL_REFID)", xPress.GetXContactsByXSchool(SCHOOL_REFID).StatusCode));
             Console.WriteLine(String.Format(format, "GetXContactsByXStudent(STUDENT_REFID)", xPress.GetXContactsByXStudent(STUDENT_REFID).StatusCode));
+
+            Console.WriteLine("Finished...");
         }
 
         #region xLeas

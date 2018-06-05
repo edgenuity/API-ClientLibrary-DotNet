@@ -6,14 +6,14 @@ using RicOneApi.Common.Objects;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-25
+ * Version     1.6.1
+ * Since       2018-05-31
  * Filename    XPress.cs
  */
 namespace RicOneApi.Api
 {
     /// <summary>
-    /// Static class that allows access to the xPress data model objects.
+    /// Class that allows access to the xPress data model objects.
     /// </summary>
     public class XPress
     {
@@ -29,12 +29,13 @@ namespace RicOneApi.Api
         private readonly AUPPObject aUPPObject;
 
         /// <summary>
-        /// 
+        /// Class that allows access to the xPress data model objects.
         /// </summary>
-        /// <param name="baseApiUrl"></param>
+        /// <param name="baseApiUrl">The base URL for an API endpoint.</param>
         public XPress(string baseApiUrl)
         {
             RestClient rc = new RestClient(baseApiUrl);
+            rc.AddDefaultHeader("Content-Type", "application/json");
             xLeasObject = new XLeasObject(rc, baseApiUrl);
             xSchoolsObject = new XSchoolsObject(rc, baseApiUrl);
             xCalendarsObject = new XCalendarsObject(rc, baseApiUrl);
@@ -1641,6 +1642,29 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request single xStaff by State or Local Id.
+        /// </summary>
+        /// <param name="idType">Header value can be set to state or local.</param>
+        /// <param name="id">State or Local Id.</param>
+        /// <returns>Single xStaffs type.</returns>
+        public ResponseSingle<XStaffType> GetXStaff(string idType, string id)
+        {
+            return xStaffsObject.GetXStaff(idType, id);
+        }
+
+        /// <summary>
+        /// Request single xStaff by State or Local Id by school year.
+        /// </summary>
+        /// <param name="idType">Header value can be set to state or local.</param>
+        /// <param name="id">State or Local Id.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>Single xStaffs type.</returns>
+        public ResponseSingle<XStaffType> GetXStaff(string idType, string id, int? schoolYear)
+        {
+            return xStaffsObject.GetXStaff(idType, id, schoolYear);
+        }
+
+        /// <summary>
         /// Request xStaffs associated to a specific xLea by refId.
         /// </summary>
         /// <param name="refId">RefId of xLeas.</param>
@@ -1957,6 +1981,29 @@ namespace RicOneApi.Api
         public ResponseSingle<XStudentType> GetXStudent(string refId, int? schoolYear)
         {
             return xStudentsObject.GetXStudent(refId, schoolYear);
+        }
+
+        /// <summary>
+        /// Request single xStudent by State or Local Id.
+        /// </summary>
+        /// <param name="idType">Header value can be set to state or local.</param>
+        /// <param name="id">State or Local Id.</param>
+        /// <returns>Single xStudents type.</returns>
+        public ResponseSingle<XStudentType> GetXStudent(string idType, string id)
+        {
+            return xStudentsObject.GetXStudent(idType, id);
+        }
+
+        /// <summary>
+        /// Request single xStudent by State or Local Id by school year.
+        /// </summary>
+        /// <param name="idType">Header value can be set to state or local.</param>
+        /// <param name="id">State or Local Id.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>Single xStudents type.</returns>
+        public ResponseSingle<XStudentType> GetXStudent(string idType, string id, int? schoolYear)
+        {
+            return xStudentsObject.GetXStudent(idType, id, schoolYear);
         }
 
         /// <summary>

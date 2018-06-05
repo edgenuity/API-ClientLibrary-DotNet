@@ -190,6 +190,8 @@ namespace RicOneApi.Tests
             Console.WriteLine(String.Format(format, "GetLastPage(GetXContactsByXLea, LEA_REFID)", xPress.GetLastPage(ServicePath.GetXContactsByXLea, LEA_REFID, NAVIGATION_PAGE_SIZE)));
             Console.WriteLine(String.Format(format, "GetLastPage(GetXContactsByXSchool, SCHOOL_REFID)", xPress.GetLastPage(ServicePath.GetXContactsByXSchool, SCHOOL_REFID, NAVIGATION_PAGE_SIZE)));
             Console.WriteLine(String.Format(format, "GetLastPage(GetXContactsByXStudent, STUDENT_REFID)", xPress.GetLastPage(ServicePath.GetXContactsByXStudent, STUDENT_REFID, NAVIGATION_PAGE_SIZE)));
+
+            Console.WriteLine("Finished...");
         }
 
         #region xLeas

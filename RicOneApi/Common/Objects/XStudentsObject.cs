@@ -4,8 +4,8 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-15
+ * Version     1.6.1
+ * Since       2018-06-04
  */
 namespace RicOneApi.Common.Objects
 {
@@ -142,6 +142,37 @@ namespace RicOneApi.Common.Objects
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentByRefId, refId, rh, rqp);
+            return rr.MakeSingleRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request single xStudent by State or Local Id.
+        /// </summary>
+        /// <param name="idType">Header value can be set to state or local.</param>
+        /// <param name="id">State or Local Id.</param>
+        /// <returns>Single xStudents type.</returns>
+        internal ResponseSingle<XStudentType> GetXStudent(string idType, string id)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(idType, id);
+            RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentById, rh, rqp);
+            return rr.MakeSingleRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request single xStudent by State or Local Id by school year.
+        /// </summary>
+        /// <param name="idType">Header value can be set to state or local.</param>
+        /// <param name="id">State or Local Id.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>Single xStudents type.</returns>
+        internal ResponseSingle<XStudentType> GetXStudent(string idType, string id, int? schoolYear)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(idType, id, schoolYear);
+            RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentById, rh, rqp);
             return rr.MakeSingleRequest<XStudentType, XStudentCollectionType>(rc, rp);
         }
 

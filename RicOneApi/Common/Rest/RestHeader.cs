@@ -5,6 +5,9 @@
  */
 namespace RicOneApi.Common.Rest
 {
+    /// <summary>
+    /// Accessor class for request headers. This includes paging, id, and shcool year. 
+    /// </summary>
     class RestHeader
     {
         private int? navigationPage;
