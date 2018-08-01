@@ -6,8 +6,8 @@ using RicOneApi.Common.Objects;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.1
- * Since       2018-05-31
+ * Version     1.6.2
+ * Since       2018-07-31
  * Filename    XPress.cs
  */
 namespace RicOneApi.Api
@@ -2482,11 +2482,23 @@ namespace RicOneApi.Api
         /// </summary>
         /// <param name="servicePath">The requested service path.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
-        /// <param name="schoolYear"></param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Integer value.</returns>
         public int GetLastPage(ServicePath servicePath, int? navigationPageSize, int? schoolYear)
         {
             return getLastPageObject.GetLastPage(servicePath, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Returns the max page value for specified service path object.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns></returns>
+        public int GetLastPage(ServicePath servicePath, int? navigationPageSize, string opaqueMarker)
+        {
+            return getLastPageObject.GetLastPage(servicePath, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -2507,7 +2519,7 @@ namespace RicOneApi.Api
         /// <param name="servicePath">The requested service path.</param>
         /// <param name="refId">RefId of xObject.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
-        /// <param name="schoolYear"></param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Integer value.</returns>
         public int GetLastPage(ServicePath servicePath, string refId, int? navigationPageSize, int? schoolYear)
         {

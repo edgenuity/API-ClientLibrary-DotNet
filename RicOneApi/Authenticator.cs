@@ -1,24 +1,20 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.5.3
- * Since       2017-09-26
+ * Version     1.6.2
+ * Since       2018-07-31
  * Filename    Authenticator.cs
  */
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RestSharp;
-using RestSharp.Authenticators;
 using RicOneApi.Models.Authentication;
-using Newtonsoft.Json;
 using RicOneApi.Exceptions;
 
 namespace RicOneApi.Api
 {
     /// <summary>
-    /// Contains methods to authenticate and pull data from auth server
+    /// Contains methods to authenticate and pull data from auth server.
     /// </summary>
     public class Authenticator
     {
@@ -163,6 +159,25 @@ namespace RicOneApi.Api
                 }
             }
             return endpoints;
+        }
+
+        /// <summary>
+        /// A single endpoint an application is associated with and it's details.
+        /// </summary>
+        /// <param name="providerId">The providerId to be returned.</param>
+        /// <returns>A single Endpoint type.</returns>
+        public Endpoint GetEndpoint(string providerId)
+        {
+            Endpoint endpoint = null;
+
+            foreach (Endpoint e in _response.Data.endpoint)
+            {
+                if(e.provider_id.Equals(providerId))
+                {
+                    endpoint = e;
+                }
+            }
+            return endpoint;
         }
     }
 }

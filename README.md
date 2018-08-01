@@ -36,6 +36,16 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.6.2
+* Added method to get the last page on Changes Since requests
+    ```csharp
+    GetLastPage(ServicePath servicePath, int? navigationPageSize, string opaqueMarker)
+    ```
+* Added new method to Authenticator that returns a single endpoint
+    ```csharp
+    Authenticator.GetEndpoint(providerId)
+    ```
+
 ### v1.6.1
 * Added support to return responses as JSON or XML strings.
 	```csharp

@@ -6,7 +6,7 @@
     <members>
         <member name="T:RicOneApi.Api.Authenticator">
             <summary>
-            Contains methods to authenticate and pull data from auth server
+            Contains methods to authenticate and pull data from auth server.
             </summary>
         </member>
         <member name="P:RicOneApi.Api.Authenticator.Instance">
@@ -62,6 +62,13 @@
             <param name="providerId">The providerId to be returned.</param>
             <param name="returnAllEndpoints">All endpoints the application is associated with.</param>
             <returns>A list of type Endpoint if Boolean set to true otherwise a single endpoint.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.Authenticator.GetEndpoint(System.String)">
+            <summary>
+            A single endpoint an application is associated with and it's details.
+            </summary>
+            <param name="providerId">The providerId to be returned.</param>
+            <returns>A single Endpoint type.</returns>
         </member>
         <member name="T:RicOneApi.Api.XPress">
             <summary>
@@ -1825,8 +1832,17 @@
             </summary>
             <param name="servicePath">The requested service path.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
-            <param name="schoolYear"></param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>Integer value.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetLastPage(RicOneApi.Common.Objects.ServicePath,System.Nullable{System.Int32},System.String)">
+            <summary>
+            Returns the max page value for specified service path object.
+            </summary>
+            <param name="servicePath">The requested service path.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns></returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetLastPage(RicOneApi.Common.Objects.ServicePath,System.String,System.Nullable{System.Int32})">
             <summary>
@@ -1844,7 +1860,7 @@
             <param name="servicePath">The requested service path.</param>
             <param name="refId">RefId of xObject.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
-            <param name="schoolYear"></param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>Integer value.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.CreateXStaffUsers(System.String)">
@@ -2031,7 +2047,16 @@
             </summary>
             <param name="servicePath">The requested service path.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
-            <param name="schoolYear"></param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>Integer value.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.GetLastPageObject.GetLastPage(RicOneApi.Common.Objects.ServicePath,System.Nullable{System.Int32},System.String)">
+            <summary>
+            Returns the max page value for specified service path object from a given point.
+            </summary>
+            <param name="servicePath">The requested service path.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>Integer value.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.GetLastPageObject.GetLastPage(RicOneApi.Common.Objects.ServicePath,System.String,System.Nullable{System.Int32})">
@@ -2050,7 +2075,7 @@
             <param name="servicePath">The requested service path.</param>
             <param name="refId">RefId of xObject.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
-            <param name="schoolYear"></param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>Integer value.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.ServicePath">

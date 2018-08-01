@@ -5,8 +5,8 @@ using System;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-21
+ * Version     1.6.2
+ * Since       2018-07-31
  */
 namespace RicOneApi.Common.Objects
 {
@@ -108,7 +108,7 @@ namespace RicOneApi.Common.Objects
         /// </summary>
         /// <param name="servicePath">The requested service path.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
-        /// <param name="schoolYear"></param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Integer value.</returns>
         internal int GetLastPage(ServicePath servicePath, int? navigationPageSize, int? schoolYear)
         {
@@ -117,6 +117,81 @@ namespace RicOneApi.Common.Objects
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
             
+            try
+            {
+                switch (servicePath.GetServicePathName())
+                {
+                    case "GetXLeas":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeas, rh, rqp);
+                            rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+                            break;
+                        }
+                    case "GetXSchools":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXSchools, rh, rqp);
+                            rr.MakeAllRequest<XSchoolType, XSchoolCollectionType>(rc, rp);
+                            break;
+                        }
+                    case "GetXCalendars":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXCalendars, rh, rqp);
+                            rr.MakeAllRequest<XCalendarType, XCalendarCollectionType>(rc, rp);
+                            break;
+                        }
+                    case "GetXCourses":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXCourses, rh, rqp);
+                            rr.MakeAllRequest<XCourseType, XCourseCollectionType>(rc, rp);
+                            break;
+                        }
+                    case "GetXRosters":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosters, rh, rqp);
+                            rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
+                            break;
+                        }
+                    case "GetXStaffs":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStaffs, rh, rqp);
+                            rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
+                            break;
+                        }
+                    case "GetXStudents":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudents, rh, rqp);
+                            rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+                            break;
+                        }
+                    case "GetXContacts":
+                        {
+                            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContacts, rh, rqp);
+                            rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
+                            break;
+                        }
+                }
+                return rr.NavigationLastPage;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Returns the max page value for specified service path object from a given point.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>Integer value.</returns>
+        internal int GetLastPage(ServicePath servicePath, int? navigationPageSize, string opaqueMarker)
+        {
+            int navigationPage = 1;
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+
             try
             {
                 switch (servicePath.GetServicePathName())
@@ -286,7 +361,7 @@ namespace RicOneApi.Common.Objects
         /// <param name="servicePath">The requested service path.</param>
         /// <param name="refId">RefId of xObject.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
-        /// <param name="schoolYear"></param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Integer value.</returns>
         internal int GetLastPage(ServicePath servicePath, string refId, int? navigationPageSize, int? schoolYear)
         {
