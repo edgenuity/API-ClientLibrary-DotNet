@@ -3,8 +3,8 @@ using System;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.6.3
+ * Since       2018-08-15
  */
 namespace RicOneApi.Common.Rest
 {
@@ -42,6 +42,8 @@ namespace RicOneApi.Common.Rest
         public ServicePath ServicePath { get => servicePath; set => servicePath = value; }
         internal RestHeader RestHeader { get => restHeader; set => restHeader = value; }
         internal RestQueryParameter RestQueryParameter { get => restQueryParameter; set => restQueryParameter = value; }
+
+        internal bool HasRefId() { return !string.IsNullOrEmpty(refId); }
 
         public override string ToString()
         {

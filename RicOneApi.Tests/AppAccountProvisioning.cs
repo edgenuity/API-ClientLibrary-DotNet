@@ -27,11 +27,15 @@ namespace RicOneApi.Tests
                 //Staff
                 //xPress.CreateXStaffUsers(SCHOOL_REFID);
                 //xPress.DeleteXStaffUsers(SCHOOL_REFID);
-                //XStaffs_GetXStaffsAccounts(xPress);
+                //xPress.DeleteXStaffPasswords(SCHOOL_REFID);
+                //xPress.DeleteXStaffUsernames(SCHOOL_REFID);
+                XStaffs_GetXStaffsAccounts(xPress);
 
                 //Student
                 //xPress.CreateXStudentUsers(SCHOOL_REFID);
                 //xPress.DeleteXStudentUsers(SCHOOL_REFID);
+                //xPress.DeleteXStudentPasswords(SCHOOL_REFID);
+                //xPress.DeleteXStudentUsernames(SCHOOL_REFID);
                 //XStudents_GetXStudentsAccounts(xPress);
 
                 Console.Read();

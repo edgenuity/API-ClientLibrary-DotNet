@@ -1,7 +1,7 @@
 ﻿/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.6.3
+ * Since       2018-08-14
  */
 namespace RicOneApi.Common.Rest
 {
@@ -32,6 +32,15 @@ namespace RicOneApi.Common.Rest
 
         public bool HasOpaqueMarker() => !string.IsNullOrEmpty(opaqueMarker);
 
+        internal bool HasAUPP()
+        {
+            if(aupp != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool IsCreateUsers()
         {
             if(aupp != null)
@@ -46,6 +55,24 @@ namespace RicOneApi.Common.Rest
             if (aupp != null)
             {
                 return aupp.Equals(AUPPEnum.DELETE);
+            }
+            return false;
+        }
+
+        public bool IsDeletePasswords()
+        {
+            if(aupp != null)
+            {
+                return aupp.Equals(AUPPEnum.DELETEPASSWORDS);
+            }
+            return false;
+        }
+
+        public bool IsDeleteUsernames()
+        {
+            if(aupp != null)
+            {
+                return aupp.Equals(AUPPEnum.DELETEUSERNAMES);
             }
             return false;
         }

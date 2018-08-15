@@ -4,8 +4,8 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-22
+ * Version     1.6.3
+ * Since       2018-08-14
  */
 namespace RicOneApi.Common.Objects
 {
@@ -32,27 +32,52 @@ namespace RicOneApi.Common.Objects
         /// Request creation of xStaffs usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStaffs type.</returns>
-        internal ResponseMulti<XStaffType> CreateXStaffUsers(string refId)
+        internal void CreateXStaffUsers(string refId)
         {
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStaffsByXSchool, refId, rh, rqp);
-            return rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
+            rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
         }
+
         /// <summary>
         /// Request deletion of generated xStaffs passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStaffs type.</returns>
-        internal ResponseMulti<XStaffType> DeleteXStaffUsers(string refId)
+        internal void DeleteXStaffUsers(string refId)
         {
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStaffsByXSchool, refId, rh, rqp);
-            return rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
+            rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStaffs passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        internal void DeleteXStaffPasswords(string refId)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEPASSWORDS);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStaffsByXSchool, refId, rh, rqp);
+            rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStaffs usernames and passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        internal void DeleteXStaffUsernames(string refId)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMES);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStaffsByXSchool, refId, rh, rqp);
+            rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
         }
 
         /// <summary>
@@ -89,28 +114,52 @@ namespace RicOneApi.Common.Objects
         /// Request creation of xStudents usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStudents type.</returns>
-        internal ResponseMulti<XStudentType> CreateXStudentUsers(string refId)
+        internal void CreateXStudentUsers(string refId)
         {
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
-            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+            rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
         }
 
         /// <summary>
         /// Request deletion of generated xStudents passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStudents type.</returns>
-        internal ResponseMulti<XStudentType> DeleteXStudentUsers(string refId)
+        internal void DeleteXStudentUsers(string refId)
         {
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
-            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+            rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStudents passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        internal void DeleteXStudentPasswords(string refId)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEPASSWORDS);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
+            rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStudents usernames and passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        internal void DeleteXStudentUsernames(string refId)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMES);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
+            rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
         }
 
         /// <summary>
@@ -128,7 +177,7 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
-        /// Request generated xStudents usernames and passwords by xSchool.
+        /// Request generated xStudents usernames and passwords by xSchool with paging.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>

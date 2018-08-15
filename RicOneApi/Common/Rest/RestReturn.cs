@@ -6,8 +6,8 @@ using System.Linq;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.1
- * Since       2018-06-01
+ * Version     1.6.3
+ * Since       2018-08-15
  */
 namespace RicOneApi.Common.Rest
 {
@@ -113,6 +113,7 @@ namespace RicOneApi.Common.Rest
                 request.AddHeader("NavigationPage", rp.RestHeader.GetNavigationPage());
                 request.AddHeader("NavigationPageSize", rp.RestHeader.GetNavigationPageSize());
             }
+
             if(rp.RestHeader.HasIdType())
             {
                 request.AddParameter("id", rp.RestHeader.Id, ParameterType.UrlSegment);
@@ -126,17 +127,30 @@ namespace RicOneApi.Common.Rest
             {
                 request.AddQueryParameter("changesSinceMarker", rp.RestQueryParameter.OpaqueMarker);
             }
-            if(rp.RestQueryParameter.IsCreateUsers())
+            if(rp.RestQueryParameter.HasAUPP())
             {
-                request.AddQueryParameter("createUsers", "true");
-            }
-            if (rp.RestQueryParameter.IsDeleteUsers())
-            {
-                request.AddQueryParameter("deleteUsers", "true");
-            }
-            if (rp.RestQueryParameter.IsGetUsers())
-            {
-                request.AddQueryParameter("getUsers", "true");
+                if (rp.RestQueryParameter.IsCreateUsers())
+                {
+                    request.AddQueryParameter("createUsers", "true");
+                }
+                else if (rp.RestQueryParameter.IsDeleteUsers())
+                {
+                    request.AddQueryParameter("deleteUsers", "true");
+                }
+                else if (rp.RestQueryParameter.IsDeletePasswords())
+                {
+                    request.AddQueryParameter("deleteUsers", "true");
+                    request.AddQueryParameter("deletePasswords", "true");
+                }
+                else if (rp.RestQueryParameter.IsDeleteUsernames())
+                {
+                    request.AddQueryParameter("deleteUsers", "true");
+                    request.AddQueryParameter("usernames", "true");
+                }
+                else if (rp.RestQueryParameter.IsGetUsers())
+                {
+                    request.AddQueryParameter("getUsers", "true");
+                }
             }
             return request;
         }

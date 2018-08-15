@@ -36,6 +36,19 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.6.3
+* Changed return type of AUPP creates and deletes to void as data is not returned.
+* Added additional AUPP methods for deleting generated xStaff and xStudent usernames and passwords.
+    ```csharp
+    // xStaffs
+    DeleteXStaffPasswords(string refId)
+    DeleteXStaffUsernames(string refId)
+
+    // xStudents
+    DeleteXStudentPasswords(string refId)
+    DeleteXStudentUsernames(string refId)
+    ```
+
 ### v1.6.2
 * Added method to get the last page on Changes Since requests
     ```csharp

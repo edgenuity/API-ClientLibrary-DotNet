@@ -6,8 +6,8 @@ using RicOneApi.Common.Objects;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.2
- * Since       2018-07-31
+ * Version     1.6.3
+ * Since       2018-08-14
  * Filename    XPress.cs
  */
 namespace RicOneApi.Api
@@ -2533,20 +2533,36 @@ namespace RicOneApi.Api
         /// Request creation of xStaffs usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStaffs type.</returns>
-        public ResponseMulti<XStaffType> CreateXStaffUsers(string refId)
+        public void CreateXStaffUsers(string refId)
         {
-            return aUPPObject.CreateXStaffUsers(refId);
+            aUPPObject.CreateXStaffUsers(refId);
         }
 
         /// <summary>
         /// Request deletion of generated xStaffs passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStaffs type.</returns>
-        public ResponseMulti<XStaffType> DeleteXStaffUsers(string refId)
+        public void DeleteXStaffUsers(string refId)
         {
-            return aUPPObject.DeleteXStaffUsers(refId);
+            aUPPObject.DeleteXStaffUsers(refId);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStaffs passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        public void DeleteXStaffPasswords(string refId)
+        {
+            aUPPObject.DeleteXStaffPasswords(refId);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStaffs usernames and passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        public void DeleteXStaffUsernames(string refId)
+        {
+            aUPPObject.DeleteXStaffUsernames(refId);
         }
 
         /// <summary>
@@ -2575,20 +2591,36 @@ namespace RicOneApi.Api
         /// Request creation of xStudents usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStudents type.</returns>
-        public ResponseMulti<XStudentType> CreateXStudentUsers(string refId)
+        public void CreateXStudentUsers(string refId)
         {
-            return aUPPObject.CreateXStudentUsers(refId);
+            aUPPObject.CreateXStudentUsers(refId);
         }
 
         /// <summary>
         /// Request deletion of generated xStudents passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        /// <returns>List of xStudents type.</returns>
-        public ResponseMulti<XStudentType> DeleteXStudentUsers(string refId)
+        public void DeleteXStudentUsers(string refId)
         {
-            return aUPPObject.DeleteXStudentUsers(refId);
+            aUPPObject.DeleteXStudentUsers(refId);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStudents passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        public void DeleteXStudentPasswords(string refId)
+        {
+            aUPPObject.DeleteXStudentPasswords(refId);
+        }
+
+        /// <summary>
+        /// Request deletion of generated xStudents usernames and passwords by xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        public void DeleteXStudentUsernames(string refId)
+        {
+            aUPPObject.DeleteXStudentUsernames(refId);
         }
 
         /// <summary>
@@ -2602,7 +2634,7 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
-        /// Request generated xStudents usernames and passwords by xSchool.
+        /// Request generated xStudents usernames and passwords by xSchool with paging.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
         /// <param name="navigationPage">Page to retrieve.</param>

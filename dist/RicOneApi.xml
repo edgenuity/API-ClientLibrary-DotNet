@@ -1868,14 +1868,24 @@
             Request creation of xStaffs usernames and passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStaffs type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.DeleteXStaffUsers(System.String)">
             <summary>
             Request deletion of generated xStaffs passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.DeleteXStaffPasswords(System.String)">
+            <summary>
+            Request deletion of generated xStaffs passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.DeleteXStaffUsernames(System.String)">
+            <summary>
+            Request deletion of generated xStaffs usernames and passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXStaffUsers(System.String)">
             <summary>
@@ -1898,14 +1908,24 @@
             Request creation of xStudents usernames and passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStudents type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.DeleteXStudentUsers(System.String)">
             <summary>
             Request deletion of generated xStudents passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.DeleteXStudentPasswords(System.String)">
+            <summary>
+            Request deletion of generated xStudents passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.DeleteXStudentUsernames(System.String)">
+            <summary>
+            Request deletion of generated xStudents usernames and passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXStudentUsers(System.String)">
             <summary>
@@ -1916,7 +1936,7 @@
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXStudentUsers(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Request generated xStudents usernames and passwords by xSchool.
+            Request generated xStudents usernames and passwords by xSchool with paging.
             </summary>
             <param name="refId">RefId of xSchool.</param>
             <param name="navigationPage">Page to retrieve.</param>
@@ -1966,14 +1986,24 @@
             Request creation of xStaffs usernames and passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStaffs type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStaffUsers(System.String)">
             <summary>
             Request deletion of generated xStaffs passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStaffPasswords(System.String)">
+            <summary>
+            Request deletion of generated xStaffs passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStaffUsernames(System.String)">
+            <summary>
+            Request deletion of generated xStaffs usernames and passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
         </member>
         <member name="M:RicOneApi.Common.Objects.AUPPObject.GetXStaffUsers(System.String)">
             <summary>
@@ -1996,14 +2026,24 @@
             Request creation of xStudents usernames and passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStudents type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStudentUsers(System.String)">
             <summary>
             Request deletion of generated xStudents passwords by xSchool.
             </summary>
             <param name="refId">RefId of xSchool.</param>
-            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStudentPasswords(System.String)">
+            <summary>
+            Request deletion of generated xStudents passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStudentUsernames(System.String)">
+            <summary>
+            Request deletion of generated xStudents usernames and passwords by xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
         </member>
         <member name="M:RicOneApi.Common.Objects.AUPPObject.GetXStudentUsers(System.String)">
             <summary>
@@ -2014,7 +2054,7 @@
         </member>
         <member name="M:RicOneApi.Common.Objects.AUPPObject.GetXStudentUsers(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Request generated xStudents usernames and passwords by xSchool.
+            Request generated xStudents usernames and passwords by xSchool with paging.
             </summary>
             <param name="refId">RefId of xSchool.</param>
             <param name="navigationPage">Page to retrieve.</param>
