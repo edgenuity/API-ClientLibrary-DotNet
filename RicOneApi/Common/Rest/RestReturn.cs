@@ -137,12 +137,7 @@ namespace RicOneApi.Common.Rest
                 {
                     request.AddQueryParameter("deleteUsers", "true");
                 }
-                else if (rp.RestQueryParameter.IsDeletePasswords())
-                {
-                    request.AddQueryParameter("deleteUsers", "true");
-                    request.AddQueryParameter("deletePasswords", "true");
-                }
-                else if (rp.RestQueryParameter.IsDeleteUsernames())
+                else if (rp.RestQueryParameter.IsDeleteUsernamesPasswords())
                 {
                     request.AddQueryParameter("deleteUsers", "true");
                     request.AddQueryParameter("usernames", "true");

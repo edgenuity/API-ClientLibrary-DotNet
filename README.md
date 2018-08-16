@@ -41,12 +41,10 @@ const string clientSecret = "YOUR PASSWORD";
 * Added additional AUPP methods for deleting generated xStaff and xStudent usernames and passwords.
     ```csharp
     // xStaffs
-    DeleteXStaffPasswords(string refId)
-    DeleteXStaffUsernames(string refId)
+    DeleteXStaffUsernamesPasswords(string refId)
 
     // xStudents
-    DeleteXStudentPasswords(string refId)
-    DeleteXStudentUsernames(string refId)
+    DeleteXStudentUsernamesPasswords(string refId)
     ```
 
 ### v1.6.2

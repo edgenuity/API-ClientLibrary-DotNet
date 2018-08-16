@@ -55,27 +55,14 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
-        /// Request deletion of generated xStaffs passwords by xSchool.
-        /// </summary>
-        /// <param name="refId">RefId of xSchool.</param>
-        internal void DeleteXStaffPasswords(string refId)
-        {
-            RestReturn rr = new RestReturn();
-            RestHeader rh = new RestHeader();
-            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEPASSWORDS);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStaffsByXSchool, refId, rh, rqp);
-            rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
-        }
-
-        /// <summary>
         /// Request deletion of generated xStaffs usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        internal void DeleteXStaffUsernames(string refId)
+        internal void DeleteXStaffUsernamesPasswords(string refId)
         {
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
-            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMES);
+            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMESPASSWORDS);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStaffsByXSchool, refId, rh, rqp);
             rr.MakeAllRequest<XStaffType, XStaffCollectionType>(rc, rp);
         }
@@ -137,27 +124,14 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
-        /// Request deletion of generated xStudents passwords by xSchool.
-        /// </summary>
-        /// <param name="refId">RefId of xSchool.</param>
-        internal void DeleteXStudentPasswords(string refId)
-        {
-            RestReturn rr = new RestReturn();
-            RestHeader rh = new RestHeader();
-            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEPASSWORDS);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
-            rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
-        }
-
-        /// <summary>
         /// Request deletion of generated xStudents usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
-        internal void DeleteXStudentUsernames(string refId)
+        internal void DeleteXStudentUsernamesPasswords(string refId)
         {
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
-            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMES);
+            RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMESPASSWORDS);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
             rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
         }

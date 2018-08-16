@@ -1875,13 +1875,7 @@
             </summary>
             <param name="refId">RefId of xSchool.</param>
         </member>
-        <member name="M:RicOneApi.Api.XPress.DeleteXStaffPasswords(System.String)">
-            <summary>
-            Request deletion of generated xStaffs passwords by xSchool.
-            </summary>
-            <param name="refId">RefId of xSchool.</param>
-        </member>
-        <member name="M:RicOneApi.Api.XPress.DeleteXStaffUsernames(System.String)">
+        <member name="M:RicOneApi.Api.XPress.DeleteXStaffUsernamesPasswords(System.String)">
             <summary>
             Request deletion of generated xStaffs usernames and passwords by xSchool.
             </summary>
@@ -1915,13 +1909,7 @@
             </summary>
             <param name="refId">RefId of xSchool.</param>
         </member>
-        <member name="M:RicOneApi.Api.XPress.DeleteXStudentPasswords(System.String)">
-            <summary>
-            Request deletion of generated xStudents passwords by xSchool.
-            </summary>
-            <param name="refId">RefId of xSchool.</param>
-        </member>
-        <member name="M:RicOneApi.Api.XPress.DeleteXStudentUsernames(System.String)">
+        <member name="M:RicOneApi.Api.XPress.DeleteXStudentUsernamesPasswords(System.String)">
             <summary>
             Request deletion of generated xStudents usernames and passwords by xSchool.
             </summary>
@@ -1993,13 +1981,7 @@
             </summary>
             <param name="refId">RefId of xSchool.</param>
         </member>
-        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStaffPasswords(System.String)">
-            <summary>
-            Request deletion of generated xStaffs passwords by xSchool.
-            </summary>
-            <param name="refId">RefId of xSchool.</param>
-        </member>
-        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStaffUsernames(System.String)">
+        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStaffUsernamesPasswords(System.String)">
             <summary>
             Request deletion of generated xStaffs usernames and passwords by xSchool.
             </summary>
@@ -2033,13 +2015,7 @@
             </summary>
             <param name="refId">RefId of xSchool.</param>
         </member>
-        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStudentPasswords(System.String)">
-            <summary>
-            Request deletion of generated xStudents passwords by xSchool.
-            </summary>
-            <param name="refId">RefId of xSchool.</param>
-        </member>
-        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStudentUsernames(System.String)">
+        <member name="M:RicOneApi.Common.Objects.AUPPObject.DeleteXStudentUsernamesPasswords(System.String)">
             <summary>
             Request deletion of generated xStudents usernames and passwords by xSchool.
             </summary>

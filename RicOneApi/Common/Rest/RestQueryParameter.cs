@@ -59,20 +59,11 @@ namespace RicOneApi.Common.Rest
             return false;
         }
 
-        public bool IsDeletePasswords()
+        internal bool IsDeleteUsernamesPasswords()
         {
             if(aupp != null)
             {
-                return aupp.Equals(AUPPEnum.DELETEPASSWORDS);
-            }
-            return false;
-        }
-
-        public bool IsDeleteUsernames()
-        {
-            if(aupp != null)
-            {
-                return aupp.Equals(AUPPEnum.DELETEUSERNAMES);
+                return aupp.Equals(AUPPEnum.DELETEUSERNAMESPASSWORDS);
             }
             return false;
         }

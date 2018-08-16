@@ -12,8 +12,7 @@ namespace RicOneApi.Common.Rest
     {
         internal static readonly AUPPEnum CREATE = new AUPPEnum("create");
         internal static readonly AUPPEnum DELETE = new AUPPEnum("delete");
-        internal static readonly AUPPEnum DELETEPASSWORDS = new AUPPEnum("deletePasswords");
-        internal static readonly AUPPEnum DELETEUSERNAMES = new AUPPEnum("deleteUsernames");
+        internal static readonly AUPPEnum DELETEUSERNAMESPASSWORDS = new AUPPEnum("delete");
         internal static readonly AUPPEnum GET = new AUPPEnum("get");
 
         private AUPPEnum(string value)
