@@ -76,6 +76,7 @@
     <Compile Include="Exceptions\AuthenticationException.cs" />
     <Compile Include="Models\Authentication\DecodedToken.cs" />
     <Compile Include="Models\XPress\ICollectionType.cs" />
+    <Compile Include="Models\XPress\XMetadata.cs" />
     <Compile Include="Models\XPress\XOtherCodeListType.cs" />
     <Compile Include="Models\XPress\XOtherCodeType.cs" />
     <Compile Include="Common\Rest\ResponseMulti.cs" />

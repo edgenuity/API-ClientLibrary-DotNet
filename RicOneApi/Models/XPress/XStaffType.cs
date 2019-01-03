@@ -3,8 +3,8 @@ using System;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.7
+ * Since       2018-12-20
  * Filename    XStaffType.cs
  */
 namespace RicOneApi.Models.XPress
@@ -26,6 +26,7 @@ namespace RicOneApi.Models.XPress
             email = new XEmailType();
             primaryAssignment = new XStaffPersonAssignmentType();
             otherAssignments = new XStaffPersonAssignmentListType();
+            Metadata = new XMetadata();
         }
         [DeserializeAs(Name = "@refId")]
         public string refId { get; set; }
@@ -38,6 +39,7 @@ namespace RicOneApi.Models.XPress
         public XEmailType email { get; set; }
         public XStaffPersonAssignmentType primaryAssignment { get; set; }
         public XStaffPersonAssignmentListType otherAssignments { get; set; }
+        public XMetadata Metadata { get; set; }
 
         public XStaffCollectionType GetObjects { get; set; }
         public XStaffType GetObject

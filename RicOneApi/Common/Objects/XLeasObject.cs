@@ -4,8 +4,8 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.7.0
+ * Since       2018-12-20
  */
 namespace RicOneApi.Common.Objects
 {
@@ -239,6 +239,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXSchool(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xLeas associated to a specific xRoster by refId.
         /// </summary>
         /// <param name="refId">RefId of xRoster.</param>
@@ -296,6 +328,38 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXRoster, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xRoster.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXRoster(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXRoster, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xRoster with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXRoster(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXRoster, refId, rh, rqp);
             return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
         }
@@ -363,6 +427,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStaff.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXStaff(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXStaff, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStaff with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXStaff(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXStaff, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xLeas associated to a specific xStudent by refId.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
@@ -394,7 +490,7 @@ namespace RicOneApi.Common.Objects
         /// <summary>
         /// Request xLeas associated to a specific xStudent by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xStudent.</param></param>
+        /// <param name="refId">RefId of xStudent.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xLeas type.</returns>
@@ -420,6 +516,38 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXStudent, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStudent.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXStudent(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXStudent, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStudent with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
         }
@@ -482,6 +610,38 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXContact, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xContact.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXContact(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXContact, refId, rh, rqp);
+            return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xContact with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        internal ResponseMulti<XLeaType> GetXLeasByXContact(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXLeasByXContact, refId, rh, rqp);
             return rr.MakeAllRequest<XLeaType, XLeaCollectionType>(rc, rp);
         }

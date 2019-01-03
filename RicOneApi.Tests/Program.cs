@@ -1283,8 +1283,6 @@ namespace RicOneApi.Tests
                     Console.WriteLine("schoolRefId: " + r.schoolRefId);
                     Console.WriteLine("schoolSectionId: " + r.schoolSectionId);
                     Console.WriteLine("schoolYear: " + r.schoolYear);
-                    Console.WriteLine("sessionCode: " + r.sessionCode);
-                    Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
                     foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
@@ -1349,8 +1347,6 @@ namespace RicOneApi.Tests
                 Console.WriteLine("schoolRefId: " + r.schoolRefId);
                 Console.WriteLine("schoolSectionId: " + r.schoolSectionId);
                 Console.WriteLine("schoolYear: " + r.schoolYear);
-                Console.WriteLine("sessionCode: " + r.sessionCode);
-                Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                 Console.WriteLine("##### BEGIN MEETING TIMES #####");
                 foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
@@ -1414,8 +1410,6 @@ namespace RicOneApi.Tests
                     Console.WriteLine("schoolRefId: " + r.schoolRefId);
                     Console.WriteLine("schoolSectionId: " + r.schoolSectionId);
                     Console.WriteLine("schoolYear: " + r.schoolYear);
-                    Console.WriteLine("sessionCode: " + r.sessionCode);
-                    Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
                     foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
@@ -1480,8 +1474,6 @@ namespace RicOneApi.Tests
                     Console.WriteLine("schoolRefId: " + r.schoolRefId);
                     Console.WriteLine("schoolSectionId: " + r.schoolSectionId);
                     Console.WriteLine("schoolYear: " + r.schoolYear);
-                    Console.WriteLine("sessionCode: " + r.sessionCode);
-                    Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
                     foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
@@ -1546,8 +1538,6 @@ namespace RicOneApi.Tests
                     Console.WriteLine("schoolRefId: " + r.schoolRefId);
                     Console.WriteLine("schoolSectionId: " + r.schoolSectionId);
                     Console.WriteLine("schoolYear: " + r.schoolYear);
-                    Console.WriteLine("sessionCode: " + r.sessionCode);
-                    Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
                     foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
@@ -1612,8 +1602,6 @@ namespace RicOneApi.Tests
                     Console.WriteLine("schoolRefId: " + r.schoolRefId);
                     Console.WriteLine("schoolSectionId: " + r.schoolSectionId);
                     Console.WriteLine("schoolYear: " + r.schoolYear);
-                    Console.WriteLine("sessionCode: " + r.sessionCode);
-                    Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
                     foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)
@@ -1678,8 +1666,6 @@ namespace RicOneApi.Tests
                     Console.WriteLine("schoolRefId: " + r.schoolRefId);
                     Console.WriteLine("schoolSectionId: " + r.schoolSectionId);
                     Console.WriteLine("schoolYear: " + r.schoolYear);
-                    Console.WriteLine("sessionCode: " + r.sessionCode);
-                    Console.WriteLine("schoolCalendarRefId: " + r.schoolCalendarRefId);
 
                     Console.WriteLine("##### BEGIN MEETING TIMES #####");
                     foreach (XMeetingTimeType mt in r.meetingTimes.meetingTime)

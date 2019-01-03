@@ -1,4 +1,4 @@
-Copyright © 2014-2017 New York State Education Department. All rights reserved.
+Copyright © 2014-2019 New York State Education Department. All rights reserved.
 
 # RICOne API .NET Client Library
 The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/).
@@ -36,6 +36,29 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.7.0
+* Removed depricated fields from XRosterType.
+    * sessionCode - use sessionCode in XMeetingTimeType
+    * schoolCalendarRefId - use schoolCalendarRefId XMeetingTimeType
+* Added School Year to all xPress types.
+    * Use new xPress object - XMetadata class
+    ```csharp
+    XPress xPress = new XPress();
+    List<XLeaType> xLeaTypeList = xPress.GetXLeas().Data;
+    foreach (XLeaType o in xLeaTypeList)
+    {
+        Console.WriteLine(o.Metadata.SchoolYear);
+    }
+    ```
+* Added changesSince to all service paths.
+* Deprecated the following AUPP methods. Creation and deletion is handled automatically by the API.
+    * CreateXStaffUsers(String refId)
+    * DeleteXStaffUsers(String refId)
+    * DeleteXStaffUsernamesPasswords(String refId)
+    * CreateXStudentUsers(String refId)
+    * DeleteXStudentUsers(String refId)
+    * DeleteXStudentUsernamesPasswords(String refId)
+
 ### v1.6.3
 * Changed return type of AUPP creates and deletes to void as data is not returned.
 * Added additional AUPP methods for deleting generated xStaff and xStudent usernames and passwords.

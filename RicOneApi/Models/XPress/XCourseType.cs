@@ -3,8 +3,8 @@ using RestSharp.Deserializers;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.7
+ * Since       2018-12-20
  * Filename    XCourseType.cs
  */
 namespace RicOneApi.Models.XPress
@@ -28,6 +28,7 @@ namespace RicOneApi.Models.XPress
             scedCourseCode = null;
             scedCourseLevelCode = null;
             scedCourseSubjectAreaCode = null;
+            Metadata = new XMetadata();
         }
         [DeserializeAs(Name = "@refId")]
         public string refId { get; set; }
@@ -42,6 +43,7 @@ namespace RicOneApi.Models.XPress
         public string scedCourseCode { get; set; }
         public string scedCourseLevelCode { get; set; }
         public string scedCourseSubjectAreaCode { get; set; }
+        public XMetadata Metadata { get; set; }
 
         public XCourseCollectionType GetObjects { get; set; }
         public XCourseType GetObject

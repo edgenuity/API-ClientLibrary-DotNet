@@ -3,8 +3,8 @@ using RestSharp.Deserializers;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.7
+ * Since       2018-12-20
  * Filename    XStudentType.cs
  */
 namespace RicOneApi.Models.XPress
@@ -34,6 +34,7 @@ namespace RicOneApi.Models.XPress
             academicSummary = new XAcademicSummaryType();
             studentContacts = new XStudentContactListType();
             languages = new XLanguageListType();
+            Metadata = new XMetadata();
 
         }
         [DeserializeAs(Name = "@refId")]
@@ -55,6 +56,7 @@ namespace RicOneApi.Models.XPress
         public XAcademicSummaryType academicSummary { get; set; }
         public XStudentContactListType studentContacts { get; set; }
         public XLanguageListType languages { get; set; }
+        public XMetadata Metadata { get; set; }
 
         public XStudentCollectionType GetObjects { get; set; }
         public XStudentType GetObject

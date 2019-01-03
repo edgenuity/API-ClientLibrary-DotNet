@@ -4,8 +4,8 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.1
- * Since       2018-06-04
+ * Version     1.7.0
+ * Since       2019-01-03
  */
 namespace RicOneApi.Common.Objects
 {
@@ -239,6 +239,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXLea(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXLea, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXLea, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xStudents associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -296,6 +328,38 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXSchool(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
         }
@@ -363,6 +427,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xRoster.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXRoster(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXRoster, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xRoster with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXRoster(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXRoster, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xStudents associated to a specific xStaff by refId.
         /// </summary>
         /// <param name="refId">RefId of xStaff.</param>
@@ -425,6 +521,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xStaff.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXStaff(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXStaff, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xStaff with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXStaff(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXStaff, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xStudents associated to a specific xContact by refId.
         /// </summary>
         /// <param name="refId">RefId of xContact.</param>
@@ -482,6 +610,38 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXContact, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xContact.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXContact(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXContact, refId, rh, rqp);
+            return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xContact with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        internal ResponseMulti<XStudentType> GetXStudentsByXContact(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXContact, refId, rh, rqp);
             return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
         }

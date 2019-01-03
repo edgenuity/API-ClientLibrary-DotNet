@@ -1,11 +1,12 @@
 ﻿using RestSharp;
 using RicOneApi.Common.Rest;
 using RicOneApi.Models.XPress;
+using System;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.3
- * Since       2018-08-14
+ * Version     1.7.0
+ * Since       2019-01-03
  */
 namespace RicOneApi.Common.Objects
 {
@@ -32,6 +33,7 @@ namespace RicOneApi.Common.Objects
         /// Request creation of xStaffs usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         internal void CreateXStaffUsers(string refId)
         {
             RestReturn rr = new RestReturn();
@@ -45,6 +47,7 @@ namespace RicOneApi.Common.Objects
         /// Request deletion of generated xStaffs passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         internal void DeleteXStaffUsers(string refId)
         {
             RestReturn rr = new RestReturn();
@@ -58,6 +61,7 @@ namespace RicOneApi.Common.Objects
         /// Request deletion of generated xStaffs usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         internal void DeleteXStaffUsernamesPasswords(string refId)
         {
             RestReturn rr = new RestReturn();
@@ -101,6 +105,7 @@ namespace RicOneApi.Common.Objects
         /// Request creation of xStudents usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         internal void CreateXStudentUsers(string refId)
         {
             RestReturn rr = new RestReturn();
@@ -114,6 +119,7 @@ namespace RicOneApi.Common.Objects
         /// Request deletion of generated xStudents passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         internal void DeleteXStudentUsers(string refId)
         {
             RestReturn rr = new RestReturn();
@@ -127,6 +133,7 @@ namespace RicOneApi.Common.Objects
         /// Request deletion of generated xStudents usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         internal void DeleteXStudentUsernamesPasswords(string refId)
         {
             RestReturn rr = new RestReturn();
@@ -165,35 +172,6 @@ namespace RicOneApi.Common.Objects
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXStudentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XStudentType, XStudentCollectionType>(rc, rp);
         }
-
-        ///// <summary>
-        ///// Request creation of xContacts usernames and passwords by xSchool.
-        ///// </summary>
-        ///// <param name="refId">RefId of xSchool.</param>
-        ///// <returns>List of xContacts type.</returns>
-        //private ResponseMulti<XContactType> CreateXContactUsers(string refId)
-        //{
-        //    RestReturn rr = new RestReturn();
-        //    RestHeader rh = new RestHeader();
-        //    RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE.Value);
-        //    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
-        //    return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
-        //}
-
-        ///// <summary>
-        ///// Request deletion of generated xContacts passwords by xSchool.
-        ///// </summary>
-        ///// <param name="refId">RefId of xSchool.</param>
-        ///// <returns>List of xContacts type.</returns>
-
-        //private ResponseMulti<XContactType> DeleteXContactUsers(string refId)
-        //{
-        //    RestReturn rr = new RestReturn();
-        //    RestHeader rh = new RestHeader();
-        //    RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE.Value);
-        //    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
-        //    return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
-        //}
 
         ///// <summary>
         ///// Request generated xContacts usernames and passwords by xSchool.

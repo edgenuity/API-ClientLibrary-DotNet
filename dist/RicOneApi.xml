@@ -193,6 +193,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXSchool(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXLeasByXRoster(System.String)">
             <summary>
             Request xLeas associated to a specific xRoster by refId.
@@ -225,6 +243,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXRoster(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xLeas type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXLeasByXStaff(System.String)">
@@ -261,6 +297,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXStaff(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXLeasByXStudent(System.String)">
             <summary>
             Request xLeas associated to a specific xStudent by refId.
@@ -276,7 +330,15 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:RicOneApi.Api.XPress.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})" -->
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xLeas associated to a specific xStudent by refId with paging.
+            </summary>
+            <param name="refId">RefId of xStudents.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Request xLeas associated to a specific xStudent by refId with paging by school year.
@@ -285,6 +347,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXStudent(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xLeas type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXLeasByXContact(System.String)">
@@ -321,6 +401,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXContact(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xContact.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXLeasByXContact(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xContact with paging.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchools">
             <summary>
             Request all xSchools.
@@ -348,6 +446,7 @@
             </summary>
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchools(System.String)">
@@ -432,6 +531,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXLea(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXCalendar(System.String)">
             <summary>
             Request xSchools associated to a specific xCalendar by refId.
@@ -464,6 +581,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXCalendar(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCalendar.
+            </summary>
+            <param name="refId">RefId of xCalendar.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXCalendar(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCalendar with paging.
+            </summary>
+            <param name="refId">RefId of xCalendar.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xSchools type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXCourse(System.String)">
@@ -500,6 +635,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXCourse(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCourse.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXCourse(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCourse with paging.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXRoster(System.String)">
             <summary>
             Request xSchools associated to a specific xRoster by refId.
@@ -532,6 +685,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXRoster(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xSchools type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXStaff(System.String)">
@@ -568,6 +739,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXStaff(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXStudent(System.String)">
             <summary>
             Request xSchools associated to a specific xStudent by refId.
@@ -602,6 +791,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXStudent(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXContact(System.String)">
             <summary>
             Request xSchools associated to a specific xContact by refId.
@@ -634,6 +841,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXContact(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xContact.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXSchoolsByXContact(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xContact with paging.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xSchools type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXCalendars">
@@ -731,6 +956,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xCalendars type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCalendarsByXLea(System.String,System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCalendarsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXCalendarsByXSchool(System.String)">
             <summary>
             Request xCalendars associated to a specific xSchool by refId.
@@ -763,6 +1006,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCalendarsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCalendarsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xCalendars type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXCourses">
@@ -860,6 +1121,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xCourses type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCoursesByXLea(System.String,System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCoursesByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXCoursesByXSchool(System.String)">
             <summary>
             Request xCourses associated to a specific xSchool by refId.
@@ -894,6 +1173,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xCourses type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCoursesByXSchool(System.String,System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCoursesByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXCoursesByXRoster(System.String)">
             <summary>
             Request xCourses associated to a specific xRoster by refId.
@@ -926,6 +1223,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCoursesByXRoster(System.String,System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXCoursesByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xCourses type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXRosters">
@@ -1023,6 +1338,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xRosters type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXLea(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXRostersByXSchool(System.String)">
             <summary>
             Request xRosters associated to a specific xSchool by refId.
@@ -1055,6 +1388,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXSchool(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xRosters type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXRostersByXCourse(System.String)">
@@ -1091,6 +1442,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xRosters type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXCourse(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xCourse.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXCourse(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xCourse with paging.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXRostersByXStaff(System.String)">
             <summary>
             Request xRosters associated to a specific xStaff by refId.
@@ -1125,6 +1494,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xRosters type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXStaff(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXRostersByXStudent(System.String)">
             <summary>
             Request xRosters associated to a specific xStudent by refId.
@@ -1157,6 +1544,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXStudent(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXRostersByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xRosters type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXStaffs">
@@ -1271,6 +1676,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXLea(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXStaffsByXSchool(System.String)">
             <summary>
             Request xStaffs associated to a specific xSchool by refId.
@@ -1303,6 +1726,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStaffs type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXStaffsByXCourse(System.String)">
@@ -1339,6 +1780,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXCourse(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xCourse.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXCourse(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xCourse with paging.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXStaffsByXRoster(System.String)">
             <summary>
             Request xStaffs associated to a specific xRoster by refId.
@@ -1373,6 +1832,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXRoster(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXStaffsByXStudent(System.String)">
             <summary>
             Request xStaffs associated to a specific xStudent by refId.
@@ -1405,6 +1882,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXStudent(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStaffsByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStaffs type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXStudents">
@@ -1519,6 +2014,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStudents type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXLea(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXStudentsByXSchool(System.String)">
             <summary>
             Request xStudents associated to a specific xSchool by refId.
@@ -1551,6 +2064,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStudents type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXStudentsByXRoster(System.String)">
@@ -1587,6 +2118,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStudents type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXRoster(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXStudentsByXStaff(System.String)">
             <summary>
             Request xStudents associated to a specific xStaff by refId.
@@ -1621,6 +2170,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStudents type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXStaff(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXStudentsByXContact(System.String)">
             <summary>
             Request xStudents associated to a specific xContact by refId.
@@ -1653,6 +2220,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXContact(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xContact.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXStudentsByXContact(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xContact with paging.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStudents type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXContacts">
@@ -1750,6 +2335,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xContacts type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXContactsByXLea(System.String,System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXContactsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXContactsByXSchool(System.String)">
             <summary>
             Request xContacts associated to a specific xSchool by refId.
@@ -1784,6 +2387,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xContacts type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXContactsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXContactsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetXContactsByXStudent(System.String)">
             <summary>
             Request xContacts associated to a specific xStudent by refId.
@@ -1816,6 +2437,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXContactsByXStudent(System.String,System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXContactsByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xContacts type.</returns>
         </member>
         <member name="M:RicOneApi.Api.XPress.GetLastPage(RicOneApi.Common.Objects.ServicePath,System.Nullable{System.Int32})">
@@ -2481,6 +3120,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xCalendars type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XCalendarsObject.GetXCalendarsByXLea(System.String,System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XCalendarsObject.GetXCalendarsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XCalendarsObject.GetXCalendarsByXSchool(System.String)">
             <summary>
             Request xCalendars associated to a specific xSchool by refId.
@@ -2513,6 +3170,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XCalendarsObject.GetXCalendarsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCalendars type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XCalendarsObject.GetXCalendarsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCalendars value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xCalendars type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.XContactsObject">
@@ -2622,6 +3297,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xContacts type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXLea(System.String,System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXSchool(System.String)">
             <summary>
             Request xContacts associated to a specific xSchool by refId.
@@ -2656,6 +3349,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xContacts type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXStudent(System.String)">
             <summary>
             Request xContacts associated to a specific xStudent by refId.
@@ -2688,6 +3399,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXStudent(System.String,System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xContacts type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XContactsObject.GetXContactsByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xContacts value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xContacts type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.XCoursesObject">
@@ -2797,6 +3526,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xCourses type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXLea(System.String,System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXSchool(System.String)">
             <summary>
             Request xCourses associated to a specific xSchool by refId.
@@ -2831,6 +3578,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xCourses type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXSchool(System.String,System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXRoster(System.String)">
             <summary>
             Request xCourses associated to a specific xRoster by refId.
@@ -2863,6 +3628,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXRoster(System.String,System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xCourses type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xCourses value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xCourses type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.XLeasObject">
@@ -2989,6 +3772,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXSchool(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXRoster(System.String)">
             <summary>
             Request xLeas associated to a specific xRoster by refId.
@@ -3021,6 +3822,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXRoster(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xLeas type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStaff(System.String)">
@@ -3057,6 +3876,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStaff(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStudent(System.String)">
             <summary>
             Request xLeas associated to a specific xStudent by refId.
@@ -3072,7 +3909,15 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})" -->
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xLeas associated to a specific xStudent by refId with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Request xLeas associated to a specific xStudent by refId with paging by school year.
@@ -3081,6 +3926,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStudent(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xLeas type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXContact(System.String)">
@@ -3117,7 +3980,29 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xLeas type.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:RicOneApi.Common.Objects.XRostersObject" -->
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXContact(System.String,System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xContact.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XLeasObject.GetXLeasByXContact(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xLeas value changes from a given point by a specific xContact with paging.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xLeas type.</returns>
+        </member>
+        <member name="T:RicOneApi.Common.Objects.XRostersObject">
+            <summary>
+            xRosters Service Paths.
+            </summary>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XRostersObject.#ctor(RestSharp.RestClient,System.String)">
             <summary>
             XRosters Object Constructor.
@@ -3220,6 +4105,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xRosters type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXLea(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXSchool(System.String)">
             <summary>
             Request xRosters associated to a specific xSchool by refId.
@@ -3252,6 +4155,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXSchool(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xRosters type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXCourse(System.String)">
@@ -3288,6 +4209,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xRosters type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXCourse(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xCourse.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXCourse(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xCourse with paging.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXStaff(System.String)">
             <summary>
             Request xRosters associated to a specific xStaff by refId.
@@ -3322,6 +4261,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xRosters type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXStaff(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXStudent(System.String)">
             <summary>
             Request xRosters associated to a specific xStudent by refId.
@@ -3354,6 +4311,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXStudent(System.String,System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xRosters type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xRosters value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xRosters type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.XSchoolsObject">
@@ -3480,6 +4455,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXLea(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXCalendar(System.String)">
             <summary>
             Request xSchools associated to a specific xCalendar by refId.
@@ -3512,6 +4505,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXCalendar(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCalendar.
+            </summary>
+            <param name="refId">RefId of xCalendar.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXCalendar(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCalendar with paging.
+            </summary>
+            <param name="refId">RefId of xCalendar.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xSchools type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXCourse(System.String)">
@@ -3548,6 +4559,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXCourse(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCourse.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXCourse(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xCourse with paging.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXRoster(System.String)">
             <summary>
             Request xSchools associated to a specific xRoster by refId.
@@ -3580,6 +4609,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXRoster(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xSchools type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXStaff(System.String)">
@@ -3616,6 +4663,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXStaff(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXStudent(System.String)">
             <summary>
             Request xSchools associated to a specific xStudent by refId.
@@ -3650,6 +4715,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xSchools type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXStudent(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXContact(System.String)">
             <summary>
             Request xSchools associated to a specific xContact by refId.
@@ -3682,6 +4765,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXContact(System.String,System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xContact.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xSchools type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XSchoolsObject.GetXSchoolsByXContact(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xSchools value changes from a given point by a specific xContact with paging.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xSchools type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.XStaffsObject">
@@ -3808,6 +4909,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXLea(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXSchool(System.String)">
             <summary>
             Request xStaffs associated to a specific xSchool by refId.
@@ -3840,6 +4959,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStaffs type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXCourse(System.String)">
@@ -3876,6 +5013,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXCourse(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xCourse.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXCourse(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xCourse with paging.
+            </summary>
+            <param name="refId">RefId of xCourse.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXRoster(System.String)">
             <summary>
             Request xStaffs associated to a specific xRoster by refId.
@@ -3910,6 +5065,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStaffs type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXRoster(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXStudent(System.String)">
             <summary>
             Request xStaffs associated to a specific xStudent by refId.
@@ -3942,6 +5115,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXStudent(System.String,System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xStudent.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStaffs type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStaffsObject.GetXStaffsByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStaffs value changes from a given point by a specific xStudent with paging.
+            </summary>
+            <param name="refId">RefId of xStudent.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStaffs type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.XStudentsObject">
@@ -4068,6 +5259,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStudents type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXLea(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXSchool(System.String)">
             <summary>
             Request xStudents associated to a specific xSchool by refId.
@@ -4100,6 +5309,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStudents type.</returns>
         </member>
         <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXRoster(System.String)">
@@ -4136,6 +5363,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStudents type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXRoster(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xRoster.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXRoster(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xRoster with paging.
+            </summary>
+            <param name="refId">RefId of xRoster.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXStaff(System.String)">
             <summary>
             Request xStudents associated to a specific xStaff by refId.
@@ -4170,6 +5415,24 @@
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
             <returns>List of xStudents type.</returns>
         </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXStaff(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xStaff.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXStaff(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xStaff with paging.
+            </summary>
+            <param name="refId">RefId of xStaff.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
         <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXContact(System.String)">
             <summary>
             Request xStudents associated to a specific xContact by refId.
@@ -4202,6 +5465,24 @@
             <param name="navigationPage">Page to retrieve.</param>
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXContact(System.String,System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xContact.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xStudents type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XStudentsObject.GetXStudentsByXContact(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xStudents value changes from a given point by a specific xContact with paging.
+            </summary>
+            <param name="refId">RefId of xContact.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xStudents type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Rest.AUPPEnum">
@@ -4250,12 +5531,11 @@
             <param name="rp">REST properties for request.</param>
             <returns>Single object response for a REST call.</returns>
         </member>
-        <member name="M:RicOneApi.Common.Rest.RestReturn.RequestBuilder(RestSharp.RestClient,RicOneApi.Common.Rest.RestProperties)">
+        <member name="M:RicOneApi.Common.Rest.RestReturn.RequestBuilder(RicOneApi.Common.Rest.RestProperties)">
             <summary>
             REST Header and Query Parameter builder method. Adds headers for JSON, paging, local/beds ids,
             and school year. Adds query parameters for changesSince and AUPP.
             </summary>
-            <param name="rc">REST client.</param>
             <param name="rp">REST properties for request.</param>
             <returns>The request with appropriate headers and query parameters.</returns>
         </member>
@@ -4279,6 +5559,11 @@
         <member name="T:RicOneApi.Models.Authentication.UserInfo">
             <summary>
             UserInfo type contains id, user_name, token, and list of endpoints
+            </summary>
+        </member>
+        <member name="T:RicOneApi.Models.XPress.XMetadata">
+            <summary>
+            XMetadata
             </summary>
         </member>
         <member name="T:RicOneApi.Models.XPress.XOtherCodeListType">

@@ -4,8 +4,8 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-15
+ * Version     1.7.0
+ * Since       2019-01-03
  */
 namespace RicOneApi.Common.Objects
 {
@@ -208,6 +208,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        internal ResponseMulti<XContactType> GetXContactsByXLea(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        internal ResponseMulti<XContactType> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xContacts associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -270,6 +302,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        internal ResponseMulti<XContactType> GetXContactsByXSchool(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        internal ResponseMulti<XContactType> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xContacts associated to a specific xStudent by refId.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
@@ -327,6 +391,38 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xStudent.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        internal ResponseMulti<XContactType> GetXContactsByXStudent(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xStudent with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        internal ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }

@@ -6,8 +6,8 @@ using RicOneApi.Common.Objects;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.3
- * Since       2018-08-14
+ * Version     1.7.0
+ * Since       2019-01-03
  * Filename    XPress.cs
  */
 namespace RicOneApi.Api
@@ -69,7 +69,7 @@ namespace RicOneApi.Api
         {
             return xLeasObject.GetXLeas();
         }
-        
+
         /// <summary>
         /// Request all xLeas by school year.
         /// </summary>
@@ -79,7 +79,7 @@ namespace RicOneApi.Api
         {
             return xLeasObject.GetXLeas(schoolYear);
         }
-        
+
         /// <summary>
         /// Request all xLeas with paging.
         /// </summary>
@@ -90,7 +90,7 @@ namespace RicOneApi.Api
         {
             return xLeasObject.GetXLeas(navigationPage, navigationPageSize);
         }
-       
+
         /// <summary>
         /// Request all xLeas with paging by school year.
         /// </summary>
@@ -102,7 +102,7 @@ namespace RicOneApi.Api
         {
             return xLeasObject.GetXLeas(navigationPage, navigationPageSize, schoolYear);
         }
-        
+
         /// <summary>
         /// Request all xLeas value changes from a given point.
         /// </summary>
@@ -112,7 +112,7 @@ namespace RicOneApi.Api
         {
             return xLeasObject.GetXLeas(opaqueMarker);
         }
-       
+
         /// <summary>
         /// Request all xLeas value changes from a given point with paging.
         /// </summary>
@@ -216,6 +216,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXSchool(string refId, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xLeas associated to a specific xRoster by refId.
         /// </summary>
         /// <param name="refId">RefId of xRosters.</param>
@@ -259,6 +283,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XLeaType> GetXLeasByXRoster(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xLeasObject.GetXLeasByXRoster(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xRoster.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXRoster(string refId, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXRoster(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xRoster with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXRoster(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXRoster(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -308,6 +356,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStaff.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXStaff(string refId, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXStaff(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStaff with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXStaff(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXStaff(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xLeas associated to a specific xStudent by refId.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
@@ -331,7 +403,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Request xLeas associated to a specific xStudent by refId with paging.
         /// </summary>
-        /// <param name="refId">RefId of xStudents.</param></param>
+        /// <param name="refId">RefId of xStudents.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>List of xLeas type.</returns>
@@ -351,6 +423,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XLeaType> GetXLeasByXStudent(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xLeasObject.GetXLeasByXStudent(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStudent.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXStudent(string refId, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXStudent(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xStudent with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXStudent(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -398,6 +494,30 @@ namespace RicOneApi.Api
         {
             return xLeasObject.GetXLeasByXContact(refId, navigationPage, navigationPageSize, schoolYear);
         }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xContact.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXContact(string refId, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXContact(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xLeas value changes from a given point by a specific xContact with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xLeas type.</returns>
+        public ResponseMulti<XLeaType> GetXLeasByXContact(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xLeasObject.GetXLeasByXContact(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
         #endregion
 
         #region xSchools
@@ -436,6 +556,7 @@ namespace RicOneApi.Api
         /// </summary>
         /// <param name="navigationPage">Page to retrieve.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>List of xSchools type.</returns>
         public ResponseMulti<XSchoolType> GetXSchools(int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
@@ -555,6 +676,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXLea(string refId, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xSchools associated to a specific xCalendar by refId.
         /// </summary>
         /// <param name="refId">RefId of xCalendars.</param>
@@ -598,6 +743,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XSchoolType> GetXSchoolsByXCalendar(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xSchoolsObject.GetXSchoolsByXCalendar(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xCalendar.
+        /// </summary>
+        /// <param name="refId">RefId of xCalendar.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXCalendar(string refId, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXCalendar(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xCalendar with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xCalendar.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXCalendar(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXCalendar(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -647,6 +816,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xCourse.
+        /// </summary>
+        /// <param name="refId">RefId of xCourse.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXCourse(string refId, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXCourse(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xCourse with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xCourse.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXCourse(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXCourse(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xSchools associated to a specific xRoster by refId.
         /// </summary>
         /// <param name="refId">RefId of xRosters.</param>
@@ -690,6 +883,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XSchoolType> GetXSchoolsByXRoster(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xSchoolsObject.GetXSchoolsByXRoster(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xRoster.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXRoster(string refId, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXRoster(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xRoster with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXRoster(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXRoster(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -739,6 +956,31 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xStaff.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+
+        public ResponseMulti<XSchoolType> GetXSchoolsByXStaff(string refId, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXStaff(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xStaff with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXStaff(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXStaff(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xSchools associated to a specific xStudent by refId.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
@@ -785,6 +1027,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xStudent.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXStudent(string refId, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXStudent(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xStudent with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXStudent(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xSchools associated to a specific xContact by refId.
         /// </summary>
         /// <param name="refId">RefId of xContacts.</param>
@@ -828,6 +1094,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XSchoolType> GetXSchoolsByXContact(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xSchoolsObject.GetXSchoolsByXContact(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xContact.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXContact(string refId, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXContact(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xSchools value changes from a given point by a specific xContact with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xSchools type.</returns>
+        public ResponseMulti<XSchoolType> GetXSchoolsByXContact(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xSchoolsObject.GetXSchoolsByXContact(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
         #endregion
 
@@ -964,6 +1254,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        public ResponseMulti<XCalendarType> GetXCalendarsByXLea(string refId, string opaqueMarker)
+        {
+            return xCalendarsObject.GetXCalendarsByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        public ResponseMulti<XCalendarType> GetXCalendarsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xCalendarsObject.GetXCalendarsByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xCalendars associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -1007,6 +1321,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xCalendarsObject.GetXCalendarsByXSchool(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        public ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string refId, string opaqueMarker)
+        {
+            return xCalendarsObject.GetXCalendarsByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        public ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xCalendarsObject.GetXCalendarsByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
         #endregion
 
@@ -1143,6 +1481,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xCourses value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCourses type.</returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXLea(string refId, string opaqueMarker)
+        {
+            return xCoursesObject.GetXCoursesByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xCourses value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCourses type.</returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xCoursesObject.GetXCoursesByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xCourses associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -1189,6 +1551,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xCourses value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCourses type.</returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXSchool(string refId, string opaqueMarker)
+        {
+            return xCoursesObject.GetXCoursesByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xCourses value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCourses type.</returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xCoursesObject.GetXCoursesByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xCourses associated to a specific xRoster by refId.
         /// </summary>
         /// <param name="refId">RefId of xRosters.</param>
@@ -1232,6 +1618,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XCourseType> GetXCoursesByXRoster(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xCoursesObject.GetXCoursesByXRoster(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xCourses value changes from a given point by a specific xRoster.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCourses type.</returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXRoster(string refId, string opaqueMarker)
+        {
+            return xCoursesObject.GetXCoursesByXRoster(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xCourses value changes from a given point by a specific xRoster with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCourses type.</returns>
+        public ResponseMulti<XCourseType> GetXCoursesByXRoster(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xCoursesObject.GetXCoursesByXRoster(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         #endregion
@@ -1370,6 +1780,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXLea(string refId, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xRosters associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -1413,6 +1847,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XRosterType> GetXRostersByXSchool(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xRostersObject.GetXRostersByXSchool(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXSchool(string refId, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -1462,6 +1920,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xCourse.
+        /// </summary>
+        /// <param name="refId">RefId of xCourse.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXCourse(string refId, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXCourse(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xCourse with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xCourse.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXCourse(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXCourse(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xRosters associated to a specific xStaff by refId.
         /// </summary>
         /// <param name="refId">RefId of xStaffs.</param>
@@ -1508,6 +1990,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xStaff.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXStaff(string refId, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXStaff(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xStaff with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXStaff(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXStaff(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xRosters associated to a specific xStudent by refId.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
@@ -1551,6 +2057,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XRosterType> GetXRostersByXStudent(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xRostersObject.GetXRostersByXStudent(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xStudent.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXStudent(string refId, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXStudent(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xRosters value changes from a given point by a specific xStudent with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xRosters type.</returns>
+        public ResponseMulti<XRosterType> GetXRostersByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xRostersObject.GetXRostersByXStudent(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         #endregion
@@ -1712,6 +2242,31 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXLea(string refId, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+
+        }
+
+        /// <summary>
         /// Request xStaffs associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -1755,6 +2310,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XStaffType> GetXStaffsByXSchool(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xStaffsObject.GetXStaffsByXSchool(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXSchool(string refId, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -1804,6 +2383,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xCourse.
+        /// </summary>
+        /// <param name="refId">RefId of xCourse.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXCourse(string refId, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXCourse(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xCourse with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xCourse.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXCourse(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXCourse(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xStaffs associated to a specific xRoster by refId.
         /// </summary>
         /// <param name="refId">RefId of xRosters.</param>
@@ -1850,6 +2453,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xRoster.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXRoster(string refId, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXRoster(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xRoster with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXRoster(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXRoster(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xStaffs associated to a specific xStudent by refId.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
@@ -1893,6 +2520,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XStaffType> GetXStaffsByXStudent(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xStaffsObject.GetXStaffsByXStudent(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xStudent.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXStudent(string refId, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXStudent(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStaffs value changes from a given point by a specific xStudent with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStaffs type.</returns>
+        public ResponseMulti<XStaffType> GetXStaffsByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStaffsObject.GetXStaffsByXStudent(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         #endregion
@@ -2053,6 +2704,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXLea(string refId, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xStudents associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -2096,6 +2771,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XStudentType> GetXStudentsByXSchool(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xStudentsObject.GetXStudentsByXSchool(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXSchool(string refId, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         /// <summary>
@@ -2145,6 +2844,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xRoster.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXRoster(string refId, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXRoster(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xRoster with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xRoster.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXRoster(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXRoster(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xStudents associated to a specific xStaff by refId.
         /// </summary>
         /// <param name="refId">RefId of xStaffs.</param>
@@ -2191,6 +2914,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xStaff.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXStaff(string refId, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXStaff(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xStaff with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStaff.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXStaff(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXStaff(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xStudents associated to a specific xContact by refId.
         /// </summary>
         /// <param name="refId">RefId of xContacts.</param>
@@ -2234,6 +2981,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XStudentType> GetXStudentsByXContact(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xStudentsObject.GetXStudentsByXContact(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xContact.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXContact(string refId, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXContact(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xStudents value changes from a given point by a specific xContact with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xContact.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xStudents type.</returns>
+        public ResponseMulti<XStudentType> GetXStudentsByXContact(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xStudentsObject.GetXStudentsByXContact(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         #endregion xStudents
@@ -2371,6 +3142,30 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXLea(string refId, string opaqueMarker)
+        {
+            return xContactsObject.GetXContactsByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xContactsObject.GetXContactsByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
         /// Request xContacts associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
@@ -2418,6 +3213,31 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXSchool(string refId, string opaqueMarker)
+        {
+            return xContactsObject.GetXContactsByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xContactsObject.GetXContactsByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
+
+        }
+
+        /// <summary>
         /// Request xContacts associated to a specific xStudent by refId.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
@@ -2461,6 +3281,30 @@ namespace RicOneApi.Api
         public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
         {
             return xContactsObject.GetXContactsByXStudent(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xStudent.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, string opaqueMarker)
+        {
+            return xContactsObject.GetXContactsByXStudent(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xContacts value changes from a given point by a specific xStudent with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xStudent.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xContacts type.</returns>
+        public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xContactsObject.GetXContactsByXStudent(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         #endregion
@@ -2533,6 +3377,7 @@ namespace RicOneApi.Api
         /// Request creation of xStaffs usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         public void CreateXStaffUsers(string refId)
         {
             aUPPObject.CreateXStaffUsers(refId);
@@ -2542,6 +3387,7 @@ namespace RicOneApi.Api
         /// Request deletion of generated xStaffs passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         public void DeleteXStaffUsers(string refId)
         {
             aUPPObject.DeleteXStaffUsers(refId);
@@ -2551,6 +3397,7 @@ namespace RicOneApi.Api
         /// Request deletion of generated xStaffs usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         public void DeleteXStaffUsernamesPasswords(string refId)
         {
             aUPPObject.DeleteXStaffUsernamesPasswords(refId);
@@ -2582,6 +3429,7 @@ namespace RicOneApi.Api
         /// Request creation of xStudents usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         public void CreateXStudentUsers(string refId)
         {
             aUPPObject.CreateXStudentUsers(refId);
@@ -2591,6 +3439,7 @@ namespace RicOneApi.Api
         /// Request deletion of generated xStudents passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         public void DeleteXStudentUsers(string refId)
         {
             aUPPObject.DeleteXStudentUsers(refId);
@@ -2600,6 +3449,7 @@ namespace RicOneApi.Api
         /// Request deletion of generated xStudents usernames and passwords by xSchool.
         /// </summary>
         /// <param name="refId">RefId of xSchool.</param>
+        [Obsolete("As of version 1.7, the process is handled automatically by the API.")]
         public void DeleteXStudentUsernamesPasswords(string refId)
         {
             aUPPObject.DeleteXStudentUsernamesPasswords(refId);
@@ -2626,26 +3476,6 @@ namespace RicOneApi.Api
         {
             return aUPPObject.GetXStudentUsers(refId, navigationPage, navigationPageSize);
         }
-
-        ///// <summary>
-        ///// Request creation of xContacts usernames and passwords by xSchool.
-        ///// </summary>
-        ///// <param name="refId">RefId of xSchool.</param>
-        ///// <returns>List of xContacts type.</returns>
-        //private ResponseMulti<XContactType> CreateXContactUsers(string refId)
-        //{
-        //    return aUPPObject.CreateXContactUsers(refId);
-        //}
-        ///// <summary>
-        ///// Request deletion of generated xContacts passwords by xSchool.
-        ///// </summary>
-        ///// <param name="refId">RefId of xSchool.</param>
-        ///// <returns>List of xContacts type.</returns>
-
-        //private ResponseMulti<XContactType> DeleteXContactUsers(string refId)
-        //{
-        //    return aUPPObject.DeleteXContactUsers(refId);
-        //}
 
         ///// <summary>
         ///// Request generated xContacts usernames and passwords by xSchool.

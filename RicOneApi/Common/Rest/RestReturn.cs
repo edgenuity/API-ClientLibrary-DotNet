@@ -6,8 +6,8 @@ using System.Linq;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.3
- * Since       2018-08-15
+ * Version     1.7.0
+ * Since       2019-01-03
  */
 namespace RicOneApi.Common.Rest
 {
@@ -27,14 +27,14 @@ namespace RicOneApi.Common.Rest
         internal ResponseMulti<E> MakeAllRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
             ResponseMulti<E> output = new ResponseMulti<E>();
-            RestRequest request = RequestBuilder(rc, rp);
+            RestRequest request = RequestBuilder(rp);
             var response = rc.Execute<T>(request);
 
             try
             {
                 if (rp.RestHeader.HasPaging())
                 {
-                    NavigationLastPage = NavigationLastPage = Int32.Parse(response.Headers.ToList()
+                    NavigationLastPage = NavigationLastPage = int.Parse(response.Headers.ToList()
                     .Find(x => x.Name.Equals("navigationLastPage", StringComparison.CurrentCultureIgnoreCase))
                     .Value.ToString());
                 }
@@ -68,7 +68,7 @@ namespace RicOneApi.Common.Rest
         internal ResponseSingle<E> MakeSingleRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
             ResponseSingle<E> output = new ResponseSingle<E>();
-            RestRequest request = RequestBuilder(rc, rp);
+            RestRequest request = RequestBuilder(rp);
             var response = rc.Execute<T>(request);
 
             try
@@ -96,15 +96,14 @@ namespace RicOneApi.Common.Rest
         /// REST Header and Query Parameter builder method. Adds headers for JSON, paging, local/beds ids,
         /// and school year. Adds query parameters for changesSince and AUPP.
         /// </summary>
-        /// <param name="rc">REST client.</param>
         /// <param name="rp">REST properties for request.</param>
         /// <returns>The request with appropriate headers and query parameters.</returns>
-        private RestRequest RequestBuilder(RestClient rc, RestProperties rp)
+        private RestRequest RequestBuilder(RestProperties rp)
         {
             RestRequest request = new RestRequest(rp.ServicePath.GetServicePath(), Method.GET);
             //request.AddHeader("Accept", "application/json");
 
-            if (!String.IsNullOrEmpty(rp.RefId))
+            if (!string.IsNullOrEmpty(rp.RefId))
             {
                 request.AddParameter("refId", rp.RefId, ParameterType.UrlSegment);
             }

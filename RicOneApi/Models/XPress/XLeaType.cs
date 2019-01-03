@@ -3,8 +3,8 @@ using RestSharp.Deserializers;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.7
+ * Since       2018-12-20
  * Filename    XLeaType.cs
  */
 namespace RicOneApi.Models.XPress
@@ -25,6 +25,7 @@ namespace RicOneApi.Models.XPress
             address = new XOrganizationAddressType();
             phoneNumber = new XTelephoneType();
             otherPhoneNumbers = new XTelephoneListType();
+            Metadata = new XMetadata();
         }
 
         [DeserializeAs(Name = "@refId")]
@@ -37,6 +38,7 @@ namespace RicOneApi.Models.XPress
         public XOrganizationAddressType address { get; set; }
         public XTelephoneType phoneNumber { get; set; }
         public XTelephoneListType otherPhoneNumbers { get; set; }
+        public XMetadata Metadata { get; set; }
 
         public XLeaCollectionType GetObjects { get; set; }
         public XLeaType GetObject

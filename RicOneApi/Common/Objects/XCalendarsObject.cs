@@ -4,8 +4,8 @@ using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-15
+ * Version     1.7.0
+ * Since       2018-12-21
  */
 namespace RicOneApi.Common.Objects
 {
@@ -208,6 +208,38 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        internal ResponseMulti<XCalendarType> GetXCalendarsByXLea(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXCalendarsByXLea, refId, rh, rqp);
+            return rr.MakeAllRequest<XCalendarType, XCalendarCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        internal ResponseMulti<XCalendarType> GetXCalendarsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXCalendarsByXLea, refId, rh, rqp);
+            return rr.MakeAllRequest<XCalendarType, XCalendarCollectionType>(rc, rp);
+        }
+
+        /// <summary>
         /// Request xCalendars associated to a specific xSchool by refId.
         /// </summary>
         /// <param name="refId">RefId of xSchools.</param>
@@ -265,6 +297,38 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXCalendarsByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XCalendarType, XCalendarCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        internal ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string refId, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader();
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXCalendarsByXSchool, refId, rh, rqp);
+            return rr.MakeAllRequest<XCalendarType, XCalendarCollectionType>(rc, rp);
+        }
+
+        /// <summary>
+        /// Request all xCalendars value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xCalendars type.</returns>
+        internal ResponseMulti<XCalendarType> GetXCalendarsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            RestReturn rr = new RestReturn();
+            RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+            RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
             RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXCalendarsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XCalendarType, XCalendarCollectionType>(rc, rp);
         }

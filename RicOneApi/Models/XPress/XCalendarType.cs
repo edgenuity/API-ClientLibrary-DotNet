@@ -3,8 +3,8 @@ using RestSharp.Deserializers;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.7
+ * Since       2018-12-20
  * Filename    XCalendarType.cs
  */
 namespace RicOneApi.Models.XPress
@@ -20,12 +20,14 @@ namespace RicOneApi.Models.XPress
             schoolRefId = null;
             schoolYear = null;
             sessions = new XSessionListType();
+            Metadata = new XMetadata();
         }
         [DeserializeAs(Name = "@refId")]
         public string refId { get; set; }
         public string schoolRefId { get; set; }
         public string schoolYear { get; set; }
         public XSessionListType sessions { get; set; }
+        public XMetadata Metadata { get; set; }
 
         public XCalendarCollectionType GetObjects { get; set; }
         public XCalendarType GetObject

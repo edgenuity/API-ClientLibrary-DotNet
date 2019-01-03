@@ -3,8 +3,8 @@ using RestSharp.Deserializers;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6
- * Since       2018-05-14
+ * Version     1.7
+ * Since       2018-12-20
  * Filename    XContactType.cs
  */
 namespace RicOneApi.Models.XPress
@@ -30,6 +30,7 @@ namespace RicOneApi.Models.XPress
             sex = null;
             employerType = null;
             relationships = new XContactStudentRelationshipListType();
+            Metadata = new XMetadata();
         }
         [DeserializeAs(Name = "@refId")]
         public string refId { get; set; }
@@ -46,6 +47,7 @@ namespace RicOneApi.Models.XPress
         public string sex { get; set; }
         public string employerType { get; set; }
         public XContactStudentRelationshipListType relationships { get; set; }
+        public XMetadata Metadata { get; set; }
 
         public XContactCollectionType GetObjects { get; set; }
         public XContactType GetObject
