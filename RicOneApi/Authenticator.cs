@@ -1,16 +1,15 @@
-﻿/*
- * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.2
- * Since       2018-07-31
- * Filename    Authenticator.cs
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using RestSharp;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Exceptions;
 
+/*
+ * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * Version     1.7.0
+ * Since       2019-03-29
+ * Filename    Authenticator.cs
+ */
 namespace RicOneApi.Api
 {
     /// <summary>
@@ -54,31 +53,24 @@ namespace RicOneApi.Api
             _authUrl = authUrl;
             _clientId = clientId;
             _clientSecret = clientSecret;
-            _client = new RestClient(authUrl);
-            Login(authUrl, clientId, clientSecret);
+            _client = new RestClient(_authUrl);
+            Login(clientId, clientSecret);
         }
 
         /// <summary>
         /// POST to authentication server with provided credentials.
         /// </summary>
-        /// <param name="authUrl">The authentication server url.</param>
         /// <param name="clientId">The clientId for the application.</param>
         /// <param name="clientSecret">The clientSecret for the application.</param>
-        private void Login(string authUrl, string clientId, string clientSecret)
+        private void Login(string clientId, string clientSecret)
         {
             try
             {
-                _client.Authenticator = new SimpleAuthenticator("username", clientId, "password", clientSecret);
-                //_request = SetRequest(clientId, clientSecret);   
-
                 _request = new RestRequest(Method.POST);
-
-                // Adds Request Body parameters for username and password
-                _request.AddParameter("username", clientId, ParameterType.RequestBody);
-                _request.AddParameter("password", clientSecret, ParameterType.RequestBody);
-
+                _request.AddParameter("username", clientId, ParameterType.GetOrPost);
+                _request.AddParameter("password", clientSecret, ParameterType.GetOrPost);
                 _response = _client.Execute<UserInfo>(_request);
-
+               
                 if (_response.ErrorException != null)
                 {
                     throw new AuthenticationException();
@@ -97,7 +89,7 @@ namespace RicOneApi.Api
         internal void RefreshToken()
         {
 
-            Login(_authUrl, _clientId, _clientSecret);
+            Login(_clientId, _clientSecret);
         }
 
         /// <summary>

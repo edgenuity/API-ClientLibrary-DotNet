@@ -1,59 +1,74 @@
-﻿/*
+﻿using Newtonsoft.Json;
+using System;
+using JWT;
+
+/*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.4
- * Since       2016-09-12
+ * Version     1.7.0
+ * Since       2019-03-29
  * Filename    DecodedToken.cs
  */
-
-using Newtonsoft.Json;
-using RestSharp.Deserializers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace RicOneApi.Models.Authentication
 {
+    /// <summary>
+    /// Decodes provided token and creates DecodedToken object.
+    /// </summary>
     public class DecodedToken
     {
-        private string _token;
+        private readonly string _token;
 
-        public DecodedToken()
-        { }
-
+        /// <summary>
+        /// Token to decode.
+        /// </summary>
+        /// <param name="token"></param>
         public DecodedToken(string token)
         {
             _token = token;
         }
+
         /// <summary>
-        /// Payload data inside an encrypted JWT token
+        /// Returns applicaiton_id, iss, iat, and exp from decoded JWT token.
         /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns>Decoded token type.</returns>
         public DecodedToken GetDecodedToken()
         {
             try
             {
-                String[] base64EncodedSegments = _token.Split('.');
-                DecodedToken dt = JsonConvert.DeserializeObject<DecodedToken>(base64UrlDecode(base64EncodedSegments[1]));
+                string[] base64EncodedSegments = _token.Split('.');
+                DecodedToken dt = JsonConvert.DeserializeObject<DecodedToken>(Base64UrlDecode(base64EncodedSegments[1]));
 
                 return dt;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
         }
 
-        internal String base64UrlDecode(String input)
+        internal string Base64UrlDecode(String input)
         {
-            byte[] newBytes = JWT.JsonWebToken.Base64UrlDecode(input);
+            var urlEncoder = new JwtBase64UrlEncoder();
+            byte[] newBytes = urlEncoder.Decode(input);
             return System.Text.Encoding.UTF8.GetString(newBytes);
         }
 
+        /// <summary>
+        /// Returns the application id of a decoded token.
+        /// </summary>
         public string application_id { get; set; }
+
+        /// <summary>
+        /// Returns the time the JWT token was issued at.
+        /// </summary>
         public long iat { get; set; }
+
+        /// <summary>
+        /// Returns the time the JWT token expired at.
+        /// </summary>
         public long exp { get; set; }
+        /// <summary>
+        /// Returns the issuer of the JWT token.
+        /// </summary>
         public string iss { get; set; }
     }
 }

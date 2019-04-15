@@ -19,8 +19,8 @@ namespace RicOneApi.Tests
         #region Test Constants
         static string authUrl = "https://auth.test.ricone.org/login";
         static string clientId = "dpaDemo";
-        static string clientSecret = "deecd889bff5ed0101a86680752f5f9";
-        static string providerId = "sandbox";
+        static string clientSecret = "deecd889bff5ed0101a86680752f5f";
+        static string providerId = "localhost";
         #endregion
 
         static void Main(string[] args)
@@ -28,7 +28,7 @@ namespace RicOneApi.Tests
             Authenticator auth = Authenticator.Instance;
             auth.Authenticate(authUrl, clientId, clientSecret);
 
-            foreach (Endpoint e in auth.GetEndpoints(providerId, false))
+            foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
                 Console.WriteLine(e.name + " | " + e.href + " | " + e.provider_id + " | " + e.token + Console.Out.NewLine);
             }
@@ -51,7 +51,6 @@ namespace RicOneApi.Tests
             //    //System.Threading.Thread.Sleep(5000);
             //    System.Threading.Thread.Sleep(300000);
             //}
-
             Console.Read();
         }
     }

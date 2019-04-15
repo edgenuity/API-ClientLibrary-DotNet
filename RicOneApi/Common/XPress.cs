@@ -3,11 +3,12 @@ using RestSharp;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Models.XPress;
 using RicOneApi.Common.Objects;
+using RestSharp.Authenticators;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * Version     1.7.0
- * Since       2019-01-03
+ * Since       2019-03-29
  * Filename    XPress.cs
  */
 namespace RicOneApi.Api
@@ -2424,7 +2425,7 @@ namespace RicOneApi.Api
         /// <returns>List of xStaffs type.</returns>
         public ResponseMulti<XStaffType> GetXStaffsByXRoster(string refId, int? schoolYear)
         {
-            return xStaffsObject.GetXStaffsByXRoster(refId);
+            return xStaffsObject.GetXStaffsByXRoster(refId, schoolYear);
         }
 
         /// <summary>

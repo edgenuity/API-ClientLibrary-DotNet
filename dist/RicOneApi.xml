@@ -22,11 +22,10 @@
             <param name="clientId">The clientId for the application.</param>
             <param name="clientSecret">The clientSecret for the application.</param>
         </member>
-        <member name="M:RicOneApi.Api.Authenticator.Login(System.String,System.String,System.String)">
+        <member name="M:RicOneApi.Api.Authenticator.Login(System.String,System.String)">
             <summary>
             POST to authentication server with provided credentials.
             </summary>
-            <param name="authUrl">The authentication server url.</param>
             <param name="clientId">The clientId for the application.</param>
             <param name="clientSecret">The clientSecret for the application.</param>
         </member>
@@ -5544,12 +5543,42 @@
             Accessor method that holds navigation last page integer value.
             </summary>
         </member>
-        <member name="M:RicOneApi.Models.Authentication.DecodedToken.GetDecodedToken">
+        <member name="T:RicOneApi.Models.Authentication.DecodedToken">
             <summary>
-            Payload data inside an encrypted JWT token
+            Decodes provided token and creates DecodedToken object.
+            </summary>
+        </member>
+        <member name="M:RicOneApi.Models.Authentication.DecodedToken.#ctor(System.String)">
+            <summary>
+            Token to decode.
             </summary>
             <param name="token"></param>
-            <returns></returns>
+        </member>
+        <member name="M:RicOneApi.Models.Authentication.DecodedToken.GetDecodedToken">
+            <summary>
+            Returns applicaiton_id, iss, iat, and exp from decoded JWT token.
+            </summary>
+            <returns>Decoded token type.</returns>
+        </member>
+        <member name="P:RicOneApi.Models.Authentication.DecodedToken.application_id">
+            <summary>
+            Returns the application id of a decoded token.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.Models.Authentication.DecodedToken.iat">
+            <summary>
+            Returns the time the JWT token was issued at.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.Models.Authentication.DecodedToken.exp">
+            <summary>
+            Returns the time the JWT token expired at.
+            </summary>
+        </member>
+        <member name="P:RicOneApi.Models.Authentication.DecodedToken.iss">
+            <summary>
+            Returns the issuer of the JWT token.
+            </summary>
         </member>
         <member name="T:RicOneApi.Models.Authentication.Endpoint">
             <summary>

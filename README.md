@@ -1,7 +1,7 @@
 Copyright © 2014-2019 New York State Education Department. All rights reserved.
 
 # RICOne API .NET Client Library
-The RICOne .NET Client Library was developed using .NET 4 and RestSharp (http://restsharp.org/).
+The RICOne .NET Client Library was developed using .NET 4.6 and RestSharp (http://restsharp.org/).
 
 ### Features
 * Makes calls to the RICOne API using the xPress model in .NET projects
@@ -37,6 +37,11 @@ const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
 ### v1.7.0
+* Upgraded project to build in .NET 4.6.
+* Upgraded dependency DLLs.
+  * RestSharp - 106.6.9.0
+  * Newtonsoft.Json - 12.0.0.0
+  * JWT - 5.0.0.0
 * Removed depricated fields from XRosterType.
     * sessionCode - use sessionCode in XMeetingTimeType
     * schoolCalendarRefId - use schoolCalendarRefId XMeetingTimeType
