@@ -1,14 +1,12 @@
 ﻿using System;
 using RestSharp;
-using RicOneApi.Models.Authentication;
 using RicOneApi.Models.XPress;
 using RicOneApi.Common.Objects;
-using RestSharp.Authenticators;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * Version     1.7.0
- * Since       2019-03-29
+ * Since       2019-04-18
  * Filename    XPress.cs
  */
 namespace RicOneApi.Api
@@ -47,18 +45,6 @@ namespace RicOneApi.Api
             xContactsObject = new XContactsObject(rc, baseApiUrl);
             getLastPageObject = new GetLastPageObject(rc, baseApiUrl);
             aUPPObject = new AUPPObject(rc, baseApiUrl);
-
-            DecodedToken dt = new DecodedToken(Authenticator.Instance.GetToken());
-
-            if (Util.ConvertUnixTime(dt.GetDecodedToken().exp) <= DateTime.Now)
-            {
-                Authenticator.Instance.RefreshToken();
-                rc.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
-            }
-            else
-            {
-                rc.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
-            }
         }
 
         # region xLeas

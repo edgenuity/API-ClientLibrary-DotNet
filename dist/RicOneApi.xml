@@ -69,6 +69,18 @@
             <param name="providerId">The providerId to be returned.</param>
             <returns>A single Endpoint type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.Authenticator.GetMessage">
+            <summary>
+            For testing token validation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RicOneApi.Api.Authenticator.SetMessage(System.String)">
+            <summary>
+            For testing token validation, set in RestReturn class
+            </summary>
+            <param name="message"></param>
+        </member>
         <member name="T:RicOneApi.Api.XPress">
             <summary>
             Class that allows access to the xPress data model objects.
@@ -5542,6 +5554,12 @@
             <summary>
             Accessor method that holds navigation last page integer value.
             </summary>
+        </member>
+        <member name="M:RicOneApi.Common.Rest.RestReturn.CheckToken(RestSharp.RestClient)">
+            <summary>
+            Validate whether current token is expired. If expired, re-authenticate and use new valid token.
+            </summary>
+            <param name="rc">REST client.</param>
         </member>
         <member name="T:RicOneApi.Models.Authentication.DecodedToken">
             <summary>

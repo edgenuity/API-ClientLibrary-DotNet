@@ -52,7 +52,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RicOneApi.Tests.TokenInfo</StartupObject>
+    <StartupObject>RicOneApi.Tests.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">

@@ -24,6 +24,7 @@ namespace RicOneApi.Api
         private static string _authUrl;
         private static string _clientId;
         private static string _clientSecret;
+        private static string _message;
 
         private Authenticator() { }
 
@@ -170,6 +171,24 @@ namespace RicOneApi.Api
                 }
             }
             return endpoint;
+        }
+
+        /// <summary>
+        /// For testing token validation
+        /// </summary>
+        /// <returns></returns>
+        private string GetMessage()
+        {
+            return _message;
+        }
+
+        /// <summary>
+        /// For testing token validation, set in RestReturn class
+        /// </summary>
+        /// <param name="message"></param>
+        internal void SetMessage(string message)
+        {
+            _message = message;
         }
     }
 }
