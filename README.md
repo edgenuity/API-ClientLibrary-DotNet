@@ -45,7 +45,7 @@ const string clientSecret = "YOUR PASSWORD";
     * OtherPhoneNumbers
     * OtherEmails
     * Languages
-* Added support for new service path xEmployments
+* Added support for new service path xEmployments, which includes staff employment information.
     * /xEmployments
     * /xLeas/{refId}/xEmployments
     * /xSchool/{refId}/xEmployments
