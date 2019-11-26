@@ -24,6 +24,7 @@ namespace RicOneApi.Api
         private readonly XStaffsObject xStaffsObject;
         private readonly XStudentsObject xStudentsObject;
         private readonly XContactsObject xContactsObject;
+        private readonly XEmploymentsObject xEmploymentsObject;
         private readonly GetLastPageObject getLastPageObject;
         private readonly AUPPObject aUPPObject;
 
@@ -43,6 +44,7 @@ namespace RicOneApi.Api
             xStaffsObject = new XStaffsObject(rc, baseApiUrl);
             xStudentsObject = new XStudentsObject(rc, baseApiUrl);
             xContactsObject = new XContactsObject(rc, baseApiUrl);
+            xEmploymentsObject = new XEmploymentsObject(rc, baseApiUrl);
             getLastPageObject = new GetLastPageObject(rc, baseApiUrl);
             aUPPObject = new AUPPObject(rc, baseApiUrl);
         }
@@ -3292,6 +3294,234 @@ namespace RicOneApi.Api
         public ResponseMulti<XContactType> GetXContactsByXStudent(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
         {
             return xContactsObject.GetXContactsByXStudent(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        #endregion
+
+        #region xEmployments
+        /// <summary>
+        /// Request all xEmployments.
+        /// </summary>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmployments()
+        {
+            return xEmploymentsObject.GetXEmployments();
+        }
+
+        /// <summary>
+        /// Request all xEmployments by school year.
+        /// </summary>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmployments(int? schoolYear)
+        {
+            return xEmploymentsObject.GetXEmployments(schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xEmployments with paging.
+        /// </summary>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmployments(int? navigationPage, int? navigationPageSize)
+        {
+            return xEmploymentsObject.GetXEmployments(navigationPage, navigationPageSize);
+        }
+
+        /// <summary>
+        /// Request all xEmployments with paging by school year.
+        /// </summary>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmployments(int? navigationPage, int? navigationPageSize, int? schoolYear)
+        {
+            return xEmploymentsObject.GetXEmployments(navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xEmployments value changes from a given point.
+        /// </summary>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmployments(string opaqueMarker)
+        {
+            return xEmploymentsObject.GetXEmployments(opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xEmployments value changes from a given point with paging.
+        /// </summary>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmployments(int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xEmploymentsObject.GetXEmployments(navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request single xEmployment by refId.
+        /// </summary>
+        /// <param name="refId">RefId of xEmployment.</param>
+        /// <returns>Single xEmployments type.</returns>
+        public ResponseSingle<XEmploymentType> GetXEmployment(string refId)
+        {
+            return xEmploymentsObject.GetXEmployment(refId);
+        }
+
+        /// <summary>
+        /// Request single xEmployment by refId by school year.
+        /// </summary>
+        /// <param name="refId">RefId of xEmployment.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>Single xEmployments type.</returns>
+        public ResponseSingle<XEmploymentType> GetXEmployment(string refId, int? schoolYear)
+        {
+            return xEmploymentsObject.GetXEmployment(refId, schoolYear);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xLea by refId.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXLea(string refId)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXLea(refId);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xLea by refId by school year.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXLea(string refId, int? schoolYear)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXLea(refId, schoolYear);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xLea by refId with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXLea(string refId, int? navigationPage, int? navigationPageSize)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXLea(refId, navigationPage, navigationPageSize);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xLea by refId with paging by school year.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXLea(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXLea(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xEmployments value changes from a given point by a specific xLea.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXLea(string refId, string opaqueMarker)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXLea(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xEmployments value changes from a given point by a specific xLea with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xLea.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXLea(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xSchool by refId.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXSchool(string refId)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXSchool(refId);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xSchool by refId by school year.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXSchool(string refId, int? schoolYear)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXSchool(refId, schoolYear);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xSchool by refId with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXSchool(string refId, int? navigationPage, int? navigationPageSize)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXSchool(refId, navigationPage, navigationPageSize);
+        }
+
+        /// <summary>
+        /// Request xEmployments associated to a specific xSchool by refId with paging by school year.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXSchool(string refId, int? navigationPage, int? navigationPageSize, int? schoolYear)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXSchool(refId, navigationPage, navigationPageSize, schoolYear);
+        }
+
+        /// <summary>
+        /// Request all xEmployments value changes from a given point by a specific xSchool.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXSchool(string refId, string opaqueMarker)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXSchool(refId, opaqueMarker);
+        }
+
+        /// <summary>
+        /// Request all xEmployments value changes from a given point by a specific xSchool with paging.
+        /// </summary>
+        /// <param name="refId">RefId of xSchool.</param>
+        /// <param name="navigationPage">Page to retrieve.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>List of xEmployments type.</returns>
+        public ResponseMulti<XEmploymentType> GetXEmploymentsByXSchool(string refId, int? navigationPage, int? navigationPageSize, string opaqueMarker)
+        {
+            return xEmploymentsObject.GetXEmploymentsByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
         }
 
         #endregion

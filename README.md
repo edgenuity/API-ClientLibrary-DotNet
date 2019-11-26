@@ -36,6 +36,20 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.8.0
+* Added OtherAddresses to xStudents object.
+* Added the following to xStaff:
+    * Addresses
+    * OtherAddressses
+    * PhoneNumber
+    * OtherPhoneNumbers
+    * OtherEmails
+    * Languages
+* Added support for new service path xEmployments
+    * /xEmployments
+    * /xLeas/{refId}/xEmployments
+    * /xSchool/{refId}/xEmployments
+
 ### v1.7.0
 * Upgraded project to build in .NET 4.6.
 * Upgraded dependency DLLs.

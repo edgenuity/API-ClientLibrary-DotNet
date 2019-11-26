@@ -14,6 +14,28 @@ namespace RicOneApi.Models.XPress
     /// </summary>
     public class XStudentType
     {
+        [DeserializeAs(Name = "@refId")]
+        public string refId { get; set; }
+        public XPersonNameType name { get; set; }
+        public XOtherPersonNameListType otherNames { get; set; }
+        public string localId { get; set; }
+        public string stateProvinceId { get; set; }
+        public XOtherPersonIdListType otherIds { get; set; }
+        public XAppProvisioningInfoType appProvisioningInfo { get; set; }
+        public XPersonAddressType address { get; set; }
+        public XOtherPersonAddressListType otherAddresses { get; set; }
+        public XTelephoneType phoneNumber { get; set; }
+        public XTelephoneListType otherPhoneNumbers { get; set; }
+        public XEmailType email { get; set; }
+        public XEmailListType otherEmails { get; set; }
+        public XDemographicsType demographics { get; set; }
+        public XEnrollmentType enrollment { get; set; }
+        public XEnrollmentListType otherEnrollments { get; set; }
+        public XAcademicSummaryType academicSummary { get; set; }
+        public XStudentContactListType studentContacts { get; set; }
+        public XLanguageListType languages { get; set; }
+        public XMetadata Metadata { get; set; }
+
         public XStudentType()
         {
             refId = null;
@@ -24,6 +46,7 @@ namespace RicOneApi.Models.XPress
             otherIds = new XOtherPersonIdListType();
             appProvisioningInfo = new XAppProvisioningInfoType();
             address = new XPersonAddressType();
+            otherAddresses = new XOtherPersonAddressListType();
             phoneNumber = new XTelephoneType();
             otherPhoneNumbers = new XTelephoneListType();
             email = new XEmailType();
@@ -37,26 +60,6 @@ namespace RicOneApi.Models.XPress
             Metadata = new XMetadata();
 
         }
-        [DeserializeAs(Name = "@refId")]
-        public string refId { get; set; }
-        public XPersonNameType name { get; set; }
-        public XOtherPersonNameListType otherNames { get; set; }
-        public string localId { get; set; }
-        public string stateProvinceId { get; set; }
-        public XOtherPersonIdListType otherIds { get; set; }
-        public XAppProvisioningInfoType appProvisioningInfo { get; set; }
-        public XPersonAddressType address { get; set; }
-        public XTelephoneType phoneNumber { get; set; }
-        public XTelephoneListType otherPhoneNumbers { get; set; }
-        public XEmailType email { get; set; }
-        public XEmailListType otherEmails { get; set; }
-        public XDemographicsType demographics { get; set; }
-        public XEnrollmentType enrollment { get; set; }
-        public XEnrollmentListType otherEnrollments { get; set; }
-        public XAcademicSummaryType academicSummary { get; set; }
-        public XStudentContactListType studentContacts { get; set; }
-        public XLanguageListType languages { get; set; }
-        public XMetadata Metadata { get; set; }
 
         public XStudentCollectionType GetObjects { get; set; }
         public XStudentType GetObject

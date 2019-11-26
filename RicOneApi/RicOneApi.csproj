@@ -68,6 +68,7 @@
     <Compile Include="Common\Objects\XLeasObject.cs" />
     <Compile Include="Common\Objects\XRostersObject.cs" />
     <Compile Include="Common\Objects\XSchoolsObject.cs" />
+    <Compile Include="Common\Objects\XEmploymentsObject.cs" />
     <Compile Include="Common\Objects\XStaffsObject.cs" />
     <Compile Include="Common\Objects\XStudentsObject.cs" />
     <Compile Include="Common\Rest\AUPPEnum.cs" />
@@ -78,6 +79,11 @@
     <Compile Include="Exceptions\AuthenticationException.cs" />
     <Compile Include="Models\Authentication\DecodedToken.cs" />
     <Compile Include="Models\XPress\ICollectionType.cs" />
+    <Compile Include="Models\XPress\XAssignmentCollectionType.cs" />
+    <Compile Include="Models\XPress\XAssignmentType.cs" />
+    <Compile Include="Models\XPress\XEmploymentCollectionType.cs" />
+    <Compile Include="Models\XPress\XEmploymentType.cs" />
+    <Compile Include="Models\XPress\XManagerType.cs" />
     <Compile Include="Models\XPress\XMetadata.cs" />
     <Compile Include="Models\XPress\XOtherCodeListType.cs" />
     <Compile Include="Models\XPress\XOtherCodeType.cs" />
@@ -88,6 +94,7 @@
     <Compile Include="Models\XPress\XAcademicSummaryType.cs" />
     <Compile Include="Models\XPress\XAppProvisioningInfoType.cs" />
     <Compile Include="Models\XPress\XOtherCourseIdType.cs" />
+    <Compile Include="Models\XPress\XOtherPersonAddressListType.cs" />
     <Compile Include="Models\XPress\XOtherPersonIdType.cs" />
     <Compile Include="Models\XPress\XOtherCourseIdListType.cs" />
     <Compile Include="Models\XPress\XOtherPersonIdListType.cs" />
