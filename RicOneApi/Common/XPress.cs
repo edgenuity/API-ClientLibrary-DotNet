@@ -2,6 +2,7 @@
 using RestSharp;
 using RicOneApi.Models.XPress;
 using RicOneApi.Common.Objects;
+using RicOneApi.Interfaces;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -14,7 +15,7 @@ namespace RicOneApi.Api
     /// <summary>
     /// Class that allows access to the xPress data model objects.
     /// </summary>
-    public class XPress
+    public class XPress : IXPress
     {
         private readonly XLeasObject xLeasObject;
         private readonly XSchoolsObject xSchoolsObject;
