@@ -15,11 +15,17 @@ namespace RicOneApi.Models.XPress
     {
         public XMetadata()
         {
-            SchoolYear = null;
+            CustomClassName = null;
             LastModified = new DateTime();
+            Password = null;
+            SchoolYear = null;
+            Username = null;
         }
 
-        public string SchoolYear { get; set; }
+        public string CustomClassName { get; set; }
         public DateTime LastModified { get; set; }
+        public string Password { get; set; }
+        public string Username { get; set; }
+        public string SchoolYear { get; set; }
     }
 }
