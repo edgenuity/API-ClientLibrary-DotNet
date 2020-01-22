@@ -15,7 +15,7 @@ namespace RicOneApi.Api
     /// <summary>
     /// Contains methods to authenticate and pull data from auth server.
     /// </summary>
-    public class Authenticator
+    public class Authenticator : IAuthenticator
     {
         private static Authenticator instance = new Authenticator();
         private static RestClient _client;
@@ -71,7 +71,7 @@ namespace RicOneApi.Api
                 _request.AddParameter("username", clientId, ParameterType.GetOrPost);
                 _request.AddParameter("password", clientSecret, ParameterType.GetOrPost);
                 _response = _client.Execute<UserInfo>(_request);
-               
+
                 if (_response.ErrorException != null)
                 {
                     throw new AuthenticationException();
@@ -165,7 +165,7 @@ namespace RicOneApi.Api
 
             foreach (Endpoint e in _response.Data.endpoint)
             {
-                if(e.provider_id.Equals(providerId))
+                if (e.provider_id.Equals(providerId))
                 {
                     endpoint = e;
                 }
