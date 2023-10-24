@@ -243,6 +243,22 @@ namespace RicOneApi.Common.Objects
         /// Returns Contacts associated to a specific Student by refId.
         /// </summary>
         public static ServicePath GetXContactsByXStudent = new ServicePath("GetXContactsByXStudent", "xStudents/{refId}/xContacts", ServicePathType.Predicate);
+        /// <summary>
+        /// Returns all xEmployments.
+        /// </summary>
+        public static ServicePath GetXEmployments = new ServicePath("GetXEmployments", "xEmployments", ServicePathType.Object);
+        /// <summary>
+        /// Returns a single xEmployment by refId.
+        /// </summary>
+        public static ServicePath GetXEmploymentByRefId = new ServicePath("GetXEmploymentByRefId", "xEmployments/{refId}", ServicePathType.Single);
+        /// <summary>
+        /// Returns xEmployments associated to a specific Lea by refId.
+        /// </summary>
+        public static ServicePath GetXEmploymentsByXLea = new ServicePath("GetXEmploymentsByXLea", "xLeas/{refId}/xEmployments", ServicePathType.Predicate);
+        /// <summary>
+        /// Returns xEmployments associated to a specific School by refId.
+        /// </summary>
+        public static ServicePath GetXEmploymentsByXSchool = new ServicePath("GetXEmploymentsByXSchool", "xSchools/{refId}/xEmployments", ServicePathType.Predicate);
 
         internal string GetServicePathName() { return servicePathName; }
         internal string GetServicePath() { return servicePath; }

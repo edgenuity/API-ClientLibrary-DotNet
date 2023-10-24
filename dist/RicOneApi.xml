@@ -2468,6 +2468,171 @@
             <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xContacts type.</returns>
         </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployments">
+            <summary>
+            Request all xEmployments.
+            </summary>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployments(System.Nullable{System.Int32})">
+            <summary>
+            Request all xEmployments by school year.
+            </summary>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployments(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request all xEmployments with paging.
+            </summary>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployments(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request all xEmployments with paging by school year.
+            </summary>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployments(System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point.
+            </summary>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployments(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point with paging.
+            </summary>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployment(System.String)">
+            <summary>
+            Request single xEmployment by refId.
+            </summary>
+            <param name="refId">RefId of xEmployment.</param>
+            <returns>Single xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmployment(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request single xEmployment by refId by school year.
+            </summary>
+            <param name="refId">RefId of xEmployment.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>Single xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXLea(System.String)">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId by school year.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId with paging by school year.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXLea(System.String,System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXSchool(System.String)">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId by school year.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId with paging by school year.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Api.XPress.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
         <member name="M:RicOneApi.Api.XPress.GetLastPage(RicOneApi.Common.Objects.ServicePath,System.Nullable{System.Int32})">
             <summary>
             Returns the max page value for specified service path object.
@@ -3022,6 +3187,26 @@
         <member name="F:RicOneApi.Common.Objects.ServicePath.GetXContactsByXStudent">
             <summary>
             Returns Contacts associated to a specific Student by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXEmployments">
+            <summary>
+            Returns all xEmployments.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXEmploymentByRefId">
+            <summary>
+            Returns a single xEmployment by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXEmploymentsByXLea">
+            <summary>
+            Returns xEmployments associated to a specific Lea by refId.
+            </summary>
+        </member>
+        <member name="F:RicOneApi.Common.Objects.ServicePath.GetXEmploymentsByXSchool">
+            <summary>
+            Returns xEmployments associated to a specific School by refId.
             </summary>
         </member>
         <member name="T:RicOneApi.Common.Objects.XCalendarsObject">
@@ -4795,6 +4980,183 @@
             <param name="navigationPageSize">Number of resources to retrieve.</param>
             <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
             <returns>List of xSchools type.</returns>
+        </member>
+        <member name="T:RicOneApi.Common.Objects.XEmploymentsObject">
+            <summary>
+            xEmployments Service Paths.
+            </summary>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.#ctor(RestSharp.RestClient,System.String)">
+            <summary>
+            XEmployments Object Constructor.
+            </summary>
+            <param name="rc">REST client.</param>
+            <param name="baseApiUrl">Base API url.</param>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployments">
+            <summary>
+            Request all xEmployments.
+            </summary>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployments(System.Nullable{System.Int32})">
+            <summary>
+            Request all xEmployments by school year.
+            </summary>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployments(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request all xEmployments with paging.
+            </summary>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployments(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request all xEmployments with paging by school year.
+            </summary>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployments(System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point.
+            </summary>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployments(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point with paging.
+            </summary>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployment(System.String)">
+            <summary>
+            Request single xEmployment by refId.
+            </summary>
+            <param name="refId">RefId of xEmployment.</param>
+            <returns>Single xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmployment(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request single xEmployment by refId by school year.
+            </summary>
+            <param name="refId">RefId of xEmployment.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>Single xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXLea(System.String)">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId by school year.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xLea by refId with paging by school year.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXLea(System.String,System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xLea.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xLea with paging.
+            </summary>
+            <param name="refId">RefId of xLea.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXSchool(System.String)">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId by school year.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Request xEmployments associated to a specific xSchool by refId with paging by school year.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXSchool(System.String,System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xSchool.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
+        </member>
+        <member name="M:RicOneApi.Common.Objects.XEmploymentsObject.GetXEmploymentsByXSchool(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Request all xEmployments value changes from a given point by a specific xSchool with paging.
+            </summary>
+            <param name="refId">RefId of xSchool.</param>
+            <param name="navigationPage">Page to retrieve.</param>
+            <param name="navigationPageSize">Number of resources to retrieve.</param>
+            <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+            <returns>List of xEmployments type.</returns>
         </member>
         <member name="T:RicOneApi.Common.Objects.XStaffsObject">
             <summary>
